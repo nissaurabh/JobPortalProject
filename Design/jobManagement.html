@@ -1,0 +1,1735 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Example of Bootstrap 3 Dynamic Tabs</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap-theme.min.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script
+	src="http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<script
+	src="http://cdn.datatables.net/plug-ins/1.10.7/integration/bootstrap/3/dataTables.bootstrap.js"></script>
+<script src="jchart.js"></script>
+<script src="Chart.js"></script>
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+<style type="text/css">
+.bs-example {
+	margin: 20px;
+}
+
+.panel-default>.panel-heading-custom {
+	background: #446293;
+	color: white;
+}
+
+.bodyClass {
+	background: url(image2.jpg);
+}
+
+.nav-tabs-container li a .active { background-color:red; }
+
+.footer {
+	position: relative;
+	clear: both;
+}
+.nav-tabs-container li a {
+ color:white;
+ font-weight:bold;
+ border-top-right-radius:5px; 
+ border-top-left-radius:5px;
+ border-bottom-right-radius:5px;
+ border-bottom-left-radius:5px;
+ background-color:#446293;
+ height:35px;
+ padding-top:6px;
+}
+
+.jobmanagement {
+	background: url("") no-repeat;
+	display:inline-block;
+}
+.resize {
+    width: 50px;
+    height: 50px;
+}
+.capresize {
+    width: 240px;
+    height: 50px;
+}
+</style>
+</head>
+
+<div class="panel panel-default">
+	<div class="panel-heading panel-heading-custom col-xs-12">
+		  <span class="col-xs-8 jobmanagement">
+		  <img class="capresize" style="float:left" src="../great/capicon.jpg"/>
+		  </span>
+		  <span class="col-xs-2 glyphicon glyphicon-home"> Home</span>
+		<span class="col-xs-2">Welcome Ashok <strong>|<a href="#" style="color: white;">Sign Out</a></strong></span>
+	</div>
+	<div class="panel-body bodyClass">
+		
+		<div class="bs-example">
+			<ul class="nav nav-tabs nav-tabs-container" id="tabId1">
+				<li class="dropdown"><a data-toggle="dropdown"
+					class="dropdown-toggle jobMnmt glyphicon glyphicon-briefcase" href="#"> Job Management <b
+						class="caret"></b></a>
+					<ul class="dropdown-menu" style="background-color:#446293;">
+						<li><a data-toggle="tab" href="#postJob" class="srchHide postJobHref">Post Job</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown"
+					class="dropdown-toggle glyphicon glyphicon-search" href="#"> Search <b class="caret"></b></a>
+					<ul class="dropdown-menu" style="background-color:#446293;">
+						<li><a data-toggle="tab" href="#jobSearch" class="srchHide">Job Search</a></li>
+						<li><a data-toggle="tab" href="#candtSearch" class="srchHide">Candidate
+								Search</a></li>
+						<li><a data-toggle="tab" href="#intrSearch" class="srchHide">Interviewer
+								Search</a></li>
+					</ul></li>
+				<li class="dropdown"><a data-toggle="dropdown"
+					class="dropdown-toggle glyphicon glyphicon-user" href="#"> Admin <b class="caret"></b></a>
+					<ul class="dropdown-menu" style="background-color:#446293;">
+						<li><a data-toggle="tab" href="#searchRole" class="srchHide">Search Role</a></li>
+						<li><a data-toggle="tab" href="#postRole" class="srchHide">Post Role</a></li>
+					</ul></li>
+				<li class="active"><a data-toggle="tab" href="#dashboard" class="srchHide dashboardHref glyphicon glyphicon-dashboard"> Dashboard</a></li>
+				<li class="dropdown"><a data-toggle="dropdown"
+					class="dropdown-toggle glyphicon glyphicon-stats" href="#"> Reports <b class="caret"></b></a>
+					<ul class="dropdown-menu" style="background-color:#446293;">
+						<li><a data-toggle="tab" href="#accountTab" class="srchHide">Account</a></li>
+						<li><a data-toggle="tab" href="#buTab" class="srchHide">BU</a></li>
+					</ul></li>
+			</ul>
+			<div class="tab-content">
+				
+				<div id="jobManagement" class="tab-pane fade">
+					<h3>Job Management</h3>
+				</div>
+				<div id="postJob" class="tab-pane fade">
+					<!--<div ng-include="D://JobReport/postJob.html'"></div>-->
+					<div class="jumbotron">
+						<form role="form" action="#dashboard">
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="wwsid">WWSID:</label> <input type="text"
+									class="form-control" id="wwsid">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="reqDate">Requested Date:</label> <input type="date"
+									class="form-control" id="reqDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="closureDate">Closure Date:</label> <input
+									type="date" class="form-control" id="closureDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="creatorRM">Creator RM:</label>
+								<input type="text" class="form-control" id="creatorRM">
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="requestorRM">Requestor RM:</label>
+								<input type="text" class="form-control" id="requestorRM">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="owningRM">Owning RM:</label>
+								<input type="text" class="form-control" id="owningRM">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="roleReq">RoleRequestor:</label> <select
+									class="form-control" id="roleReq">
+									<option>Girish</option>
+									<option>Shushil</option>
+									<option>Ramya</option>
+									<option>Geetha</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="noOfResrc">Number of Resources:</label> <input
+									type="text" class="form-control" id="noOfResrc">
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="clientNm">Account:</label> <select
+									class="form-control" id="acct">
+									<option>Disney</option>
+									<option>ATT</option>
+									<option>Cisco</option>
+									<option>GM</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="roleStrDate">Role Start date:</label> <input
+									type="date" class="form-control" id="roleStrDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="roleEndDate">Role End date:</label> <input
+									type="date" class="form-control" id="roleEndDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="cntrElg">Contractor Eligibile:</label> <input
+									type="text" class="form-control" id="cntrElg">
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="chargeOutRate">Charge Out Rate:</label> <input
+									type="text" class="form-control" id="chargeOutRate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="cntrRate">Contractor Rate:</label> <input
+									type="text" class="form-control" id="cntrRate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="travel">Travel:</label> <input type="text"
+									class="form-control" id="travel">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="trExpltn">Travel Explanation:</label> <input
+									type="text" class="form-control" id="trExpltn">
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="rsrSts">Resource Status:</label> <select
+									class="form-control" id="rsrSts">
+									<option>Recruit</option>
+									<option>Contracor</option>
+									<option>Internal</option>
+									<option>Secondee</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="talioId">Talio ID:</label> <input
+									type="text" class="form-control" id="talioId">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="source">Source:</label> <input
+									type="text" class="form-control" id="source">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="status">Status:</label> <select class="form-control"
+									id="status">
+									<option>Open</option>
+									<option>Closed</option>
+								</select>
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="serLine">Service Line:</label> <select
+									class="form-control serLine" id="serLine">
+									<option>CSD</option>
+									<option>SAP</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="serLnCap">Service Line Capability:</label> <select
+									class="form-control serLnCap" id="serLnCap">
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="rlNm">Role Name:</label> <select
+									class="form-control rlNm" id="rlNm">
+
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="bibltySts">Billability Status:</label>
+								<select
+									class="form-control bibltySts" id="bibltySts">
+									<option>Billable</option>
+									<option>PreBillable</option>
+									<option>Strategic</option>
+									<option>Pipeline </option>
+								</select>
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="openDate">Open Date:</label> <input type="date"
+									class="form-control" id="openDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="prsntDate">Presented  Date:</label> <input type="date"
+									class="form-control" id="prsntDate">
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="jobStg">Job Stage:</label>
+								<select
+									class="form-control jobStg" id="jobStg">
+									<option>Finalized</option>
+									<option>Non Finalized</option>
+								</select>
+							</div>
+							</div>
+							<div class="row">
+							<div class="form-group col-sm-3">
+								<label for="wrkAuth">Work Auth:</label>
+								<select
+									class="form-control wrkAuth" id="wrkAuth">
+									<option>H1B</option>
+									<option>GreenCard</option>
+								</select>
+							</div>
+							<div class="form-group col-sm-3">
+								<label for="comment">Requirement Specifics:</label>
+								<textarea class="form-control" rows="2" id="comment"></textarea>
+							</div>
+							<div class="form-group col-sm-3">
+								<button type="button" class="btn btn-default btn-info postJobBtn">Post Job</button>
+							</div>
+							</div>
+						</form>
+					</div>
+				</div>
+				<div id="accountTab" class="tab-pane fade">
+					<div class="well">
+						<h3>Account</h3>
+						<div class="row">
+							<div class="col-sm-6">
+								<div id="accountChart" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+							</div>
+							<div class="col-sm-6">	
+								<table class="table table-hover table-condensed table-striped">
+									<thead style="background-color: #b0c4de;">
+										<tr>
+											<th><label>Account</label></th>
+											<th><label>Open</label></th>
+											<th><label>Aging</label></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Disney</td>
+											<td>49</td>
+											<td>83</td>
+										</tr>
+										<tr>
+											<td>Cisco</td>
+											<td>71</td>
+											<td>78</td>
+										</tr>
+										<tr>
+											<td>AT&T</td>
+											<td>106</td>
+											<td>98</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="buTab" class="tab-pane fade">
+					<div class="well">
+						<h3>BU</h3>
+						<div class="row">
+							<div class="col-sm-6">
+							     <div id="buChart" style="min-width: 500px; height: 400px; margin: 0 auto"></div>
+							</div>
+							<div class="col-sm-6">	
+								<table class="table table-hover table-condensed table-striped">
+									<thead style="background-color: #b0c4de;">
+										<tr>
+											<th><label>BU</label></th>
+											<th><label>Open</label></th>
+											<th><label>Aging</label></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr>
+											<td>Htech</td>
+											<td>49</td>
+											<td>83</td>
+										</tr>
+										<tr>
+											<td>Govt Services</td>
+											<td>71</td>
+											<td>78</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div id="jobSearch" class="tab-pane fade">
+
+					<div class="well">
+						<h3>Job Search page</h3>
+						<form role="form" action="#dashboard">
+							<table class="table-condensed">
+								<tr>
+									<td><label for="srcReqDateFrom1">Requested Date:</label></td>
+									<td><input type="date" class="form-control"
+										id="srcReqDateFrom"></td>
+									<td><label for="srcReqDateTo1">To</label></td>
+									<td><input type="date" class="form-control"
+										id="srcReqDateTo"></td>
+								</tr>
+								<tr>
+									<td><label for="srcReqDateFrom3">Role Start Date:</label></td>
+									<td><input type="date" class="form-control"
+										id="srcReqDateFrom"></td>
+									<td><label for="srcReqDateTo2">To</label></td>
+									<td><input type="date" class="form-control"
+										id="srcReqDateTo"></td>
+								</tr>
+								<tr>
+									<td><label for="srcStatus">Status:</label></td>
+									<td><select class="form-control" id="srcStatus">
+											<option>Open</option>
+											<option>Closed</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="srcAccount">Account:</label></td>
+									<td><select class="form-control" id="srcAccount">
+											<option>Disney</option>
+											<option>Cisco</option>
+											<option>GM</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="srcSerLine">Service Line:</label></td>
+									<td><select class="form-control serLine" id="srcSerLine">
+											<option>CSD</option>
+											<option>SAP</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="srcSerLnCap">Service Line
+											Capability:</label></td>
+									<td><select class="form-control serLnCap" id="srcSerLnCap">
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="srcRlNm">Role Name:</label></td>
+									<td><select class="form-control rlNm" id="srcRlNm">
+									</select></td>
+								</tr>
+								<tr>
+									<td><button type="button" id="searchId"
+											class="btn btn-default btn-info"><span class="glyphicon glyphicon-search"></span> Search</button></td>
+									<td><button type="button" id="customizeId"
+											class="btn btn-default btn-info">Set As Dashboard Default</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div id="candtSearch" class="tab-pane fade">
+					<div class="jumbotron">
+						<h3>Candidate Search page</h3>
+						<form role="form" action="#dashboard">
+							<table class="table-condensed">
+								<tr>
+									<td><label for="cmdtSrcSerLine">Service Line:</label></td>
+									<td><select class="form-control serLine"
+										id="cmdtSrcSerLine">
+											<option>CSD</option>
+											<option>SAP</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="cndtSrcSerLnCap">Service Line
+											Capability:</label></td>
+									<td><select class="form-control serLnCap"
+										id="cndtSrcSerLnCap">
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="cndtSrcRlNm">Role Name:</label></td>
+									<td><select class="form-control rlNm" id="cndtSrcRlNm">
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="cndtSrcSts">Candidate Status:</label></td>
+									<td><select class="form-control" id="cndtSrcSts">
+											<option>Active</option>
+											<option>Hired</option>
+											<option>Rejected</option>
+											<option>Did Not Join</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="ctzSrcSts">Citizenship Status:</label></td>
+									<td><select class="form-control" id="ctzSrcSts">
+											<option>Green Card</option>
+											<option>H1B</option>
+											<option>OPT</option>
+											<option>US Citizen</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><button type="button" id="cndtSearchId"
+											class="btn btn-default btn-info">
+											<span class="glyphicon glyphicon-search"></span> 
+											Search</button></td>
+									<td><button type="button" id="customizeId"
+											class="btn btn-default btn-info">Set As Dashboard Default</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div id="intrSearch" class="tab-pane fade">
+					<div class="jumbotron">
+						<h3>Interviewer Search page</h3>
+						<form role="form" action="#dashboard">
+							<table class="table-condensed">
+								<tr>
+									<td><label for="srcIntrDateFrom">Interview Date:</label></td>
+
+									<td><input type="date" class="form-control"
+										id="srcIntrDateFrom"></td>
+									<td><label for="srcIntrDateTo">To</label></td>
+									<td><input type="date" class="form-control"
+										id="srcIntrDateTo"></td>
+								</tr>
+								<tr>
+									<td><label for="srcRst">Result:</label></td>
+									<td><input type="text" class="form-control" id="srcRst"></td>
+								</tr>
+								<tr>
+									<td><label for="srcIntrer">Interviewer:</label></td>
+									<td><input type="text" class="form-control" id="srcIntrer"></td>
+								</tr>
+								<tr>
+									<td><button type="button" id="intrSearchId"
+											class="btn btn-default btn-info">
+											<span class="glyphicon glyphicon-search"></span> Search</button></td>
+									<td><button type="button" id="customizeId"
+											class="btn btn-default btn-info">Set As Dashboard Default</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div id="searchRole" class="tab-pane fade">
+					<div class="well well-sm">
+						<h3>Search Role page</h3>
+						<form role="form" action="#">
+							<table class="table-condensed">
+								<tr>
+									<td><label for="roleName">Role Name:</label></td>
+									<td><input type="text" class="form-control" id="roleName"></td>
+								</tr>
+								<tr>
+									<td><label for="resourceType" class="">Resource
+											Type:</label></td>
+									<td><input type="text" class="form-control "
+										id="resourceType"></td>
+								</tr>
+								<tr>
+
+									<td><label for="jobSts" class="">Job Status:</label></td>
+									<td><input type="text" class="form-control " id="jobSts">
+									</td>
+								</tr>
+								<tr>
+									<td><label for="recrType" class="">Recruitment
+											Type:</label></td>
+									<td><input type="text" class="form-control " id="recrType">
+									</td>
+								</tr>
+								<tr>
+									<td><button type="button" id="searchId4"
+											class="btn btn-default btn-info">
+											<span class="glyphicon glyphicon-search"></span> Search</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div id="postRole" class="tab-pane fade">
+					<div class="well">
+						<h1>Post Role</h1>
+						<form class="form-horizontal" role="form">
+							<table class="table-condensed">
+
+								<tr>
+									<td><label class="control-label" for="roleDesc">Role
+											Description:</label></td>
+									<td><input type="text" class="form-control" id="roleDesc"
+										placeholder="Enter Role Description"></td>
+								</tr>
+								<tr>
+									<td><label for="seriveLine">Service Line:</label></td>
+									<td><select class="form-control" id="seriveLine">
+											<option>CSD</option>
+											<option>SAP</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="serLineCap">Service Line
+											Capability:</label></td>
+									<td><select class="form-control" id="serLineCap">
+											<option>Core</option>
+											<option>Business</option>
+									</select></td>
+								</tr>
+								<tr>
+									<td><label for="roleName2">Role Name:</label></td>
+									<td><select class="form-control" id="roleName2">
+											<option>Primary Role</option>
+											<option>Secondary Role</option>
+									</select></td>
+								</tr>
+								<tr class="form-group">
+									<td><button type="submit" class="btn btn-default btn-info">Post
+											Role</button></td>
+								</tr>
+							</table>
+						</form>
+					</div>
+				</div>
+				<div id="admin" class="tab-pane fade">
+					<h3>Admin Page</h3>
+				</div>
+				<div id="dashboard" class="tab-pane fade in active">
+					<div class="row">
+						<div class="col-sm-7">
+							<div class="well">
+
+								<table class="table table-hover table-striped">
+									<thead style="background-color: #b0c4de;">
+										<tr>
+											<th>WWSID</th>
+											<th>Service Line</th>
+											<th>Service Line Capability</th>
+											<th>Role Name</th>
+											<th>Status</th>
+											<th>Requested Date</th>
+											<th></th>
+											<th></th>
+										</tr>
+									</thead>
+									<tbody>
+										<tr class="">
+											<td>WAC43534</td>
+											<td>CSD</td>
+											<td>Core</td>
+											<td>Java Developer</td>
+											<td>Open</td>
+											<td>2015-02-10</td>
+											<td><a href="#jobDetails1" class="job1Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate1" class="candidate1Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC43567</td>
+											<td>SAP</td>
+											<td>Core</td>
+											<td>Sap Developer</td>
+											<td>Open</td>
+											<td>2015-10-10</td>
+											<td><a href="#jobDetails2" class="job2Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate2" class="candidate2Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47868</td>
+											<td>CSD</td>
+											<td>BA</td>
+											<td>Senior Business Analyst</td>
+											<td>Open</td>
+											<td>2015-10-20</td>
+											<td><a href="#jobDetails3" class="job3Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate3" class="candidate3Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47869</td>
+											<td>CSD</td>
+											<td>Core</td>
+											<td>Senior Tester</td>
+											<td>Open</td>
+											<td>2016-11-20</td>
+											<td><a href="#jobDetails4" class="job4Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate4" class="candidate4Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47870</td>
+											<td>CSD</td>
+											<td>BA</td>
+											<td>Business Analyst</td>
+											<td>Open</td>
+											<td>2015-02-02</td>
+											<td><a href="#jobDetails5" class="job5Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate5" class="candidate5Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47871</td>
+											<td>CSD</td>
+											<td>BA</td>
+											<td>BA Manager</td>
+											<td>Open</td>
+											<td>2015-05-10</td>
+											<td><a href="#jobDetails6" class="job6Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate6" class="candidate6Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47872</td>
+											<td>CSD</td>
+											<td>Core</td>
+											<td>Project Manager</td>
+											<td>Open</td>
+											<td>2015-05-31</td>
+											<td><a href="#jobDetails7" class="job7Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate7" class="candidate7Lnk">Candidate
+													Details</a></td>
+										</tr>
+										<tr class="">
+											<td>WAC47873</td>
+											<td>SAP</td>
+											<td>Functional</td>
+											<td>Senior HR Analyst</td>
+											<td>Open</td>
+											<td>2015-10-20</td>
+											<td><a href="#jobDetails8" class="job8Lnk">Job
+													Details</a></td>
+											<td><a href="#candidate8" class="candidate8Lnk">Candidate
+													Details</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+						<div class="col-sm-5" style="">
+							<div class="well jobDetails1">
+								<div style="background-color: #b0c4de;">
+									<h3>Java Developer</h3>
+								</div>
+								<table class="table table-hover table-condensed">
+									<tbody>
+										<tr>
+											<td><label>WWSID</label></td>
+											<td><span>WAC43534</span></td>
+										</tr>
+										<tr>
+											<td><label>Service Line</label></td>
+											<td><span>CSD</span></td>
+										</tr>
+										<tr>
+											<td><label>Service Line Capability</label></td>
+											<td><span>Core</span></td>
+										</tr>
+										<tr>
+											<td><label>Role Name</label></td>
+											<td><span>Java Developer</span></td>
+										</tr>
+										<tr>
+											<td><label>Request Creation Date</label></td>
+											<td><span>2015-05-29</span></td>
+										</tr>
+
+										<tr>
+											<td><label>Role Requirement Specifics</label></td>
+											<td><span>Resource Manager</span></td>
+										</tr>
+										<tr>
+											<td><label>Number of Resources</label></td>
+											<td><span>2</span></td>
+										</tr>
+										<tr>
+											<td><label>Client Name</label></td>
+											<td><span>Disney</span></td>
+										</tr>
+										<tr>
+											<td><label>Role Start Date</label></td>
+											<td><span>2015-05-29</span></td>
+										</tr>
+										<tr>
+											<td><label>Role End Date</label></td>
+											<td><span>2015-06-29</span></td>
+										</tr>
+										<tr>
+											<td><label>Contractor Eligibile</label></td>
+											<td><span>Yes</span></td>
+										</tr>
+										<tr>
+											<td><label>Charge Out Rate</label></td>
+											<td><span>$20</span></td>
+										</tr>
+										<tr>
+											<td><label>Contractor Rate</label></td>
+											<td><span>$30</span></td>
+										</tr>
+										<tr>
+											<td><label>Travel</label></td>
+											<td><span>Yes</span></td>
+										</tr>
+										<tr>
+											<td><label>Travel Explanation</label></td>
+											<td><span>Staying in different location</span></td>
+										</tr>
+										<tr>
+											<td><label>Resource Type</label></td>
+											<td><span>GX</span></td>
+										</tr>
+										<tr>
+											<td><label>Status</label></td>
+											<td><span>Open</span></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td><a href="#postRole" class="btn btn-info btn-info editPostJob">Edit</a></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="well jobDetails2">
+								<h3>Mobile Tester</h3>
+								<table class="table table-hover table-condensed">
+									<tbody>
+										<tr>
+											<td><label>WWSID</label></td>
+											<td><span>WAC43567</span></td>
+										</tr>
+										<tr>
+											<td><label>Service Line</label></td>
+											<td><span>CSD</span></td>
+										</tr>
+										<tr>
+											<td><label>Service Line Capability</label></td>
+											<td><span>Core</span></td>
+										</tr>
+										<tr>
+											<td><label>Role Name</label></td>
+											<td><span>Mobile Tester</span></td>
+										</tr>
+										<tr>
+											<td><label>Request Creation Date</label></td>
+											<td><span>J2015-05-29</span></td>
+										</tr>
+
+										<tr>
+											<td><label>Role Requirement Specifics</label></td>
+											<td><span>Resource Manager</span></td>
+										</tr>
+										<tr>
+											<td><label>Number of Resources</label></td>
+											<td><span>8</span></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>
+												<button type="button" class="btn btn-info btn-sm"
+													data-toggle="modal" data-target="#addCndtModal">Add
+													Candidate</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="well jobDetails3">
+								<h3>Senior Java Developer</h3>
+								<table class="table table-hover table-condensed">
+									<tbody>
+										<tr>
+											<td><label>WWSID</label></td>
+											<td><span>WAC47868</span></td>
+										</tr>
+										<tr>
+											<td><label>Role Name</label></td>
+											<td><span>Senior Java Developer</span></td>
+										</tr>
+										<tr>
+											<td><label>Request Creation Date</label></td>
+											<td><span>J2015-05-29</span></td>
+										</tr>
+
+										<tr>
+											<td><label>Role Requirement Specifics</label></td>
+											<td><span>Resource Manager</span></td>
+										</tr>
+										<tr>
+											<td><label>Number of Resources</label></td>
+											<td><span>5</span></td>
+										</tr>
+										<tr>
+											<td></td>
+											<td>
+												<button type="button" class="btn btn-info btn-sm btn-info"
+													data-toggle="modal" data-target="#addCndtModal">Add
+													Candidate</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="well candidate1">
+								<h3>Java Developer Candidates</h3>
+								<table class="table">
+									<tbody>
+										<tr>
+											<td>
+												<table class="table table-hover table-condensed">
+													<thead style="background-color: #b0c4de;">
+														<tr>
+															<th>Name</th>
+															<th>Category</th>
+															<th>Primary Skills</th>
+															<th>Candidate Status</th>
+															<th>Citizenship Status</th>
+															<th></th>
+														</tr>
+													</thead>
+													<tbody>
+														<tr>
+															<td><span>Sesha</span></td>
+															<td><span>Internal</span></td>
+															<td><span>Java/J2EE</span></td>
+															<td><span>Hired</span></td>
+															<td><span>H1B</span></td>
+															<td><a href="#" data-toggle="modal"
+																data-target="#addCndtModal">
+																<span class="glyphicon glyphicon-edit"></span>
+																</a></td>
+														</tr>
+														<tr>
+															<td colspan="2"><a href="#" data-toggle="collapse"
+																data-target="#demo1">Interview Details</a></td>
+															<td><a href="#" data-toggle="modal"
+																data-target="#scheduleModal">Schedule</a></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td colspan="6">
+
+																<div id="demo1" class="collapse">
+																	<table class="table" style="background-color: #dff0d8;">
+																		<thead class="bg-info">
+																			<tr>
+																				<th>Interviewer Name</th>
+																				<th>Status</th>
+																				<th>Result</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr>
+																				<td>Nishit</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																			<tr>
+																				<td>Santosh</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																			<tr>
+																				<td>Ashok</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																		<tbody>
+																	</table>
+																</div>
+															</td>
+														</tr>
+														<tr>
+															<td><span>Geetha</span></td>
+															<td><span>Contractor</span></td>
+															<td><span>SAP</span></td>
+															<td><span>Did Not Join</span></td>
+															<td><span>US Citizen</span></td>
+															<td><a href="#" data-toggle="modal"
+																data-target="#addCndtModal">
+																<span class="glyphicon glyphicon-edit"></span>
+																</a></td>
+														</tr>
+														<tr>
+															<td colspan="2"><a href="#" data-toggle="collapse"
+																data-target="#demo2">Interview Details</a></td>
+															<td><a href="#" data-toggle="modal"
+																data-target="#scheduleModal">Schedule</a></td>
+															<td></td>
+															<td></td>
+															<td></td>
+														</tr>
+														<tr>
+															<td colspan="6">
+																<div id="demo2" class="collapse">
+																	<table class="table" style="background-color: #dff0d8;">
+																		<thead class="bg-info">
+																			<tr>
+																				<th>Interviewer Name</th>
+																				<th>Status</th>
+																				<th>Result</th>
+																			</tr>
+																		</thead>
+																		<tbody>
+																			<tr>
+																				<td>Sunil</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																			<tr>
+																				<td>Nikhil</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																			<tr>
+																				<td>Gem</td>
+																				<td>Selected</td>
+																				<td>Hired</td>
+																			</tr>
+																		<tbody>
+																	</table>
+																</div>
+
+															</td>
+														</tr>
+
+													</tbody>
+												</table>
+											</td>
+										</tr>
+										<tr>
+											<td>
+												<button type="button" class="btn btn-info btn-sm"
+													data-toggle="modal" data-target="#addCndtModal">Add
+													Candidate</button>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							<div class="well candidate2">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td><label>Candidate Name:</label> <span>David</span></td>
+											<td><label>Resource Type:</label> <span>GX</span></td>
+											<td><label><a href="#" data-toggle="collapse"
+													data-target="#demo3">Interviewer Details</a></label></td>
+										</tr>
+										<tr>
+											<td><div id="demo3" class="collapse">Lorem ipsum
+													dolor sit amet, consectetur adipisicing elit, sed do
+													eiusmod tempor incididunt ut labore et dolore magna aliqua.
+													Ut enim ad minim veniam, quis nostrud exercitation ullamco
+													laboris nisi ut aliquip ex ea commodo consequat.</div></td>
+										</tr>
+										<tr>
+											<td><label>Candidate Name:</label> <span>Jenny</span></td>
+											<td><label>Resource Type:</label> <span>Contractor</span></td>
+											<td><label><a href="#" data-toggle="collapse"
+													data-target="#demo4">Interviewer Details</a></label></td>
+										</tr>
+										<tr>
+											<td colspan="3">
+												<div id="demo4" class="collapse">
+													<table>
+														<thead>
+															<tr>
+																<th><label>Interviewer Name</label></th>
+																<th><label>Interviewer Position</label></th>
+																<th><label>Result</label></th>
+
+															</tr>
+														</thead>
+														<tbody>
+															<tr>
+																<td><label>Sesha</label></td>
+																<td><label>Senior Consultant</label></td>
+																<td><label>Selected</label></td>
+
+															</tr>
+															<tr>
+																<td><label>Nishit</label></td>
+																<td><label>Manager</label></td>
+																<td><label>Selected</label></td>
+
+															</tr>
+															<tr>
+
+																<td><label>Santosh</label></td>
+																<td><label>Senior Manager</label></td>
+																<td><label>Selected</label></td>
+
+															</tr>
+														</tbody>
+													</table>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+
+							<div class="well candidate3">
+								<table class="table">
+									<tbody>
+										<tr>
+											<td><label>Candidate Name:</label> <span>Romesh</span></td>
+											<td><label>Resource Type:</label> <span>GX</span></td>
+											<td><label><a href="#interviewer5"
+													class="interviewer5Lnk">Interviewer Details</a></label></td>
+										</tr>
+										<tr>
+											<td><label>Candidate Name:</label> <span>Anshul</span></td>
+											<td><label>Resource Type:</label> <span>Contractor</span></td>
+											<td><label><a href="#interviewer6"
+													class="interviewer6Lnk">Interviewer Details</a></label></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="addCndtModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content create candidate-->
+				<div class="modal-content" style="width:700px;">
+					<div class="modal-header" style="background-color: #dff0d8">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Create Candidate</h4>
+					</div>
+					<div class="modal-body">
+						<div class="well">
+							<form role="form" action="#dashboard">
+								<table class="table-condensed">
+									<tr>
+										<td><label for="candtName">Candidate Name:</label></td>
+										<td><input type="text" class="form-control"
+											id="candtName"></td>
+										<td><label for="rsrType1">Category:</label></td>
+										<td><select class="form-control" id="rsrType1">
+												<option>Internal</option>
+												<option>For Hire</option>
+												<option>Contractor</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label for="cndtSrcSts1">Candidate Status:</label></td>
+										<td><select class="form-control" id="cndtSrcSts1">
+												<option>Active</option>
+												<option>Hired</option>
+												<option>Rejected</option>
+												<option>Did Not Join</option>
+										</select></td>
+										<td><label for="cntrRate1">Contractor Rate:</label></td>
+										<td><input type="text" class="form-control"
+											id="cntrRate1"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="prmSkills">Primary Skills:</label></td>
+										<td><input type="text" class="form-control"
+											id="prmSkills"></td>
+										<td><label for="buLeadAppr">BU Lead Approval:</label></td>
+										<td><input type="text" class="form-control"
+											id="buLeadAppr"></td>
+									</tr>
+									<tr>
+										<td><label for="ctzSrcSts1">Citizenship Status:</label></td>
+										<td><select class="form-control" id="ctzSrcSts1">
+												<option>Green Card</option>
+												<option>H1B</option>
+												<option>OPT</option>
+												<option>US Citizen</option>
+										</select></td>
+										<td><label for="capLeadAppr">Capablity Lead Approve:</label></td>
+										<td><input type="text" class="form-control"
+											id="capLeadAppr"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="offerDate">Offer Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offerDate"></td>
+										<td><label for="offrAcptDate">Offer Accept Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offrAcptDate"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="joinDate">Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="joinDate"></td>
+										<td><label for="actjoinDate">Actual Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="actjoinDate"></td>
+									</tr>
+									<tr class="form-group form-inline" >
+									<td colspan="4"><span><label for="upldResume">Upload Resume:</label></span>
+										<span><input type="file" class="form-control"
+											id="upldResume"></span></td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #dff0d8">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+
+		<div class="modal fade" id="scheduleModal" role="dialog">
+			<div class="modal-dialog">
+				<!-- Modal content to schedule an interview-->
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #dff0d8">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Schedule Interview</h4>
+					</div>
+					<div class="modal-body">
+						<div class="well">
+							<form role="form" action="#dashboard">
+								<div class="form-group">
+									<label for="itvrName">Interviewer Name:</label> <input
+										type="text" class="form-control" id="itvrName">
+								</div>
+								<div class="form-group">
+									<label for="email">Email:</label> <input type="text"
+										class="form-control" id="email">
+								</div>
+								<div class="form-group">
+									<label for="itrvDtTm">Interview Date and Time:</label> <input
+										type="text" class="form-control" id="itrvDtTm">
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #dff0d8">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Send</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Modal -->
+		<div class="modal fade" id="editCndtModal" role="dialog">
+			<div class="modal-dialog">
+
+				<!-- Modal content create candidate-->
+				<div class="modal-content">
+					<div class="modal-header" style="background-color: #dff0d8">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Manage Candidate</h4>
+					</div>
+					<div class="modal-body">
+						<div class="well">
+							<form role="form" action="#dashboard">
+								<div class="form-group">
+									<label for="candtName1">Candidate Name:</label> <input
+										type="text" class="form-control" id="candtName1">
+								</div>
+								<div class="form-group">
+									<label for="rsrType2">Category:</label> <select
+										class="form-control" id="rsrType2">
+										<option>Internal</option>
+										<option>For Hire</option>
+										<option>Contractor</option>
+									</select>
+								</div>
+								<div class="form-group">
+									<label for="upldResume1">Upload Resume:</label> <input
+										type="file" class="form-control" id="upldResume1">
+								</div>
+								<div class="form-group">
+									<label for="cntrRate2">Contractor Rate:</label> <input
+										type="text" class="form-control" id="cntrRate2">
+								</div>
+								<div class="form-group">
+									<label for="prmSkills1">Primary Skills:</label> <input
+										type="text" class="form-control" id="prmSkills1">
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #dff0d8">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Save</button>
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+
+			</div>
+		</div>
+		<div style="" id="result">
+			<div class="bs-example">
+			<div class="well well-sm">
+				<table class="table table-hover">
+					<thead style="background-color: #b0c4de;">
+						<tr>
+							<th><label>WWSID</label></th>
+							<th><label>Service Line</label></th>
+							<th><label>Service Line Capability</label></th>
+							<th><label>Role Name</label></th>
+							<th><label>Status</label></th>
+							<th><label>Requested By</label></th>
+							<th><label>Requested Date</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td><a href="#dashboard">WAC43534</a></td>
+							<td>CSD</td>
+							<td>Core</td>
+							<td>Java Developer</td>
+							<td>Open</td>
+							<td>Ram</td>
+							<td>2015-05-23</td>
+						</tr>
+						<tr>
+							<td><a href="#dashboard">WAC43567</a></td>
+							<td>CSD</td>
+							<td>Business Analyst</td>
+							<td>Senior Business Analyst</td>
+							<td>Closed</td>
+							<td>Robert</td>
+							<td>2015-05-23</td>
+						</tr>
+						<tr>
+							<td><a href="#dashboard">WAC47867</a></td>
+							<td>SAP</td>
+							<td>Funcational</td>
+							<td>Senior HR Developer</td>
+							<td>Open</td>
+							<td>King</td>
+							<td>2015-05-23</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+
+		<div style="" id="cndtResult">
+			<div class="bs-example">
+			<div class="well">
+				<table class="table table-hover">
+					<thead style="background-color: #b0c4de;">
+						<tr>
+							<th><label>Candidate Name</label></th>
+							<th><label>Resume</label></th>
+							<th><label>Resource Type</label></th>
+							<th><label>Contractor Rate</label></th>
+							<th><label>Candidate Status</label></th>
+							<th><label>Citizenship Status</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Jacob</td>
+							<td><a href="#">Download Resume</a></td>
+							<td>gxteam</td>
+							<td>$30 per hour</td>
+							<td>Did Not Join</td>
+							<td>US Citizen</td>
+						</tr>
+						<tr>
+
+							<td>Robert</td>
+							<td><a href="#">Download Resume</a></td>
+							<td>External resource</td>
+							<td>$40 per hour</td>
+							<td>Did Not Join</td>
+							<td>US Citizen</td>
+						</tr>
+						<tr>
+
+							<td>Krishna</td>
+							<td><a href="#">Download Resume</a></td>
+							<td>gxteam</td>
+							<td>$50 per hour</td>
+							<td>Did Not Join</td>
+							<td>US Citizen</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+
+		<div style="" id="intrResult">
+		<div class="bs-example">
+			<div class="well">
+				<table class="table table-hover">
+					<thead style="background-color: #b0c4de;">
+						<tr>
+							<th><label>Interviewer Name</label></th>
+							<th><label>Interviewer Position</label></th>
+							<th><label>Result</label></th>
+							<th><label>Comment</label></th>
+							<th><label>Interview Date/Time</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+
+							<td>Sesha</td>
+							<td>Senior Consultant</td>
+							<td>Selected</td>
+							<td>Technically good</td>
+							<td>2015-05-29</td>
+						</tr>
+						<tr>
+
+							<td>Nishit</td>
+							<td>Manager</td>
+							<td>Selected</td>
+							<td>Technically good</td>
+							<td>2015-05-29</td>
+						</tr>
+						<tr>
+
+							<td>Santosh</td>
+							<td>Senior Manager</td>
+							<td>Selected</td>
+							<td>Technically good</td>
+							<td>2015-05-29</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+		
+		<div style="" id="jobRoleSrchId">
+			<div class="bs-example">
+			<div class="well">
+				<table class="table table-hover">
+					<thead style="background-color: #b0c4de;">
+						<tr>
+							<th><label>Role Name</label></th>
+							<th><label>Resource Type</label></th>
+							<th><label>Job Status</label></th>
+							<th><label>Recruitment Type</label></th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Java Developer</td>
+							<td>GX</td>
+							<td>Open</td>
+							<td>Telephonic</td>
+						</tr>
+						<tr>
+							<td>Oracle Developer</td>
+							<td>US Citizen</td>
+							<td>Open</td>
+							<td>Skype</td>
+						</tr>
+						<tr>
+							<td>Senior Business Analyst</td>
+							<td>GX</td>
+							<td>Open</td>
+							<td>Direct</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			</div>
+		</div>
+		<script>
+			$(document)
+					.ready(
+							function() {
+								$(".jobDetails2").hide();
+								$(".jobDetails3").hide();
+								$(".candidate1").hide();
+								$(".candidate2").hide();
+								$(".candidate3").hide();
+								
+								$("#cndtResult").hide();
+								$("#result").hide();
+								$("#intrResult").hide();
+								$("#jobRoleSrchId").hide();
+								var a = {SrLnCap : [{"srLnNm" : "Core","srLnNmID" : "core1"},{"srLnNm" : "Business Analyst","srLnNmID" : "bs1"} ]};
+										$.each(a.SrLnCap,function(key,value) {
+											$(".serLnCap").append($("<option></option>").val(value.srLnNmID).html(value.srLnNm));
+										});
+								var b = {RlNm : [{"rlNm" : "Java Developer","rlNmID" : "cj1"},{"rlNm" : "Oracle Developer","rlNmID" : "or1"} ]};
+									   $.each(b.RlNm,function(key,value) {
+										$(".rlNm").append($("<option></option>").val(value.rlNmID).html(value.rlNm));
+									   });
+								
+								
+								$(".job1Lnk").click(function() {
+									$(".jobDetails2").hide();
+									$(".jobDetails1").show();
+									$(".jobDetails3").hide();
+									$(".candidate1").hide();
+									$(".candidate2").hide();
+									$(".candidate3").hide();
+								});
+								$(".job2Lnk").click(function() {
+									$(".jobDetails2").show();
+									$(".jobDetails3").hide();
+									$(".jobDetails1").hide();
+									$(".candidate1").hide();
+									$(".candidate2").hide();
+									$(".candidate3").hide();
+								});
+								$(".job3Lnk").click(function() {
+									$(".jobDetails2").hide();
+									$(".jobDetails3").show();
+									$(".jobDetails1").hide();
+									$(".candidate1").hide();
+									$(".candidate2").hide();
+									$(".candidate3").hide();
+								});
+
+								$(".candidate1Lnk").click(function() {
+									$(".jobDetails2").hide();
+									$(".jobDetails3").hide();
+									$(".jobDetails1").hide();
+									$(".candidate1").show();
+									$(".candidate2").hide();
+									$(".candidate3").hide();
+								});
+								$(".candidate2Lnk").click(function() {
+									$(".jobDetails2").hide();
+									$(".jobDetails3").hide();
+									$(".jobDetails1").hide();
+									$(".candidate1").hide();
+									$(".candidate2").show();
+									$(".candidate3").hide();
+								});
+								$(".candidate3Lnk").click(function() {
+									$(".jobDetails2").hide();
+									$(".jobDetails3").hide();
+									$(".jobDetails1").hide();
+									$(".candidate1").hide();
+									$(".candidate2").hide();
+									$(".candidate3").show();
+								});
+								$(".serLine").on("change",function() {
+								  var selected = $(this).find("option:selected").val();
+								  if (selected == "CSD") {
+										$("option", ".serLnCap").remove();
+										var a = {SrLnCap : [{"srLnNm" : "Core","srLnNmID" : "core1"},{"srLnNm" : "Business Analyst","srLnNmID" : "bs1"} ]};
+										$.each(a.SrLnCap,function(key,value) {
+											$(".serLnCap").append($("<option></option>").val(value.srLnNmID).html(value.srLnNm));
+										});
+								  } else {
+										$("option", ".serLnCap").remove();
+									    var a = {SrLnCap : [{"srLnNm" : "Core","srLnNmID" : "sapDp1"},{"srLnNm" : "Funcational","srLnNmID" : "sapTst1"} ]};
+										$.each(a.SrLnCap,function(key,value) {
+										 $(".serLnCap").append($("<option></option>").val(value.srLnNmID).html(value.srLnNm));
+										});
+								 }
+
+								});
+
+								$(".serLnCap").on("change",function() {
+									var selected = $(this).find("option:selected").val();
+									if (selected == "core1") {
+									   $("option", ".rlNm").remove();
+									   var a = {RlNm : [{"rlNm" : "Java Developer","rlNmID" : "cj1"},{"rlNm" : "Oracle Developer","rlNmID" : "or1"} ]};
+									   $.each(a.RlNm,function(key,value) {
+										$(".rlNm").append($("<option></option>").val(value.rlNmID).html(value.rlNm));
+									   });
+									} else if (selected == "bs1") {
+									  $("option", ".rlNm").remove();
+									  var a = {RlNm : [{"rlNm" : "Senior Business Analyst","rlNmID" : "sapDp5"},{"rlNm" : "BA Manager","rlNmID" : "sapTst1"} ]};
+									  $.each(a.RlNm,function(key,value) {
+									    $(".rlNm").append($("<option></option>").val(value.rlNmID).html(value.rlNm));
+									  });
+									} else if (selected == "sapDp1") {
+									  $("option", ".rlNm").remove();
+									  var a = {RlNm : [{"rlNm" : "SAP Developer","rlNmID" : "sapDp2"}]};
+									  $.each(a.RlNm,function(key,value) {
+									    $(".rlNm").append($("<option></option>").val(value.rlNmID).html(value.rlNm));
+									  });
+									}else {
+									   $("option", ".rlNm").remove();
+									   var a = {RlNm : [{"rlNm" : "Senior HR Analyst","rlNmID" : "sapDp3"} ]};
+									   $.each(a.RlNm,function(key,value) {
+										 $(".rlNm").append($("<option></option>").val(value.rlNmID).html(value.rlNm));
+									   });
+									}
+								});
+
+								$("#searchId").click(function() {
+									$("#result").toggle();
+									$("#intrResult").hide();
+									$("#cndtResult").hide();
+									$("#jobRoleSrchId").hide();
+								});
+
+								$("#cndtSearchId").click(function() {
+									$("#cndtResult").toggle();
+									$("#result").hide();
+									$("#intrResult").hide();
+									$("#jobRoleSrchId").hide();
+								});
+								$("#intrSearchId").click(function() {
+									$("#intrResult").toggle();
+									$("#result").hide();
+									$("#cndtResult").hide();
+									$("#jobRoleSrchId").hide();
+								});
+								
+								$("#searchId4").click(function() {
+									$("#jobRoleSrchId").toggle();
+									$("#intrResult").hide();
+									$("#result").hide();
+									$("#cndtResult").hide();
+								});
+	
+								$(".srchHide").click(function() {
+									$("#intrResult").hide();
+									$("#result").hide();
+									$("#cndtResult").hide();
+									$("#jobRoleSrchId").hide();
+									
+								});
+								$(".postJobBtn").click(function() {
+									
+									//$('#dashboard').load("jobManagement.html");
+									 //e.preventDefault();
+									$(".dashboardHref").tab("show");
+								});
+								$(".editPostJob").click(function() {
+									
+									//$('#dashboard').load("jobManagement.html");
+									 //e.preventDefault();
+									$(".postJobHref").tab("show");
+								});
+
+        $('#accountChart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'Account Report'
+            },
+           
+            xAxis: {
+				max:2,
+				min:0,
+                categories: [
+                    'Disney',
+                    'Cisco',
+					'AT&T'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'count'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+			credits: {
+			  enabled: false
+		  },
+            series: [{
+                name: 'OPEN',
+                data: [49, 71, 106, 129, 144]
+
+            }, {
+                name: 'AGING',
+                data: [83, 78, 98, 93, 106, 84]
+
+            }]
+        });
+		
+		  $('#buChart').highcharts({
+            chart: {
+                type: 'column'
+            },
+            title: {
+                text: 'BU Report'
+            },
+           
+            xAxis: {
+				max:1,
+				min:0,
+                categories: [
+                    'Htech',
+                    'Govt Services'
+                ]
+            },
+            yAxis: {
+                min: 0,
+                title: {
+                    text: 'count'
+                }
+            },
+            tooltip: {
+                headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+                pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+                    '<td style="padding:0"><b>{point.y}</b></td></tr>',
+                footerFormat: '</table>',
+                shared: true,
+                useHTML: true
+            },
+            plotOptions: {
+                column: {
+                    pointPadding: 0.2,
+                    borderWidth: 0
+                }
+            },
+			credits: {
+			  enabled: false
+		  },
+            series: [{
+                name: 'OPEN',
+                data: [49, 71, 106, 129, 144]
+
+            }, {
+                name: 'AGING',
+                data: [83, 78, 98, 93, 106, 84]
+
+            }]
+        });
+							});
+		</script>
+		
+	</div>
+	<div class="panel-footer panel-heading-custom">
+		<span style="text-align: center;">
+			<p>2015 - Capgemini Company Confidential</p>
+		</span>
+	</div>
+</div>
+</body>
+</html>
