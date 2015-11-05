@@ -25,93 +25,52 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 
 	@Transactional
 	public void createJob(JobDetails jobDetails) {
-		Job job = populateJobDetails(jobDetails);
-		jobDetailsDAO.storeJob(job);
+		Job jobObject = new Job();
+		Job job = populateJobDetails(jobDetails, jobObject);
+		jobDetailsDAO.createJob(job);
 	}
 
-	/*
-	 * private Job populateJobDetails(JobDetails jobDetails) { Job job = new
-	 * Job(); JSONObject jobJsonObject = JSONObject.getJSONObject(jobDetails);
-	 * 
-	 * Account account = retrieveAccount(jobJsonObject.getInt("accountId"));
-	 * job.setAccount(account);
-	 * 
-	 * EmplTyp emplTyp = job.getEmptTyp();
-	 * emplTyp.setEmptTypId(jobJsonObject.getInt("employementTypeId"));
-	 * job.setEmptTyp(emplTyp);
-	 * 
-	 * JobRole jobRole = job.getJobRole();
-	 * jobRole.setJobRlId(jobJsonObject.getInt("roleId"));
-	 * job.setJobRole(jobRole);
-	 * 
-	 * JobSt jobSt = job.getJobSt();
-	 * jobSt.setJobStsId(jobJsonObject.getInt("jobStatusId"));
-	 * job.setJobSt(jobSt);
-	 * 
-	 * JobStg jobStg = job.getJobStg();
-	 * jobStg.setJobStgId(jobJsonObject.getInt("jobStageId"));
-	 * job.setJobStg(jobStg);
-	 * 
-	 * job.setChrgOutRt(jobJsonObject.getInt("chargeOutRate"));
-	 * 
-	 * job.setClsrDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "closureDate")));
-	 * 
-	 * job.setCntrtRt(jobJsonObject.getInt("contractorRate"));
-	 * 
-	 * job.setCrtrRm(jobJsonObject.getString("creatorRM"));
-	 * 
-	 * job.setOpnDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "openDate")));
-	 * 
-	 * job.setOwnRm(jobJsonObject.getString("owningRM"));
-	 * 
-	 * job.setPrsntDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "presentedDate")));
-	 * 
-	 * job.setReqDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "requestedDate")));
-	 * 
-	 * job.setReqmntSpc(jobJsonObject.getString("requirementSpecifics"));
-	 * 
-	 * job.setReqstrRm(jobJsonObject.getString("requestorRM"));
-	 * 
-	 * job.setResrCnt(jobJsonObject.getInt("contractorRate"));
-	 * 
-	 * job.setTrvl(Boolean.valueOf(jobJsonObject.getString("requirementSpecifics"
-	 * )));
-	 * 
-	 * job.setRlStrDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "openDate")));
-	 * 
-	 * job.setRlEndDt(DateUtil.convertStringToTimestamp(jobJsonObject.getString(
-	 * "openDate")));
-	 * 
-	 * job.setCreateDts(new Timestamp(System.currentTimeMillis()));
-	 * job.setCreateUsrId("jobmngmnt"); job.setUpdtDts(new
-	 * Timestamp(System.currentTimeMillis())); job.setUpdtUsrId("jobmngmnt");
-	 * 
-	 * return job; }
-	 */
-
-	private Job populateJobDetails(JobDetails jobDetails) {
-		Job job = new Job();
-
-		Account account = getAccount(Integer.parseInt(jobDetails
-				.getAccountId()));
+	public void updateJob(String jobId, JobDetails jobDetails) {
 		
+		Job job = jobDetailsDAO.getJob(jobId);
+
+		if (job != null) {
+			job = populateJobDetails(jobDetails, job);
+			jobDetailsDAO.updateJob(job);
+		}
+
+	}
+
+	public void deleteJob(String jobId) {
+
+		Job job = jobDetailsDAO.getJob(jobId);
+
+		if (job != null) {
+			jobDetailsDAO.deleteJob(job);
+		}
+
+	}
+
+	private Job populateJobDetails(JobDetails jobDetails, Job job) {
+
+		Account account = getAccount(Integer
+				.parseInt(jobDetails.getAccountId()));
+
 		job.setAccount(account);
 
-		EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails.getEmployementTypeId()));
+		EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails
+				.getEmployementTypeId()));
 		job.setEmptTyp(emplTyp);
 
 		JobRole jobRole = getJobRole(Integer.parseInt(jobDetails.getRoleId()));
 		job.setJobRole(jobRole);
 
-		JobSt jobSt = getJobStatus(Integer.parseInt(jobDetails.getJobStatusId()));
+		JobSt jobSt = getJobStatus(Integer
+				.parseInt(jobDetails.getJobStatusId()));
 		job.setJobSt(jobSt);
 
-		JobStg jobStg = getJobStage(Integer.parseInt(jobDetails.getJobStageId()));
+		JobStg jobStg = getJobStage(Integer
+				.parseInt(jobDetails.getJobStageId()));
 		job.setJobStg(jobStg);
 
 		job.setChrgOutRt(Integer.parseInt(jobDetails.getChargeOutRate()));

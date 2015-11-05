@@ -1,7 +1,11 @@
 package com.job.mngmnt.webservice.impl;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.core.Response;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +23,27 @@ public class CreateJobDetailsWebserviceImpl implements CreateJobDetailsWebservic
 
 	@POST
 	@Consumes("application/json")
-	public Response storeJob(JobDetails jobDetails) {
+	public Response createJob(JobDetails jobDetails) {
 		
 		jobDetailsService.createJob(jobDetails);
 		return Response.ok().build();
-	}	
+	}
+
+	@PUT
+	@Consumes("application/json")
+	@Path("/job-id")
+	public Response updateJob(@PathParam("job-id") String jobId,
+			JobDetails jobDetails) {
+		// TODO Auto-generated method stub
+		return Response.ok().build();
+	}
+
+	@DELETE
+	@Consumes("application/json")
+	@Path("/job-id")
+	public Response deleteJob(@PathParam("job-id") String jobId) {
+		// TODO Auto-generated method stub
+		return Response.ok().build();
+	}
 	
 }

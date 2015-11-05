@@ -2,6 +2,7 @@ package com.job.mngmnt.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,6 +12,10 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="job.findJob",
+                query="SELECT job FROM Job job where job.jobId=:jobId")
+}) 
 public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 

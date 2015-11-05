@@ -11,6 +11,10 @@ import com.job.mngmnt.entities.JobStg;
 public interface JobDetailsService {
 
 	public void createJob(JobDetails jobDetails);
+	
+	public void updateJob(String jobId, JobDetails jobDetails);
+	
+	public void deleteJob(String jobId);
 
 	public Account getAccount(int acctId);
 

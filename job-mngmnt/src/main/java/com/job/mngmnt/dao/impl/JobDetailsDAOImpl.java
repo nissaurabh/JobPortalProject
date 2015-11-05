@@ -23,22 +23,36 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager entityManager;
 
-	// @Autowired
-	/*
-	 * @Qualifier("jpaTemplate") private JpaTemplate jpaTemplate = null;
-	 */
 
-	public void storeJob(Job job) {
-		/*
-		 * JobSt jobSts = new JobSt(); jobSts.setJobStsNm(status);
-		 * 
-		 * jobSts.setCreateDts(new Timestamp(System.currentTimeMillis()));
-		 * jobSts.setCreateUsrId("jobmngmnt"); jobSts.setUpdtDts(new
-		 * Timestamp(System.currentTimeMillis()));
-		 * jobSts.setUpdtUsrId("jobmngmnt");
-		 */
+	public void createJob(Job job) {
+		
 		entityManager.persist(job);
 
+	}
+	
+	public void updateJob(Job job) {
+		entityManager.merge(job);		
+	}
+
+	public void deleteJob(Job job) {
+		
+		entityManager.remove(job);
+		
+	}
+	
+	public Job getJob(String jobId){
+		
+		Job job = null;
+		
+		Query query = entityManager.createNamedQuery("job.findJob");
+		query.setParameter("jobId", jobId);
+		List<Job> jobList = (List<Job>) query.getResultList();
+		
+		if(!CollectionUtils.isEmpty(jobList)){
+			job = jobList.get(0);
+		}
+		return job;
+		
 	}
 
 	public Account getAccount(int acctId) {

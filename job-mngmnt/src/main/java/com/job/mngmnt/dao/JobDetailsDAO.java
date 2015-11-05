@@ -9,7 +9,11 @@ import com.job.mngmnt.entities.JobStg;
 
 public interface JobDetailsDAO {
 	
-	public void storeJob(Job job);
+	public void createJob(Job job);
+	
+	public void updateJob(Job job);
+	
+	public void deleteJob(Job job);
 	
 	public Account getAccount(int acctId);
 	
@@ -20,5 +24,7 @@ public interface JobDetailsDAO {
 	public JobSt getJobStatus(int jobStsId);
 	
 	public JobStg getJobStage(int jobStgId);
+	
+	public Job getJob(String jobId);
 
 }
