@@ -45,7 +45,7 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 		Job job = null;
 		
 		Query query = entityManager.createNamedQuery("job.findJob");
-		query.setParameter("jobId", jobId);
+		query.setParameter("jobId", Integer.parseInt(jobId));
 		List<Job> jobList = (List<Job>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(jobList)){

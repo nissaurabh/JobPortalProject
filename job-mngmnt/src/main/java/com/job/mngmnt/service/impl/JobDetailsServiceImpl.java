@@ -6,7 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.job.mmngmnt.jaxb.JobDetails;
 import com.job.mngmnt.dao.JobDetailsDAO;
 import com.job.mngmnt.entities.Account;
 import com.job.mngmnt.entities.EmplTyp;
@@ -14,6 +13,7 @@ import com.job.mngmnt.entities.Job;
 import com.job.mngmnt.entities.JobRole;
 import com.job.mngmnt.entities.JobSt;
 import com.job.mngmnt.entities.JobStg;
+import com.job.mngmnt.jaxb.JobDetails;
 import com.job.mngmnt.service.JobDetailsService;
 import com.job.mngmnt.util.DateUtil;
 
@@ -30,6 +30,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		jobDetailsDAO.createJob(job);
 	}
 
+	@Transactional
 	public void updateJob(String jobId, JobDetails jobDetails) {
 		
 		Job job = jobDetailsDAO.getJob(jobId);
@@ -41,6 +42,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 
 	}
 
+	@Transactional
 	public void deleteJob(String jobId) {
 
 		Job job = jobDetailsDAO.getJob(jobId);

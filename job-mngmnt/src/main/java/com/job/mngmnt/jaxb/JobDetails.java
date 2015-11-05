@@ -6,7 +6,7 @@
 //
 
 
-package com.job.mmngmnt.jaxb;
+package com.job.mngmnt.jaxb;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

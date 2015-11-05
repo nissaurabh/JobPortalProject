@@ -1,11 +1,11 @@
 package com.job.mngmnt.service;
 
-import com.job.mmngmnt.jaxb.JobDetails;
 import com.job.mngmnt.entities.Account;
 import com.job.mngmnt.entities.EmplTyp;
 import com.job.mngmnt.entities.JobRole;
 import com.job.mngmnt.entities.JobSt;
 import com.job.mngmnt.entities.JobStg;
+import com.job.mngmnt.jaxb.JobDetails;
 
 
 public interface JobDetailsService {

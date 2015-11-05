@@ -11,7 +11,7 @@ import javax.ws.rs.core.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.job.mmngmnt.jaxb.JobDetails;
+import com.job.mngmnt.jaxb.JobDetails;
 import com.job.mngmnt.service.JobDetailsService;
 import com.job.mngmnt.webservice.CreateJobDetailsWebservice;
 
@@ -31,18 +31,22 @@ public class CreateJobDetailsWebserviceImpl implements CreateJobDetailsWebservic
 
 	@PUT
 	@Consumes("application/json")
-	@Path("/job-id")
+	@Path("/{job-id}")
 	public Response updateJob(@PathParam("job-id") String jobId,
 			JobDetails jobDetails) {
-		// TODO Auto-generated method stub
+		
+		jobDetailsService.updateJob(jobId, jobDetails);
+		
 		return Response.ok().build();
 	}
 
 	@DELETE
 	@Consumes("application/json")
-	@Path("/job-id")
+	@Path("/{job-id}")
 	public Response deleteJob(@PathParam("job-id") String jobId) {
-		// TODO Auto-generated method stub
+		
+		jobDetailsService.deleteJob(jobId);
+		
 		return Response.ok().build();
 	}
 	
