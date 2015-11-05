@@ -6,7 +6,7 @@
         <pathsSet class="linked-hash-set">
           <string>web.xml</string>
           <string>WEB-INF/classes/applicationcontext.xml</string>
-          <string>WEB-INF/classes/com/job/mmngmnt/jaxb/JobDetails.class</string>
+          <string>WEB-INF/classes/com/job/mngmnt/constants/JobMngMntConstants.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/dao/impl/JobDetailsDAOImpl.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/dao/JobDetailsDAO.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/entities/Account.class</string>
@@ -24,6 +24,7 @@
           <string>WEB-INF/classes/com/job/mngmnt/entities/ResourceTyp.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/entities/ServiceLn.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/entities/ServiceLnCap.class</string>
+          <string>WEB-INF/classes/com/job/mngmnt/jaxb/JobDetails.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/service/impl/JobDetailsServiceImpl.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/service/JobDetailsService.class</string>
           <string>WEB-INF/classes/com/job/mngmnt/util/DateUtil.class</string>

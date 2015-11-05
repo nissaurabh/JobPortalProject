@@ -1,3 +1,8 @@
+/**
+ * $Id$
+ * @author
+ * Copyright (c) 2015, Inc.
+ */
 package com.job.mngmnt.dao.impl;
 
 import java.util.List;
@@ -17,36 +22,44 @@ import com.job.mngmnt.entities.JobRole;
 import com.job.mngmnt.entities.JobSt;
 import com.job.mngmnt.entities.JobStg;
 
+/**
+ * The Class JobDetailsDAO.
+ * 
+ * @author sbasired
+ */
 @Service("jobDetailsDAO")
 public class JobDetailsDAOImpl implements JobDetailsDAO {
 
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager entityManager;
 
-
-	public void createJob(Job job) {
+	@Override
+	public void createJob(final Job job) {
 		
 		entityManager.persist(job);
 
 	}
 	
-	public void updateJob(Job job) {
+	@Override
+	public void updateJob(final Job job) {
 		entityManager.merge(job);		
 	}
 
-	public void deleteJob(Job job) {
+	@Override
+	public void deleteJob(final Job job) {
 		
 		entityManager.remove(job);
 		
 	}
 	
-	public Job getJob(String jobId){
+	@Override
+	public Job getJob(final String jobId){
 		
 		Job job = null;
 		
-		Query query = entityManager.createNamedQuery("job.findJob");
+		final Query query = entityManager.createNamedQuery("job.findJob");
 		query.setParameter("jobId", Integer.parseInt(jobId));
-		List<Job> jobList = (List<Job>) query.getResultList();
+		final List<Job> jobList = (List<Job>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(jobList)){
 			job = jobList.get(0);
@@ -55,11 +68,12 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 		
 	}
 
-	public Account getAccount(int acctId) {
+	@Override
+	public Account getAccount(final int acctId) {
 		Account accout = null;
-		Query query = entityManager.createNamedQuery("account.findAccount");
+		final Query query = entityManager.createNamedQuery("account.findAccount");
 		query.setParameter("clntId", acctId);
-		List<Account> acctList = (List<Account>) query.getResultList();
+		final List<Account> acctList = (List<Account>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(acctList)){
 			accout = acctList.get(0);
@@ -69,11 +83,12 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 
 	}
 	
-	public EmplTyp getEmplTyp(int emptTypId) {
+	@Override
+	public EmplTyp getEmplTyp(final int emptTypId) {
 		EmplTyp emplTyp = null;
-		Query query = entityManager.createNamedQuery("emplTyp.findEmplTyp");
+		final Query query = entityManager.createNamedQuery("emplTyp.findEmplTyp");
 		query.setParameter("emptTypId", emptTypId);
-		List<EmplTyp> emplTypList = (List<EmplTyp>) query.getResultList();
+		final List<EmplTyp> emplTypList = (List<EmplTyp>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(emplTypList)){
 			emplTyp = emplTypList.get(0);
@@ -83,11 +98,12 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 
 	}
 	
-	public JobRole getJobRole(int jobRlId) {
+	@Override
+	public JobRole getJobRole(final int jobRlId) {
 		JobRole jobRole = null;
-		Query query = entityManager.createNamedQuery("jobRole.findJobRole");
+		final Query query = entityManager.createNamedQuery("jobRole.findJobRole");
 		query.setParameter("jobRlId", jobRlId);
-		List<JobRole> jobRoleList = (List<JobRole>) query.getResultList();
+		final List<JobRole> jobRoleList = (List<JobRole>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(jobRoleList)){
 			jobRole = jobRoleList.get(0);
@@ -97,11 +113,12 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 
 	}
 	
-	public JobSt getJobStatus(int jobStsId) {
+	@Override
+	public JobSt getJobStatus(final int jobStsId) {
 		JobSt jobSt = null;
-		Query query = entityManager.createNamedQuery("jobSt.findJobSt");
+		final Query query = entityManager.createNamedQuery("jobSt.findJobSt");
 		query.setParameter("jobStsId", jobStsId);
-		List<JobSt> jobStList = (List<JobSt>) query.getResultList();
+		final List<JobSt> jobStList = (List<JobSt>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(jobStList)){
 			jobSt = jobStList.get(0);
@@ -111,11 +128,12 @@ public class JobDetailsDAOImpl implements JobDetailsDAO {
 
 	}
 	
-	public JobStg getJobStage(int jobStgId) {
+	@Override
+	public JobStg getJobStage(final int jobStgId) {
 		JobStg jobStg = null;
-		Query query = entityManager.createNamedQuery("jobStg.findJobStgId");
+		final Query query = entityManager.createNamedQuery("jobStg.findJobStgId");
 		query.setParameter("jobStgId", jobStgId);
-		List<JobStg> jobStgList = (List<JobStg>) query.getResultList();
+		final List<JobStg> jobStgList = (List<JobStg>) query.getResultList();
 		
 		if(!CollectionUtils.isEmpty(jobStgList)){
 			jobStg = jobStgList.get(0);

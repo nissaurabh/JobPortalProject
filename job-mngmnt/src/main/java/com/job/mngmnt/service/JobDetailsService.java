@@ -1,3 +1,8 @@
+/**
+ * $Id$
+ * @author
+ * Copyright (c) 2015, Inc.
+ */
 package com.job.mngmnt.service;
 
 import com.job.mngmnt.entities.Account;
@@ -7,23 +12,83 @@ import com.job.mngmnt.entities.JobSt;
 import com.job.mngmnt.entities.JobStg;
 import com.job.mngmnt.jaxb.JobDetails;
 
-
+/**
+ * The Class performs create, update, delete Job JobDetailsService.
+ * 
+ * @author sbasired
+ */
 public interface JobDetailsService {
 
-	public void createJob(JobDetails jobDetails);
+	/**
+	 * create the job service.
+	 * 
+	 * @param jobDetails
+	 *            the jobDetails
+	 * @return the response
+	 */
+	public String createJob(final JobDetails jobDetails);
 	
-	public void updateJob(String jobId, JobDetails jobDetails);
+	/**
+	 * update the job service.
+	 * @param jobId
+	 *            the jobId
+	 * @param jobDetails
+	 *            the jobDetails
+	 * @return the response
+	 */
+	public String updateJob(final String jobId, final JobDetails jobDetails);
 	
-	public void deleteJob(String jobId);
+	/**
+	 * delete the job service.
+	 * @param jobId
+	 *            the jobId
+	 * @return the response
+	 */
+	public String deleteJob(final String jobId);
 
-	public Account getAccount(int acctId);
+	/**
+	 * get the account service.
+	 * @param acctId
+	 *            the acctId
+	 * @return account
+	 * 			  the acctId
+	 */
+	public Account getAccount(final int acctId);
 
-	public EmplTyp getEmplTyp(int emptTypId);
+	/**
+	 * get the employee type service.
+	 * @param emptTypId
+	 *            the emptTypId
+	 * @return emplTyp
+	 * 			  the emplTyp
+	 */
+	public EmplTyp getEmplTyp(final int emptTypId);
 
-	public JobRole getJobRole(int jobRlId);
+	/**
+	 * get the job role service.
+	 * @param jobRlId
+	 *            the jobRlId
+	 * @return jobRole
+	 * 			  the jobRole
+	 */
+	public JobRole getJobRole(final int jobRlId);
 
-	public JobSt getJobStatus(int jobStsId);
+	/**
+	 * get the job status service.
+	 * @param jobStsId
+	 *            the jobStsId
+	 * @return jobSt
+	 * 			  the jobSt
+	 */
+	public JobSt getJobStatus(final int jobStsId);
 
-	public JobStg getJobStage(int jobStgId);
+	/**
+	 * get the job stage service.
+	 * @param jobStgId
+	 *            the jobStgId
+	 * @return jobStg
+	 * 			  the jobStg
+	 */
+	public JobStg getJobStage(final int jobStgId);
 
 }

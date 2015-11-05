@@ -1,3 +1,8 @@
+/**
+ * $Id$
+ * @author
+ * Copyright (c) 2015, Inc.
+ */
 package com.job.mngmnt.service.impl;
 
 import java.sql.Timestamp;
@@ -6,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.job.mngmnt.constants.JobMngMntConstants;
 import com.job.mngmnt.dao.JobDetailsDAO;
 import com.job.mngmnt.entities.Account;
 import com.job.mngmnt.entities.EmplTyp;
@@ -17,6 +23,11 @@ import com.job.mngmnt.jaxb.JobDetails;
 import com.job.mngmnt.service.JobDetailsService;
 import com.job.mngmnt.util.DateUtil;
 
+/**
+ * The Class performs create, update, delete Job JobDetailsService.
+ * 
+ * @author sbasired
+ */
 @Component("jobDetailsService")
 public class JobDetailsServiceImpl implements JobDetailsService {
 
@@ -24,54 +35,73 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 	private JobDetailsDAO jobDetailsDAO;
 
 	@Transactional
-	public void createJob(JobDetails jobDetails) {
-		Job jobObject = new Job();
-		Job job = populateJobDetails(jobDetails, jobObject);
+	@Override
+	public String createJob(final JobDetails jobDetails) {
+		final String response = JobMngMntConstants.CREATED;
+		final Job jobObject = new Job();
+		final Job job = populateJobDetails(jobDetails, jobObject);
 		jobDetailsDAO.createJob(job);
+
+		return response;
 	}
 
 	@Transactional
-	public void updateJob(String jobId, JobDetails jobDetails) {
-		
+	@Override
+	public String updateJob(final String jobId, final JobDetails jobDetails) {
+		String response = JobMngMntConstants.OK_STATUS;
 		Job job = jobDetailsDAO.getJob(jobId);
 
 		if (job != null) {
 			job = populateJobDetails(jobDetails, job);
 			jobDetailsDAO.updateJob(job);
+		}else{
+			response = JobMngMntConstants.NOT_FOUND;
 		}
-
+		return response;
 	}
 
 	@Transactional
-	public void deleteJob(String jobId) {
-
-		Job job = jobDetailsDAO.getJob(jobId);
+	@Override
+	public String deleteJob(final String jobId) {
+		String response = JobMngMntConstants.OK_STATUS;
+		final Job job = jobDetailsDAO.getJob(jobId);
 
 		if (job != null) {
 			jobDetailsDAO.deleteJob(job);
+		}else{
+			response = JobMngMntConstants.NOT_FOUND;
 		}
+		return response;
 
 	}
 
-	private Job populateJobDetails(JobDetails jobDetails, Job job) {
+	/**
+	 * populate the job details.
+	 * @param jobDetails
+	 *            the jobDetails
+	 * @param job
+	 *            the job
+	 * @return the job
+	 */
+	private Job populateJobDetails(final JobDetails jobDetails, final Job job) {
 
-		Account account = getAccount(Integer
+		final Account account = getAccount(Integer
 				.parseInt(jobDetails.getAccountId()));
 
 		job.setAccount(account);
 
-		EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails
+		final EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails
 				.getEmployementTypeId()));
 		job.setEmptTyp(emplTyp);
 
-		JobRole jobRole = getJobRole(Integer.parseInt(jobDetails.getRoleId()));
+		final JobRole jobRole = getJobRole(Integer.parseInt(jobDetails.getRoleId()));
 		job.setJobRole(jobRole);
 
-		JobSt jobSt = getJobStatus(Integer
+		final JobSt jobSt = getJobStatus(Integer
 				.parseInt(jobDetails.getJobStatusId()));
 		job.setJobSt(jobSt);
 
-		JobStg jobStg = getJobStage(Integer
+		final JobStg jobStg = getJobStage(Integer
 				.parseInt(jobDetails.getJobStageId()));
 		job.setJobStg(jobStg);
 
@@ -116,27 +146,37 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		return job;
 	}
 
-	public Account getAccount(int acctId) {
+	@Transactional
+	@Override
+	public Account getAccount(final int acctId) {
 
 		return jobDetailsDAO.getAccount(acctId);
 	}
 
-	public EmplTyp getEmplTyp(int emptTypId) {
+	@Transactional
+	@Override
+	public EmplTyp getEmplTyp(final int emptTypId) {
 
 		return jobDetailsDAO.getEmplTyp(emptTypId);
 	}
 
-	public JobRole getJobRole(int jobRlId) {
+	@Transactional
+	@Override
+	public JobRole getJobRole(final int jobRlId) {
 
 		return jobDetailsDAO.getJobRole(jobRlId);
 	}
 
-	public JobSt getJobStatus(int jobStsId) {
+	@Transactional
+	@Override
+	public JobSt getJobStatus(final int jobStsId) {
 
 		return jobDetailsDAO.getJobStatus(jobStsId);
 	}
 
-	public JobStg getJobStage(int jobStgId) {
+	@Transactional
+	@Override
+	public JobStg getJobStage(final int jobStgId) {
 
 		return jobDetailsDAO.getJobStage(jobStgId);
 	}
