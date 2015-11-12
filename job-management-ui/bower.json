@@ -1,0 +1,10 @@
+{
+  "name": "job-management-ui",
+  "version": "1.0.0",
+  "dependencies": {
+    "angular": "latest",
+    "bootstrap": "latest",
+    "angular-route": "latest",
+	"angular-resource": "latest"
+  }
+}
