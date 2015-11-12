@@ -3,7 +3,11 @@
  * @author
  * Copyright (c) 2015, Inc.
  */
+<<<<<<< HEAD:job-mngmnt/src/main/java/com/capgemini/job/portal/service/impl/JobDetailsServiceImpl.java
 package com.capgemini.job.portal.service.impl;
+=======
+package com.job.mngmnt.service.impl;
+>>>>>>> origin/master:job-mngmnt/src/main/java/com/job/mngmnt/service/impl/JobDetailsServiceImpl.java
 
 import java.sql.Timestamp;
 
@@ -11,6 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 
+<<<<<<< HEAD:job-mngmnt/src/main/java/com/capgemini/job/portal/service/impl/JobDetailsServiceImpl.java
 import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dao.JobDetailsDAO;
 import com.capgemini.job.portal.entities.Account;
@@ -22,6 +27,19 @@ import com.capgemini.job.portal.entities.JobStg;
 import com.capgemini.job.portal.jaxb.JobDetails;
 import com.capgemini.job.portal.service.JobDetailsService;
 import com.capgemini.job.portal.util.DateUtil;
+=======
+import com.job.mngmnt.constants.JobMngMntConstants;
+import com.job.mngmnt.dao.JobDetailsDAO;
+import com.job.mngmnt.entities.Account;
+import com.job.mngmnt.entities.EmplTyp;
+import com.job.mngmnt.entities.Job;
+import com.job.mngmnt.entities.JobRole;
+import com.job.mngmnt.entities.JobSt;
+import com.job.mngmnt.entities.JobStg;
+import com.job.mngmnt.jaxb.JobDetails;
+import com.job.mngmnt.service.JobDetailsService;
+import com.job.mngmnt.util.DateUtil;
+>>>>>>> origin/master:job-mngmnt/src/main/java/com/job/mngmnt/service/impl/JobDetailsServiceImpl.java
 
 /**
  * The Class performs create, update, delete Job JobDetailsService.
