@@ -24,13 +24,14 @@
 	<import resource="classpath:META-INF/cxf/cxf.xml" />
 	<import resource="classpath:META-INF/cxf/cxf-servlet.xml" />
 
-	<context:component-scan base-package="com.job.mngmnt.*" />
+	<context:component-scan base-package="com.capgemini.job.portal.*" />
 
 	<!-- web service end points -->
-	<jaxrs:server id="jobMngmntServiceEndpoint" address="/">
+	<jaxrs:server id="capgeminiJobPortalServiceEndpoint" address="/">
 
 		<jaxrs:serviceBeans>
-			<ref bean="createJobDetailsWebservice" />
+			<ref bean="jobDetailsWebservice" />
+			<ref bean="jobCandidateWebservice" />
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 		   <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>

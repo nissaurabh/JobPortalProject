@@ -3,11 +3,11 @@
 
 	<modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.job.mngmnt</groupId>
-	<artifactId>job-mngmnt</artifactId>
+	<groupId>com.capgemini.job.portal.service</groupId>
+	<artifactId>job-mngmnt-service</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>JobManagement</name>
+	<name>JobManagementService</name>
 
 
 	<properties>
@@ -21,7 +21,7 @@
 
 	<!-- Plugin configuration -->
 	<build>
-		<finalName>job-mngmnt</finalName>
+		<finalName>job-management-service</finalName>
 		<plugins>
 			<plugin>
 				<artifactId>maven-compiler-plugin</artifactId>
@@ -38,30 +38,6 @@
                     <webXml>src\main\webapp\web.xml</webXml>
                 </configuration>
             </plugin>
-			<!--  <plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.1</version>
-				<configuration>
-					<source>1.7</source>
-					<target>1.7</target>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<configuration>
-					<argLine>-XX:MaxPermSize=512m</argLine>
-					<skipTests>false</skipTests>
-				</configuration>
-			</plugin>
-			<plugin>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<downloadSources>true</downloadSources>
-					<wtpversion>1.5</wtpversion>
-				</configuration>
-			</plugin>  -->
 		</plugins>
 	</build>
 
@@ -135,6 +111,17 @@
 			<artifactId>spring-web</artifactId>
 			<version>${spring.version}</version>
 		</dependency>
+		 <dependency>
+	       <groupId>org.springframework</groupId>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+		
 
 		<!-- JPA dependecies -->
 		<dependency>
@@ -146,7 +133,7 @@
 		<dependency>
 			<groupId>org.eclipse.persistence</groupId>
 			<artifactId>eclipselink</artifactId>
-			<version>2.0.0</version>
+			<version>2.4.2</version>
 			<scope>compile</scope>
 		</dependency>
 
@@ -237,11 +224,6 @@
 			<classifier>jdk15</classifier>
 		</dependency>
 
-	<!-- <dependency>
-			<groupId>com.jayway.jsonpath</groupId>
-			<artifactId>json-path</artifactId>
-			<version>0.8.1</version>
-		</dependency>  -->
 	</dependencies>
 
 </project>
