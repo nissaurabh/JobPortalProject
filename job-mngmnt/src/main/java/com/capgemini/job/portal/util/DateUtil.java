@@ -1,13 +1,10 @@
+package com.capgemini.job.portal.util;
+
 /**
  * $Id$
  * @author
  * Copyright (c) 2015, Inc.
  */
-<<<<<<< HEAD:job-mngmnt/src/main/java/com/capgemini/job/portal/util/DateUtil.java
-package com.capgemini.job.portal.util;
-=======
-package com.job.mngmnt.util;
->>>>>>> origin/master:job-mngmnt/src/main/java/com/job/mngmnt/util/DateUtil.java
 
 import java.sql.Timestamp;
 import java.text.DateFormat;

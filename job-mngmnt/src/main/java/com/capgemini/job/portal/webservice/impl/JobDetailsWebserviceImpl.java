@@ -14,10 +14,10 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
-import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +31,7 @@ import com.capgemini.job.portal.webservice.JobDetailsWebservice;
  * 
  * @author sbasired
  */
+@CrossOriginResourceSharing(allowAllOrigins = true)
 @Component("jobDetailsWebservice")
 public class JobDetailsWebserviceImpl implements
 		JobDetailsWebservice {
@@ -50,12 +51,12 @@ public class JobDetailsWebserviceImpl implements
 	 */
 	@POST
 	@Consumes("application/json")
-	public Response createJob(final String jobDetails)
+	public Response createJob(JobDetails jobDetails)
 			throws URISyntaxException {
 		String response = null;
-		System.out.println("JobDetails JSON: "+ jobDetails);
-		//response = jobDetailsService.createJob(jobDetails);
-		return Response.ok().build();
+		System.out.println("JobDetails JSON: "+ jobDetails.getAccountId());
+		response = jobDetailsService.createJob(jobDetails);
+		return Response.ok().header("Access-Control-Allow-Origin", "http://10.81.82.144:8080/job-management-service/").build();
 	}
 
 	/**

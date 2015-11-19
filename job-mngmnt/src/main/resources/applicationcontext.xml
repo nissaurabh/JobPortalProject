@@ -26,15 +26,23 @@
 
 	<context:component-scan base-package="com.capgemini.job.portal.*" />
 
+<bean id="cors-filter" class="org.apache.cxf.rs.security.cors.CrossOriginResourceSharingFilter"/>
+<!--   <bean id="cors-server" scope="prototype"
+          class="org.apache.cxf.systest.jaxrs.cors.AnnotatedCorsServer" /> -->
 	<!-- web service end points -->
 	<jaxrs:server id="capgeminiJobPortalServiceEndpoint" address="/">
 
 		<jaxrs:serviceBeans>
+			<!-- <ref bean="cors-server" />  -->
 			<ref bean="jobDetailsWebservice" />
 			<ref bean="jobCandidateWebservice" />
+			<ref bean="jobUtilityWebservice" />
+			
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
+		 	 <ref bean="cors-filter" /> 
 		   <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
+		  
 		</jaxrs:providers>
 	</jaxrs:server>
 

@@ -11,6 +11,7 @@ package com.capgemini.job.portal.jaxb;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -77,22 +78,28 @@ import javax.xml.bind.annotation.XmlType;
     "employementTypeId",
     "jobStatusId"
 })
-@XmlRootElement(name = "jobDetails")
+@XmlRootElement
 public class JobDetails {
 
+	@XmlSchemaType(name = "date")
     protected String requestedDate;
+	@XmlSchemaType(name = "date")
     protected String closureDate;
     protected String creatorRM;
     protected String requestorRM;
     protected String owningRM;
     protected String requirementSpecifics;
     protected String resourceCount;
+    @XmlSchemaType(name = "date")
     protected String roleStartDate;
+    @XmlSchemaType(name = "date")
     protected String roleEndDate;
     protected String chargeOutRate;
     protected String contractorRate;
     protected String travel;
+    @XmlSchemaType(name = "date")
     protected String openDate;
+    @XmlSchemaType(name = "date")
     protected String presentedDate;
     protected String roleId;
     protected String serviceLineCapabilityId;

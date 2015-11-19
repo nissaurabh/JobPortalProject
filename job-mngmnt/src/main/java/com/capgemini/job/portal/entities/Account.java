@@ -13,7 +13,9 @@ import java.util.List;
 @Entity
 @NamedQueries({
     @NamedQuery(name="account.findAccount",
-                query="SELECT acct FROM Account acct where acct.clntId=:clntId")
+                query="SELECT acct FROM Account acct where acct.clntId=:clntId"),
+   @NamedQuery(name="account.getAccount",
+                query="SELECT acct FROM Account acct")
 }) 
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;

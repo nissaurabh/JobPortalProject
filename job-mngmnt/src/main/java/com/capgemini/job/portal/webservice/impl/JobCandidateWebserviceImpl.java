@@ -6,7 +6,6 @@
 package com.capgemini.job.portal.webservice.impl;
 
 import java.io.InputStream;
-import java.io.StringReader;
 import java.net.URISyntaxException;
 import java.util.List;
 
@@ -24,7 +23,6 @@ import javax.xml.bind.Unmarshaller;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
-import org.eclipse.persistence.jaxb.JAXBContextProperties;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -126,7 +124,7 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
     }
 	
 	public JobCandidate convertStringToJaxbObject(String jsonString) throws Exception{
-		        JAXBContext jc = JAXBContext.newInstance(JobCandidate.class);
+		        /*JAXBContext jc = JAXBContext.newInstance(JobCandidate.class);
 		        Unmarshaller unmarshaller = jc.createUnmarshaller();
 		        unmarshaller.setProperty(JAXBContextProperties.MEDIA_TYPE,
 		                "application/json");
@@ -134,9 +132,9 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 
 		        //unmarshaller.setProperty(UnmarshallerProperties.JAXB_FORMATTED_OUTPUT, true);
 		        StringReader json = new StringReader(jsonString);
-		        JobCandidate jobCandidate = (JobCandidate) unmarshaller.unmarshal(json);
+		        JobCandidate jobCandidate = (JobCandidate) unmarshaller.unmarshal(json);*/
 
-		        return jobCandidate;
+		        return null;
 	}
 
 }

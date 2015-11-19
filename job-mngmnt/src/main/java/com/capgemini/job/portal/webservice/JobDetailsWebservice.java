@@ -37,7 +37,7 @@ public interface JobDetailsWebservice {
 	 */
 	@POST
 	@Consumes("application/json")
-	public Response createJob(final String jobDetails)
+	public Response createJob(final JobDetails jobDetails)
 			throws URISyntaxException;
 
 	/**
