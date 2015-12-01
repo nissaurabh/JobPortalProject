@@ -48,69 +48,80 @@ public class JobUtilityDAOImpl implements JobUtilityDAO{
 	}
 
 	@Override
-	public CndtCtg getCandidateCategory() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CndtCtg> getCandidateCategory() {
+		Query query = entityManager.createQuery("SELECT cndtCtg FROM CndtCtg cndtCtg");
+		List<CndtCtg> candtCategories = query.getResultList();
+		return candtCategories;
 	}
 
 	@Override
-	public CndtSt getCandidateStatus() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CndtSt> getCandidateStatus() {
+		Query query = entityManager.createQuery("SELECT cndtSt FROM CndtSt cndtSt");
+		List<CndtSt> candidateStatuses = query.getResultList();
+		return candidateStatuses;
 	}
 
 	@Override
-	public CtznshpSt getCitizenshipStatus() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<CtznshpSt> getCitizenshipStatus() {
+		Query query = entityManager.createQuery("SELECT ctznshpSt FROM CtznshpSt ctznshpSt");
+		List<CtznshpSt> citizenshipStatuses = query.getResultList();
+		return citizenshipStatuses;
 	}
 
 	@Override
-	public EmplTyp getEmployeeType() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<EmplTyp> getEmployeeType() {
+		Query query = entityManager.createQuery("SELECT emplTyp FROM EmplTyp emplTyp");
+		List<EmplTyp> employeeTypeList = query.getResultList();
+		return employeeTypeList;
 	}
 
 	@Override
-	public IntrvwSt getInterviewStatus() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IntrvwSt> getInterviewStatus() {
+		Query query = entityManager.createQuery("SELECT intrvwSt FROM IntrvwSt intrvwSt");
+		List<IntrvwSt> interviwStatusList = query.getResultList();
+		return interviwStatusList;
 	}
 
 	@Override
-	public JobRole getJobRole() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<JobRole> getJobRole() {
+		Query query = entityManager.createQuery("SELECT jobRole FROM JobRole jobRole");
+		List<JobRole> jobRoleList = query.getResultList();
+		return jobRoleList;
 	}
 
 	@Override
-	public JobStg getJobStage() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<JobStg> getJobStage() {
+		Query query = entityManager.createQuery("SELECT jobStg FROM JobStg jobStg");
+		List<JobStg> jobStgList = query.getResultList();
+		return jobStgList;
 	}
 
 	@Override
-	public JobSt getJobStatus() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<JobSt> getJobStatus() {
+		Query query = entityManager.createQuery("SELECT jobSt FROM JobSt jobSt");
+		List<JobSt> jobStList = query.getResultList();
+		return jobStList;
 	}
 
 	@Override
-	public ResourceTyp getResourceType() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ResourceTyp> getResourceType() {
+		Query query = entityManager.createQuery("SELECT resourceTyp FROM ResourceTyp resourceTyp");
+		List<ResourceTyp> resourceTypList = query.getResultList();
+		return resourceTypList;
 	}
 
 	@Override
-	public ServiceLn getServiceLine() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ServiceLn> getServiceLine() {
+		Query query = entityManager.createQuery("SELECT srviceLn FROM ServiceLn srviceLn");
+		List<ServiceLn> srviceLnList = query.getResultList();
+		return srviceLnList;
 	}
 
 	@Override
-	public ServiceLnCap getServiceLineCapability() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<ServiceLnCap> getServiceLineCapability() {
+		Query query = entityManager.createQuery("SELECT serviceLnCap FROM ServiceLnCap serviceLnCap");
+		List<ServiceLnCap> serviceLnCapList = query.getResultList();
+		return serviceLnCapList;
 	}
 
 }

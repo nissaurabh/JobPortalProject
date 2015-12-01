@@ -1,21 +1,129 @@
-.bodyClass {
- background: url(../images/image2.jpg);
+.body{
+    background-color: #F0F7F9 !important;
 }
-
-
 .header {
  color:white;
  font-weight:bold;
- border-top-right-radius:5px;
- border-top-left-radius:5px;
- border-bottom-right-radius:5px;
- border-bottom-left-radius:5px;
  background-color:#446293;
  height:35px;
  padding-top:6px;
 }
 
-.jobmanagement {
- background: url("") no-repeat;
- display:inline-block;
+.panel-heading.accordion-toggle:after {
+    /* symbol for "opening" panels */
+    font-family:'Glyphicons Halflings';
+    /* essential for enabling glyphicon */
+    content:"\e113";
+    /* adjust as needed, taken from bootstrap.css */
+    float: right;
+    /* adjust as needed */
+    color: white;
+    /* adjust as needed */
+    font-size: 20px;
+    /* adjust as needed */
+    margin-left: 10px !important;
+    /* adjust as needed */
+    margin-right: 10px !important;
+    /* adjust as needed */
 }
+.panel-heading.accordion-toggle.collapsed:after {
+    /* symbol for "collapsed" panels */
+    content:"\e114";
+    /* adjust as needed, taken from bootstrap.css */
+}
+.accordion-toggle:hover {
+    cursor: pointer;
+}
+.panel-default {
+    border-color: #6BAFC4 !important;
+    font-family:'Roboto', sans-serif !important;
+    margin-bottom: 0px !important;
+    padding: 0px !important;
+}
+/* http://css-tricks.com/snippets/css/a-guide-to-flexbox/ */
+.panel-default .panel-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #6BAFC4 !important;
+    margin: 0px !important;
+    min-height: 40px;
+}
+.panel-default .panel-title {
+    font-size: 14px;
+    font-weight:bold;
+    line-height: 22px;
+    color: white;
+    padding: 0px !important;
+    margin: 0px !important;
+    margin-right: 10px;
+}
+.list-group-item{
+    background-color: #F0F7F9 !important;
+
+}
+
+canvas{
+    width: 100% !important;
+    min-width: 200px;
+    height: 200px;
+    background-color: #F0F7F9 !important;
+}
+.column{
+    padding:10px;
+}
+
+.panel-green {
+    border-color: #5cb85c;
+}
+
+.panel-green .panel-heading {
+    border-color: #5cb85c;
+    color: #fff;
+    background-color: #5cb85c;
+}
+
+/*.panel-green a {
+    color: #5cb85c;
+}
+
+.panel-green a:hover {
+    color: #3d8b3d;
+}*/
+
+.panel-red {
+    border-color: #d9534f;
+}
+
+.panel-red .panel-heading {
+    border-color: #d9534f;
+    color: #fff;
+    background-color: #d9534f;
+}
+
+/*.panel-red a {
+    color: #d9534f;
+}
+
+.panel-red a:hover {
+    color: #b52b27;
+}*/
+
+.panel-yellow {
+    border-color: #f0ad4e;
+}
+
+.panel-yellow .panel-heading {
+    border-color: #f0ad4e;
+    color: #fff;
+    background-color: #f0ad4e;
+}
+
+/*
+.panel-yellow a {
+    color: #f0ad4e;
+}
+
+.panel-yellow a:hover {
+    color: #df8a13;
+}*/

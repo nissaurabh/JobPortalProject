@@ -1,17 +1,17 @@
 package com.capgemini.job.portal.service;
 
 import com.capgemini.job.portal.jaxb.Accounts;
-import com.capgemini.job.portal.jaxb.CandidateCategory;
-import com.capgemini.job.portal.jaxb.CandidateStatus;
-import com.capgemini.job.portal.jaxb.CitizenshipStatus;
-import com.capgemini.job.portal.jaxb.EmployeeType;
-import com.capgemini.job.portal.jaxb.InterviewStatus;
-import com.capgemini.job.portal.jaxb.JobRole;
-import com.capgemini.job.portal.jaxb.JobStage;
-import com.capgemini.job.portal.jaxb.JobStatus;
-import com.capgemini.job.portal.jaxb.ResourceType;
-import com.capgemini.job.portal.jaxb.ServiceLine;
-import com.capgemini.job.portal.jaxb.ServiceLineCapability;
+import com.capgemini.job.portal.jaxb.CandidateCategories;
+import com.capgemini.job.portal.jaxb.CandidateStatuses;
+import com.capgemini.job.portal.jaxb.CitizenshipStatuses;
+import com.capgemini.job.portal.jaxb.EmployeeTypes;
+import com.capgemini.job.portal.jaxb.InterviewStatuses;
+import com.capgemini.job.portal.jaxb.JobRoles;
+import com.capgemini.job.portal.jaxb.JobStages;
+import com.capgemini.job.portal.jaxb.JobStatuses;
+import com.capgemini.job.portal.jaxb.ResourceTypes;
+import com.capgemini.job.portal.jaxb.ServiceLineCapabilities;
+import com.capgemini.job.portal.jaxb.ServiceLines;
 
 /**
  * The Class performs to get the administrative data JobUtilityService.
@@ -30,69 +30,69 @@ public interface JobUtilityService {
 	
 	/**
 	 * get the candidate category details.
-	 * @return candidateCategory
-	 * 			  the candidateCategory
+	 * @return CandidateCategories
+	 * 			  the CandidateCategories
 	 */
-	public CandidateCategory getCandidateCategory();
+	public CandidateCategories getCandidateCategory();
 	
 	/**
 	 * get the candidate status details
-	 * @return the candidateStatus
+	 * @return the candidatesStatuses
 	 */
-	public CandidateStatus getCandidateStatus();
+	public CandidateStatuses getCandidateStatus();
 	
 	/**
 	 * get the citizenship status details
-	 * @return the citizenshipStatus
+	 * @return the citizenshipStatuses
 	 */
-	public CitizenshipStatus getCitizenshipStatus();
+	public CitizenshipStatuses getCitizenshipStatus();
 	
 	/**
 	 * get the employee type details
-	 * @return the employeeType
+	 * @return the employeeTypes
 	 */
-	public EmployeeType getEmployeeType();
+	public EmployeeTypes getEmployeeType();
 	
 	/**
 	 * get the interview status details
-	 * @return the InterviewStatus
+	 * @return the InterviewStatuses
 	 */
-	public InterviewStatus getInterviewStatus();
+	public InterviewStatuses getInterviewStatus();
 	
 	/**
 	 * get the job role details
-	 * @return the jobRole
+	 * @return the jobRoles
 	 */
-	public JobRole getJobRole();
+	public JobRoles getJobRole();
 	
 	/**
 	 * get the job stage details
-	 * @return the jobStage
+	 * @return the jobStages
 	 */
-	public JobStage getJobStage();
+	public JobStages getJobStage();
 	
 	/**
 	 * get the job status details
-	 * @return the jobStatus
+	 * @return the jobStatuses
 	 */
-	public JobStatus getJobStatus();
+	public JobStatuses getJobStatus();
 	
 	/**
 	 * get the resource type details
-	 * @return the resourceType
+	 * @return the ResourceTypes
 	 */
-	public ResourceType getResourceType();
+	public ResourceTypes getResourceType();
 	
 	/**
 	 * get the service line details
-	 * @return the serviceLine
+	 * @return the ServiceLines
 	 */
-	public ServiceLine getServiceLine();
+	public ServiceLines getServiceLine();
 	
 	/**
 	 * get the service line capability details
-	 * @return the serviceLineCapability
+	 * @return the ServiceLineCapabilities
 	 */
-	public ServiceLineCapability getServiceLineCapability();
+	public ServiceLineCapabilities getServiceLineCapability();
 
 }

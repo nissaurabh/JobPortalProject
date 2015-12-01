@@ -16,12 +16,10 @@ jobMngmtServices.factory('JobDetailsFactory', function ($resource) {
 
   });
 
-/*jobMngmtServices.factory('JobAdminFactory', function ($resource) {
+jobMngmtServices.factory('JobAdminFactory', function ($resource) {
 
     return $resource('http://10.81.82.144:8080/job-management-service/jobUtility/account', {}, {
-        query: { method: 'GET',
-            isArray: true
-        }
+
     });
 
-});*/
+});

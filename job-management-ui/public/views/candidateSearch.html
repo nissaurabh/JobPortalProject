@@ -1,0 +1,92 @@
+<h3>Candidate Search page</h3>
+<form role="form" action="#dashboard">
+    <table class="table-condensed">
+        <tr>
+            <td><label for="cmdtSrcSerLine">Service Line:</label></td>
+            <td><select class="form-control serLine"
+                        id="cmdtSrcSerLine">
+                <option>CSD</option>
+                <option>SAP</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="cndtSrcSerLnCap">Service Line
+                Capability:</label></td>
+            <td><select class="form-control serLnCap"
+                        id="cndtSrcSerLnCap">
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="cndtSrcRlNm">Role Name:</label></td>
+            <td><select class="form-control rlNm" id="cndtSrcRlNm">
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="cndtSrcSts">Candidate Status:</label></td>
+            <td><select class="form-control" id="cndtSrcSts">
+                <option>Active</option>
+                <option>Hired</option>
+                <option>Rejected</option>
+                <option>Did Not Join</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><label for="ctzSrcSts">Citizenship Status:</label></td>
+            <td><select class="form-control" id="ctzSrcSts">
+                <option>Green Card</option>
+                <option>H1B</option>
+                <option>OPT</option>
+                <option>US Citizen</option>
+            </select></td>
+        </tr>
+        <tr>
+            <td><button type="button" id="cndtSearchId"
+                        class="btn btn-default btn-info">
+                <span class="glyphicon glyphicon-search"></span>
+                Search</button></td>
+            <td><button type="button" id="customizeId"
+                        class="btn btn-default btn-info">Set As Dashboard Default</button></td>
+        </tr>
+    </table>
+</form>
+
+<table class="table table-hover">
+    <thead style="background-color: #b0c4de;">
+    <tr>
+        <th><label>Candidate Name</label></th>
+        <th><label>Resume</label></th>
+        <th><label>Resource Type</label></th>
+        <th><label>Contractor Rate</label></th>
+        <th><label>Candidate Status</label></th>
+        <th><label>Citizenship Status</label></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <td>Jacob</td>
+        <td><a href="#">Download Resume</a></td>
+        <td>gxteam</td>
+        <td>$30 per hour</td>
+        <td>Did Not Join</td>
+        <td>US Citizen</td>
+    </tr>
+    <tr>
+
+        <td>Robert</td>
+        <td><a href="#">Download Resume</a></td>
+        <td>External resource</td>
+        <td>$40 per hour</td>
+        <td>Did Not Join</td>
+        <td>US Citizen</td>
+    </tr>
+    <tr>
+
+        <td>Krishna</td>
+        <td><a href="#">Download Resume</a></td>
+        <td>gxteam</td>
+        <td>$50 per hour</td>
+        <td>Did Not Join</td>
+        <td>US Citizen</td>
+    </tr>
+    </tbody>
+</table>

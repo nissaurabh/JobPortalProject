@@ -48,11 +48,9 @@
     <div class="row">
       <div class="form-group col-sm-3">
         <label for="accountId">Account:</label>
-        {{accounts}}
-        <select name="accountId" id="accountId" class="form-control" ng-model="vm.accountId">
-          <!--<option ng-repeat="account in accounts" value="{{account.accountId}}">{{account.accountName}}</option>-->
-          <option value="1">Full Time</option>
-          <option value="2">Contractor</option>
+        <select name="accountId" id="accountId" class="form-control" ng-model="vm.accountId"
+                ng-options="opt.accountId as opt.accountName for opt in accounts.account">
+
         </select>
       </div>
       <div class="form-group col-sm-3">

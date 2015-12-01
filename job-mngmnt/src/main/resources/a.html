@@ -1,0 +1,153 @@
+<div class="row">
+	<div class="col-sm-4">
+		<div class="panel panel-green">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-4">
+						<a href="#" ng-click="page='jobs'"> <i
+							class="fa fa-list-alt fa-5x"></i></a>
+					</div>
+					<div class="col-xs-8 text-left">
+						<table class="table">
+							<thead>
+								<tr>
+									<th colspan="2">Job Status</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Open</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>Aging</td>
+									<td>30</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+			<div class="panel-footer">
+				<span class="pull-left"><a href="/detailsView">View
+						Details</a></span> <span class="pull-right"><i
+					class="fa fa-arrow-circle-right"></i></span>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-info">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-4">
+						<a href="#" ng-click="page='candidate'"> <i
+							class="fa fa-users fa-5x"></i></a>
+					</div>
+					<div class="col-xs-8 text-left">
+						<table class="table">
+							<thead>
+								<tr>
+									<th colspan="3">Candidate</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Active</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>Hired</td>
+									<td>30</td>
+								</tr>
+								<tr>
+									<td>Rejected</td>
+									<td>30</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-footer">
+				<span class="pull-left"><a href="/detailsView">View
+						Details</a></span> <span class="pull-right"><i
+					class="fa fa-arrow-circle-right"></i></span>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+	<div class="col-sm-4">
+		<div class="panel panel-yellow">
+			<div class="panel-heading">
+				<div class="row">
+					<div class="col-xs-4">
+						<a href="#" ng-click="page='interview'"> <i
+							class="fa fa-institution fa-5x"></i></a>
+					</div>
+					<div class="col-xs-8 text-left">
+						<table class="table">
+							<thead>
+								<tr>
+									<th colspan="2">Interview</th>
+								</tr>
+							</thead>
+							<tbody>
+								<tr>
+									<td>Conducted</td>
+									<td>20</td>
+								</tr>
+								<tr>
+									<td>Success</td>
+									<td>30</td>
+								</tr>
+							</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="panel-footer">
+				<span class="pull-left"><a href="/detailsView">View
+						Details</a></span> <span class="pull-right"><i
+					class="fa fa-arrow-circle-right"></i></span>
+				<div class="clearfix"></div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<div class="row">
+	<div ng-switch="page">
+		<div ng-switch-when="jobs">
+			<div class="col-sm-6">
+				<canvas id="jobAccount" class="chart chart-doughnut"
+					chart-data="jobAccountData" chart-labels="jobAccountLabels"
+					chart-legend="true"></canvas>
+			</div>
+			<div class="col-sm-6">
+				<canvas id="jobBU" class="chart chart-doughnut"
+					chart-data="jobBUData" chart-labels="jobBULabels"></canvas>
+			</div>
+		</div>
+
+		<div ng-switch-when="candidate">
+			<div class="col-sm-6">
+				<canvas id="candidateAccount" class="chart chart-line"
+					chart-data="candidateAccountData"
+					chart-labels="candidateAccountLabels" chart-legend="true"
+					chart-series="candidateAccountSeries" chart-click="onClick">
+                </canvas>
+			</div>
+			<div class="col-sm-6">
+				<canvas id="candidateBU" class="chart chart-line"
+					chart-data="candidateBUData" chart-labels="candidateBULabels"
+					chart-legend="true" chart-series="candidateBUSeries"
+					chart-click="onClick">
+            
+			</div>
+		</div>
+	</div>
+</div>

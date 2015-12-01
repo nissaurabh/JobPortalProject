@@ -1,23 +1,39 @@
-
-        <div class="panel-group" id="panel-361229">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <a class="panel-title collapsed" data-toggle="collapse" data-parent="#panel-361229" href="#panel-element-868478">Collapsible Group Item #1</a>
-                </div>
-                <div id="panel-element-868478" class="panel-collapse collapse">
-                    <div class="panel-body">
-                        Anim pariatur cliche...
-                    </div>
-                </div>
-            </div>
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <a class="panel-title" data-toggle="collapse" data-parent="#panel-361229" href="#panel-element-599735">Collapsible Group Item #2</a>
-                </div>
-                <div id="panel-element-599735" class="panel-collapse collapse in">
-                    <div class="panel-body">
-                        Anim pariatur cliche...
-                    </div>
-                </div>
-            </div>
+<div class="panel-group" id="accordion">
+    <div class="panel panel-default">
+        <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#dashboard">
+        <div class="panel-title">Dashboard</div>
+              <!--  <a data-toggle="collapse" data-parent="#accordion" href="#dashboard">
+                    <span class="glyphicon glyphicon-folder-close"> </span>Dashboard
+                </a>-->
         </div>
+        <div id="dashboard" class="panel-collapse collapse in">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/dashboard">Dashboard1</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default no-gutter">
+        <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#jobManagement">
+            <div class="panel-title">Job Management</div>
+               <!-- <a data-toggle="collapse" data-parent="#accordion"
+                   href="#jobManagement"><span class="glyphicon glyphicon-file">
+				</span>Job Management</a>-->
+        </div>
+        <div id="jobManagement" class="panel-collapse collapse">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/createJob">Post Job</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="panel panel-default no-gutter">
+        <div class="panel-heading accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#reports">
+            <div class="panel-title">Reports</div>
+        </div>
+        <div id="reports" class="panel-collapse collapse">
+            <ul class="list-group">
+                <li class="list-group-item"><a href="/account">Account</a></li>
+                <li class="list-group-item"><a href="/bu">BU</a></li>
+            </ul>
+        </div>
+    </div>
+</div>

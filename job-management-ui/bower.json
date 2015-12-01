@@ -5,6 +5,9 @@
     "angular": "latest",
     "bootstrap": "latest",
     "angular-route": "latest",
-	"angular-resource": "latest"
+    "angular-resource": "latest",
+    "chartjs": "latest",
+    "angular-chart.js": "latest",
+    "font-awesome":"latest"
   }
 }

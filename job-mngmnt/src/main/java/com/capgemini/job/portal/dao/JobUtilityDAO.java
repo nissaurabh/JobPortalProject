@@ -42,66 +42,66 @@ public interface JobUtilityDAO {
 	 * @return CndtCtg
 	 * 			  the CndtCtg
 	 */
-	public CndtCtg getCandidateCategory();
+	public List<CndtCtg> getCandidateCategory();
 	
 	/**
 	 * get the candidate status details
 	 * @return the CndtSt
 	 */
-	public CndtSt getCandidateStatus();
+	public List<CndtSt> getCandidateStatus();
 	
 	/**
 	 * get the citizenship status details
 	 * @return the CtznshpSt
 	 */
-	public CtznshpSt getCitizenshipStatus();
+	public List<CtznshpSt> getCitizenshipStatus();
 	
 	/**
 	 * get the employee type details
 	 * @return the EmplTyp
 	 */
-	public EmplTyp getEmployeeType();
+	public List<EmplTyp> getEmployeeType();
 	
 	/**
 	 * get the interview status details
 	 * @return the IntrvwSt
 	 */
-	public IntrvwSt getInterviewStatus();
+	public List<IntrvwSt> getInterviewStatus();
 	
 	/**
 	 * get the job role details
 	 * @return the JobRole
 	 */
-	public JobRole getJobRole();
+	public List<JobRole> getJobRole();
 	
 	/**
 	 * get the job stage details
 	 * @return the JobStg
 	 */
-	public JobStg getJobStage();
+	public List<JobStg> getJobStage();
 	
 	/**
 	 * get the job status details
 	 * @return the JobSt
 	 */
-	public JobSt getJobStatus();
+	public List<JobSt> getJobStatus();
 	
 	/**
 	 * get the resource type details
 	 * @return the ResourceTyp
 	 */
-	public ResourceTyp getResourceType();
+	public List<ResourceTyp> getResourceType();
 	
 	/**
 	 * get the service line details
 	 * @return the ServiceLn
 	 */
-	public ServiceLn getServiceLine();
+	public List<ServiceLn> getServiceLine();
 	
 	/**
 	 * get the service line capability details
 	 * @return the ServiceLnCap
 	 */
-	public ServiceLnCap getServiceLineCapability();
+	public List<ServiceLnCap> getServiceLineCapability();
 
 }

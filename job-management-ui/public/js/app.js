@@ -9,11 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('jobMngmtApp', [
-    'ngRoute',
-    'jobMngmtServices',
-    'jobMngmtControllers'
-  ])
+  .module('jobMngmtApp', ['chart.js','ngRoute','jobMngmtServices', 'jobMngmtControllers'])
     .config(['$httpProvider',function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         //$httpProvider.defaults.withCredentials = true;
@@ -21,20 +17,50 @@ angular
         $httpProvider.defaults.headers.common["Accept"] = "application/json";
         $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     }])
+    /*.config(['ChartJsProvider', function(ChartJsProvider) {
+        ChartJsProvider.setOptions({
+            colours: ['#FF5252', '#FF8A80'],
+            responsive: false
+        });
+        // Configure all line charts
+        ChartJsProvider.setOptions('Line', {
+            datasetFill: false
+        });
 
-    .config(function ($routeProvider) {
+    }])*/
+    .config(function ($routeProvider,$locationProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/createJobMngMnt.html',
-        controller: 'CreateJobCtrl',
-        controllerAs: 'createJob'
+      .when('/dashboard', {
+        templateUrl: 'views/dashboard1.html',
+        controller: 'DashboardCtrl'
       })
+        .when('/account', {
+            templateUrl: 'views/account_report.html',
+            controller: 'AccountReportCtrl'
+        })
+        .when('/bu', {
+            templateUrl: 'views/bu_report.html'
+        })
       .when('/createJob', {
-        templateUrl: 'views/dashboard.html',
-        controller: 'DashboardCtrl',
-        controllerAs: 'dashboard'
+        templateUrl: 'views/createJobMngmnt.html'
       })
+        .when('/search', {
+            templateUrl: 'views/menu.html'
+        })
+        .when('/detailsView', {
+            templateUrl: 'views/dashboard.html'
+        })
+        .when('/jobSearchView', {
+            templateUrl: 'views/jobSearch.html'
+        })
+        .when('/candidateSearchView', {
+            templateUrl: 'views/interviewSearch.html'
+        })
+        .when('/interviewSearchView', {
+            templateUrl: 'views/candidateSearch.html'
+        })
       .otherwise({
         redirectTo: '/'
       });
+        $locationProvider.html5Mode(true);
   });

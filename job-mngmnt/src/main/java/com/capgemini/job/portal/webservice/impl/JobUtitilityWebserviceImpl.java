@@ -16,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.job.portal.jaxb.Accounts;
+import com.capgemini.job.portal.jaxb.CandidateCategories;
 import com.capgemini.job.portal.service.JobUtilityService;
 import com.capgemini.job.portal.webservice.JobUtilityWebservice;
 
@@ -46,8 +47,8 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/candidateCategory")
 	@Produces("application/json")
 	public Response getCandidateCategory() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		CandidateCategories candidateCategories = jobUtilityService.getCandidateCategory();
+		return Response.ok(candidateCategories).header("Access-Control-Allow-Origin", "http://10.81.82.144:8080/job-management-service/").build();
 	}
 
 	@Override
