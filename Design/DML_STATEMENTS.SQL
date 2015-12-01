@@ -138,5 +138,3 @@ VALUES (3, 'NEXT ROUND','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAM
 INSERT INTO `jobmgmt`.`intrvw_sts`(`intrvw_sts_id`,`intrvw_sts_nm`,`CREATE_USR_ID`,
 `CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
 VALUES (4, 'REJECTED','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
-
----test
