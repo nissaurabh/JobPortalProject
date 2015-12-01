@@ -139,3 +139,4 @@ INSERT INTO `jobmgmt`.`intrvw_sts`(`intrvw_sts_id`,`intrvw_sts_nm`,`CREATE_USR_I
 `CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
 VALUES (4, 'REJECTED','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
+---test
