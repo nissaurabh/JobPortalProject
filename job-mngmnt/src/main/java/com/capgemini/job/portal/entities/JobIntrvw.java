@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 
@@ -20,6 +22,10 @@ import javax.persistence.Table;
  */
 @Entity
 @Table(name="job_intrvw")
+@NamedQueries({
+    @NamedQuery(name="jobIntrvw.getJobIntrvwByIntrvwId",
+                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobIntrvwId=:jobIntrvwId")
+})
 public class JobIntrvw implements Serializable {
 	private static final long serialVersionUID = 1L;
 
@@ -50,6 +56,11 @@ public class JobIntrvw implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="intrvw_sts_id")
 	private IntrvwSt intrvwSt;
+	
+	//bi-directional many-to-one association to Job
+	@ManyToOne
+	@JoinColumn(name="job_id")
+	private Job job;
 
 	public JobIntrvw() {
 	}
@@ -109,5 +120,14 @@ public class JobIntrvw implements Serializable {
 	public void setIntrvwSt(IntrvwSt intrvwSt) {
 		this.intrvwSt = intrvwSt;
 	}
+	
+	public Job getJob() {
+		return job;
+	}
 
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
+	
 }

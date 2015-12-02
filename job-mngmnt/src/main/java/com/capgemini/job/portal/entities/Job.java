@@ -106,6 +106,9 @@ public class Job implements Serializable {
 	//bi-directional many-to-one association to JobCndt
 	@OneToMany(mappedBy="job")
 	private List<JobCndt> jobCndts;
+	//bi-directional many-to-one association to jobIntrvws
+	@OneToMany(mappedBy="job")
+	private List<JobIntrvw> jobIntrvws;
 
 	public Job() {
 	}
@@ -308,6 +311,14 @@ public class Job implements Serializable {
 
 	public void setJobCndts(List<JobCndt> jobCndts) {
 		this.jobCndts = jobCndts;
+	}
+	
+	public List<JobIntrvw> getJobIntrvws() {
+		return this.jobIntrvws;
+	}
+
+	public void setJobIntrvws(List<JobIntrvw> jobIntrvws) {
+		this.jobIntrvws = jobIntrvws;
 	}
 
 	public JobCndt addJobCndt(JobCndt jobCndt) {

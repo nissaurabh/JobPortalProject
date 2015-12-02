@@ -1,7 +1,9 @@
 package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -11,6 +13,10 @@ import java.util.List;
  * 
  */
 @Entity
+@NamedQueries({
+    @NamedQuery(name="intrvwSt.findIntrvwSt",
+                query="SELECT intrvwSt FROM IntrvwSt intrvwSt where intrvwSt.intrvwStsId=:intrvwStsId")
+})
 @Table(name="intrvw_sts")
 public class IntrvwSt implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -22,6 +22,9 @@ public interface JobMngMntConstants {
 	
 	/** CREATED. */
    String CREATED = "201";
+   
+   /** NO_CONTENT. */
+   String NO_CONTENT = "204";
 
 
 

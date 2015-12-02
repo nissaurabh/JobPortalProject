@@ -37,6 +37,7 @@
 			<ref bean="jobDetailsWebservice" />
 			<ref bean="jobCandidateWebservice" />
 			<ref bean="jobUtilityWebservice" />
+			<ref bean="jobInterviewDetWebservice"/>
 			
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
