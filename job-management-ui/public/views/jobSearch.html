@@ -1,102 +1,102 @@
 <div class="row">
-    <div class="panel panel-green">
-        <div class="panel-heading">
-            <h3>Job Search page</h3>
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-9">
+                    <h3 class="panel-title">Search Job</h3>
+                </div>
+                <div class="col-xs-3 text-left">
+                    <a href="/jobAdvanceSearchView" class="white-link">Advance
+                        Search</a> <span>/</span> <a href="/dashboard" class="white-link">Back</a>
+                </div>
+            </div>
         </div>
         <div class="panel-body">
-            <form role="form" action="">
-                <div class="form-group col-sm-3">
-                    <label for="srcReqDateFrom">Requested Date:</label>
-                    <input type="date" class="form-control"
-                           id="srcReqDateFromId">
-                    <label for="srcReqDateTo">To</label>
-                    <input type="date" class="form-control"
-                           id="srcReqDateToId">
-                </div>
-                <div class="form-group col-sm-3">
-                    <label for="roleStartDateFrom">Role Start Date:</label>
-                    <input type="date" class="form-control"
-                           id="roleStartDateFromId">
-                    <label for="roleStartDateTo">To</label>
-                    <input type="date" class="form-control"
-                           id="roleStartDateTo">
-                </div>
+            <form class="form-group">
+                <table class="table table-striped table-condensed">
+                    <tbody class="bg-success">
+                    <tr>
+                        <td><label for="srcStatus">Status:</label> <select
+                                class="form-control" id="srcStatus">
+                            <option>Open</option>
+                            <option>Closed</option>
+                        </select></td>
+                        <td><label for="srcAccount">Account:</label> <select
+                                class="form-control" id="srcAccount">
+                            <option>Disney</option>
+                            <option>Cisco</option>
+                            <option>GM</option>
+                        </select></td>
+
+                        <td><label for="srcSerLine">Service Line:</label> <select
+                                class="form-control serLine" id="srcSerLine">
+                            <option>CSD</option>
+                            <option>SAP</option>
+                        </select></td>
+                        <td><label for="srcSerLnCap">Service Line
+                            Capability:</label> <select class="form-control serLnCap"
+                                                        id="srcSerLnCap">
+                        </select> </td>
+                        <td><label for="srcRlNm">Role Name:</label> <select
+                                class="form-control rlNm" id="srcRlNm">
+                        </select></td>
+                        <td style="vertical-align: bottom;">
+
+                            <button type="button" id="searchId" class="btn btn-color">
+                                <span class="glyphicon glyphicon-search"></span> Search
+                            </button>
+                        </td>
+                        <td style="vertical-align: bottom;">
+                            <button type="button" id="customizeId" class="btn btn-color">Set
+                                As Dashboard Default</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
             </form>
+            <div style="padding-bottom:30px;"></div>
+            <table class="table table-hover">
+                <thead class="search search-heading">
+                <tr>
+                    <th><label>WWSID</label></th>
+                    <th><label>Service Line</label></th>
+                    <th><label>Service Line Capability</label></th>
+                    <th><label>Role Name</label></th>
+                    <th><label>Status</label></th>
+                    <th><label>Requested By</label></th>
+                    <th><label>Requested Date</label></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="#dashboard">WAC43534</a></td>
+                    <td>CSD</td>
+                    <td>Core</td>
+                    <td>Java Developer</td>
+                    <td>Open</td>
+                    <td>Ram</td>
+                    <td>2015-05-23</td>
+                </tr>
+                <tr>
+                    <td><a href="#dashboard">WAC43567</a></td>
+                    <td>CSD</td>
+                    <td>Business Analyst</td>
+                    <td>Senior Business Analyst</td>
+                    <td>Closed</td>
+                    <td>Robert</td>
+                    <td>2015-05-23</td>
+                </tr>
+                <tr>
+                    <td><a href="#dashboard">WAC47867</a></td>
+                    <td>SAP</td>
+                    <td>Funcational</td>
+                    <td>Senior HR Developer</td>
+                    <td>Open</td>
+                    <td>King</td>
+                    <td>2015-05-23</td>
+                </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </div>
-
-<form role="form" action="">
-
-
-            <td><label for="srcStatus">Status:</label><select class="form-control" id="srcStatus">
-                <option>Open</option>
-                <option>Closed</option>
-            </select></td>
-            <td><label for="srcAccount">Account:</label><select class="form-control" id="srcAccount">
-                <option>Disney</option>
-                <option>Cisco</option>
-                <option>GM</option>
-            </select></td>
-            <td><label for="srcSerLine">Service Line:</label></td>
-            <td><select class="form-control serLine" id="srcSerLine">
-                <option>CSD</option>
-                <option>SAP</option>
-            </select></td>
-            <td><label for="srcSerLnCap">Service Line
-                Capability:</label></td>
-            <td><select class="form-control serLnCap" id="srcSerLnCap">
-            </select></td>
-            <td><label for="srcRlNm">Role Name:</label></td>
-            <td><select class="form-control rlNm" id="srcRlNm">
-            </select></td>
-            <td><button type="button" id="searchId"
-                        class="btn btn-default btn-info"><span class="glyphicon glyphicon-search"></span> Search</button></td>
-            <td><button type="button" id="customizeId"
-                        class="btn btn-default btn-info">Set As Dashboard Default</button></td>
-        </tr>
-    </table>
-</form>
-
-<table class="table table-hover">
-    <thead style="background-color: #b0c4de;">
-    <tr>
-        <th><label>WWSID</label></th>
-        <th><label>Service Line</label></th>
-        <th><label>Service Line Capability</label></th>
-        <th><label>Role Name</label></th>
-        <th><label>Status</label></th>
-        <th><label>Requested By</label></th>
-        <th><label>Requested Date</label></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-        <td><a href="#dashboard">WAC43534</a></td>
-        <td>CSD</td>
-        <td>Core</td>
-        <td>Java Developer</td>
-        <td>Open</td>
-        <td>Ram</td>
-        <td>2015-05-23</td>
-    </tr>
-    <tr>
-        <td><a href="#dashboard">WAC43567</a></td>
-        <td>CSD</td>
-        <td>Business Analyst</td>
-        <td>Senior Business Analyst</td>
-        <td>Closed</td>
-        <td>Robert</td>
-        <td>2015-05-23</td>
-    </tr>
-    <tr>
-        <td><a href="#dashboard">WAC47867</a></td>
-        <td>SAP</td>
-        <td>Funcational</td>
-        <td>Senior HR Developer</td>
-        <td>Open</td>
-        <td>King</td>
-        <td>2015-05-23</td>
-    </tr>
-    </tbody>
-</table>

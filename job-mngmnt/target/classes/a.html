@@ -1,153 +1,117 @@
 <div class="row">
-	<div class="col-sm-4">
-		<div class="panel panel-green">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-4">
-						<a href="#" ng-click="page='jobs'"> <i
-							class="fa fa-list-alt fa-5x"></i></a>
-					</div>
-					<div class="col-xs-8 text-left">
-						<table class="table">
-							<thead>
-								<tr>
-									<th colspan="2">Job Status</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Open</td>
-									<td>20</td>
-								</tr>
-								<tr>
-									<td>Aging</td>
-									<td>30</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
+	<div class="panel search">
+		<div class="panel-heading search-heading">
+			<div class="row">
+				<div class="col-xs-10">
+					<h3 class="panel-title">Advance Search Job</h3>
+				</div>
+				<div class="col-xs-2 text-left">
+					<a href="/jobSearchView" class="white-link">Search</a> <span>/</span>
+					<a href="/dashboard" class="white-link">Back</a>
 				</div>
 			</div>
-			<div class="panel-footer">
-				<span class="pull-left"><a href="/detailsView">View
-						Details</a></span> <span class="pull-right"><i
-					class="fa fa-arrow-circle-right"></i></span>
-				<div class="clearfix"></div>
-			</div>
 		</div>
-	</div>
-	<div class="col-sm-4">
-		<div class="panel panel-info">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-4">
-						<a href="#" ng-click="page='candidate'"> <i
-							class="fa fa-users fa-5x"></i></a>
-					</div>
-					<div class="col-xs-8 text-left">
-						<table class="table">
-							<thead>
-								<tr>
-									<th colspan="3">Candidate</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Active</td>
-									<td>20</td>
-								</tr>
-								<tr>
-									<td>Hired</td>
-									<td>30</td>
-								</tr>
-								<tr>
-									<td>Rejected</td>
-									<td>30</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+		<div class="panel-body">
+			<form class="form-group">
+				<table class="table table-striped table-condensed">
+					<tbody class="bg-success">
+						<tr>
+							<td>
+								<label for="srcReqDateFrom">Requested Date:</label>
+								<input type="date" class="form-control" id="srcReqDateFromId">
+								<label for="srcReqDateTo">To</label> 
+								<input type="date" class="form-control" id="srcReqDateToId">
+							</td>
+							<td>
+								<label for="roleStartDateFrom">Role Start Date:</label>
+								<input type="date" class="form-control" id="roleStartDateFromId">
+								<label for="roleStartDateTo">To</label> 
+								<input type="date" class="form-control" id="roleStartDateTo">
+							</td>
+							<td>
+								<label for="srcStatus">Status:</label>
+								<select class="form-control" id="srcStatus">
+									<option>Open</option>
+									<option>Closed</option>
+								</select>
+								<label for="srcAccount">Account:</label> 
+								<select class="form-control" id="srcAccount">
+									<option>Disney</option>
+									<option>Cisco</option>
+									<option>GM</option>
+								</select>
+							</td>
+							<td>
+								<label for="srcSerLine">Service Line:</label>
+								<select class="form-control serLine" id="srcSerLine">
+									<option>CSD</option>
+									<option>SAP</option>
+								</select> 
+								<label for="srcRlNm">Role Name:</label>
+								<select class="form-control rlNm" id="srcRlNm">
+								</select>
+							</td>
+							<td>
+								<label for="srcSerLnCap">Service Line Capability:</label>
+								 <select class="form-control serLnCap" id="srcSerLnCap">
+								 </select>
+							</td>
+							<td colspan="">
 
-			<div class="panel-footer">
-				<span class="pull-left"><a href="/detailsView">View
-						Details</a></span> <span class="pull-right"><i
-					class="fa fa-arrow-circle-right"></i></span>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-	<div class="col-sm-4">
-		<div class="panel panel-yellow">
-			<div class="panel-heading">
-				<div class="row">
-					<div class="col-xs-4">
-						<a href="#" ng-click="page='interview'"> <i
-							class="fa fa-institution fa-5x"></i></a>
-					</div>
-					<div class="col-xs-8 text-left">
-						<table class="table">
-							<thead>
-								<tr>
-									<th colspan="2">Interview</th>
-								</tr>
-							</thead>
-							<tbody>
-								<tr>
-									<td>Conducted</td>
-									<td>20</td>
-								</tr>
-								<tr>
-									<td>Success</td>
-									<td>30</td>
-								</tr>
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
+								<button type="button" id="searchId" class="btn btn-color">
+									<span class="glyphicon glyphicon-search"></span> Search
+								</button>
 
-			<div class="panel-footer">
-				<span class="pull-left"><a href="/detailsView">View
-						Details</a></span> <span class="pull-right"><i
-					class="fa fa-arrow-circle-right"></i></span>
-				<div class="clearfix"></div>
-			</div>
-		</div>
-	</div>
-</div>
-
-
-<div class="row">
-	<div ng-switch="page">
-		<div ng-switch-when="jobs">
-			<div class="col-sm-6">
-				<canvas id="jobAccount" class="chart chart-doughnut"
-					chart-data="jobAccountData" chart-labels="jobAccountLabels"
-					chart-legend="true"></canvas>
-			</div>
-			<div class="col-sm-6">
-				<canvas id="jobBU" class="chart chart-doughnut"
-					chart-data="jobBUData" chart-labels="jobBULabels"></canvas>
-			</div>
-		</div>
-
-		<div ng-switch-when="candidate">
-			<div class="col-sm-6">
-				<canvas id="candidateAccount" class="chart chart-line"
-					chart-data="candidateAccountData"
-					chart-labels="candidateAccountLabels" chart-legend="true"
-					chart-series="candidateAccountSeries" chart-click="onClick">
-                </canvas>
-			</div>
-			<div class="col-sm-6">
-				<canvas id="candidateBU" class="chart chart-line"
-					chart-data="candidateBUData" chart-labels="candidateBULabels"
-					chart-legend="true" chart-series="candidateBUSeries"
-					chart-click="onClick">
-            
-			</div>
+								<button type="button" id="customizeId" class="btn btn-color">Set
+									As Dashboard Default</button>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</form>
+			<div style="padding-bottom: 30px;"></div>
+			<table class="table table-hover">
+				<thead class="search search-heading">
+					<tr>
+						<th><label>WWSID</label></th>
+						<th><label>Service Line</label></th>
+						<th><label>Service Line Capability</label></th>
+						<th><label>Role Name</label></th>
+						<th><label>Status</label></th>
+						<th><label>Requested By</label></th>
+						<th><label>Requested Date</label></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td><a href="#dashboard">WAC43534</a></td>
+						<td>CSD</td>
+						<td>Core</td>
+						<td>Java Developer</td>
+						<td>Open</td>
+						<td>Ram</td>
+						<td>2015-05-23</td>
+					</tr>
+					<tr>
+						<td><a href="#dashboard">WAC43567</a></td>
+						<td>CSD</td>
+						<td>Business Analyst</td>
+						<td>Senior Business Analyst</td>
+						<td>Closed</td>
+						<td>Robert</td>
+						<td>2015-05-23</td>
+					</tr>
+					<tr>
+						<td><a href="#dashboard">WAC47867</a></td>
+						<td>SAP</td>
+						<td>Funcational</td>
+						<td>Senior HR Developer</td>
+						<td>Open</td>
+						<td>King</td>
+						<td>2015-05-23</td>
+					</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </div>

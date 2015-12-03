@@ -53,11 +53,15 @@ angular
         .when('/jobSearchView', {
             templateUrl: 'views/jobSearch.html'
         })
+        .when('/jobAdvanceSearchView', {
+            templateUrl: 'views/jobAdvanceSearch.html'
+        })
         .when('/candidateSearchView', {
-            templateUrl: 'views/interviewSearch.html'
+
+            templateUrl: 'views/candidateSearch.html'
         })
         .when('/interviewSearchView', {
-            templateUrl: 'views/candidateSearch.html'
+            templateUrl: 'views/interviewSearch.html'
         })
       .otherwise({
         redirectTo: '/'

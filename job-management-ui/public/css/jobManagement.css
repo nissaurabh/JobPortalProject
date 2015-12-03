@@ -1,10 +1,11 @@
 .body{
     background-color: #F0F7F9 !important;
 }
+
 .header {
  color:white;
  font-weight:bold;
- background-color:#446293;
+ background-color:#314D68;
  height:35px;
  padding-top:6px;
 }
@@ -35,7 +36,7 @@
     cursor: pointer;
 }
 .panel-default {
-    border-color: #6BAFC4 !important;
+    border-color: #314D68 !important;
     font-family:'Roboto', sans-serif !important;
     margin-bottom: 0px !important;
     padding: 0px !important;
@@ -45,7 +46,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #6BAFC4 !important;
+    background-color: #314D68 !important;
     margin: 0px !important;
     min-height: 40px;
 }
@@ -110,13 +111,57 @@ canvas{
 }*/
 
 .panel-yellow {
-    border-color: #f0ad4e;
+    border-color: #A39F5D;
 }
 
 .panel-yellow .panel-heading {
-    border-color: #f0ad4e;
+    border-color: #A39F5D;
     color: #fff;
-    background-color: #f0ad4e;
+    background-color: #A39F5D;
+}
+
+.white-link {
+    color: #ffffff !important;
+}
+
+.search{
+    border-color: #539CA6;
+}
+.search-heading{
+    border-color: #539CA6;
+    color: #fff;
+    background-color: #539CA6;
+}
+
+.job-panel{
+     border-color: #A47C5E;
+ }
+
+.job-panel-heading{
+    border-color: #A47C5E;
+    color: #fff;
+    background-color: #A47C5E;
+}
+
+.candidate-panel{
+    border-color: #D69554;
+}
+
+.candidate-panel-heading{
+    border-color: #D69554;
+    color: #fff;
+    background-color: #D69554;
+}
+
+.btn-color{
+
+    background-color: #4A7B6F;
+    border-radius: 12px;
+    color: #fff;
+}
+
+.equal, .equal > div[class*='col-'] {
+    min-height: 40px;
 }
 
 /*

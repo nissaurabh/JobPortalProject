@@ -1,67 +1,74 @@
-<h3>Interviewer Search page</h3>
-<form role="form" action="#dashboard">
-    <table class="table-condensed">
-        <tr>
-            <td><label for="srcIntrDateFrom">Interview Date:</label></td>
+<div class="row">
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">Search Interview</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/dashboard" class="white-link">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form role="form" action="#dashboard">
+                <table class="table table-striped table-condensed">
+                    <tr>
+                        <td><label for="srcIntrDateFrom">Interview Date:</label><input type="date" class="form-control"
+                                   id="srcIntrDateFrom"></td>
+                        <td><label for="srcIntrDateTo">To</label><input type="date" class="form-control"
+                                   id="srcIntrDateTo"></td>
+                        <td><label for="srcRst">Result:</label><input type="text" class="form-control" id="srcRst"></td>
+                        <td><label for="srcIntrer">Interviewer:</label><input type="text" class="form-control" id="srcIntrer"></td>
+                        <td style="vertical-align: bottom;"><button type="button" id="intrSearchId"
+                                    class="btn btn-color">
+                            <span class="glyphicon glyphicon-search"></span> Search</button></td>
+                        <td style="vertical-align: bottom;"><button type="button" id="customizeId"
+                                    class="btn btn-color">Set As Dashboard Default</button></td>
+                    </tr>
+                </table>
+            </form>
+<div style="padding-bottom:30px;"></div>
+            <table class="table table-hover">
+                <thead class="search search-heading">
+                <tr>
+                    <th><label>Interviewer Name</label></th>
+                    <th><label>Interviewer Position</label></th>
+                    <th><label>Result</label></th>
+                    <th><label>Comment</label></th>
+                    <th><label>Interview Date/Time</label></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
 
-            <td><input type="date" class="form-control"
-                       id="srcIntrDateFrom"></td>
-            <td><label for="srcIntrDateTo">To</label></td>
-            <td><input type="date" class="form-control"
-                       id="srcIntrDateTo"></td>
-        </tr>
-        <tr>
-            <td><label for="srcRst">Result:</label></td>
-            <td><input type="text" class="form-control" id="srcRst"></td>
-        </tr>
-        <tr>
-            <td><label for="srcIntrer">Interviewer:</label></td>
-            <td><input type="text" class="form-control" id="srcIntrer"></td>
-        </tr>
-        <tr>
-            <td><button type="button" id="intrSearchId"
-                        class="btn btn-default btn-info">
-                <span class="glyphicon glyphicon-search"></span> Search</button></td>
-            <td><button type="button" id="customizeId"
-                        class="btn btn-default btn-info">Set As Dashboard Default</button></td>
-        </tr>
-    </table>
-</form>
+                    <td>Sesha</td>
+                    <td>Senior Consultant</td>
+                    <td>Selected</td>
+                    <td>Technically good</td>
+                    <td>2015-05-29</td>
+                </tr>
+                <tr>
 
-<table class="table table-hover">
-    <thead style="background-color: #b0c4de;">
-    <tr>
-        <th><label>Interviewer Name</label></th>
-        <th><label>Interviewer Position</label></th>
-        <th><label>Result</label></th>
-        <th><label>Comment</label></th>
-        <th><label>Interview Date/Time</label></th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
+                    <td>Nishit</td>
+                    <td>Manager</td>
+                    <td>Selected</td>
+                    <td>Technically good</td>
+                    <td>2015-05-29</td>
+                </tr>
+                <tr>
 
-        <td>Sesha</td>
-        <td>Senior Consultant</td>
-        <td>Selected</td>
-        <td>Technically good</td>
-        <td>2015-05-29</td>
-    </tr>
-    <tr>
+                    <td>Santosh</td>
+                    <td>Senior Manager</td>
+                    <td>Selected</td>
+                    <td>Technically good</td>
+                    <td>2015-05-29</td>
+                </tr>
+                </tbody>
+            </table>
+            </div>
+        </div>
+</div>
 
-        <td>Nishit</td>
-        <td>Manager</td>
-        <td>Selected</td>
-        <td>Technically good</td>
-        <td>2015-05-29</td>
-    </tr>
-    <tr>
 
-        <td>Santosh</td>
-        <td>Senior Manager</td>
-        <td>Selected</td>
-        <td>Technically good</td>
-        <td>2015-05-29</td>
-    </tr>
-    </tbody>
-</table>
+

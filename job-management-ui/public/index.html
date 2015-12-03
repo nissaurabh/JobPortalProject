@@ -1,30 +1,32 @@
 <!doctype html>
 <html>
-<head class="page-header">
+<head>
   <meta charset="utf-8">
   <title></title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
   <link rel="stylesheet" href="libs/bootstrap/dist/css/bootstrap.css" />
   <link rel="stylesheet" href="libs/font-awesome/css/font-awesome.css" />
-  <link rel="stylesheet" href="libs/angular-chart.js/dist/angular-chart.css">
+  <link rel="stylesheet"
+        href="libs/angular-chart.js/dist/angular-chart.css">
   <link rel="stylesheet" href="css/jobManagement.css">
   <base href="/">
 </head>
-<div ng-include src="'views/header.html'"></div>
+
 <body ng-app="jobMngmtApp" class="body">
 
-<div class="row">
-
-  <div class="col-sm-2 column">
+<div class="container-fluid">
+  <div class="row">
+  <div ng-include src="'views/header.html'" class="col-sm-12"></div>
+  <div class="col-lg-3 column">
     <div ng-include src="'views/left-panel.html'"></div>
   </div>
   <!--<div class="" ng-include src="'views/breadcrum.html'"></div> -->
-  <div class="col-sm-10 column"><div data-ng-view>
-
+  <div class="col-lg-9 column">
+    <div data-ng-view></div>
 
   </div>
-
+  <div ng-include src="'views/footer.html'" class="col-sm-12"></div>
   </div>
 </div>
 
@@ -42,5 +44,5 @@
 <script src="js/controllers/controllers.js"></script>
 <script src="js/services/services.js"></script>
 </body>
-<div ng-include src="'views/footer.html'"></div>
+
 </html>

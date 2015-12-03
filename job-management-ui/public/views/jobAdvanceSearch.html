@@ -1,0 +1,115 @@
+<div class="row">
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">Advance Search Job</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/jobSearchView" class="white-link">Search</a> <span>/</span>
+                    <a href="/dashboard" class="white-link">Back</a>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body">
+            <form class="form-group">
+                <table class="table table-striped table-condensed">
+                    <tbody class="bg-success">
+                    <tr>
+                        <td>
+                            <label for="srcReqDateFrom">Requested Date:</label>
+                            <input type="date" class="form-control" id="srcReqDateFromId">
+                            <label for="srcReqDateTo">To</label>
+                            <input type="date" class="form-control" id="srcReqDateToId">
+                        </td>
+                        <td>
+                            <label for="roleStartDateFrom">Role Start Date:</label>
+                            <input type="date" class="form-control" id="roleStartDateFromId">
+                            <label for="roleStartDateTo">To</label>
+                            <input type="date" class="form-control" id="roleStartDateTo">
+                        </td>
+                        <td>
+                            <label for="srcStatus">Status:</label>
+                            <select class="form-control" id="srcStatus">
+                                <option>Open</option>
+                                <option>Closed</option>
+                            </select>
+                            <label for="srcAccount">Account:</label>
+                            <select class="form-control" id="srcAccount">
+                                <option>Disney</option>
+                                <option>Cisco</option>
+                                <option>GM</option>
+                            </select>
+                        </td>
+                        <td>
+                            <label for="srcSerLine">Service Line:</label>
+                            <select class="form-control serLine" id="srcSerLine">
+                                <option>CSD</option>
+                                <option>SAP</option>
+                            </select>
+                            <label for="srcRlNm">Role Name:</label>
+                            <select class="form-control rlNm" id="srcRlNm">
+                            </select>
+                        </td>
+                        <td>
+                            <label for="srcSerLnCap">Service Line Capability:</label>
+                            <select class="form-control serLnCap" id="srcSerLnCap">
+                            </select>
+                            <div style="padding-bottom: 20px;"></div>
+                            <button type="button" id="searchId" class="btn btn-color">
+                                <span class="glyphicon glyphicon-search"></span> Search
+                            </button>
+                            <button type="button" id="customizeId" class="btn btn-color">Set
+                                As Dashboard Default</button>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+            </form>
+            <div style="padding-bottom: 30px;"></div>
+            <table class="table table-hover">
+                <thead class="search search-heading">
+                <tr>
+                    <th><label>WWSID</label></th>
+                    <th><label>Service Line</label></th>
+                    <th><label>Service Line Capability</label></th>
+                    <th><label>Role Name</label></th>
+                    <th><label>Status</label></th>
+                    <th><label>Requested By</label></th>
+                    <th><label>Requested Date</label></th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr>
+                    <td><a href="#dashboard">WAC43534</a></td>
+                    <td>CSD</td>
+                    <td>Core</td>
+                    <td>Java Developer</td>
+                    <td>Open</td>
+                    <td>Ram</td>
+                    <td>2015-05-23</td>
+                </tr>
+                <tr>
+                    <td><a href="#dashboard">WAC43567</a></td>
+                    <td>CSD</td>
+                    <td>Business Analyst</td>
+                    <td>Senior Business Analyst</td>
+                    <td>Closed</td>
+                    <td>Robert</td>
+                    <td>2015-05-23</td>
+                </tr>
+                <tr>
+                    <td><a href="#dashboard">WAC47867</a></td>
+                    <td>SAP</td>
+                    <td>Funcational</td>
+                    <td>Senior HR Developer</td>
+                    <td>Open</td>
+                    <td>King</td>
+                    <td>2015-05-23</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

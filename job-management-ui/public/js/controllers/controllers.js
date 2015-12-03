@@ -81,6 +81,32 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope',
             [28, 48]
         ];
 
+      /* $scope.colours = [
+            { // grey
+                fillColor: '#CC7C21',
+                strokeColor: 'rgba(204,124,33,1)',
+                pointColor: 'rgba(204,124,33,1)',
+                pointStrokeColor: 'rgba(204,124,33,1)',
+                pointHighlightFill: 'rgba(204,124,33,1)',
+                pointHighlightStroke: 'rgba(204,124,33,1)'
+            },
+           { // grey
+               fillColor: '#234B4D',
+               strokeColor: 'rgba(35,75,77,1)',
+               pointColor: 'rgba(35,75,77,1)',
+               pointStrokeColor: 'rgba(35,75,77,1)',
+               pointHighlightFill: 'rgba(35,75,77,1)',
+               pointHighlightStroke: 'rgba(35,75,77,1)'
+           },
+            { // dark grey
+                fillColor: '#76B0B3',
+                strokeColor: 'rgba(118,176,179,1)',
+                pointColor: 'rgba(118,176,179,1)',
+                pointStrokeColor: 'rgba(118,176,179,1)',
+                pointHighlightFill: 'rgba(118,176,179,1)',
+                pointHighlightStroke: 'rgba(118,176,179,1)'
+            }
+        ];*/
 
     }]);
 
@@ -96,15 +122,15 @@ jobMngmtControllers.controller('AccountReportCtrl', ['$scope',
         ];
         $scope.colours = [
             { // grey
-                fillColor: '#B2912F',
-                strokeColor: 'rgba(148,159,177,1)',
-                pointColor: 'rgba(148,159,177,1)',
-                pointStrokeColor: '#fff',
-                pointHighlightFill: '#fff',
-                pointHighlightStroke: 'rgba(148,159,177,0.8)'
+                fillColor: '#F79256',
+                strokeColor: 'rgba(1,159,177,1)',
+                pointColor: 'rgba(1,159,177,1)',
+                pointStrokeColor: '#',
+                pointHighlightFill: '#',
+                pointHighlightStroke: 'rgba(1,159,177,0.8)'
             },
             { // dark grey
-                fillColor: '#B276B2',
+                fillColor: '#7DCFB6',
                 strokeColor: 'rgba(77,83,96,1)',
                 pointColor: 'rgba(77,83,96,1)',
                 pointStrokeColor: '#fff',
