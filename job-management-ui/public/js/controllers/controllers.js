@@ -140,3 +140,54 @@ jobMngmtControllers.controller('AccountReportCtrl', ['$scope',
         ];
 
     }]);
+
+
+jobMngmtControllers.controller('JobSearchCtrl', ['$scope','JobSearchFactory','$filter',
+    function($scope,jobSearchFactory,$filter) {
+        $scope.serviceLineCapabilityList =[];
+        $scope.serviceLineCapabilities = [];
+        $scope.jobRolesList =[];
+        $scope.jobRoles = [];
+        $scope.jobStatuses = jobSearchFactory.status.get();
+        $scope.accounts = jobSearchFactory.account.get();
+        $scope.serviceLines = jobSearchFactory.serviceLine.get();
+        $scope.serviceLineCapabilities = jobSearchFactory.serviceLineCapability.get();
+        $scope.jobRoles = jobSearchFactory.jobRole.get();
+        //$scope.recipe = Api.Recipe.get({id: 1});
+
+        $scope.serviceLineChanged = function(serviceLineId) {
+
+            $scope.serviceLineCapabilityList = ($filter('filter')($scope.serviceLineCapabilities.serviceLineCapability, {serviceLineId: serviceLineId}));
+        };
+
+        $scope.serviceLineCapChanged = function(serviceLineCapabilityId) {
+
+            $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
+        };
+
+    }]);
+
+jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','CandidateSearchFactory','$filter',
+    function($scope,candidateSearchFactory,$filter) {
+        $scope.serviceLineCapabilityList =[];
+        $scope.serviceLineCapabilities = [];
+        $scope.jobRolesList =[];
+        $scope.jobRoles = [];
+        $scope.candidateStatuses = candidateSearchFactory.candidateStatus.get();
+        $scope.citizenshipStatuses = candidateSearchFactory.citizenshipStatus.get();
+        $scope.serviceLines = candidateSearchFactory.serviceLine.get();
+        $scope.serviceLineCapabilities = candidateSearchFactory.serviceLineCapability.get();
+        $scope.jobRoles = candidateSearchFactory.jobRole.get();
+        //$scope.recipe = Api.Recipe.get({id: 1});
+
+        $scope.serviceLineChanged = function(serviceLineId) {
+
+            $scope.serviceLineCapabilityList = ($filter('filter')($scope.serviceLineCapabilities.serviceLineCapability, {serviceLineId: serviceLineId}));
+        };
+
+        $scope.serviceLineCapChanged = function(serviceLineCapabilityId) {
+
+            $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
+        };
+
+    }]);

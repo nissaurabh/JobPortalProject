@@ -107,12 +107,14 @@ public class JobRoles {
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "jobRoleId",
-        "jobRoleName"
+        "jobRoleName",
+        "serviceLineCapabilityId",
     })
     public static class JobRole {
 
         protected String jobRoleId;
         protected String jobRoleName;
+        protected String serviceLineCapabilityId;
 
         /**
          * Gets the value of the jobRoleId property.
@@ -161,6 +163,31 @@ public class JobRoles {
         public void setJobRoleName(String value) {
             this.jobRoleName = value;
         }
+        
+        /**
+         * Gets the value of the serviceLineCapabilityId property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getServiceLineCapabilityId() {
+            return serviceLineCapabilityId;
+        }
+
+        /**
+         * Sets the value of the serviceLineCapabilityId property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setServiceLineCapabilityId(String value) {
+            this.serviceLineCapabilityId = value;
+        }
+
 
     }
 

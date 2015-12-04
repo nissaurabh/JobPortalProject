@@ -2,7 +2,6 @@ package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -21,7 +20,6 @@ public class CndtCtg implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="cndt_ctg_id")
 	private int cndtCtgId;
 

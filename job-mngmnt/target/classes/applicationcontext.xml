@@ -37,7 +37,8 @@
 			<ref bean="jobDetailsWebservice" />
 			<ref bean="jobCandidateWebservice" />
 			<ref bean="jobUtilityWebservice" />
-			
+			<ref bean="jobInterviewDetWebservice"/>
+			<ref bean="userDashboardWebservice"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 		 	 <ref bean="cors-filter" /> 

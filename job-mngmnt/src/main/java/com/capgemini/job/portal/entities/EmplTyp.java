@@ -2,26 +2,24 @@ package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
 
 
 /**
- * The persistent class for the empt_typ database table.
+ * The persistent class for the empl_typ database table.
  * 
  */
 @Entity
+@Table(name="empl_typ")
 @NamedQueries({
     @NamedQuery(name="emplTyp.findEmplTyp",
                 query="SELECT emplTyp FROM EmplTyp emplTyp where emplTyp.emptTypId=:emptTypId")
 })
-@Table(name="empl_typ")
 public class EmplTyp implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="empt_typ_id")
 	private int emptTypId;
 
@@ -41,7 +39,7 @@ public class EmplTyp implements Serializable {
 	private String updtUsrId;
 
 	//bi-directional many-to-one association to Job
-	@OneToMany(mappedBy="emptTyp")
+	@OneToMany(mappedBy="emplTyp")
 	private List<Job> jobs;
 
 	public EmplTyp() {
@@ -105,14 +103,14 @@ public class EmplTyp implements Serializable {
 
 	public Job addJob(Job job) {
 		getJobs().add(job);
-		job.setEmptTyp(this);
+		job.setEmplTyp(this);
 
 		return job;
 	}
 
 	public Job removeJob(Job job) {
 		getJobs().remove(job);
-		job.setEmptTyp(null);
+		job.setEmplTyp(null);
 
 		return job;
 	}

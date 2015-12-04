@@ -17,6 +17,16 @@ import org.springframework.stereotype.Component;
 
 import com.capgemini.job.portal.jaxb.Accounts;
 import com.capgemini.job.portal.jaxb.CandidateCategories;
+import com.capgemini.job.portal.jaxb.CandidateStatuses;
+import com.capgemini.job.portal.jaxb.CitizenshipStatuses;
+import com.capgemini.job.portal.jaxb.EmployeeTypes;
+import com.capgemini.job.portal.jaxb.InterviewStatuses;
+import com.capgemini.job.portal.jaxb.JobRoles;
+import com.capgemini.job.portal.jaxb.JobStages;
+import com.capgemini.job.portal.jaxb.JobStatuses;
+import com.capgemini.job.portal.jaxb.ResourceTypes;
+import com.capgemini.job.portal.jaxb.ServiceLineCapabilities;
+import com.capgemini.job.portal.jaxb.ServiceLines;
 import com.capgemini.job.portal.service.JobUtilityService;
 import com.capgemini.job.portal.webservice.JobUtilityWebservice;
 
@@ -31,15 +41,19 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	/** Job utility service. */
 	@Autowired
 	private JobUtilityService jobUtilityService;
-	
+
 	@Override
 	@GET
 	@Path("/account")
 	@Produces("application/json")
 	public Response getAccount() throws URISyntaxException {
 		Accounts accounts = jobUtilityService.getAccount();
-		return Response.ok(accounts).header("Access-Control-Allow-Origin", "http://10.81.82.144:8080/job-management-service/").build();
-		//return Response.ok(accounts).build();
+		return Response
+				.ok(accounts)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
+		// return Response.ok(accounts).build();
 	}
 
 	@Override
@@ -47,8 +61,13 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/candidateCategory")
 	@Produces("application/json")
 	public Response getCandidateCategory() throws URISyntaxException {
-		CandidateCategories candidateCategories = jobUtilityService.getCandidateCategory();
-		return Response.ok(candidateCategories).header("Access-Control-Allow-Origin", "http://10.81.82.144:8080/job-management-service/").build();
+		CandidateCategories candidateCategories = jobUtilityService
+				.getCandidateCategory();
+		return Response
+				.ok(candidateCategories)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -56,8 +75,13 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/candidateStatus")
 	@Produces("application/json")
 	public Response getCandidateStatus() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		CandidateStatuses candidateStatuses = jobUtilityService
+				.getCandidateStatus();
+		return Response
+				.ok(candidateStatuses)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -65,8 +89,13 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/citizenshipStatus")
 	@Produces("application/json")
 	public Response getCitizenshipStatus() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		CitizenshipStatuses citizenshipStatuses = jobUtilityService
+				.getCitizenshipStatus();
+		return Response
+				.ok(citizenshipStatuses)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -74,8 +103,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/employeeType")
 	@Produces("application/json")
 	public Response getEmployeeType() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		EmployeeTypes employeeTypes = jobUtilityService.getEmployeeType();
+		return Response
+				.ok(employeeTypes)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -83,8 +116,13 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/interviewStatus")
 	@Produces("application/json")
 	public Response getInterviewStatus() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		InterviewStatuses interviewStatuses = jobUtilityService
+				.getInterviewStatus();
+		return Response
+				.ok(interviewStatuses)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -92,8 +130,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/jobRole")
 	@Produces("application/json")
 	public Response getJobRole() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		JobRoles jobRoles = jobUtilityService.getJobRole();
+		return Response
+				.ok(jobRoles)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -101,8 +143,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/jobStage")
 	@Produces("application/json")
 	public Response getJobStage() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		JobStages jobStages = jobUtilityService.getJobStage();
+		return Response
+				.ok(jobStages)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -110,8 +156,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/jobStatus")
 	@Produces("application/json")
 	public Response getJobStatus() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		JobStatuses jobStatuses = jobUtilityService.getJobStatus();
+		return Response
+				.ok(jobStatuses)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -119,8 +169,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/resourceType")
 	@Produces("application/json")
 	public Response getResourceType() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		ResourceTypes resourceTypes = jobUtilityService.getResourceType();
+		return Response
+				.ok(resourceTypes)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -128,8 +182,12 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/serviceLine")
 	@Produces("application/json")
 	public Response getServiceLine() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceLines serviceLines = jobUtilityService.getServiceLine();
+		return Response
+				.ok(serviceLines)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 	@Override
@@ -137,8 +195,13 @@ public class JobUtitilityWebserviceImpl implements JobUtilityWebservice {
 	@Path("/serviceLineCapability")
 	@Produces("application/json")
 	public Response getServiceLineCapability() throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		ServiceLineCapabilities serviceLineCapabilities = jobUtilityService
+				.getServiceLineCapability();
+		return Response
+				.ok(serviceLineCapabilities)
+				.header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/")
+				.build();
 	}
 
 }

@@ -162,5 +162,17 @@ public interface JobUtilityWebservice {
 	@Produces("application/json")
 	public Response getServiceLineCapability()
 			throws URISyntaxException;
+	
+	/**
+	 * get the service line capability details
+	 * @return the response
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
+	 */
+	/*@GET
+	@Path("/serviceLineCapability")
+	@Produces("application/json")
+	public Response getServiceLineCapabilityByServiceLineId()
+			throws URISyntaxException;*/
 
 }

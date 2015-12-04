@@ -94,7 +94,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 
 		final EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails
 				.getEmployementTypeId()));
-		job.setEmptTyp(emplTyp);
+		job.setEmplTyp(emplTyp);
 
 		final JobRole jobRole = getJobRole(Integer.parseInt(jobDetails.getRoleId()));
 		job.setJobRole(jobRole);

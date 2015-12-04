@@ -107,12 +107,14 @@ public class ServiceLineCapabilities {
     @XmlAccessorType(XmlAccessType.FIELD)
     @XmlType(name = "", propOrder = {
         "serviceLineCapabilityId",
-        "serviceLineCapabilityName"
+        "serviceLineCapabilityName",
+        "serviceLineId"
     })
     public static class ServiceLineCapability {
 
         protected String serviceLineCapabilityId;
         protected String serviceLineCapabilityName;
+        protected String serviceLineId;
 
         /**
          * Gets the value of the serviceLineCapabilityId property.
@@ -160,6 +162,30 @@ public class ServiceLineCapabilities {
          */
         public void setServiceLineCapabilityName(String value) {
             this.serviceLineCapabilityName = value;
+        }
+        
+        /**
+         * Gets the value of the serviceLineId property.
+         * 
+         * @return
+         *     possible object is
+         *     {@link String }
+         *     
+         */
+        public String getServiceLineId() {
+            return serviceLineId;
+        }
+
+        /**
+         * Sets the value of the serviceLineId property.
+         * 
+         * @param value
+         *     allowed object is
+         *     {@link String }
+         *     
+         */
+        public void setServiceLineId(String value) {
+            this.serviceLineId = value;
         }
 
     }

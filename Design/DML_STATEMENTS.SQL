@@ -138,3 +138,31 @@ VALUES (3, 'NEXT ROUND','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAM
 INSERT INTO `jobmgmt`.`intrvw_sts`(`intrvw_sts_id`,`intrvw_sts_nm`,`CREATE_USR_ID`,
 `CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
 VALUES (4, 'REJECTED','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+
+INSERT INTO `jobmgmt`.`portal_user_role`
+(`role_name`,
+`default_job_dashboard`,
+`default_candidate_dashboard`,
+`default_interview_dashboard`,
+`CREATE_USR_ID`,
+`CREATE_DTS`,
+`UPDT_USR_ID`,
+`UPDT_DTS`)
+VALUES ('ResourceManager','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+
+INSERT INTO `jobmgmt`.`portal_user_role`
+(`role_name`,
+`default_job_dashboard`,
+`default_candidate_dashboard`,
+`default_interview_dashboard`,
+`CREATE_USR_ID`,
+`CREATE_DTS`,
+`UPDT_USR_ID`,
+`UPDT_DTS`)
+VALUES ('ServiceLineCap','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+
+INSERT INTO `jobmgmt`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
+VALUES ('sbasired', 'Sesha','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','sbasired','ResourceManager','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+
+INSERT INTO `jobmgmt`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
+VALUES ('sbasired1', 'Sesha','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','sbasired1','ServiceLineCap','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());

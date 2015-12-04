@@ -51,20 +51,23 @@ angular
             templateUrl: 'views/dashboard.html'
         })
         .when('/jobSearchView', {
-            templateUrl: 'views/jobSearch.html'
+            templateUrl: 'views/jobSearch.html',
+            controller: 'JobSearchCtrl'
         })
         .when('/jobAdvanceSearchView', {
-            templateUrl: 'views/jobAdvanceSearch.html'
+            templateUrl: 'views/jobAdvanceSearch.html',
+            controller: 'JobSearchCtrl'
         })
         .when('/candidateSearchView', {
-
-            templateUrl: 'views/candidateSearch.html'
+            templateUrl: 'views/candidateSearch.html',
+            controller: 'CandidateSearchCtrl'
         })
         .when('/interviewSearchView', {
             templateUrl: 'views/interviewSearch.html'
         })
       .otherwise({
-        redirectTo: '/'
+        redirectTo: '/login',
+          templateUrl: 'views/login-form.html'
       });
         $locationProvider.html5Mode(true);
   });

@@ -16,7 +16,6 @@ public class ServiceLnCap implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="srvc_ln_cap_id")
 	private int srvcLnCapId;
 

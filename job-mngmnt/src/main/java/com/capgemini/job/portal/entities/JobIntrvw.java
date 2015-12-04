@@ -1,19 +1,8 @@
 package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.Table;
 
 
 /**
@@ -30,7 +19,6 @@ public class JobIntrvw implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="job_intrvw_id")
 	private int jobIntrvwId;
 
@@ -47,6 +35,11 @@ public class JobIntrvw implements Serializable {
 	@Column(name="intrvw_tm")
 	private Timestamp intrvwTm;
 
+	//bi-directional many-to-one association to Job
+	@ManyToOne
+	@JoinColumn(name="job_id")
+	private Job job;
+
 	//bi-directional many-to-one association to JobCndt
 	@ManyToOne
 	@JoinColumn(name="cndt_id")
@@ -56,11 +49,6 @@ public class JobIntrvw implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="intrvw_sts_id")
 	private IntrvwSt intrvwSt;
-	
-	//bi-directional many-to-one association to Job
-	@ManyToOne
-	@JoinColumn(name="job_id")
-	private Job job;
 
 	public JobIntrvw() {
 	}
@@ -105,6 +93,14 @@ public class JobIntrvw implements Serializable {
 		this.intrvwTm = intrvwTm;
 	}
 
+	public Job getJob() {
+		return this.job;
+	}
+
+	public void setJob(Job job) {
+		this.job = job;
+	}
+
 	public JobCndt getJobCndt() {
 		return this.jobCndt;
 	}
@@ -120,14 +116,5 @@ public class JobIntrvw implements Serializable {
 	public void setIntrvwSt(IntrvwSt intrvwSt) {
 		this.intrvwSt = intrvwSt;
 	}
-	
-	public Job getJob() {
-		return job;
-	}
 
-	public void setJob(Job job) {
-		this.job = job;
-	}
-
-	
 }

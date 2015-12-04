@@ -95,6 +95,7 @@ CREATE TABLE `job` (
   `CREATE_DTS` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
   `UPDT_USR_ID` varchar(20) NOT NULL,
   `UPDT_DTS` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `wwsid` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`job_id`),
   UNIQUE KEY `job_id_UNIQUE` (`job_id`),
   KEY `job_sts_ref_nm_idx` (`job_sts_id`),
@@ -107,14 +108,14 @@ CREATE TABLE `job` (
   CONSTRAINT `job_rl_ref_nm1` FOREIGN KEY (`job_rl_id`) REFERENCES `job_role` (`job_rl_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `job_stg_ref_nm1` FOREIGN KEY (`job_stg_id`) REFERENCES `job_stg` (`job_stg_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `job_sts_ref_nm1` FOREIGN KEY (`job_sts_id`) REFERENCES `job_sts` (`job_sts_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
 
 CREATE TABLE `job_cndt` (
   `cndt_id` int(11) NOT NULL AUTO_INCREMENT,
   `cndt_nm` varchar(45) NOT NULL,
   `cndt_rsm` blob,
   `cntrctr_rt` varchar(20) DEFAULT NULL,
-  `prmy_sk` blob,
+  `prmy_sk` varchar(72) DEFAULT NULL,
   `bu_ld_appr` tinyint(4) DEFAULT NULL,
   `cap_ld_appr` tinyint(4) DEFAULT NULL,
   `offr_dt` timestamp NULL DEFAULT NULL,
@@ -125,7 +126,6 @@ CREATE TABLE `job_cndt` (
   `cndt_sts_id` int(11) NOT NULL,
   `cndt_ctg_id` int(11) NOT NULL,
   `ctzn_shp_id` int(11) NOT NULL,
-  `job_intrvw_id` int(11) NOT NULL,
   `job_id` int(11) NOT NULL,
   `CREATE_USR_ID` varchar(20) NOT NULL,
   `CREATE_DTS` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
@@ -137,13 +137,11 @@ CREATE TABLE `job_cndt` (
   KEY `cndt_sts_ref_nm_idx` (`cndt_sts_id`),
   KEY `cndt_ctg_ref_nm_idx` (`cndt_ctg_id`),
   KEY `ctzn_ref_nm_idx` (`ctzn_shp_id`),
-  KEY `job_intrvw_ref_nm_idx` (`job_intrvw_id`),
   KEY `job_id_ref_nm_idx` (`job_id`),
   CONSTRAINT `cndt_ctg_ref_nm` FOREIGN KEY (`cndt_ctg_id`) REFERENCES `cndt_ctg` (`cndt_ctg_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `cndt_sts_ref_nm` FOREIGN KEY (`cndt_sts_id`) REFERENCES `cndt_sts` (`cndt_sts_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `ctzn_ref_nm` FOREIGN KEY (`ctzn_shp_id`) REFERENCES `ctznshp_sts` (`ctzn_shp_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `job_id_ref_nm` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `job_intrvw_ref_nm` FOREIGN KEY (`job_intrvw_id`) REFERENCES `job_intrvw` (`job_intrvw_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `res_typ_ref_nm` FOREIGN KEY (`res_typ_id`) REFERENCES `resource_typ` (`res_typ_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -154,10 +152,16 @@ CREATE TABLE `job_intrvw` (
   `intrvr_pos` varchar(45) DEFAULT NULL,
   `intrvr_cmnts` longtext,
   `intrvw_sts_id` int(11) NOT NULL,
+  `cndt_id` int(11) NOT NULL,
+  `job_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`job_intrvw_id`),
   UNIQUE KEY `job_intrvw_id_UNIQUE` (`job_intrvw_id`),
   UNIQUE KEY `job_intrvw_nm_UNIQUE` (`intrvr_nm`),
   KEY `intrvw_sts_ref_nm_idx` (`intrvw_sts_id`),
+  KEY `intrvw_cndt_id_ref_nm_idx` (`cndt_id`),
+  KEY `intrvw_sts_ref_job_id_idx` (`job_id`),
+  CONSTRAINT `intrvw_sts_ref_job_id` FOREIGN KEY (`job_id`) REFERENCES `job` (`job_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  CONSTRAINT `intrvw_cndt_id_ref_nm` FOREIGN KEY (`cndt_id`) REFERENCES `job_cndt` (`cndt_id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
   CONSTRAINT `intrvw_sts_ref_nm` FOREIGN KEY (`intrvw_sts_id`) REFERENCES `intrvw_sts` (`intrvw_sts_id`) ON DELETE NO ACTION ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
@@ -198,6 +202,36 @@ CREATE TABLE `job_sts` (
   UNIQUE KEY `job_status_id_UNIQUE` (`job_sts_id`),
   UNIQUE KEY `job_sts_nm_UNIQUE` (`job_sts_nm`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+CREATE TABLE `portal_user` (
+  `user_id` varchar(32) NOT NULL,
+  `user_name` varchar(45) DEFAULT NULL,
+  `job_dashboard` varchar(255) DEFAULT NULL,
+  `candidate_dashboard` varchar(255) DEFAULT NULL,
+  `interview_dashboard` varchar(255) DEFAULT NULL,
+  `password` varchar(45) DEFAULT NULL,
+  `role_name` varchar(45) DEFAULT NULL,
+  `CREATE_USR_ID` varchar(32) DEFAULT NULL,
+  `CREATE_DTS` timestamp NULL DEFAULT NULL,
+  `UPDT_USR_ID` varchar(45) DEFAULT NULL,
+  `UPDT_DTS` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`user_id`),
+  UNIQUE KEY `user_id_UNIQUE` (`user_id`),
+  KEY `portal_user_fk_role_nm_idx` (`role_name`),
+  CONSTRAINT `portal_user_fk_role_nm` FOREIGN KEY (`role_name`) REFERENCES `portal_user_role` (`role_name`) ON DELETE NO ACTION ON UPDATE NO ACTION
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+CREATE TABLE `portal_user_role` (
+  `role_name` varchar(32) NOT NULL,
+  `default_job_dashboard` varchar(255) DEFAULT NULL,
+  `default_candidate_dashboard` varchar(255) DEFAULT NULL,
+  `default_interview_dashboard` varchar(255) DEFAULT NULL,
+  `CREATE_USR_ID` varchar(45) DEFAULT NULL,
+  `CREATE_DTS` timestamp NULL DEFAULT NULL,
+  `UPDT_USR_ID` varchar(45) DEFAULT NULL,
+  `UPDT_DTS` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`role_name`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 CREATE TABLE `resource_typ` (
   `res_typ_id` int(11) NOT NULL AUTO_INCREMENT,

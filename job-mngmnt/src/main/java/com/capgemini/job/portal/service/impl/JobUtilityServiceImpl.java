@@ -13,6 +13,12 @@ import com.capgemini.job.portal.entities.CndtSt;
 import com.capgemini.job.portal.entities.CtznshpSt;
 import com.capgemini.job.portal.entities.EmplTyp;
 import com.capgemini.job.portal.entities.IntrvwSt;
+import com.capgemini.job.portal.entities.JobRole;
+import com.capgemini.job.portal.entities.JobSt;
+import com.capgemini.job.portal.entities.JobStg;
+import com.capgemini.job.portal.entities.ResourceTyp;
+import com.capgemini.job.portal.entities.ServiceLn;
+import com.capgemini.job.portal.entities.ServiceLnCap;
 import com.capgemini.job.portal.jaxb.Accounts;
 import com.capgemini.job.portal.jaxb.CandidateCategories;
 import com.capgemini.job.portal.jaxb.CandidateStatuses;
@@ -33,30 +39,27 @@ import com.capgemini.job.portal.service.JobUtilityService;
  * @author sbasired
  */
 @Component("jobUtilityService")
-public class JobUtilityServiceImpl implements JobUtilityService{
+public class JobUtilityServiceImpl implements JobUtilityService {
 
 	@Autowired
 	private JobUtilityDAO jobUtilityDAO;
-	
+
 	@Transactional
 	@Override
 	public Accounts getAccount() {
-		List<Account> acctList = jobUtilityDAO
-				.getAccount();
+		List<Account> acctList = jobUtilityDAO.getAccount();
 		return getAccounts(acctList);
 	}
 
 	@Override
 	public CandidateCategories getCandidateCategory() {
-		List<CndtCtg> cndtCtgList = jobUtilityDAO
-				.getCandidateCategory();
+		List<CndtCtg> cndtCtgList = jobUtilityDAO.getCandidateCategory();
 		return getCandidateCategories(cndtCtgList);
 	}
 
 	@Override
 	public CandidateStatuses getCandidateStatus() {
-		List<CndtSt> cndtStList = jobUtilityDAO
-				.getCandidateStatus();
+		List<CndtSt> cndtStList = jobUtilityDAO.getCandidateStatus();
 		return getCandidateStatus(cndtStList);
 	}
 
@@ -80,44 +83,45 @@ public class JobUtilityServiceImpl implements JobUtilityService{
 
 	@Override
 	public JobRoles getJobRole() {
-		// TODO Auto-generated method stub
-		return null;
+		List<JobRole> jobRoleList = jobUtilityDAO.getJobRole();
+		return getJobRole(jobRoleList);
 	}
 
 	@Override
 	public JobStages getJobStage() {
-		// TODO Auto-generated method stub
-		return null;
+		List<JobStg> jbStgList = jobUtilityDAO.getJobStage();
+		return getJobStage(jbStgList);
 	}
 
 	@Override
 	public JobStatuses getJobStatus() {
-		// TODO Auto-generated method stub
-		return null;
+		List<JobSt> jobStList = jobUtilityDAO.getJobStatus();
+		return getJobStatus(jobStList);
 	}
 
 	@Override
 	public ResourceTypes getResourceType() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ResourceTyp> resourceTypList = jobUtilityDAO.getResourceType();
+		return getResourceType(resourceTypList);
 	}
 
 	@Override
 	public ServiceLines getServiceLine() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ServiceLn> serviceLnList = jobUtilityDAO.getServiceLine();
+		return getServiceLine(serviceLnList);
 	}
 
 	@Override
 	public ServiceLineCapabilities getServiceLineCapability() {
-		// TODO Auto-generated method stub
-		return null;
+		List<ServiceLnCap> serviceLnCapList = jobUtilityDAO
+				.getServiceLineCapability();
+		return getServiceLineCapability(serviceLnCapList);
 	}
-	
-	private Accounts getAccounts(List<Account> acctList){
+
+	private Accounts getAccounts(List<Account> acctList) {
 		Accounts accounts = new Accounts();
 		List<Accounts.Account> acctsList = accounts.getAccount();
-		for(Account account: acctList){
+		for (Account account : acctList) {
 			Accounts.Account jaxbAccount = new Accounts.Account();
 			jaxbAccount.setAccountId(String.valueOf(account.getClntId()));
 			jaxbAccount.setAccountName(account.getClntNm());
@@ -126,64 +130,159 @@ public class JobUtilityServiceImpl implements JobUtilityService{
 		return accounts;
 	}
 
-	
-	private CandidateCategories getCandidateCategories(List<CndtCtg> cndtCtgList){
+	private CandidateCategories getCandidateCategories(List<CndtCtg> cndtCtgList) {
 		CandidateCategories candidateCategories = new CandidateCategories();
-		List<CandidateCategories.CandidateCategory> categoriesList = candidateCategories.getCandidateCategory();
-		for(CndtCtg cndtCtg: cndtCtgList){
+		List<CandidateCategories.CandidateCategory> categoriesList = candidateCategories
+				.getCandidateCategory();
+		for (CndtCtg cndtCtg : cndtCtgList) {
 			CandidateCategories.CandidateCategory jaxbCndtCtg = new CandidateCategories.CandidateCategory();
-			jaxbCndtCtg.setCandidateCategoryId(String.valueOf(cndtCtg.getCndtCtgId()));
+			jaxbCndtCtg.setCandidateCategoryId(String.valueOf(cndtCtg
+					.getCndtCtgId()));
 			jaxbCndtCtg.setCandidateCategoryName(cndtCtg.getCndtCtgNm());
 			categoriesList.add(jaxbCndtCtg);
 		}
 		return candidateCategories;
 	}
-	
-	private CandidateStatuses getCandidateStatus(List<CndtSt> cndtStList){
+
+	private CandidateStatuses getCandidateStatus(List<CndtSt> cndtStList) {
 		CandidateStatuses candidateStatuses = new CandidateStatuses();
-		List<CandidateStatuses.CandidateStatus> candidateStatusesList = candidateStatuses.getCandidateStatus();
-		for(CndtSt cndtSt: cndtStList){
+		List<CandidateStatuses.CandidateStatus> candidateStatusesList = candidateStatuses
+				.getCandidateStatus();
+		for (CndtSt cndtSt : cndtStList) {
 			CandidateStatuses.CandidateStatus jaxbCndtSt = new CandidateStatuses.CandidateStatus();
-			jaxbCndtSt.setCandidateStatusId(String.valueOf(cndtSt.getCndtStsId()));
+			jaxbCndtSt.setCandidateStatusId(String.valueOf(cndtSt
+					.getCndtStsId()));
 			jaxbCndtSt.setCandidateStatusName(cndtSt.getCndtStsNm());
 			candidateStatusesList.add(jaxbCndtSt);
 		}
 		return candidateStatuses;
 	}
-	
-	private CitizenshipStatuses getCitizenshipStatus(List<CtznshpSt> ctznshpStList){
+
+	private CitizenshipStatuses getCitizenshipStatus(
+			List<CtznshpSt> ctznshpStList) {
 		CitizenshipStatuses citizenshipStatuses = new CitizenshipStatuses();
-		List<CitizenshipStatuses.CitizenshipStatus> cititzenshipStatusesList = citizenshipStatuses.getCitizenshipStatus();
-		for(CtznshpSt ctznshpSt: ctznshpStList){
+		List<CitizenshipStatuses.CitizenshipStatus> cititzenshipStatusesList = citizenshipStatuses
+				.getCitizenshipStatus();
+		for (CtznshpSt ctznshpSt : ctznshpStList) {
 			CitizenshipStatuses.CitizenshipStatus jaxbCtznshpSt = new CitizenshipStatuses.CitizenshipStatus();
-			jaxbCtznshpSt.setCitizenshipStatusId(String.valueOf(ctznshpSt.getCtznShpId()));
+			jaxbCtznshpSt.setCitizenshipStatusId(String.valueOf(ctznshpSt
+					.getCtznShpId()));
 			jaxbCtznshpSt.setCitizenshipStatusName(ctznshpSt.getCtznShpNm());
 			cititzenshipStatusesList.add(jaxbCtznshpSt);
 		}
 		return citizenshipStatuses;
 	}
-	
-	private EmployeeTypes getEmployeeType(List<EmplTyp> emplTypStList){
+
+	private EmployeeTypes getEmployeeType(List<EmplTyp> emplTypStList) {
 		EmployeeTypes employeeTypes = new EmployeeTypes();
-		List<EmployeeTypes.EmployeeType> employeeTypesList = employeeTypes.getEmployeeType();
-		for(EmplTyp emplTyp: emplTypStList){
+		List<EmployeeTypes.EmployeeType> employeeTypesList = employeeTypes
+				.getEmployeeType();
+		for (EmplTyp emplTyp : emplTypStList) {
 			EmployeeTypes.EmployeeType jaxbEmplTyp = new EmployeeTypes.EmployeeType();
-			jaxbEmplTyp.setEmployeeTypeId(String.valueOf(emplTyp.getEmptTypId()));
+			jaxbEmplTyp
+					.setEmployeeTypeId(String.valueOf(emplTyp.getEmptTypId()));
 			jaxbEmplTyp.setEmployeeTypeName(emplTyp.getEmptTypNm());
 			employeeTypesList.add(jaxbEmplTyp);
 		}
 		return employeeTypes;
 	}
-	
-	private InterviewStatuses getIntervewStatus(List<IntrvwSt> intrvwStList){
+
+	private InterviewStatuses getIntervewStatus(List<IntrvwSt> intrvwStList) {
 		InterviewStatuses interviewStatuses = new InterviewStatuses();
-		List<InterviewStatuses.InterviewStatus> employeeTypesList = interviewStatuses.getInterviewStatus();
-		for(IntrvwSt intrvwSt: intrvwStList){
+		List<InterviewStatuses.InterviewStatus> interviewStatusesList = interviewStatuses
+				.getInterviewStatus();
+		for (IntrvwSt intrvwSt : intrvwStList) {
 			InterviewStatuses.InterviewStatus jaxbIntrvwSt = new InterviewStatuses.InterviewStatus();
-			jaxbIntrvwSt.setInterviewStatusId(String.valueOf(intrvwSt.getIntrvwStsId()));
+			jaxbIntrvwSt.setInterviewStatusId(String.valueOf(intrvwSt
+					.getIntrvwStsId()));
 			jaxbIntrvwSt.setInterviewStatusName(intrvwSt.getIntrvwStsNm());
-			employeeTypesList.add(jaxbIntrvwSt);
+			interviewStatusesList.add(jaxbIntrvwSt);
 		}
 		return interviewStatuses;
+	}
+
+	private JobStages getJobStage(List<JobStg> jbStgList) {
+		JobStages jobStages = new JobStages();
+		List<JobStages.JobStage> jobStagesList = jobStages.getJobStage();
+		for (JobStg jobStg : jbStgList) {
+			JobStages.JobStage jaxbJobStage = new JobStages.JobStage();
+			jaxbJobStage.setJobStageId(String.valueOf(jobStg.getJobStgId()));
+			jaxbJobStage.setJobStageName(jobStg.getJobStgNm());
+			jobStagesList.add(jaxbJobStage);
+		}
+		return jobStages;
+	}
+
+	private JobRoles getJobRole(List<JobRole> jbRoleList) {
+		JobRoles jobRoles = new JobRoles();
+		List<JobRoles.JobRole> jobRolesList = jobRoles.getJobRole();
+		for (JobRole jobRole : jbRoleList) {
+			JobRoles.JobRole jaxbJobRole = new JobRoles.JobRole();
+			jaxbJobRole.setJobRoleId(String.valueOf(jobRole.getJobRlId()));
+			jaxbJobRole.setJobRoleName(jobRole.getJobRlNm());
+			jaxbJobRole.setServiceLineCapabilityId(String.valueOf(jobRole
+					.getServiceLnCap().getSrvcLnCapId()));
+			jobRolesList.add(jaxbJobRole);
+		}
+		return jobRoles;
+	}
+
+	private JobStatuses getJobStatus(List<JobSt> jobStList) {
+		JobStatuses jobStatuses = new JobStatuses();
+		List<JobStatuses.JobStatus> jobStatusesList = jobStatuses
+				.getJobStatus();
+		for (JobSt jobSt : jobStList) {
+			JobStatuses.JobStatus jaxbJobStatus = new JobStatuses.JobStatus();
+			jaxbJobStatus.setJobStatusId(String.valueOf(jobSt.getJobStsId()));
+			jaxbJobStatus.setJobStatusName(jobSt.getJobStsNm());
+			jobStatusesList.add(jaxbJobStatus);
+		}
+		return jobStatuses;
+	}
+
+	private ResourceTypes getResourceType(List<ResourceTyp> resourceTypList) {
+		ResourceTypes resourceTypes = new ResourceTypes();
+		List<ResourceTypes.ResourceType> resourceTypesList = resourceTypes
+				.getResourceType();
+		for (ResourceTyp resourceTyp : resourceTypList) {
+			ResourceTypes.ResourceType jaxbResourceType = new ResourceTypes.ResourceType();
+			jaxbResourceType.setResourceTypeId(String.valueOf(resourceTyp
+					.getResTypId()));
+			jaxbResourceType.setResourceTypeName(resourceTyp.getResTypNm());
+			resourceTypesList.add(jaxbResourceType);
+		}
+		return resourceTypes;
+	}
+
+	private ServiceLines getServiceLine(List<ServiceLn> serviceLnList) {
+		ServiceLines serviceLines = new ServiceLines();
+		List<ServiceLines.ServiceLine> serviceLineList = serviceLines
+				.getServiceLine();
+		for (ServiceLn serviceLn : serviceLnList) {
+			ServiceLines.ServiceLine jaxbServiceLine = new ServiceLines.ServiceLine();
+			jaxbServiceLine.setServiceLineId(String.valueOf(serviceLn
+					.getSrvcLnId()));
+			jaxbServiceLine.setServiceLineName(serviceLn.getSrvcLnNm());
+			serviceLineList.add(jaxbServiceLine);
+		}
+		return serviceLines;
+	}
+
+	private ServiceLineCapabilities getServiceLineCapability(
+			List<ServiceLnCap> serviceLnCapList) {
+		ServiceLineCapabilities serviceLineCapabilities = new ServiceLineCapabilities();
+		List<ServiceLineCapabilities.ServiceLineCapability> serviceLineCapabilityList = serviceLineCapabilities
+				.getServiceLineCapability();
+		for (ServiceLnCap serviceLnCap : serviceLnCapList) {
+			ServiceLineCapabilities.ServiceLineCapability jaxbServiceLineCapability = new ServiceLineCapabilities.ServiceLineCapability();
+			jaxbServiceLineCapability.setServiceLineCapabilityId(String
+					.valueOf(serviceLnCap.getSrvcLnCapId()));
+			jaxbServiceLineCapability.setServiceLineCapabilityName(serviceLnCap
+					.getSrvcLnCapNm());
+			jaxbServiceLineCapability.setServiceLineId(String
+					.valueOf(serviceLnCap.getServiceLn().getSrvcLnId()));
+			serviceLineCapabilityList.add(jaxbServiceLineCapability);
+		}
+		return serviceLineCapabilities;
 	}
 }

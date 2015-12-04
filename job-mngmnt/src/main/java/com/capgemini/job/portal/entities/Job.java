@@ -2,7 +2,6 @@ package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -20,7 +19,6 @@ public class Job implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="job_id")
 	private int jobId;
 
@@ -69,7 +67,6 @@ public class Job implements Serializable {
 	@Column(name="rl_str_dt")
 	private Timestamp rlStrDt;
 
-	@Column(nullable = false, columnDefinition = "TINYINT(1)")
 	private Boolean trvl;
 
 	@Column(name="UPDT_DTS")
@@ -78,35 +75,38 @@ public class Job implements Serializable {
 	@Column(name="UPDT_USR_ID")
 	private String updtUsrId;
 
+	private String wwsid;
+
 	//bi-directional many-to-one association to Account
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="clnt_id")
 	private Account account;
 
-	//bi-directional many-to-one association to EmptTyp
-	@ManyToOne(fetch=FetchType.LAZY)
+	//bi-directional many-to-one association to EmplTyp
+	@ManyToOne
 	@JoinColumn(name="empt_typ_id")
-	private EmplTyp emptTyp;
+	private EmplTyp emplTyp;
 
 	//bi-directional many-to-one association to JobRole
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="job_rl_id")
 	private JobRole jobRole;
 
 	//bi-directional many-to-one association to JobStg
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="job_stg_id")
 	private JobStg jobStg;
 
 	//bi-directional many-to-one association to JobSt
-	@ManyToOne(fetch=FetchType.LAZY)
+	@ManyToOne
 	@JoinColumn(name="job_sts_id")
 	private JobSt jobSt;
 
 	//bi-directional many-to-one association to JobCndt
 	@OneToMany(mappedBy="job")
 	private List<JobCndt> jobCndts;
-	//bi-directional many-to-one association to jobIntrvws
+
+	//bi-directional many-to-one association to JobIntrvw
 	@OneToMany(mappedBy="job")
 	private List<JobIntrvw> jobIntrvws;
 
@@ -265,6 +265,14 @@ public class Job implements Serializable {
 		this.updtUsrId = updtUsrId;
 	}
 
+	public String getWwsid() {
+		return this.wwsid;
+	}
+
+	public void setWwsid(String wwsid) {
+		this.wwsid = wwsid;
+	}
+
 	public Account getAccount() {
 		return this.account;
 	}
@@ -273,12 +281,12 @@ public class Job implements Serializable {
 		this.account = account;
 	}
 
-	public EmplTyp getEmptTyp() {
-		return this.emptTyp;
+	public EmplTyp getEmplTyp() {
+		return this.emplTyp;
 	}
 
-	public void setEmptTyp(EmplTyp emptTyp) {
-		this.emptTyp = emptTyp;
+	public void setEmplTyp(EmplTyp emplTyp) {
+		this.emplTyp = emplTyp;
 	}
 
 	public JobRole getJobRole() {
@@ -312,14 +320,6 @@ public class Job implements Serializable {
 	public void setJobCndts(List<JobCndt> jobCndts) {
 		this.jobCndts = jobCndts;
 	}
-	
-	public List<JobIntrvw> getJobIntrvws() {
-		return this.jobIntrvws;
-	}
-
-	public void setJobIntrvws(List<JobIntrvw> jobIntrvws) {
-		this.jobIntrvws = jobIntrvws;
-	}
 
 	public JobCndt addJobCndt(JobCndt jobCndt) {
 		getJobCndts().add(jobCndt);
@@ -333,6 +333,28 @@ public class Job implements Serializable {
 		jobCndt.setJob(null);
 
 		return jobCndt;
+	}
+
+	public List<JobIntrvw> getJobIntrvws() {
+		return this.jobIntrvws;
+	}
+
+	public void setJobIntrvws(List<JobIntrvw> jobIntrvws) {
+		this.jobIntrvws = jobIntrvws;
+	}
+
+	public JobIntrvw addJobIntrvw(JobIntrvw jobIntrvw) {
+		getJobIntrvws().add(jobIntrvw);
+		jobIntrvw.setJob(this);
+
+		return jobIntrvw;
+	}
+
+	public JobIntrvw removeJobIntrvw(JobIntrvw jobIntrvw) {
+		getJobIntrvws().remove(jobIntrvw);
+		jobIntrvw.setJob(null);
+
+		return jobIntrvw;
 	}
 
 }

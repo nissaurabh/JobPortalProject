@@ -1,21 +1,9 @@
 package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
-import javax.persistence.ManyToOne;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
-import javax.persistence.Table;
 
 
 /**
@@ -35,7 +23,6 @@ public class JobCndt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="cndt_id")
 	private int cndtId;
 
@@ -73,7 +60,6 @@ public class JobCndt implements Serializable {
 	@Column(name="offr_dt")
 	private Timestamp offrDt;
 
-	@Lob
 	@Column(name="prmy_sk")
 	private String prmySk;
 
@@ -102,15 +88,15 @@ public class JobCndt implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="job_id")
 	private Job job;
-	
-	//bi-directional many-to-one association to JobIntrvw
-	@OneToMany(mappedBy="jobCndt")
-	private List<JobIntrvw> jobIntrvws;
 
 	//bi-directional many-to-one association to ResourceTyp
 	@ManyToOne
 	@JoinColumn(name="res_typ_id")
 	private ResourceTyp resourceTyp;
+
+	//bi-directional many-to-one association to JobIntrvw
+	@OneToMany(mappedBy="jobCndt")
+	private List<JobIntrvw> jobIntrvws;
 
 	public JobCndt() {
 	}
@@ -274,13 +260,27 @@ public class JobCndt implements Serializable {
 	public void setResourceTyp(ResourceTyp resourceTyp) {
 		this.resourceTyp = resourceTyp;
 	}
-	
+
 	public List<JobIntrvw> getJobIntrvws() {
 		return this.jobIntrvws;
 	}
 
 	public void setJobIntrvws(List<JobIntrvw> jobIntrvws) {
 		this.jobIntrvws = jobIntrvws;
+	}
+
+	public JobIntrvw addJobIntrvw(JobIntrvw jobIntrvw) {
+		getJobIntrvws().add(jobIntrvw);
+		jobIntrvw.setJobCndt(this);
+
+		return jobIntrvw;
+	}
+
+	public JobIntrvw removeJobIntrvw(JobIntrvw jobIntrvw) {
+		getJobIntrvws().remove(jobIntrvw);
+		jobIntrvw.setJobCndt(null);
+
+		return jobIntrvw;
 	}
 
 }

@@ -10,36 +10,44 @@
                 </div>
             </div>
         </div>
-        <div class="panel-body">
+        <div class="panel-body" ng-controller="CandidateSearchCtrl">
             <form role="form" action="#dashboard">
                 <table class="table table-striped table-condensed">
                     <tr>
-                        <td><label for="cmdtSrcSerLine">Service Line:</label><select class="form-control serLine"
-                                    id="cmdtSrcSerLine">
-                            <option>CSD</option>
-                            <option>SAP</option>
-                        </select></td>
+                        <td><label for="cmdtSrcSerLine">Service Line:</label>
+                            <select
+                                    class="form-control serLine" id="serviceLineId" ng-model="serviceLineId" ng-change="serviceLineChanged(serviceLineId)"
+                                    ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
+                                <option value="" selected="selected">Select</option>
+                            </select>
+                        </td>
 
                         <td><label for="cndtSrcSerLnCap">Service Line
-                            Capability:</label><select class="form-control serLnCap"
-                                    id="cndtSrcSerLnCap">
+                            Capability:</label>
+                            <select class="form-control serLnCap" id="serviceLineCapabilityId" ng-model="serviceLineCapabilityId"
+                                    ng-change="serviceLineCapChanged(serviceLineCapabilityId)"
+                                    ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilityList">
+                                <option value="" selected="selected">Select</option>
+                            </select>
+                        </td>
+
+                        <td><label for="cndtSrcRlNm">Role Name:</label>
+                            <select class="form-control rlNm" id="jobRoleId"  ng-model="jobRoleId"
+                                    ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRolesList">
+                                <option value="" selected="selected">Select</option>
+                            </select>
+                        </td>
+
+                        <td><label for="cndtSrcSts">Candidate Status:</label>
+                            <select class="form-control" id="candidateStatusId" ng-model="candidateStatusId"
+                                    ng-options="opt.candidateStatusId as opt.candidateStatusName for opt in candidateStatuses.candidateStatus">
+                            <option value="" selected="selected">Select</option>
                         </select></td>
 
-                        <td><label for="cndtSrcRlNm">Role Name:</label><select class="form-control rlNm" id="cndtSrcRlNm">
-                        </select></td>
-
-                        <td><label for="cndtSrcSts">Candidate Status:</label><select class="form-control" id="cndtSrcSts">
-                            <option>Active</option>
-                            <option>Hired</option>
-                            <option>Rejected</option>
-                            <option>Did Not Join</option>
-                        </select></td>
-
-                        <td><label for="ctzSrcSts">Citizenship Status:</label><select class="form-control" id="ctzSrcSts">
-                            <option>Green Card</option>
-                            <option>H1B</option>
-                            <option>OPT</option>
-                            <option>US Citizen</option>
+                        <td><label for="ctzSrcSts">Citizenship Status:</label>
+                            <select class="form-control" id="citizenshipStatusId" ng-model="citizenshipStatusId"
+                                    ng-options="opt.citizenshipStatusId as opt.citizenshipStatusName for opt in citizenshipStatuses.citizenshipStatus">
+                            <option value="" selected="selected">Select</option>
                         </select></td>
 
                         <td style="vertical-align: bottom;"><button type="button" id="cndtSearchId"

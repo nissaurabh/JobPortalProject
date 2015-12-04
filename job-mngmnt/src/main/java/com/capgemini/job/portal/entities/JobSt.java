@@ -2,7 +2,6 @@ package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
 import javax.persistence.*;
-
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -12,16 +11,15 @@ import java.util.List;
  * 
  */
 @Entity
+@Table(name="job_sts")
 @NamedQueries({
     @NamedQuery(name="jobSt.findJobSt",
                 query="SELECT jobSt FROM JobSt jobSt where jobSt.jobStsId=:jobStsId")
 })
-@Table(name="job_sts")
 public class JobSt implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="job_sts_id")
 	private int jobStsId;
 
