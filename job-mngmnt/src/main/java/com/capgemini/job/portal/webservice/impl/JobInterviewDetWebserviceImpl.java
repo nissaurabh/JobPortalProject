@@ -30,7 +30,7 @@ import com.capgemini.job.portal.webservice.JobInterviewDetWebservice;
 public class JobInterviewDetWebserviceImpl implements
 		JobInterviewDetWebservice {
 
-	/** Job details service. */
+	/** Job Interview service. */
 	@Autowired
 	private JobInterviewService jobInterviewService;
 
