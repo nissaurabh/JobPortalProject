@@ -14,11 +14,13 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.job.portal.dto.JobDetails;
 import com.capgemini.job.portal.service.SearchByFilterCriteriaService;
 import com.capgemini.job.portal.util.QueryParamUtil;
 import com.capgemini.job.portal.webservice.SearchByFilterCriteriaWebservice;
@@ -42,20 +44,19 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 	 */
 	@Override
 	public Response retrieveJobSearchDetails(final UriInfo uriInfo) throws URISyntaxException {
-		String response = null;
+		JobDetails response = null;
 		try{
 			final MultivaluedMap<String, String> multivaluedMap = uriInfo
 		                .getQueryParameters();
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
-			String type = queryMap.get("type");
-			if ((multivaluedMap.isEmpty()) || StringUtils.isEmpty(type)){
-	       	   return Response.status(Status.BAD_REQUEST).build();
-			}
 			response = searchByFilterCriteriaService.retriveJobDetailsByFilterCriteria(queryMap);
+			if(!CollectionUtils.isNotEmpty(response.getJobList())){
+				return Response.status(Status.NOT_FOUND).build();
+			}
 		} catch (Exception e){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		return buildResponse(response);
+		return Response.ok(response).build();
 	}
 	
 	/* (non-Javadoc)
@@ -68,10 +69,6 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 			final MultivaluedMap<String, String> multivaluedMap = uriInfo
 		                .getQueryParameters();
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
-			String type = queryMap.get("type");
-			if ((multivaluedMap.isEmpty()) || StringUtils.isEmpty(type)){
-	       	   return Response.status(Status.BAD_REQUEST).build();
-			}
 			response = searchByFilterCriteriaService.retriveCandidateDetailsByFilterCriteria(queryMap);
 		} catch (Exception e){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();

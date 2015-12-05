@@ -40,5 +40,15 @@ public final class  DateUtil {
 	      return null;
 	    }
 	  }
+	
+	
+	/**
+	 * @param timestamp
+	 * @return
+	 */
+	public static String convertTimestamptoDate(Timestamp timestamp) {
+	    String dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
+	    return dateString;
+	  }
 
 }

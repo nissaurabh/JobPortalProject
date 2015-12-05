@@ -5,11 +5,10 @@
  */
 package com.capgemini.job.portal.service;
 
-import java.io.IOException;
+import java.text.ParseException;
 import java.util.Map;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
+import com.capgemini.job.portal.dto.JobDetails;
 
 /**
  * The Class SearchByFilterCriteriaService performs search by filter criteria.
@@ -21,11 +20,10 @@ public interface SearchByFilterCriteriaService {
 	/**
 	 * @param queryMap
 	 * @return
-	 * @throws IOException 
-	 * @throws JsonMappingException 
-	 * @throws JsonGenerationException 
+	 * @throws ParseException 
 	 */
-	public String retriveJobDetailsByFilterCriteria(final Map<String, String> queryMap) throws JsonGenerationException, JsonMappingException, IOException;
+	public JobDetails retriveJobDetailsByFilterCriteria(final Map<String, String> queryMap) 
+			throws ParseException;
 	
 	/**
 	 * @param queryMap

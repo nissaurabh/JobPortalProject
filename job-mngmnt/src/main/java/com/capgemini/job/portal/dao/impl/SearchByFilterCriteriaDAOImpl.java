@@ -17,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO;
 import com.capgemini.job.portal.dto.JobDetail;
+import com.capgemini.job.portal.util.DateUtil;
 
 /**
  * @author ppenamak
@@ -41,6 +42,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 				+ " and d.srvc_ln_cap_id = b.srvc_ln_cap_id"
 				+ " and d.srvc_ln_id = c.srvc_ln_id"
 				+ " and f.clnt_id = a.clnt_id"
+				+ " and a.clsr_dt is null "
 				+ " and e.job_sts_id=a.job_sts_id");
 		Query q = null;
 		if(jobFilterMap.containsKey("owner_rm")){
@@ -72,17 +74,15 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		for (Object[] temp : list) {
 			JobDetail detail = new JobDetail();
 			detail.setWwsid((String)temp[0]);
-			detail.setClnt_nm((String)temp[1]);
-			detail.setSrvc_ln_nm((String)temp[2]);
-			detail.setSrvc_ln_cap_nm((String)temp[3]);
-			detail.setJob_rl_nm((String)temp[4]);
-			detail.setJob_sts_nm((String)temp[5]);
-			detail.setReqstr_rm((String)temp[6]);
-			detail.setReq_dt((Timestamp) temp[7]);
+			detail.setClientName((String)temp[1]);
+			detail.setServiceLine((String)temp[2]);
+			detail.setServiceLineCap((String)temp[3]);
+			detail.setRoleName((String)temp[4]);
+			detail.setJobStatus((String)temp[5]);
+			detail.setReqBy((String)temp[6]);
+			detail.setReqDate(DateUtil.convertTimestamptoDate((Timestamp) temp[7]));
 			jobDetList.add(detail);
 		}
-		System.out.println(jobDetList.size());
-		System.out.println(jobDetList.get(0).getJob_rl_nm());
 		return jobDetList;
 	}
 

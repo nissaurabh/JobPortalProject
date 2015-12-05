@@ -10,6 +10,7 @@ import java.net.URISyntaxException;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
@@ -30,7 +31,7 @@ public interface SearchByFilterCriteriaWebservice {
 	 * @throws URISyntaxException
 	 */
 	@GET
-	@Consumes("application/json")
+	@Produces("application/json")
 	@Path("jobSearch")
 	public Response retrieveJobSearchDetails(@Context final UriInfo uriInfo) throws URISyntaxException;
 	
