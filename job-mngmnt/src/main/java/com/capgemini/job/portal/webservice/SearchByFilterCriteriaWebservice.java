@@ -42,7 +42,7 @@ public interface SearchByFilterCriteriaWebservice {
 	 * @throws URISyntaxException
 	 */
 	@GET
-	@Consumes("application/json")
+	@Produces("application/json")
 	@Path("candidateSearch")
 	public Response retrieveCandidateSearchDetails(@Context final UriInfo uriInfo) throws URISyntaxException;
 

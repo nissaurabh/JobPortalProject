@@ -17,6 +17,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO;
+import com.capgemini.job.portal.dto.CandidateDetail;
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.dto.JobDetail;
 import com.capgemini.job.portal.dto.JobDetails;
 import com.capgemini.job.portal.service.SearchByFilterCriteriaService;
@@ -41,8 +43,8 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 		JobDetails details = new JobDetails();
 		List<JobDetail> jobDetList = searchByFilterCriteriaDAO.getJobDetailsByFilterCriteria(queryMap);
 		if(CollectionUtils.isNotEmpty(jobDetList)){
-			details.setJobList(jobDetList);
 			populateJobCountsByDate(details,jobDetList);
+			details.setJobList(jobDetList);
 		}
 		return details;
 	}
@@ -75,17 +77,37 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 	 * @see com.capgemini.job.portal.service.SearchByFilterCriteriaService#retriveCandidateDetailsByFilterCriteria(java.util.Map)
 	 */
 	@Override
-	public String retriveCandidateDetailsByFilterCriteria(
+	public CandidateDetails retriveCandidateDetailsByFilterCriteria(
 			Map<String, String> queryMap) {
-		// TODO Auto-generated method stub
-		return null;
+		CandidateDetails details = new CandidateDetails();
+		List<CandidateDetail> candidateDetList = searchByFilterCriteriaDAO.getCandidateDetailsByFilterCriteria(queryMap);
+		if(CollectionUtils.isNotEmpty(candidateDetList)){
+			populateCountsByCandidateStatus(details,candidateDetList);
+			details.setCandidateList(candidateDetList);
+		}
+		return details;
 	}
 
-	/*select a.wwsid, c.srvc_ln_nm, d.srvc_ln_cap_nm, b.job_rl_nm,e.job_sts_nm, a.reqstr_rm,a.req_dt  
-	from job a, job_role b, service_ln c, service_ln_cap d, job_sts e where b.job_rl_id = a.job_rl_id
-	and d.srvc_ln_cap_id = b.srvc_ln_cap_id
-	and d.srvc_ln_id = c.srvc_ln_id
-	and e.job_sts_id=a.job_sts_id
-	and a.own_rm = 'RM3';*/
-
+	/**
+	 * @param details
+	 * @param candidateDetList
+	 */
+	private void populateCountsByCandidateStatus(CandidateDetails details,
+			List<CandidateDetail> candidateDetList) {
+		int activeCount=0;
+		int hiredCount=0;
+		int rejectCount=0;
+		for (CandidateDetail detail : candidateDetList) {
+			if(detail.getCndtStatus().equalsIgnoreCase("active")){
+				activeCount++;
+			} else if(detail.getCndtStatus().equalsIgnoreCase("hired")){
+				hiredCount++;
+			} else {
+				rejectCount++;
+			}
+		}
+		details.setActiveCount(activeCount);
+		details.setHiredCount(hiredCount);
+		details.setRejectCount(rejectCount);
+	}
 }

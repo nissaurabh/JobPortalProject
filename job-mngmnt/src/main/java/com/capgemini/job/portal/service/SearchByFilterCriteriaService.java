@@ -8,6 +8,7 @@ package com.capgemini.job.portal.service;
 import java.text.ParseException;
 import java.util.Map;
 
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.dto.JobDetails;
 
 /**
@@ -29,7 +30,7 @@ public interface SearchByFilterCriteriaService {
 	 * @param queryMap
 	 * @return
 	 */
-	public String retriveCandidateDetailsByFilterCriteria(final Map<String, String> queryMap);
+	public CandidateDetails retriveCandidateDetailsByFilterCriteria(final Map<String, String> queryMap);
 	
 
 }

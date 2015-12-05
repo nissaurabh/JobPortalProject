@@ -8,6 +8,7 @@ package com.capgemini.job.portal.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.dto.JobDetail;
 
 
@@ -28,6 +29,6 @@ public interface SearchByFilterCriteriaDAO {
 	 * @param candidateFilterMap
 	 * @return
 	 */
-	public String getCandidateDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
+	public List<CandidateDetail> getCandidateDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
 
 }

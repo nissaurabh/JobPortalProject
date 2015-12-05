@@ -15,11 +15,11 @@ import javax.ws.rs.core.Response.Status;
 import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.collections.CollectionUtils;
-import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.dto.JobDetails;
 import com.capgemini.job.portal.service.SearchByFilterCriteriaService;
 import com.capgemini.job.portal.util.QueryParamUtil;
@@ -64,36 +64,19 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 	 */
 	@Override
 	public Response retrieveCandidateSearchDetails(final UriInfo uriInfo) throws URISyntaxException {
-		String response = null;
+		CandidateDetails response = null;
 		try{
 			final MultivaluedMap<String, String> multivaluedMap = uriInfo
 		                .getQueryParameters();
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
 			response = searchByFilterCriteriaService.retriveCandidateDetailsByFilterCriteria(queryMap);
+			if(!CollectionUtils.isNotEmpty(response.getCandidateList())){
+				return Response.status(Status.NOT_FOUND).build();
+			}
 		} catch (Exception e){
 			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
 		}
-		return buildResponse(response);
-	}
-
-	/**
-	 * build the response object.
-	 * 
-	 * @param response
-	 *            the response
-	 * @return the responseObj
-	 * @throws URISyntaxException
-	 *             the URI syntax exception
-	 */
-	private Response buildResponse(final String response)
-			throws URISyntaxException {
-		Response responseObj = null;
-		if (StringUtils.isNotEmpty(response)) {
-			responseObj = Response.ok(response).build();
-		} else {
-			responseObj = Response.status(Status.NOT_FOUND).build();
-		}
-		return responseObj;
+		return Response.ok(response).build();
 	}
 
 }
