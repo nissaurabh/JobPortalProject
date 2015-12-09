@@ -18,68 +18,97 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','
 
   }]);
 
-jobMngmtControllers.controller('DashboardCtrl', ['$scope',
-    function($scope) {
-
-        $scope.labels =["Open","Closed"];
-
-        $scope.data = [
-            65, 59
-        ];
-
-        $scope.labels1 = ["Java", "In-Store Sales", "Mail-Order Sales"];
-        $scope.data1 = [300, 500, 100];
+jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
+    function($scope,$cookies,$rootScope,jobDashboardFactory) {
 
 
-        //jobs account
-        $scope.jobAccountLabels = ["Disney", "Cisco", "AT&T", "Walmart"];
+        $rootScope.loggedIn= $cookies.get('loggedIn');
+        $rootScope.userId= $cookies.get('userId');
+
+    //job dashboard
+        $scope.jobAccountLabels = [];
+        $scope.jobAccountData = [[], []];
         $scope.jobAccountSeries = ['Open', 'Aging'];
-        $scope.jobAccountData = [
-            [10, 59, 30, 71],
-            [28, 34, 80, 19]
-        ];
-
-        //jobs bu
-        $scope.jobBULabels = ["Htech", "Govt Services"];
         $scope.jobBUSeries = ['Open', 'Aging'];
-        $scope.jobBUData = [
-            [65, 59],
-            [28, 48]
-        ];
+        $scope.jobBUData = [[],[]];
+        $scope.jobBULabels = [];
+        $scope.jobReportObj = [];
+        var jobReport = jobDashboardFactory.jobReport.get({param:$rootScope.jobDashboard});
+        jobReport.$promise.then(function (response) {
+           $scope.jobReportObj = response;
+            angular.forEach(response.jobAccount, function(item){
 
-        //candidate account
-        $scope.candidateAccountLabels = ["Disney", "Cisco", "AT&T", "Walmart"];
-        $scope.candidateAccountSeries = ['Active', 'Hired', 'Rejected'];
-        $scope.candidateAccountData = [
-            [65, 59, 80, 81],
-            [28, 48, 40, 19],
-            [90, 20, 76, 34]
-        ];
+                $scope.jobAccountLabels.push(item.clientName);
+                $scope.jobAccountData[0].push(item.Open);
+                $scope.jobAccountData[1].push(item.Aging);
 
-        //candidate bu
-        $scope.candidateBULabels = ["Htech", "Govt Services"];
+            });
+
+            angular.forEach(response.jobBU, function(item){
+                //alert(item.clientName);
+                $scope.jobBULabels.push(item.buName);
+                $scope.jobBUData[0].push(item.Open);
+                $scope.jobBUData[1].push(item.Aging);
+
+            });
+
+       });
+
+        //candidate dashboard
+        $scope.candidateAccountLabels = [];
+        $scope.candidateAccountData = [[], [],[]];
         $scope.candidateBUSeries = ['Active', 'Hired', 'Rejected'];
-        $scope.candidateBUData = [
-            [65, 59],
-            [28, 48],
-            [56, 86]
-        ];
+        $scope.candidateAccountSeries = ['Active', 'Hired', 'Rejected'];
+        $scope.candidateBUData = [[],[],[]];
+        $scope.candidateBULabels = [];
+        $scope.candidateReport = [];
 
-        //interview account
-        $scope.interviewAccountLabels = ["Disney", "Cisco", "AT&T", "Walmart"];
-        $scope.interviewAccountSeries = ['Conducted', 'Success'];
-        $scope.interviewAccountData = [
-            [65, 59, 80, 81],
-            [28, 48, 40, 19]
-        ];
+        var candidateReport = jobDashboardFactory.candidateReport.get({param:$rootScope.candidateDashboard});
+        candidateReport.$promise.then(function (response) {
+            $scope.candidateReport = response;
+            angular.forEach(response.candidateAccount, function (item) {
+                $scope.candidateAccountLabels.push(item.clientName);
+                $scope.candidateAccountData[0].push(item.active);
+                $scope.candidateAccountData[1].push(item.hired);
+                $scope.candidateAccountData[2].push(item.rejected);
+            });
 
-        //interview bu
-        $scope.interviewBULabels = ["Htech", "Govt Services"];
+            angular.forEach(response.candidateBU, function (item) {
+                $scope.candidateBULabels.push(item.buName);
+                $scope.candidateBUData[0].push(item.active);
+                $scope.candidateBUData[1].push(item.hired);
+                $scope.candidateBUData[2].push(item.rejected);
+
+            });
+        });
+
+        //interview dashboard
+        $scope.interviewAccountLabels = [];
+        $scope.interviewAccountData = [[], []];
         $scope.interviewBUSeries = ['Conducted', 'Success'];
-        $scope.interviewBUData = [
-            [65, 59],
-            [28, 48]
-        ];
+        $scope.interviewAccountSeries = ['Conducted', 'Success'];
+        $scope.interviewBUData = [[],[]];
+        $scope.interviewBULabels = [];
+        $scope.interviewReport = [];
+
+        var interviewReport = jobDashboardFactory.interviewReport.get({param:$rootScope.interviewDashboard});
+        interviewReport.$promise.then(function (response) {
+            $scope.interviewReport = response;
+            angular.forEach(response.interviewAccount, function (item) {
+                $scope.interviewAccountLabels.push(item.clientName);
+                $scope.interviewAccountData[0].push(item.conducted);
+                $scope.interviewAccountData[1].push(item.success);
+            });
+
+            angular.forEach(response.interviewBU, function (item) {
+                //alert(item.clientName);
+                $scope.interviewBULabels.push(item.buName);
+                $scope.interviewBUData[0].push(item.conducted);
+                $scope.interviewBUData[1].push(item.success);
+
+            });
+        });
+
 
       /* $scope.colours = [
             { // grey
@@ -142,13 +171,16 @@ jobMngmtControllers.controller('AccountReportCtrl', ['$scope',
     }]);
 
 
-jobMngmtControllers.controller('JobSearchCtrl', ['$scope','JobSearchFactory','$filter',
-    function($scope,jobSearchFactory,$filter) {
+jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies','JobSearchFactory','$filter',
+    function($scope,$rootScope,$cookies,jobSearchFactory,$filter) {
+        $rootScope.loggedIn= $cookies.get('loggedIn');
+        $rootScope.userId= $cookies.get('userId');
         $scope.serviceLineCapabilityList =[];
         $scope.serviceLineCapabilities = [];
         $scope.jobRolesList =[];
         $scope.jobRoles = [];
-        $scope.jobStatuses = jobSearchFactory.status.get();
+        $scope.jobSearchResult = [];
+            $scope.jobStatuses = jobSearchFactory.status.get();
         $scope.accounts = jobSearchFactory.account.get();
         $scope.serviceLines = jobSearchFactory.serviceLine.get();
         $scope.serviceLineCapabilities = jobSearchFactory.serviceLineCapability.get();
@@ -165,10 +197,24 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','JobSearchFactory','$f
             $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
         };
 
+        $scope.jobSearch = function(jobSearch) {
+            //alert("hello");
+            $scope.jobSearchResult = jobSearchFactory.jobSearch.get(
+                {status: $scope.statusId,
+                    //accountId:$scope.accountId,
+                    service_ln:$scope.serviceLineId,
+                   // serviceLineCapabilityId:$scope.serviceLineCapabilityId,
+                    role_nm:$scope.jobRoleId
+            });
+            //alert($scope.jobSearchResult.jobList.wwsid);
+        };
+
     }]);
 
-jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','CandidateSearchFactory','$filter',
-    function($scope,candidateSearchFactory,$filter) {
+jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$cookies','CandidateSearchFactory','$filter',
+    function($scope,$rootScope,$cookies,candidateSearchFactory,$filter) {
+        $rootScope.loggedIn= $cookies.get('loggedIn');
+        $rootScope.userId= $cookies.get('userId');
         $scope.serviceLineCapabilityList =[];
         $scope.serviceLineCapabilities = [];
         $scope.jobRolesList =[];
@@ -189,5 +235,76 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','CandidateSearch
 
             $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
         };
+        $scope.candidateResultObject = [];
+        $scope.candidateSearch = function() {
+            $scope.candidateResultObject = candidateSearchFactory.candidateReport.get(
+                {
+                    serviceLineId: $scope.serviceLineId,
+                    serviceLineCapabilityId:$scope.serviceLineCapabilityId,
+                    jobRoleId: $scope.jobRoleId,
+                    candidateStatusId: $scope.candidateStatusId,
+                    citizenshipStatusId: $scope.citizenshipStatusId
+                }
+            );
+        };
+
+    }]);
+
+jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$cookies','InterviewSearchFactory','$filter',
+    function($scope,$rootScope,$cookies,interviewSearchFactory,$filter) {
+
+        $rootScope.loggedIn= $cookies.get('loggedIn');
+        $rootScope.userId= $cookies.get('userId');
+
+        $scope.interviewSearchResultObject = [];
+
+        $scope.interviewSearch = function() {
+            $scope.interviewSearchResultObject = interviewSearchFactory.interviewReport.get(
+                {
+                    interviewDateFrom: $scope.interviewDateFrom,
+                    interviewDateTo:$scope.interviewDateTo,
+                    result: $scope.result,
+                    interviewer: $scope.interviewer
+                }
+            );
+        };
+
+    }]);
+
+jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$window','$location','LoginFactory',
+    function($scope,$rootScope,$cookies, $window,$location,loginFactory) {
+
+        $scope.userDashboard = [];
+        $scope.login = function() {
+            $scope.userDashboard = loginFactory.userDashboard($scope.user);
+        return  $scope.userDashboard.$promise.then(function (response) {
+            $scope.userDashboard = response;
+            $rootScope.userRole =  $scope.userDashboard.userRole;
+            $rootScope.userId=  $scope.userDashboard.userId;
+            $rootScope.jobDashboard=  $scope.userDashboard.jobDashboard;
+            $rootScope.candidateDashboard=  $scope.userDashboard.candidateDashboard;
+            $rootScope.interviewDashboard=  $scope.userDashboard.interviewDashboard;
+            //$rootScope.$apply();
+           // $sessionStorage.loggedIn= true;
+            //$sessionStorage.userId = $scope.userDashboard.userId;
+            $cookies.put("loggedIn",'TRUE');
+            $cookies.put("userId",$rootScope.userId);
+            //$window.sessionStorage.loggedIn = true;
+            //$window.sessionStorage.userId = $scope.userDashboard.userId;
+           // $window.sessionStorage.setItem('loggedIn', true);
+           // $window.sessionStorage.setItem('userId', $scope.userDashboard.userId);
+            //$cookieStore.put("loggedin", "true");
+            //alert($scope.userDashboard.userRole);
+            //console.log("data.name"+$rootScope.userDashboard);
+            $location.path("/dashboard");
+
+        });
+
+        };
+    }]);
+
+jobMngmtControllers.controller('LogoutCtrl', ['$scope','$rootScope',
+    function($scope,$rootScope) {
+                $rootScope.loggedIn = false;
 
     }]);

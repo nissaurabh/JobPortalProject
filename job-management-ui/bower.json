@@ -8,6 +8,7 @@
     "angular-resource": "latest",
     "chartjs": "latest",
     "angular-chart.js": "latest",
-    "font-awesome":"latest"
+    "font-awesome":"latest",
+    "angular-cookies": "latest"
   }
 }

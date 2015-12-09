@@ -12,7 +12,8 @@
         </div>
         <div class="panel-body" ng-controller="CandidateSearchCtrl">
             <form role="form" action="#dashboard">
-                <table class="table table-striped table-condensed">
+                <table class="table">
+                    <tbody class="bg-success">
                     <tr>
                         <td><label for="cmdtSrcSerLine">Service Line:</label>
                             <select
@@ -37,12 +38,13 @@
                                 <option value="" selected="selected">Select</option>
                             </select>
                         </td>
-
                         <td><label for="cndtSrcSts">Candidate Status:</label>
                             <select class="form-control" id="candidateStatusId" ng-model="candidateStatusId"
                                     ng-options="opt.candidateStatusId as opt.candidateStatusName for opt in candidateStatuses.candidateStatus">
-                            <option value="" selected="selected">Select</option>
-                        </select></td>
+                                <option value="" selected="selected">Select</option>
+                            </select></td>
+                        </tr><tr>
+
 
                         <td><label for="ctzSrcSts">Citizenship Status:</label>
                             <select class="form-control" id="citizenshipStatusId" ng-model="citizenshipStatusId"
@@ -50,13 +52,14 @@
                             <option value="" selected="selected">Select</option>
                         </select></td>
 
-                        <td style="vertical-align: bottom;"><button type="button" id="cndtSearchId"
-                                    class="btn btn-color">
+                        <td style="vertical-align: bottom;" colspan="3"><button type="button" id="cndtSearchId"
+                                    class="btn btn-color" ng-click="candidateSearch()">
                             <span class="glyphicon glyphicon-search"></span>
-                            Search</button></td>
-                        <td style="vertical-align: bottom;"><button type="button" id="customizeId"
+                            Search</button>
+                        <button type="button" id="customizeId"
                                     class="btn btn-color">Set As Dashboard Default</button></td>
                     </tr>
+                    </tbody>
                 </table>
             </form>
 <div style="padding-bottom:30px;"><span></span></div>
@@ -71,32 +74,14 @@
                     <th><label>Citizenship Status</label></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="searchResultObj in candidateResultObject.candidateList">
                 <tr>
-                    <td>Jacob</td>
-                    <td><a href="#">Download Resume</a></td>
-                    <td>gxteam</td>
-                    <td>$30 per hour</td>
-                    <td>Did Not Join</td>
-                    <td>US Citizen</td>
-                </tr>
-                <tr>
-
-                    <td>Robert</td>
-                    <td><a href="#">Download Resume</a></td>
-                    <td>External resource</td>
-                    <td>$40 per hour</td>
-                    <td>Did Not Join</td>
-                    <td>US Citizen</td>
-                </tr>
-                <tr>
-
-                    <td>Krishna</td>
-                    <td><a href="#">Download Resume</a></td>
-                    <td>gxteam</td>
-                    <td>$50 per hour</td>
-                    <td>Did Not Join</td>
-                    <td>US Citizen</td>
+                    <td>{{searchResultObj.cndtName}}</td>
+                    <td><a href="#">{{searchResultObj.cndtResume}}</a></td>
+                    <td>{{searchResultObj.resourceType}}</td>
+                    <td>{{searchResultObj.cntrctrRate}}</td>
+                    <td>{{searchResultObj.cndtStatus}}</td>
+                    <td>{{searchResultObj.ctznStatus}}</td>
                 </tr>
                 </tbody>
             </table>

@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('jobMngmtApp', ['chart.js','ngRoute','jobMngmtServices', 'jobMngmtControllers'])
+  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers'])
     .config(['$httpProvider',function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         //$httpProvider.defaults.withCredentials = true;
@@ -63,11 +63,18 @@ angular
             controller: 'CandidateSearchCtrl'
         })
         .when('/interviewSearchView', {
-            templateUrl: 'views/interviewSearch.html'
+            templateUrl: 'views/interviewSearch.html',
+            controller: 'InterviewSearchCtrl'
+        })
+        .when('/signoutView', {
+            templateUrl: 'views/login-form.html',
+            controller: 'LogoutCtrl'
         })
       .otherwise({
         redirectTo: '/login',
-          templateUrl: 'views/login-form.html'
+          templateUrl: 'views/login-form.html',
+          controller: 'LoginCtrl'
+
       });
         $locationProvider.html5Mode(true);
   });

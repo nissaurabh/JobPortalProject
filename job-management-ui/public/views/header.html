@@ -1,4 +1,5 @@
 <div class="row header">
-  <div class="col-xs-9 glyphicon glyphicon-home"> Home</div>
-  <div class="col-xs-3">Welcome Ashok <strong>|<a href="#" style="color: white;">Sign Out</a></strong></div>
+  <div class="col-xs-3 col-xs-offset-9" ng-show="loggedIn">Welcome {{userId}}<strong>|
+    <a href="/signoutView" style="color: white;">Sign Out</a></strong>
   </div>
+</div>

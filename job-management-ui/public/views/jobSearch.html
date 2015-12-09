@@ -46,7 +46,7 @@
                         </select></td>
                         <td style="vertical-align: bottom;">
 
-                            <button type="button" id="searchId" class="btn btn-color">
+                            <button type="button" id="searchId" class="btn btn-color" ng-click="jobSearch()">
                                 <span class="glyphicon glyphicon-search"></span> Search
                             </button>
                         </td>
@@ -71,33 +71,15 @@
                     <th><label>Requested Date</label></th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ng-repeat="jobSearchObj in jobSearchResult.jobList">
                 <tr>
-                    <td><a href="#dashboard">WAC43534</a></td>
-                    <td>CSD</td>
-                    <td>Core</td>
-                    <td>Java Developer</td>
-                    <td>Open</td>
-                    <td>Ram</td>
-                    <td>2015-05-23</td>
-                </tr>
-                <tr>
-                    <td><a href="#dashboard">WAC43567</a></td>
-                    <td>CSD</td>
-                    <td>Business Analyst</td>
-                    <td>Senior Business Analyst</td>
-                    <td>Closed</td>
-                    <td>Robert</td>
-                    <td>2015-05-23</td>
-                </tr>
-                <tr>
-                    <td><a href="#dashboard">WAC47867</a></td>
-                    <td>SAP</td>
-                    <td>Funcational</td>
-                    <td>Senior HR Developer</td>
-                    <td>Open</td>
-                    <td>King</td>
-                    <td>2015-05-23</td>
+                    <td><a href="#dashboard">{{jobSearchObj.wwsid}}</a></td>
+                    <td>{{jobSearchObj.serviceLine}}</td>
+                    <td>{{jobSearchObj.serviceLineCap}}</td>
+                    <td>{{jobSearchObj.roleName}}</td>
+                    <td>{{jobSearchObj.jobStatus}}</td>
+                    <td>{{jobSearchObj.reqBy}}</td>
+                    <td>{{jobSearchObj.reqDate}}</td>
                 </tr>
                 </tbody>
             </table>

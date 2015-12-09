@@ -47,7 +47,7 @@ import javax.xml.bind.annotation.XmlType;
     "candidateDashboard",
     "interviewDashboard"
 })
-@XmlRootElement(name = "userDashboard")
+//@XmlRootElement(name = "userDashboard")
 public class UserDashboard {
 
     protected String userId;
