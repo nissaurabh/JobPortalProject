@@ -32,5 +32,11 @@ public interface SearchByFilterCriteriaService {
 	 */
 	public CandidateDetails retriveCandidateDetailsByFilterCriteria(final Map<String, String> queryMap);
 	
+	/**
+	 * @param queryMap
+	 * @return
+	 */
+	public void retriveInterviewDetailsByFilterCriteria(final Map<String, String> queryMap);
+	
 
 }

@@ -7,8 +7,11 @@ package com.capgemini.job.portal.service.impl;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -21,6 +24,7 @@ import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.dto.JobDetail;
 import com.capgemini.job.portal.dto.JobDetails;
+import com.capgemini.job.portal.dto.JobStats;
 import com.capgemini.job.portal.service.SearchByFilterCriteriaService;
 
 /**
@@ -45,10 +49,89 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 		if(CollectionUtils.isNotEmpty(jobDetList)){
 			populateJobCountsByDate(details,jobDetList);
 			details.setJobList(jobDetList);
+			Map<String,List<JobDetail>> clientMap = populateJobCountsByClient(jobDetList);
+			formatResponse(details,clientMap,"clientName");
+			
+			Map<String,List<JobDetail>> buMap = populateJobCountsByBU(jobDetList);
+			formatResponse(details,buMap,"serviceLine");
 		}
 		return details;
 	}
 
+	/**
+	 * @param jobDetList
+	 */
+	private Map<String,List<JobDetail>>	populateJobCountsByClient(List<JobDetail> jobDetList) {
+		Map<String,List<JobDetail>> clientMap = new HashMap<String, List<JobDetail>>();
+		for (JobDetail jobDetail : jobDetList) {
+			if(clientMap.containsKey(jobDetail.getClientName())){
+				clientMap.get(jobDetail.getClientName()).add(jobDetail);
+			} else {
+				List<JobDetail> jobList = new ArrayList<JobDetail>();
+				jobList.add(jobDetail);
+				clientMap.put(jobDetail.getClientName(), jobList);
+			}
+		}
+		return clientMap;
+	}
+	
+	/**
+	 * @param jobDetList
+	 */
+	private Map<String,List<JobDetail>>	populateJobCountsByBU(List<JobDetail> jobDetList) {
+		Map<String,List<JobDetail>> buMap = new HashMap<String, List<JobDetail>>();
+		for (JobDetail jobDetail : jobDetList) {
+			if(buMap.containsKey(jobDetail.getServiceLine())){
+				buMap.get(jobDetail.getServiceLine()).add(jobDetail);
+			} else {
+				List<JobDetail> jobList = new ArrayList<JobDetail>();
+				jobList.add(jobDetail);
+				buMap.put(jobDetail.getServiceLine(), jobList);
+			}
+		}
+		return buMap;
+	}
+	
+	/**
+	 * @param details
+	 * @param clientMap
+	 * @param type
+	 * @throws ParseException
+	 */
+	private void formatResponse(JobDetails details,
+			Map<String, List<JobDetail>> clientMap, String type) throws ParseException {
+		List<JobStats> stats= new ArrayList<JobStats>();
+		for (Iterator<String> iterator = clientMap.keySet().iterator(); iterator.hasNext();) {
+			JobStats jobStats = new JobStats();
+			String key = (String) iterator.next();
+			int agedJobCount=0;
+			int activeJobCount=0;
+			for (JobDetail jobDetail : clientMap.get(key)) {
+				SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date reqDate = formatter.parse(jobDetail.getReqDate());
+				Date currentDate = Calendar.getInstance().getTime();
+				long diffDays = (currentDate.getTime() - reqDate.getTime()) / (24 * 60 * 60 * 1000);
+				if(diffDays > 14){
+					agedJobCount++;
+				}
+			}
+			activeJobCount = clientMap.get(key).size()-agedJobCount;
+			jobStats.setAging(agedJobCount);
+			jobStats.setOpen(activeJobCount);
+			if("clientName".equalsIgnoreCase(type)){
+				jobStats.setClientName(key);
+			} else {
+				jobStats.setBuName(key);
+			}
+			stats.add(jobStats);
+		}
+		if("clientName".equalsIgnoreCase(type)){
+			details.setJobAccount(stats);
+		} else {
+			details.setJobBU(stats);
+		}
+	}
+	
 	/**
 	 * @param details
 	 * @param jobDetList
@@ -109,5 +192,11 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 		details.setActiveCount(activeCount);
 		details.setHiredCount(hiredCount);
 		details.setRejectCount(rejectCount);
+	}
+
+	@Override
+	public void retriveInterviewDetailsByFilterCriteria(
+			Map<String, String> queryMap) {
+	
 	}
 }

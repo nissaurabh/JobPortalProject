@@ -30,5 +30,11 @@ public interface SearchByFilterCriteriaDAO {
 	 * @return
 	 */
 	public List<CandidateDetail> getCandidateDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
+	
+	/**
+	 * @param candidateFilterMap
+	 * @return
+	 */
+	public void getInterviewDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
 
 }

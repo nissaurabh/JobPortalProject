@@ -7,7 +7,6 @@ package com.capgemini.job.portal.webservice;
 
 import java.net.URISyntaxException;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
@@ -45,5 +44,15 @@ public interface SearchByFilterCriteriaWebservice {
 	@Produces("application/json")
 	@Path("candidateSearch")
 	public Response retrieveCandidateSearchDetails(@Context final UriInfo uriInfo) throws URISyntaxException;
+	
+	/**
+	 * @param uriInfo
+	 * @return
+	 * @throws URISyntaxException
+	 */
+	@GET
+	@Produces("application/json")
+	@Path("interviewSearch")
+	public Response retrieveInterviewSearchDetails(@Context final UriInfo uriInfo) throws URISyntaxException;
 
 }

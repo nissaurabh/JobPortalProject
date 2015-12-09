@@ -43,8 +43,7 @@
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 		 	 <ref bean="cors-filter" /> 
-		   <bean class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider"/>
-		  
+		     <ref bean="jsonProvider"/>
 		</jaxrs:providers>
 	</jaxrs:server>
 
@@ -107,5 +106,13 @@
 	</bean>  -->
 	
 	<bean id="persistenceExceptionTranslationPostProcessor" class="org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor"/>
+	
+	<bean id="jacksonObjectMapper" class="org.codehaus.jackson.map.ObjectMapper">
+    	<property name="serializationInclusion" value="NON_NULL"/>
+	</bean>
+
+	<bean id="jsonProvider" class="org.codehaus.jackson.jaxrs.JacksonJaxbJsonProvider">
+    	<property name="mapper" ref="jacksonObjectMapper"/>
+	</bean>
 
 </beans>

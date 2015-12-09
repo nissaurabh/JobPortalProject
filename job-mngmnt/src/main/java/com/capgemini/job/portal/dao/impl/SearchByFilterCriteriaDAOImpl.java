@@ -24,6 +24,7 @@ import com.capgemini.job.portal.util.DateUtil;
  * @author ppenamak
  *
  */
+@SuppressWarnings("unchecked")
 @Service("searchByFilterCriteriaDAO")
 public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO {
 	
@@ -33,7 +34,6 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 	/* (non-Javadoc)
 	 * @see com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO#getJobDetailsByFilterCriteria(java.util.Map)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<JobDetail> getJobDetailsByFilterCriteria(Map<String, String> jobFilterMap) {
 		List<String> paramList = new ArrayList<String>();
@@ -90,7 +90,6 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 	/* (non-Javadoc)
 	 * @see com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO#getCandidateDetailsByFilterCriteria(java.util.Map)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public List<CandidateDetail> getCandidateDetailsByFilterCriteria(
 			Map<String, String> candidateFilterMap) {
@@ -140,6 +139,53 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			cndtDetList.add(detail);
 		}
 		return cndtDetList;
+	}
+
+	@Override
+	public void getInterviewDetailsByFilterCriteria(
+			Map<String, String> interviewFilterMap) {
+		List<String> paramList = new ArrayList<String>();
+		List<JobDetail> jobDetList = new ArrayList<JobDetail>();
+		StringBuffer sql = new StringBuffer ("select a.wwsid, f.clnt_nm,c.srvc_ln_nm, d.srvc_ln_cap_nm, b.job_rl_nm,e.job_sts_nm, a.reqstr_rm,a.req_dt "  
+				+" from job a, job_role b, service_ln c, service_ln_cap d, job_sts e, account f where b.job_rl_id = a.job_rl_id"
+				+ " and d.srvc_ln_cap_id = b.srvc_ln_cap_id"
+				+ " and d.srvc_ln_id = c.srvc_ln_id"
+				+ " and f.clnt_id = a.clnt_id"
+				+ " and a.clsr_dt is null "
+				+ " and e.job_sts_id=a.job_sts_id");
+		Query q = null;
+		if(interviewFilterMap.containsKey("start_date") && interviewFilterMap.containsKey("start_date")){
+			sql.append(" and a.own_rm = :start_date");
+			paramList.add("start_date");
+			paramList.add("end_date");
+		}
+		if(interviewFilterMap.containsKey("result")){
+			sql.append(" and e.job_sts_nm = :result");
+			paramList.add("result");
+		}
+		if(interviewFilterMap.containsKey("intrvwr_nm")){
+			sql.append(" and b.job_rl_nm = :intrvwr_nm");
+			paramList.add("intrvwr_nm");
+		}
+		q = (Query) entityManager.createNativeQuery(sql.toString());
+		for (Iterator<String> iterator = paramList.iterator(); iterator.hasNext();) {
+			String param = (String) iterator.next();
+			q.setParameter(param, interviewFilterMap.get(param));
+		}
+		List<Object[]> list = q.getResultList();
+		for (Object[] temp : list) {
+			JobDetail detail = new JobDetail();
+			detail.setWwsid((String)temp[0]);
+			detail.setClientName((String)temp[1]);
+			detail.setServiceLine((String)temp[2]);
+			detail.setServiceLineCap((String)temp[3]);
+			detail.setRoleName((String)temp[4]);
+			detail.setJobStatus((String)temp[5]);
+			detail.setReqBy((String)temp[6]);
+			detail.setReqDate(DateUtil.convertTimestamptoDate((Timestamp) temp[7]));
+			jobDetList.add(detail);
+		}
+		
 	}
 
 }

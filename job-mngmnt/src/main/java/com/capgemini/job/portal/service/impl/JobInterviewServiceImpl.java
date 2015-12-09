@@ -14,7 +14,6 @@ import com.capgemini.job.portal.entities.Job;
 import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.entities.JobIntrvw;
 import com.capgemini.job.portal.jaxb.InterviewDetails;
-import com.capgemini.job.portal.jaxb.JobDetails;
 import com.capgemini.job.portal.service.JobInterviewService;
 import com.capgemini.job.portal.util.DateUtil;
 

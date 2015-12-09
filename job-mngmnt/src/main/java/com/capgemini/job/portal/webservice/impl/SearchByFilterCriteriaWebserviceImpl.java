@@ -79,4 +79,11 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 		return Response.ok(response).build();
 	}
 
+	@Override
+	public Response retrieveInterviewSearchDetails(UriInfo uriInfo)
+			throws URISyntaxException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
