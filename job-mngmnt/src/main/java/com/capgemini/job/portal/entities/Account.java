@@ -1,7 +1,9 @@
 package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 import java.util.List;
 
@@ -17,6 +19,7 @@ import java.util.List;
    @NamedQuery(name="account.getAccount",
                 query="SELECT acct FROM Account acct")
 }) 
+@Table(name="account")
 public class Account implements Serializable {
 	private static final long serialVersionUID = 1L;
 
