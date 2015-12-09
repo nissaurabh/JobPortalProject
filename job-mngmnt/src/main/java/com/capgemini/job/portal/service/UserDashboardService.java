@@ -24,5 +24,13 @@ public interface UserDashboardService {
 	 * @return the UserDashboard
 	 */
 	public UserDashboard getUserDashboard(final User user);
+	
+	
+	/**
+	 * @param userId
+	 * @param dashboardInput
+	 * @return
+	 */
+	public String setUserDashboard(String userId, String dashboardInput);
 
 }

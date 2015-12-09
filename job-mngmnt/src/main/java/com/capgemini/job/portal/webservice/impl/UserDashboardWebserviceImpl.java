@@ -11,12 +11,14 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-
+import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.jaxb.User;
 import com.capgemini.job.portal.jaxb.UserDashboard;
 import com.capgemini.job.portal.service.UserDashboardService;
@@ -47,5 +49,38 @@ public class UserDashboardWebserviceImpl implements UserDashboardWebservice{
 						"http://10.81.82.144:8080/job-management-service/")
 				.build();
 	}
+
+	@Override
+	public Response setUserDashboard(final String userId, final String dashboardInput)
+			throws URISyntaxException {
+		String response = userDashboardService.setUserDashboard(userId, dashboardInput);
+		return buildResponse(response);
+	}
+
+	/**
+	 * build the response object.
+	 * 
+	 * @param response
+	 *            the response
+	 * @return the responseObj
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
+	 */
+	private Response buildResponse(final String response)
+			throws URISyntaxException {
+		ResponseBuilder responseObj = null;
+		if (response.equalsIgnoreCase(JobMngMntConstants.NOT_FOUND)) {
+			responseObj = Response.status(Status.NOT_FOUND);
+		} else if (response.equalsIgnoreCase(JobMngMntConstants.OK_STATUS)) {
+			responseObj = Response.status(Status.OK);
+		} else if (response.equalsIgnoreCase(JobMngMntConstants.CREATED)) {
+			responseObj = Response.status(Status.CREATED);
+		} else if (response.equalsIgnoreCase(JobMngMntConstants.BAD_REQUEST)) {
+			responseObj = Response.status(Status.BAD_REQUEST);
+		}
+		return responseObj.header("Access-Control-Allow-Origin",
+				"http://10.81.82.144:8080/job-management-service/").build();
+	}
+	
 
 }

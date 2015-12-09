@@ -31,5 +31,8 @@ public interface JobMngMntConstants {
    
    /** FORBIDDEN. */
    String FORBIDDEN = "403";
+   
+   /** BAD_REQUEST. */
+   String BAD_REQUEST = "400";
 
 }

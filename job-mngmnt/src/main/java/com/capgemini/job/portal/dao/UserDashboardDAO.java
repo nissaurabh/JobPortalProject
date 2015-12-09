@@ -5,6 +5,8 @@
  */
 package com.capgemini.job.portal.dao;
 
+import java.util.Map;
+
 import com.capgemini.job.portal.entities.PortalUser;
 import com.capgemini.job.portal.jaxb.User;
 
@@ -23,5 +25,12 @@ public interface UserDashboardDAO {
 	 * @return the PortalUser
 	 */
 	public PortalUser userDashboard(final User user);
+
+	/**
+	 * @param userId
+	 * @param dashboardMap
+	 * @return
+	 */
+	public String setUserDashboard(final String userId, final Map<String, String> dashboardMap);
 
 }
