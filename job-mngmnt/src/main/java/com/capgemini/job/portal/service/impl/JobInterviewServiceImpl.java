@@ -45,10 +45,8 @@ public class JobInterviewServiceImpl implements JobInterviewService {
 	@Override
 	public String scheduleInterview(String jobId, String candidateId,
 			InterviewDetails interviewDetails) {
-		final String response = JobMngMntConstants.CREATED;
 		final JobIntrvw jobIntrvw = populateJobInterviewDetails(jobId, candidateId, interviewDetails);
-		jobInterviewDetailsDAO.createJobInterview(jobIntrvw);
-		return response;
+		return jobInterviewDetailsDAO.createJobInterview(jobIntrvw);
 	}
 
 	
@@ -71,6 +69,10 @@ public class JobInterviewServiceImpl implements JobInterviewService {
 	}
 
 	
+	/**
+	 * @param jobIntrvw
+	 * @param interviewDetails
+	 */
 	private void updateInterviewDetails(JobIntrvw jobIntrvw,
 			InterviewDetails interviewDetails) {
 		if(StringUtils.isNotEmpty(interviewDetails.getInterviewDateTime())){
@@ -139,7 +141,6 @@ public class JobInterviewServiceImpl implements JobInterviewService {
 	
 	@Transactional
 	public IntrvwSt getInterviewStatus(final int interviewStsId) {
-
 		return jobInterviewDetailsDAO.getInterviewStatus(interviewStsId);
 	}
 

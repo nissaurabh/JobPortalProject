@@ -26,6 +26,10 @@ public interface JobMngMntConstants {
    /** NO_CONTENT. */
    String NO_CONTENT = "204";
 
-
+   /** ERROR. */
+   String ERROR = "500";
+   
+   /** FORBIDDEN. */
+   String FORBIDDEN = "403";
 
 }

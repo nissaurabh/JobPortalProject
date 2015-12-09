@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.job.portal.dto.CandidateDetails;
+import com.capgemini.job.portal.dto.InterviewDetails;
 import com.capgemini.job.portal.dto.JobDetails;
 import com.capgemini.job.portal.service.SearchByFilterCriteriaService;
 import com.capgemini.job.portal.util.QueryParamUtil;
@@ -51,12 +52,15 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
 			response = searchByFilterCriteriaService.retriveJobDetailsByFilterCriteria(queryMap);
 			if(!CollectionUtils.isNotEmpty(response.getJobList())){
-				return Response.status(Status.NOT_FOUND).build();
+				return Response.status(Status.NOT_FOUND).header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/").build();
 			}
 		} catch (Exception e){
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin",
+					"http://10.81.82.144:8080/job-management-service/").build();
 		}
-		return Response.ok(response).build();
+		return Response.ok(response).header("Access-Control-Allow-Origin",
+				"http://10.81.82.144:8080/job-management-service/").build();
 	}
 	
 	/* (non-Javadoc)
@@ -71,19 +75,39 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
 			response = searchByFilterCriteriaService.retriveCandidateDetailsByFilterCriteria(queryMap);
 			if(!CollectionUtils.isNotEmpty(response.getCandidateList())){
-				return Response.status(Status.NOT_FOUND).build();
+				return Response.status(Status.NOT_FOUND).header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/").build();
 			}
 		} catch (Exception e){
-			return Response.status(Status.INTERNAL_SERVER_ERROR).build();
+			return Response.status(Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin",
+					"http://10.81.82.144:8080/job-management-service/").build();
 		}
-		return Response.ok(response).build();
+		return Response.ok(response).header("Access-Control-Allow-Origin",
+				"http://10.81.82.144:8080/job-management-service/").build();
 	}
 
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.webservice.SearchByFilterCriteriaWebservice#retrieveInterviewSearchDetails(javax.ws.rs.core.UriInfo)
+	 */
 	@Override
 	public Response retrieveInterviewSearchDetails(UriInfo uriInfo)
 			throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return null;
+		InterviewDetails response = null;
+		try{
+			final MultivaluedMap<String, String> multivaluedMap = uriInfo
+		                .getQueryParameters();
+			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
+			response = searchByFilterCriteriaService.retriveInterviewDetailsByFilterCriteria(queryMap);
+			if(!CollectionUtils.isNotEmpty(response.getInterviewList())){
+				return Response.status(Status.NOT_FOUND).header("Access-Control-Allow-Origin",
+						"http://10.81.82.144:8080/job-management-service/").build();
+			}
+		} catch (Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin",
+					"http://10.81.82.144:8080/job-management-service/").build();
+		}
+		return Response.ok(response).header("Access-Control-Allow-Origin",
+				"http://10.81.82.144:8080/job-management-service/").build();
 	}
-
 }
+

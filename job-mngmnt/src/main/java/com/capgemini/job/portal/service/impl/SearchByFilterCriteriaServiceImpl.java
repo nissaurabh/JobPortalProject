@@ -22,6 +22,8 @@ import org.springframework.stereotype.Service;
 import com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO;
 import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.dto.CandidateDetails;
+import com.capgemini.job.portal.dto.InterviewDetail;
+import com.capgemini.job.portal.dto.InterviewDetails;
 import com.capgemini.job.portal.dto.JobDetail;
 import com.capgemini.job.portal.dto.JobDetails;
 import com.capgemini.job.portal.dto.JobStats;
@@ -194,9 +196,35 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 		details.setRejectCount(rejectCount);
 	}
 
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.service.SearchByFilterCriteriaService#retriveInterviewDetailsByFilterCriteria(java.util.Map)
+	 */
 	@Override
-	public void retriveInterviewDetailsByFilterCriteria(
-			Map<String, String> queryMap) {
-	
+	public InterviewDetails retriveInterviewDetailsByFilterCriteria(
+			final Map<String, String> queryMap) {
+		final InterviewDetails details = new InterviewDetails();
+		List<InterviewDetail> interviewList = searchByFilterCriteriaDAO.getInterviewDetailsByFilterCriteria(queryMap);
+		if(CollectionUtils.isNotEmpty(interviewList)){
+			populateCountsByInterviewStatus(details,interviewList);
+			details.setInterviewList(interviewList);
+		}
+		return details;
 	}
+
+	/**
+	 * @param details
+	 * @param interviewList
+	 */
+	private void populateCountsByInterviewStatus(final InterviewDetails details,
+			final List<InterviewDetail> interviewList) {
+		int successCount=0;
+		for (final InterviewDetail interviewDetail : interviewList) {
+			if("RECOMMENDED".equalsIgnoreCase(interviewDetail.getStatus())){
+				successCount++;
+			}
+		}
+		details.setConductedCount(interviewList.size());
+		details.setSuccessCount(successCount);
+	}
+
 }

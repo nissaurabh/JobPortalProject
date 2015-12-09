@@ -30,7 +30,7 @@ public final class  DateUtil {
 	public static Timestamp convertStringToTimestamp(String strDate) {
 	    try {
 	      DateFormat formatter;
-	      formatter = new SimpleDateFormat("yyyy-mm-dd");
+	      formatter = new SimpleDateFormat("yyyy-MM-dd");
 	      Date date = (Date) formatter.parse(strDate);
 	      java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
 

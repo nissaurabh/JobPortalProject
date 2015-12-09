@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.capgemini.job.portal.dto.CandidateDetail;
+import com.capgemini.job.portal.dto.InterviewDetail;
 import com.capgemini.job.portal.dto.JobDetail;
 
 
@@ -32,9 +33,9 @@ public interface SearchByFilterCriteriaDAO {
 	public List<CandidateDetail> getCandidateDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
 	
 	/**
-	 * @param candidateFilterMap
+	 * @param intrvwFilterMap
 	 * @return
 	 */
-	public void getInterviewDetailsByFilterCriteria(final Map<String, String> candidateFilterMap);
+	public List<InterviewDetail> getInterviewDetailsByFilterCriteria(final Map<String, String> intrvwFilterMap);
 
 }

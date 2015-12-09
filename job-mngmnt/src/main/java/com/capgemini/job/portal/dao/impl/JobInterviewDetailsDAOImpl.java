@@ -14,6 +14,7 @@ import javax.persistence.Query;
 import org.apache.cxf.common.util.CollectionUtils;
 import org.springframework.stereotype.Service;
 
+import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dao.JobInterviewDetailsDAO;
 import com.capgemini.job.portal.entities.IntrvwSt;
 import com.capgemini.job.portal.entities.JobIntrvw;
@@ -30,11 +31,39 @@ public class JobInterviewDetailsDAOImpl implements JobInterviewDetailsDAO {
 	@PersistenceContext(unitName = "persistenceUnit")
 	private EntityManager entityManager;
 	
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.dao.JobInterviewDetailsDAO#createJobInterview(com.capgemini.job.portal.entities.JobIntrvw)
+	 */
 	@Override
-	public void createJobInterview(final JobIntrvw jobIntrvw) {
-		
-		entityManager.persist(jobIntrvw);
-
+	public String createJobInterview(final JobIntrvw jobIntrvw) {
+		JobIntrvw jobIntrvwTemp = retrieveInterviewDetailsByJobAndCandId(jobIntrvw.getJob().getJobId(),jobIntrvw.getJobCndt().getCndtId(),
+				jobIntrvw.getIntrvrNm());
+		if(null == jobIntrvwTemp){
+			entityManager.persist(jobIntrvw);
+			return JobMngMntConstants.CREATED;
+		} else {
+			return JobMngMntConstants.FORBIDDEN;
+		}
+	}
+	
+	
+	/**
+	 * @param jobId
+	 * @param cndtId
+	 * @param intrvwrName
+	 * @return
+	 */
+	public JobIntrvw retrieveInterviewDetailsByJobAndCandId(int jobId, int cndtId, String intrvwrName) {
+		JobIntrvw jobIntrvw = null;
+		final Query query = entityManager.createNamedQuery("jobIntrvw.getJobIntrvwByJobIdCndtIdAndIntvrNm");
+		query.setParameter("jobId", jobId);
+		query.setParameter("cndtId", cndtId);
+		query.setParameter("intrvwrName", intrvwrName);
+		final List<JobIntrvw> jobIntrvws = query.getResultList();
+		if(!CollectionUtils.isEmpty(jobIntrvws)){
+			jobIntrvw = jobIntrvws.get(0);
+		}
+		return jobIntrvw;
 	}
 
 	/* (non-Javadoc)
@@ -52,6 +81,9 @@ public class JobInterviewDetailsDAOImpl implements JobInterviewDetailsDAO {
 		return intrvwSt;
 	}
 
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.dao.JobInterviewDetailsDAO#retrieveInterviewDetails(int)
+	 */
 	@Override
 	public JobIntrvw retrieveInterviewDetails(int jobIntrvwId) {
 		JobIntrvw jobIntrvw = null;
@@ -64,11 +96,17 @@ public class JobInterviewDetailsDAOImpl implements JobInterviewDetailsDAO {
 		return jobIntrvw;
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.dao.JobInterviewDetailsDAO#updateJobInterview(com.capgemini.job.portal.entities.JobIntrvw)
+	 */
 	@Override
 	public JobIntrvw updateJobInterview(final JobIntrvw jobIntrvw) {
 		return entityManager.merge(jobIntrvw);
 	}
 	
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.dao.JobInterviewDetailsDAO#deleteJobInterview(com.capgemini.job.portal.entities.JobIntrvw)
+	 */
 	@Override
 	public void deleteJobInterview(final JobIntrvw jobIntrvw) {
 		entityManager.remove(jobIntrvw);

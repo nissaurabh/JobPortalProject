@@ -1,7 +1,9 @@
 package com.capgemini.job.portal.entities;
 
 import java.io.Serializable;
+
 import javax.persistence.*;
+
 import java.sql.Timestamp;
 
 
@@ -13,7 +15,10 @@ import java.sql.Timestamp;
 @Table(name="job_intrvw")
 @NamedQueries({
     @NamedQuery(name="jobIntrvw.getJobIntrvwByIntrvwId",
-                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobIntrvwId=:jobIntrvwId")
+                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobIntrvwId=:jobIntrvwId"),
+    @NamedQuery(name="jobIntrvw.getJobIntrvwByJobIdCndtIdAndIntvrNm",
+                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobCndt.cndtId=:cndtId"
+                + " and jobIntrvw.job.jobId=:jobId and jobIntrvw.intrvrNm=:intrvwrName")  
 })
 public class JobIntrvw implements Serializable {
 	private static final long serialVersionUID = 1L;

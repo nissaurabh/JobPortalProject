@@ -20,8 +20,9 @@ public interface JobInterviewDetailsDAO {
 	 * 
 	 * @param jobIntrvw
 	 *            the jobIntrvw
+	 * @return 
 	 */
-	public void createJobInterview(final JobIntrvw jobIntrvw);
+	public String createJobInterview(final JobIntrvw jobIntrvw);
 
 	/**
 	 * @param intrvwStId
