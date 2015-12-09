@@ -48,11 +48,11 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
         serviceLineCapability:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLineCapability', {}),
         jobRole:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/jobRole', {}),
         candidateReport:  $resource('http://10.81.82.144:8080/job-management-service/candidateSearch?:param', {
-            serviceLineId: '@serviceLineId',
-            serviceLineCapabilityId:'@serviceLineCapabilityId',
-            jobRoleId: '@jobRoleId',
-            candidateStatusId: '@candidateStatusId',
-            citizenshipStatusId: '@citizenshipStatusId'
+            service_ln: '@serviceLineId',
+            service_cap_ln:'@serviceLineCapabilityId',
+            role_nm: '@jobRoleId',
+            cndt_sts: '@candidateStatusId',
+            ctznshp_sts: '@citizenshipStatusId'
         })
     };
 
@@ -62,10 +62,10 @@ jobMngmtServices.factory('InterviewSearchFactory', function ($resource) {
 
     return {
         interviewReport:  $resource('http://10.81.82.144:8080/job-management-service/interviewSearch', {
-            interviewDateFrom: '@interviewDateFrom',
-            interviewDateTo:'@interviewDateTo',
+            start_date: '@interviewDateFrom',
+            end_date:'@interviewDateTo',
             result: '@result',
-            interviewer: '@interviewer'
+            intrvwr_nm: '@interviewer'
         })
     };
 

@@ -31,11 +31,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="controllers.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/public/js/controllers/controllers.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.5882353">
-              <caret line="248" column="10" selection-start-line="248" selection-start-column="10" selection-end-line="248" selection-end-column="10" />
+            <state vertical-scroll-proportion="-9.965517">
+              <caret line="245" column="31" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="31" />
               <folding />
             </state>
           </provider>
@@ -45,17 +45,17 @@
         <entry file="file://$PROJECT_DIR$/public/js/services/services.js">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="54" column="55" selection-start-line="54" selection-start-column="55" selection-end-line="54" selection-end-column="55" />
+              <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="interviewSearch.html" pinned="false" current-in-tab="false">
+      <file leaf-file-name="interviewSearch.html" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/public/views/interviewSearch.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-13.730769">
-              <caret line="24" column="86" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="86" />
+            <state vertical-scroll-proportion="0.6729776">
+              <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
               <folding />
             </state>
           </provider>
@@ -108,10 +108,10 @@
         <option value="$PROJECT_DIR$/public/views/dashboard1.html" />
         <option value="$PROJECT_DIR$/public/views/jobAdvanceSearch.html" />
         <option value="$PROJECT_DIR$/public/js/app.js" />
-        <option value="$PROJECT_DIR$/public/views/interviewSearch.html" />
         <option value="$PROJECT_DIR$/public/views/candidateSearch.html" />
-        <option value="$PROJECT_DIR$/public/js/services/services.js" />
         <option value="$PROJECT_DIR$/public/js/controllers/controllers.js" />
+        <option value="$PROJECT_DIR$/public/js/services/services.js" />
+        <option value="$PROJECT_DIR$/public/views/interviewSearch.html" />
       </list>
     </option>
   </component>
@@ -689,22 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/public/views/interviewSearch.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-13.730769">
-          <caret line="24" column="86" selection-start-line="24" selection-start-column="58" selection-end-line="24" selection-end-column="86" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/js/services/services.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="54" column="55" selection-start-line="54" selection-start-column="55" selection-end-line="54" selection-end-column="55" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/public/views/candidateSearch.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-15.807693">
@@ -715,8 +699,24 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/public/js/controllers/controllers.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5882353">
-          <caret line="248" column="10" selection-start-line="248" selection-start-column="10" selection-end-line="248" selection-end-column="10" />
+        <state vertical-scroll-proportion="-9.965517">
+          <caret line="245" column="31" selection-start-line="245" selection-start-column="20" selection-end-line="245" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/js/services/services.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="55" column="10" selection-start-line="55" selection-start-column="10" selection-end-line="55" selection-end-column="10" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/views/interviewSearch.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6729776">
+          <caret line="47" column="48" selection-start-line="47" selection-start-column="48" selection-end-line="47" selection-end-column="48" />
           <folding />
         </state>
       </provider>

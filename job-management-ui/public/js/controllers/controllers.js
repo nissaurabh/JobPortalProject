@@ -239,11 +239,11 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
         $scope.candidateSearch = function() {
             $scope.candidateResultObject = candidateSearchFactory.candidateReport.get(
                 {
-                    serviceLineId: $scope.serviceLineId,
-                    serviceLineCapabilityId:$scope.serviceLineCapabilityId,
-                    jobRoleId: $scope.jobRoleId,
-                    candidateStatusId: $scope.candidateStatusId,
-                    citizenshipStatusId: $scope.citizenshipStatusId
+                    service_ln: $scope.serviceLineId,
+                    service_cap_ln:$scope.serviceLineCapabilityId,
+                    role_nm: $scope.jobRoleId,
+                    cndt_sts: $scope.candidateStatusId,
+                    ctznshp_sts: $scope.citizenshipStatusId
                 }
             );
         };
@@ -261,10 +261,10 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
         $scope.interviewSearch = function() {
             $scope.interviewSearchResultObject = interviewSearchFactory.interviewReport.get(
                 {
-                    interviewDateFrom: $scope.interviewDateFrom,
-                    interviewDateTo:$scope.interviewDateTo,
+                    start_date: $scope.interviewDateFrom,
+                    end_date:$scope.interviewDateTo,
                     result: $scope.result,
-                    interviewer: $scope.interviewer
+                    intrvwr_nm: $scope.interviewer
                 }
             );
         };
