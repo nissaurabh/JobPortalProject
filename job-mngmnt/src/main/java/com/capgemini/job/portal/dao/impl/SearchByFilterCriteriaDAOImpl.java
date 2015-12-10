@@ -39,7 +39,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 	public List<JobDetail> getJobDetailsByFilterCriteria(Map<String, String> jobFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<JobDetail> jobDetList = new ArrayList<JobDetail>();
-		StringBuffer sql = new StringBuffer ("select a.wwsid, f.clnt_nm,c.srvc_ln_nm, d.srvc_ln_cap_nm, b.job_rl_nm,e.job_sts_nm, a.reqstr_rm,a.req_dt "  
+		StringBuffer sql = new StringBuffer ("select a.wwsid, f.clnt_nm,c.srvc_ln_nm, d.srvc_ln_cap_nm, b.job_rl_nm,e.job_sts_nm, a.reqstr_rm,a.req_dt, a.job_id "  
 				+" from job a, job_role b, service_ln c, service_ln_cap d, job_sts e, account f where b.job_rl_id = a.job_rl_id"
 				+ " and d.srvc_ln_cap_id = b.srvc_ln_cap_id"
 				+ " and d.srvc_ln_id = c.srvc_ln_id"
@@ -97,6 +97,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			detail.setJobStatus((String)temp[5]);
 			detail.setReqBy((String)temp[6]);
 			detail.setReqDate(DateUtil.convertTimestamptoDate((Timestamp) temp[7]));
+			detail.setJobId((int)temp[8]);
 			jobDetList.add(detail);
 		}
 		return jobDetList;
@@ -150,6 +151,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			CandidateDetail detail = new CandidateDetail();
 			detail.setCndtName((String)temp[0]);
 			detail.setCndtResume(candidateFilterMap.get("uri")+"candidate/download/"+temp[1]);
+			detail.setCndtId((int) temp[1]);
 			detail.setResourceType((String)temp[2]);
 			detail.setCntrctrRate((String)temp[3]);
 			detail.setCndtStatus((String)temp[4]);
