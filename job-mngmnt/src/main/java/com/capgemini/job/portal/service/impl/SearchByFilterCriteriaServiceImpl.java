@@ -16,6 +16,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -109,12 +110,14 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 			int agedJobCount=0;
 			int activeJobCount=0;
 			for (JobDetail jobDetail : clientMap.get(key)) {
-				SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-				Date reqDate = formatter.parse(jobDetail.getReqDate());
-				Date currentDate = Calendar.getInstance().getTime();
-				long diffDays = (currentDate.getTime() - reqDate.getTime()) / (24 * 60 * 60 * 1000);
-				if(diffDays > 14){
-					agedJobCount++;
+				if(StringUtils.isNotEmpty(jobDetail.getReqDate())){
+					SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+					Date reqDate = formatter.parse(jobDetail.getReqDate());
+					Date currentDate = Calendar.getInstance().getTime();
+					long diffDays = (currentDate.getTime() - reqDate.getTime()) / (24 * 60 * 60 * 1000);
+					if(diffDays > 14){
+						agedJobCount++;
+					}
 				}
 			}
 			activeJobCount = clientMap.get(key).size()-agedJobCount;
@@ -144,12 +147,14 @@ public class SearchByFilterCriteriaServiceImpl implements SearchByFilterCriteria
 		int agedJobCount=0;
 		int activeJobCount=0;
 		for (JobDetail jobDetail : jobDetList) {
-			SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-			Date reqDate = formatter.parse(jobDetail.getReqDate());
-			Date currentDate = Calendar.getInstance().getTime();
-			long diffDays = (currentDate.getTime() - reqDate.getTime()) / (24 * 60 * 60 * 1000);
-			if(diffDays > 14){
-				agedJobCount++;
+			if(StringUtils.isNotEmpty(jobDetail.getReqDate())){
+				SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+				Date reqDate = formatter.parse(jobDetail.getReqDate());
+				Date currentDate = Calendar.getInstance().getTime();
+				long diffDays = (currentDate.getTime() - reqDate.getTime()) / (24 * 60 * 60 * 1000);
+				if(diffDays > 14){
+					agedJobCount++;
+				}
 			}
 		}
 		activeJobCount = jobDetList.size()-agedJobCount;
