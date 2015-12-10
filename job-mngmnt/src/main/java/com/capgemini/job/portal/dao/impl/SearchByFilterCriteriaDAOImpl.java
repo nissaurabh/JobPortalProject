@@ -44,9 +44,19 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 				+ " and d.srvc_ln_cap_id = b.srvc_ln_cap_id"
 				+ " and d.srvc_ln_id = c.srvc_ln_id"
 				+ " and f.clnt_id = a.clnt_id"
-				+ " and a.clsr_dt is null "
+				//+ " and a.clsr_dt is null "
 				+ " and e.job_sts_id=a.job_sts_id");
 		Query q = null;
+		if(jobFilterMap.containsKey("req_start_from_date") && jobFilterMap.containsKey("req_start_to_date")){
+			sql.append(" and a.req_dt >= :req_start_from_date and a.req_dt < :req_start_to_date");
+			paramList.add("req_start_from_date");
+			paramList.add("req_start_to_date");
+		}
+		if(jobFilterMap.containsKey("role_start_from_date") && jobFilterMap.containsKey("role_start_to_date")){
+			sql.append(" and a.rl_str_dt >= :role_start_from_date and a.rl_str_dt < :role_start_to_date");
+			paramList.add("role_start_from_date");
+			paramList.add("role_start_to_date");
+		}
 		if(jobFilterMap.containsKey("owner_rm")){
 			sql.append(" and a.own_rm = :owner_rm");
 			paramList.add("owner_rm");
@@ -104,7 +114,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		Query q = null;
 		if(candidateFilterMap.containsKey("owner_rm")){
 			sql.append(" and e.own_rm = :owner_rm");
-			paramList.add("owner_rm");
+			paramList.add("owner_rm");	
 		}
 		if(candidateFilterMap.containsKey("service_cap_ln")){
 			sql.append(" and h.srvc_ln_cap_nm = :service_cap_ln");
