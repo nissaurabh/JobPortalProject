@@ -6,7 +6,6 @@
 package com.capgemini.job.portal.webservice;
 
 import java.net.URISyntaxException;
-import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
@@ -14,11 +13,15 @@ import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
+import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
+
+import com.capgemini.job.portal.jaxb.JobCandidate;
 
 /**
  * The Class performs add, update, remove Job candidate JobCandidateWebservice.
@@ -33,23 +36,21 @@ public interface JobCandidateWebservice {
 	 * 
 	 * @param jobId
 	 *            the jobId
-	 * @param multipartBody
-	 *            the multipartBody
+	 * @param jobCandidate
+	 *            the jobCandidate
+	 * @param attachment
+	 *            the attachment
 	 * @return the response
 	 * @throws URISyntaxException
 	 *             the URI syntax exception
 	 */
-	/*@POST
-	@Consumes(MediaType.MULTIPART_FORM_DATA)
-	@Path("/{job-id}")
-	public Response addJobCandidate(@PathParam("job-id") final String jobId, JobCandidate jobCandidate,
-			List<Attachment> attachments) throws URISyntaxException,Exception;*/
-
 	@POST
-	@Consumes("multipart/mixed")
 	@Path("/{job-id}")
-	public Response addJobCandidate(@PathParam("job-id") final String jobId, /*@Multipart(value="jobCandidate") JobCandidate jobCandidate,*/ 
-		   List<Attachment> attachments, String body) throws URISyntaxException,Exception;
+	@Produces(MediaType.APPLICATION_JSON)
+	@Consumes(MediaType.MULTIPART_FORM_DATA)
+	public Response addJobCandidate(@PathParam("job-id") final String jobId,
+			@Multipart("jobCandidate") JobCandidate jobCandidate,
+			@Multipart("file") Attachment attachment) throws Exception;
 	
 	
 	/**

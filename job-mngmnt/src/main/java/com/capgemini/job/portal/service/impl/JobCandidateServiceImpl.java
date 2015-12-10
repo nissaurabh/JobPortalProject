@@ -38,6 +38,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	@Autowired
 	private JobCandidateDAO jobCandidateDAO;
 
+	@Transactional
 	@Override
 	public String addJobCandidate(String jobId, JobCandidate jobCandidate, byte bytes[]) {
 		final String response = JobMngMntConstants.CREATED;
@@ -48,6 +49,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		return response;
 	}
 
+	@Transactional
 	@Override
 	public String updateJobCandidate(String jobId, String jobCandidateId,
 			JobCandidate jobCandidate, byte bytes[]) {
@@ -65,6 +67,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		return response;
 	}
 
+	@Transactional
 	@Override
 	public String deleteJob(String jobId, String jobCandidateId) {
 		String response = JobMngMntConstants.OK_STATUS;

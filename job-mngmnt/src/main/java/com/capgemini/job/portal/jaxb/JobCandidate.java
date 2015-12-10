@@ -11,6 +11,7 @@ package com.capgemini.job.portal.jaxb;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSchemaType;
 import javax.xml.bind.annotation.XmlType;
 
 
@@ -63,7 +64,7 @@ import javax.xml.bind.annotation.XmlType;
     "candidateCategoryId",
     "citizenshipStatusId"
 })
-@XmlRootElement(name = "jobCandidate")
+@XmlRootElement
 public class JobCandidate {
 
     protected String name;
@@ -72,9 +73,13 @@ public class JobCandidate {
     protected String primarySkills;
     protected String buLeadApproval;
     protected String capabilityLeadApproval;
+    @XmlSchemaType(name = "date")
     protected String offerDate;
+    @XmlSchemaType(name = "date")
     protected String offerAcceptDate;
+    @XmlSchemaType(name = "date")
     protected String joiningDate;
+    @XmlSchemaType(name = "date")
     protected String actualJoiningDate;
     protected String resourceTypeId;
     protected String candidateStatusId;
