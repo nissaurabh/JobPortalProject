@@ -72,8 +72,11 @@ public final class  DateUtil {
 	 * @param timestamp
 	 * @return
 	 */
-	public static String convertTimestamptoDate(Timestamp timestamp) {
-	    String dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
+	public static String convertTimestamptoDate(final Timestamp timestamp) {
+		String dateString = "";
+		if(null!=timestamp){
+			dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
+		}
 	    return dateString;
 	  }
 	
