@@ -57,6 +57,10 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("role_start_from_date");
 			paramList.add("role_start_to_date");
 		}
+		if(jobFilterMap.containsKey("service_cap_ln")){
+			sql.append(" and d.srvc_ln_cap_nm = :service_cap_ln");
+			paramList.add("service_cap_ln");
+		}
 		if(jobFilterMap.containsKey("owner_rm")){
 			sql.append(" and a.own_rm = :owner_rm");
 			paramList.add("owner_rm");
