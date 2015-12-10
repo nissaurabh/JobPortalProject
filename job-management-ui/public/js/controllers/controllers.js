@@ -185,29 +185,28 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         $scope.serviceLines = jobSearchFactory.serviceLine.get();
         $scope.serviceLineCapabilities = jobSearchFactory.serviceLineCapability.get();
         $scope.jobRoles = jobSearchFactory.jobRole.get();
-        //$scope.recipe = Api.Recipe.get({id: 1});
 
         $scope.serviceLineChanged = function(serviceLineId) {
-
             $scope.serviceLineCapabilityList = ($filter('filter')($scope.serviceLineCapabilities.serviceLineCapability, {serviceLineId: serviceLineId}));
         };
 
         $scope.serviceLineCapChanged = function(serviceLineCapabilityId) {
-
             $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
         };
 
         $scope.jobSearch = function(jobSearch) {
-            //alert("hello");
             $scope.jobSearchResult = jobSearchFactory.jobSearch.get(
-                {owner_rm:$rootScope.userId,
-                    status: $scope.statusId,
-                    //accountId:$scope.accountId,
+                {
+                    req_start_from_date : $scope.srcReqDateFromId,
+                    req_start_to_date : $scope.srcReqDateToId,
+                    role_start_from_date : $scope.roleStartDateFromId,
+                    role_start_to_date : $scope.roleStartDateTo,
+                    owner_rm:$rootScope.userId,
                     service_ln:$scope.serviceLineId,
-                   // serviceLineCapabilityId:$scope.serviceLineCapabilityId,
-                    role_nm:$scope.jobRoleId
+                    status: $scope.statusId,
+                    role_nm:$scope.jobRoleId,
+                    service_ln_cap :$scope.serviceLineCapabilityId
             });
-            //alert($scope.jobSearchResult.jobList.wwsid);
         };
 
     }]);
@@ -240,6 +239,7 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
         $scope.candidateSearch = function() {
             $scope.candidateResultObject = candidateSearchFactory.candidateReport.get(
                 {
+                    owner_rm : $rootScope.userId,
                     service_ln: $scope.serviceLineId,
                     service_cap_ln:$scope.serviceLineCapabilityId,
                     role_nm: $scope.jobRoleId,
@@ -262,6 +262,7 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
         $scope.interviewSearch = function() {
             $scope.interviewSearchResultObject = interviewSearchFactory.interviewReport.get(
                 {
+                    owner_rm : $rootScope.userId,
                     start_date: $scope.interviewDateFrom,
                     end_date:$scope.interviewDateTo,
                     result: $scope.result,
@@ -278,7 +279,7 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
         $scope.userDashboard = [];
         $scope.login = function() {
             $scope.userDashboard = loginFactory.userDashboard($scope.user);
-        return  $scope.userDashboard.$promise.then(function (response) {
+            return  $scope.userDashboard.$promise.then(function (response) {
             $scope.userDashboard = response;
             $rootScope.userRole =  $scope.userDashboard.userRole;
             $rootScope.userId=  $scope.userDashboard.userId;
