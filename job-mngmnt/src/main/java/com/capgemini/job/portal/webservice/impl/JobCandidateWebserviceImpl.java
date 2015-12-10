@@ -5,6 +5,9 @@
  */
 package com.capgemini.job.portal.webservice.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 import java.util.List;
@@ -18,6 +21,8 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
@@ -26,6 +31,7 @@ import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.jaxb.JobCandidate;
 import com.capgemini.job.portal.service.JobCandidateService;
 import com.capgemini.job.portal.webservice.JobCandidateWebservice;
@@ -135,6 +141,36 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 		        JobCandidate jobCandidate = (JobCandidate) unmarshaller.unmarshal(json);*/
 
 		        return null;
+	}
+	
+	@Override
+	public Response downloadCandidateResume(final int candidateId) {
+		ResponseBuilder responseBuilder =  null;
+		try{
+			JobCndt candidate = jobCandidateService.getJobCndtByJobCndtId(candidateId);
+			File file = byteArrayToFile(candidate.getCndtRsm(),candidate.getCndtNm());
+			responseBuilder = Response.ok((Object) file);
+			responseBuilder.header("Content-Disposition", "attachment; filename="+candidate.getCndtNm()+"_Resume.doc");
+		} catch(Exception e) {
+			responseBuilder = Response.status(Status.NOT_FOUND);
+		}
+        return responseBuilder.build();
+        
+	}
+	
+	/**
+	 * @param bytearray
+	 * @param candidateName
+	 * @return
+	 * @throws IOException
+	 */
+	public File byteArrayToFile(byte[] bytearray, String candidateName) throws IOException {
+		File file = new File(candidateName+"_Resume.doc");
+		file.createNewFile();
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(bytearray);
+		fos.close();
+		return file;
 	}
 
 }

@@ -10,10 +10,12 @@ import java.util.List;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
@@ -89,5 +91,14 @@ public interface JobCandidateWebservice {
 	public Response deleteJobCandidate(@PathParam("job-id") final String jobId,
 			@PathParam("candidate-id") final String candidateId)
 			throws URISyntaxException;
+	
+	/**
+	 * @param candidateId
+	 * @return
+	 */
+	@GET
+    @Path("/download/{candidate_id}")
+    @Produces("application/msword")
+    public Response downloadCandidateResume(@PathParam("candidate_id")final int candidateId);
 
 }

@@ -52,6 +52,7 @@ public final class QueryParamUtil {
 				.entrySet();
 		final Map<String, String> queryParams = new TreeMap<String, String>();
 		for (final Map.Entry<String, List<String>> multivalue : multivaluedSet) {
+			String key = multivalue.getKey();
 			String value=multivalue.getValue().get(0);
 			if(!StringUtils.isBlank(value)){
 				if(StringUtils.contains(value, "+")){
@@ -61,7 +62,13 @@ public final class QueryParamUtil {
 				}
 				
 			}
-			queryParams.put(multivalue.getKey(),value);
+			if(StringUtils.isNotEmpty(value)){
+				if(key.contains("date") || key.contains("dt")){
+					queryParams.put(multivalue.getKey(),DateUtil.convertUTCToString(value));
+				} else {
+					queryParams.put(multivalue.getKey(),value);
+				}
+			}
 		}
 		return queryParams;
 	}

@@ -96,7 +96,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			Map<String, String> candidateFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<CandidateDetail> cndtDetList = new ArrayList<CandidateDetail>();
-		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_rsm, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm "  
+		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_id, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm "  
 				+" from job_cndt a, resource_typ b, cndt_sts c , ctznshp_sts d, job e, job_role f, service_ln g, service_ln_cap h "
 				+ " where a.res_typ_id=b.res_typ_id and a.cndt_sts_id=c.cndt_sts_id and d.ctzn_shp_id = a.ctzn_shp_id "
 				+ " and e.job_id=a.job_id and e.job_rl_id = f.job_rl_id and h.srvc_ln_cap_id = f.srvc_ln_cap_id "
@@ -135,7 +135,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		for (Object[] temp : list) {
 			CandidateDetail detail = new CandidateDetail();
 			detail.setCndtName((String)temp[0]);
-			detail.setCndtResume((String)temp[1]);
+			detail.setCndtResume("/job-management-service/candidate/download/"+temp[1]);
 			detail.setResourceType((String)temp[2]);
 			detail.setCntrctrRate((String)temp[3]);
 			detail.setCndtStatus((String)temp[4]);

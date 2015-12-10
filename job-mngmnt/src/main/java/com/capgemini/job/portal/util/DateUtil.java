@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * The Class DateUtil.
@@ -18,6 +19,9 @@ import java.util.Date;
  * @author sbasired
  */
 public final class  DateUtil {
+	
+	 static final String ZULU_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
+	 static final DateFormat ZULU_DATE_FORMATTER = new SimpleDateFormat(ZULU_DATE_FORMAT);
 	
 	
 	/**
@@ -36,10 +40,29 @@ public final class  DateUtil {
 
 	      return timeStampDate;
 	    } catch (ParseException e) {
-	      System.out.println("Exception :" + e);
 	      return null;
 	    }
 	  }
+	
+	/**
+	 * create the job.
+	 * 
+	 * @param strDate
+	 *            the strDate
+	 * @return the timeStampDate
+	 */
+	public static String convertUTCToString(String strDate) {
+		try {
+			ZULU_DATE_FORMATTER.setTimeZone(TimeZone.getTimeZone("UTC"));
+			Date date = (Date) ZULU_DATE_FORMATTER.parse(strDate);
+			final SimpleDateFormat dateFormat = new SimpleDateFormat(
+					"yyyy-MM-dd");
+			dateFormat.setLenient(false);
+			return dateFormat.format(date);
+		} catch (ParseException e) {
+			return null;
+		}
+	}
 	
 	
 	/**
@@ -50,5 +73,5 @@ public final class  DateUtil {
 	    String dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
 	    return dateString;
 	  }
-
+	
 }
