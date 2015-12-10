@@ -180,7 +180,7 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         $scope.jobRolesList =[];
         $scope.jobRoles = [];
         $scope.jobSearchResult = [];
-            $scope.jobStatuses = jobSearchFactory.status.get();
+        $scope.jobStatuses = jobSearchFactory.status.get();
         $scope.accounts = jobSearchFactory.account.get();
         $scope.serviceLines = jobSearchFactory.serviceLine.get();
         $scope.serviceLineCapabilities = jobSearchFactory.serviceLineCapability.get();
@@ -200,7 +200,8 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         $scope.jobSearch = function(jobSearch) {
             //alert("hello");
             $scope.jobSearchResult = jobSearchFactory.jobSearch.get(
-                {status: $scope.statusId,
+                {owner_rm:$rootScope.userId,
+                    status: $scope.statusId,
                     //accountId:$scope.accountId,
                     service_ln:$scope.serviceLineId,
                    // serviceLineCapabilityId:$scope.serviceLineCapabilityId,

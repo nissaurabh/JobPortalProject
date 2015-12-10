@@ -56,6 +56,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = {
+		"wwsid",
     "requestedDate",
     "closureDate",
     "creatorRM",
@@ -81,6 +82,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlRootElement
 public class JobDetails {
 
+	protected String wwsid;
 	@XmlSchemaType(name = "date")
     protected String requestedDate;
 	@XmlSchemaType(name = "date")
@@ -109,6 +111,13 @@ public class JobDetails {
     protected String employementTypeId;
     protected String jobStatusId;
 
+    public String getWwsid() {
+		return wwsid;
+	}
+
+	public void setWwsid(String wwsid) {
+		this.wwsid = wwsid;
+	}
     /**
      * Gets the value of the requestedDate property.
      * 

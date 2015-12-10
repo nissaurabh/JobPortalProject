@@ -18,11 +18,11 @@ INSERT INTO `jobmgmt`.`job_stg` (`job_stg_id`,`job_stg_nm`,`CREATE_USR_ID`,`CREA
 VALUES (2, 'NON_FINALIZED','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
 
-INSERT INTO `jobmgmt`.`empt_typ` (`empt_typ_id`,`empt_typ_nm`,`CREATE_USR_ID`,`CREATE_DTS`,
+INSERT INTO `jobmgmt`.`empl_typ` (`empt_typ_id`,`empt_typ_nm`,`CREATE_USR_ID`,`CREATE_DTS`,
 `UPDT_USR_ID`, `UPDT_DTS`)
 VALUES (1, 'FULL TIME','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
-INSERT INTO `jobmgmt`.`empt_typ` (`empt_typ_id`,`empt_typ_nm`,`CREATE_USR_ID`,`CREATE_DTS`,
+INSERT INTO `jobmgmt`.`empl_typ` (`empt_typ_id`,`empt_typ_nm`,`CREATE_USR_ID`,`CREATE_DTS`,
 `UPDT_USR_ID`, `UPDT_DTS`)
 VALUES (2, 'CONTRACTOR','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
@@ -148,7 +148,7 @@ INSERT INTO `jobmgmt`.`portal_user_role`
 `CREATE_DTS`,
 `UPDT_USR_ID`,
 `UPDT_DTS`)
-VALUES ('ResourceManager','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+VALUES ('ResourceManager','owner_rm=temp','owner_rm=temp','owner_rm=temp','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
 INSERT INTO `jobmgmt`.`portal_user_role`
 (`role_name`,
@@ -159,10 +159,10 @@ INSERT INTO `jobmgmt`.`portal_user_role`
 `CREATE_DTS`,
 `UPDT_USR_ID`,
 `UPDT_DTS`)
-VALUES ('ServiceLineCap','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+VALUES ('ResourceManager','owner_rm=temp1','owner_rm=temp1','owner_rm=temp1','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
-INSERT INTO `jobmgmt`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
-VALUES ('sbasired', 'Sesha','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','sbasired','ResourceManager','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+INSERT INTO `jobportal`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
+VALUES ('temp', 'temp','owner_rm=temp','owner_rm=temp','owner_rm=temp','temp','ResourceManager','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
 
-INSERT INTO `jobmgmt`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
-VALUES ('sbasired1', 'Sesha','/jobSearch?account=Disney&serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer','/candidateSearch?serviceLine=CSD&serviceLineCap=Core&roleName=Java Developer&candidateStatus=Active&citizenShipStatus=H1B','/interviewSearch?interviewDateFrom=12/02/2015&interviewDateTo=12/04/2015&result=success&interviewer=nishit','sbasired1','ServiceLineCap','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());
+INSERT INTO `jobportal`.`portal_user`(`user_id`,`user_name`,`job_dashboard`,`candidate_dashboard`, `interview_dashboard`,`password`,`role_name`,`CREATE_USR_ID`,`CREATE_DTS`,`UPDT_USR_ID`,`UPDT_DTS`)
+VALUES ('temp1', 'temp1','owner_rm=temp1','owner_rm=temp1','owner_rm=temp1','temp1','ResourceManager1','jobmgmt',CURRENT_TIMESTAMP(),'jobmgmt',CURRENT_TIMESTAMP());

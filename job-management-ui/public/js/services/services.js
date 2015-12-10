@@ -32,6 +32,7 @@ jobMngmtServices.factory('JobSearchFactory', function ($resource) {
             serviceLineCapability:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLineCapability', {}),
             jobRole:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/jobRole', {}),
             jobSearch:  $resource('http://10.81.82.144:8080/job-management-service/jobSearch', {
+                owner_rm : '@userId',
                 status:'@statusId',
                 service_ln:'@serviceLineId',
                 role_nm:'@jobRoleId'
