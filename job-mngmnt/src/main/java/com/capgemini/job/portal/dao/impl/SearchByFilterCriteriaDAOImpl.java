@@ -44,9 +44,19 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 				+ " and d.srvc_ln_cap_id = b.srvc_ln_cap_id"
 				+ " and d.srvc_ln_id = c.srvc_ln_id"
 				+ " and f.clnt_id = a.clnt_id"
-				+ " and a.clsr_dt is null "
+				//+ " and a.clsr_dt is null "
 				+ " and e.job_sts_id=a.job_sts_id");
 		Query q = null;
+		if(jobFilterMap.containsKey("req_start_from_date") && jobFilterMap.containsKey("req_start_to_date")){
+			sql.append(" and a.req_dt >= :req_start_from_date and a.req_dt < :req_start_to_date");
+			paramList.add("req_start_from_date");
+			paramList.add("req_start_to_date");
+		}
+		if(jobFilterMap.containsKey("role_start_from_date") && jobFilterMap.containsKey("role_start_to_date")){
+			sql.append(" and a.rl_str_dt >= :role_start_from_date and a.rl_str_dt < :role_start_to_date");
+			paramList.add("role_start_from_date");
+			paramList.add("role_start_to_date");
+		}
 		if(jobFilterMap.containsKey("owner_rm")){
 			sql.append(" and a.own_rm = :owner_rm");
 			paramList.add("owner_rm");
@@ -96,12 +106,16 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			Map<String, String> candidateFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<CandidateDetail> cndtDetList = new ArrayList<CandidateDetail>();
-		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_rsm, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm "  
+		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_id, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm "  
 				+" from job_cndt a, resource_typ b, cndt_sts c , ctznshp_sts d, job e, job_role f, service_ln g, service_ln_cap h "
 				+ " where a.res_typ_id=b.res_typ_id and a.cndt_sts_id=c.cndt_sts_id and d.ctzn_shp_id = a.ctzn_shp_id "
 				+ " and e.job_id=a.job_id and e.job_rl_id = f.job_rl_id and h.srvc_ln_cap_id = f.srvc_ln_cap_id "
 				+ " and h.srvc_ln_id = g.srvc_ln_id ");
 		Query q = null;
+		if(candidateFilterMap.containsKey("owner_rm")){
+			sql.append(" and e.own_rm = :owner_rm");
+			paramList.add("owner_rm");	
+		}
 		if(candidateFilterMap.containsKey("service_cap_ln")){
 			sql.append(" and h.srvc_ln_cap_nm = :service_cap_ln");
 			paramList.add("service_cap_ln");
@@ -131,7 +145,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		for (Object[] temp : list) {
 			CandidateDetail detail = new CandidateDetail();
 			detail.setCndtName((String)temp[0]);
-			detail.setCndtResume((String)temp[1]);
+			detail.setCndtResume("/job-management-service/candidate/download/"+temp[1]);
 			detail.setResourceType((String)temp[2]);
 			detail.setCntrctrRate((String)temp[3]);
 			detail.setCndtStatus((String)temp[4]);
@@ -150,9 +164,13 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			Map<String, String> interviewFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<InterviewDetail> intrvwDetList = new ArrayList<InterviewDetail>();
-		StringBuffer sql = new StringBuffer ("select a.intrvr_nm, a.intrvr_pos,b.intrvw_sts_nm, a.intrvr_cmnts, a.intrvw_tm from job_intrvw a, intrvw_sts b  "  
-				+"  where a.intrvw_sts_id = b.intrvw_sts_id ");
+		StringBuffer sql = new StringBuffer ("select distinct a.intrvr_nm, a.intrvr_pos,b.intrvw_sts_nm, a.intrvr_cmnts, a.intrvw_tm from job_intrvw a, intrvw_sts b, job c  "  
+				+"  where a.intrvw_sts_id = b.intrvw_sts_id and a.job_id=c.job_id ");
 		Query q = null;
+		if(interviewFilterMap.containsKey("owner_rm")){
+			sql.append(" and c.own_rm = :owner_rm");
+			paramList.add("owner_rm");
+		}
 		if(interviewFilterMap.containsKey("start_date") && interviewFilterMap.containsKey("end_date")){
 			sql.append(" and a.intrvw_tm >= :start_date and a.intrvw_tm < :end_date");
 			paramList.add("start_date");

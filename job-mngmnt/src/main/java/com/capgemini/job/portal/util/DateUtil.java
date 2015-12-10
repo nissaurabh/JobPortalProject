@@ -11,6 +11,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * The Class DateUtil.
@@ -18,6 +19,9 @@ import java.util.Date;
  * @author sbasired
  */
 public final class  DateUtil {
+	
+	 static final String ZULU_DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss.SSS'Z'";
+	 static final DateFormat ZULU_DATE_FORMATTER = new SimpleDateFormat(ZULU_DATE_FORMAT);
 	
 	
 	/**
@@ -36,19 +40,44 @@ public final class  DateUtil {
 
 	      return timeStampDate;
 	    } catch (ParseException e) {
-	      System.out.println("Exception :" + e);
 	      return null;
 	    }
 	  }
 	
 	
 	/**
+	 * @param strDate
+	 * @return
+	 */
+	public static String convertUTCToString(String dateString) {
+		ZULU_DATE_FORMATTER.setTimeZone(TimeZone.getTimeZone("UTC"));
+		final SimpleDateFormat dateFormat = new SimpleDateFormat(
+				"yyyy-MM-dd");
+		try {
+			Date date = (Date) ZULU_DATE_FORMATTER.parse(dateString);
+			dateFormat.setLenient(false);
+			return dateFormat.format(date);
+		} catch (ParseException e) {
+			try{
+				dateFormat.parse(dateString);
+				return dateString;
+			} catch(ParseException pe){
+				return null;
+			}
+		}
+	}
+	
+	
+	/**
 	 * @param timestamp
 	 * @return
 	 */
-	public static String convertTimestamptoDate(Timestamp timestamp) {
-	    String dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
+	public static String convertTimestamptoDate(final Timestamp timestamp) {
+		String dateString = "";
+		if(null!=timestamp){
+			dateString = new SimpleDateFormat("MM/dd/yyyy").format(timestamp);
+		}
 	    return dateString;
 	  }
-
+	
 }

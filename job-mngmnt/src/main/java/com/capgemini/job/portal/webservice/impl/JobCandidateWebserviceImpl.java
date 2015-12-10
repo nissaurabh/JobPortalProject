@@ -5,6 +5,9 @@
  */
 package com.capgemini.job.portal.webservice.impl;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.net.URISyntaxException;
 
@@ -18,12 +21,20 @@ import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import javax.ws.rs.core.Response.ResponseBuilder;
+import javax.ws.rs.core.Response.Status;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.Unmarshaller;
+
+
+import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.jaxb.JobCandidate;
 import com.capgemini.job.portal.service.JobCandidateService;
 import com.capgemini.job.portal.webservice.JobCandidateWebservice;
@@ -52,8 +63,8 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	
 		DataHandler dataHandler1 =attachment.getDataHandler();
 		 InputStream fileStream = dataHandler1.getInputStream();
-	        int expected = fileStream.available();
-		     byte[] contents = new byte[expected];
+	        //int expected = fileStream.available();
+		     byte[] contents = IOUtils.toByteArray(fileStream);
 		     
 		jobCandidateService.addJobCandidate(jobId, jobCandidate, contents);
 		return Response.ok().build();
@@ -80,6 +91,47 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 			throws URISyntaxException {
 		// TODO Auto-generated method stub
 		return Response.ok().build();
+	}
+
+	
+	public static JobCandidate getProjectFromInputStream(InputStream is) throws Exception {
+        JAXBContext c = JAXBContext.newInstance(new Class[]{JobCandidate.class});
+        Unmarshaller u = c.createUnmarshaller();
+        JobCandidate jobCandidate = (JobCandidate) u.unmarshal(is);
+
+        return jobCandidate;
+    }
+	
+	
+	
+	@Override
+	public Response downloadCandidateResume(final int candidateId) {
+		ResponseBuilder responseBuilder =  null;
+		try{
+			JobCndt candidate = jobCandidateService.getJobCndtByJobCndtId(candidateId);
+			File file = byteArrayToFile(candidate.getCndtRsm(),candidate.getCndtNm());
+			responseBuilder = Response.ok((Object) file);
+			responseBuilder.header("Content-Disposition", "attachment; filename="+candidate.getCndtNm()+"_Resume.doc");
+		} catch(Exception e) {
+			responseBuilder = Response.status(Status.NOT_FOUND);
+		}
+        return responseBuilder.build();
+        
+	}
+	
+	/**
+	 * @param bytearray
+	 * @param candidateName
+	 * @return
+	 * @throws IOException
+	 */
+	public File byteArrayToFile(byte[] bytearray, String candidateName) throws IOException {
+		File file = new File(candidateName+"_Resume.doc");
+		file.createNewFile();
+		FileOutputStream fos = new FileOutputStream(file);
+		fos.write(bytearray);
+		fos.close();
+		return file;
 	}
 
 }
