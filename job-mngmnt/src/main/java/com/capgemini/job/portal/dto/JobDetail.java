@@ -21,7 +21,8 @@ import javax.xml.bind.annotation.XmlType;
     "roleName",
     "jobStatus",
     "reqBy",
-    "reqDate"
+    "reqDate",
+    "jobId"
 })
 @XmlRootElement(name = "job")
 public class JobDetail implements Serializable{
@@ -41,6 +42,8 @@ public class JobDetail implements Serializable{
 	private String reqBy;
 	
 	private String reqDate;
+	
+	private int jobId;
 
 	public String getWwsid() {
 		return wwsid;
@@ -104,6 +107,14 @@ public class JobDetail implements Serializable{
 
 	public void setReqDate(String reqDate) {
 		this.reqDate = reqDate;
+	}
+
+	public int getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 	
 }

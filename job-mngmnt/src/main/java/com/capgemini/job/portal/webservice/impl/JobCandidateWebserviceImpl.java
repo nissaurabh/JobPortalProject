@@ -62,10 +62,8 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 			@Multipart("file") Attachment attachment) throws Exception{
 	
 		DataHandler dataHandler1 =attachment.getDataHandler();
-		 InputStream fileStream = dataHandler1.getInputStream();
-	        //int expected = fileStream.available();
-		     byte[] contents = IOUtils.toByteArray(fileStream);
-		     
+		InputStream fileStream = dataHandler1.getInputStream();
+	    byte[] contents = IOUtils.toByteArray(fileStream);
 		jobCandidateService.addJobCandidate(jobId, jobCandidate, contents);
 		return Response.ok().build();
 		
@@ -112,6 +110,7 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 			File file = byteArrayToFile(candidate.getCndtRsm(),candidate.getCndtNm());
 			responseBuilder = Response.ok((Object) file);
 			responseBuilder.header("Content-Disposition", "attachment; filename="+candidate.getCndtNm()+"_Resume.doc");
+			file.deleteOnExit();
 		} catch(Exception e) {
 			responseBuilder = Response.status(Status.NOT_FOUND);
 		}
@@ -126,7 +125,7 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	 * @throws IOException
 	 */
 	public File byteArrayToFile(byte[] bytearray, String candidateName) throws IOException {
-		File file = new File(candidateName+"_Resume.doc");
+		File file = File.createTempFile(candidateName+"_Resume",".doc");
 		file.createNewFile();
 		FileOutputStream fos = new FileOutputStream(file);
 		fos.write(bytearray);

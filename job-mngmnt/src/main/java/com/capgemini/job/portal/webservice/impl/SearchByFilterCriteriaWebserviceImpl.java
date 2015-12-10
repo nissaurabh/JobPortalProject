@@ -72,7 +72,9 @@ public class SearchByFilterCriteriaWebserviceImpl implements
 		try{
 			final MultivaluedMap<String, String> multivaluedMap = uriInfo
 		                .getQueryParameters();
+			final String uri = uriInfo.getBaseUri().toString();
 			final Map<String, String> queryMap = QueryParamUtil.getQueryParamsFrmMultiMap(multivaluedMap);
+			queryMap.put("uri", uri);
 			response = searchByFilterCriteriaService.retriveCandidateDetailsByFilterCriteria(queryMap);
 			if(!CollectionUtils.isNotEmpty(response.getCandidateList())){
 				return Response.status(Status.NOT_FOUND).header("Access-Control-Allow-Origin",
