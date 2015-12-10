@@ -194,6 +194,11 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
             $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
         };
 
+        var jobReport = jobSearchFactory.jobReport.get({param:$rootScope.jobDashboard});
+        jobReport.$promise.then(function (response) {
+            $scope.jobSearchResult = response;
+        });
+
         $scope.jobSearch = function(jobSearch) {
             $scope.jobSearchResult = jobSearchFactory.jobSearch.get(
                 {
@@ -236,7 +241,14 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
             $scope.jobRolesList = ($filter('filter')($scope.jobRoles.jobRole, {serviceLineCapabilityId: serviceLineCapabilityId}));
         };
         $scope.candidateResultObject = [];
-        $scope.candidateSearch = function() {
+
+        var candidateReport = candidateSearchFactory.candidateDefaultReport.get({param:$rootScope.candidateDashboard});
+        candidateReport.$promise.then(function (response) {
+            $scope.candidateResultObject = response;
+
+        });
+
+            $scope.candidateSearch = function() {
             $scope.candidateResultObject = candidateSearchFactory.candidateReport.get(
                 {
                     owner_rm : $rootScope.userId,
@@ -258,6 +270,12 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
         $rootScope.userId= $cookies.get('userId');
 
         $scope.interviewSearchResultObject = [];
+
+
+        var interviewReport = interviewSearchFactory.interviewDefaultReport.get({param:$rootScope.interviewDashboard});
+        interviewReport.$promise.then(function (response) {
+            $scope.interviewSearchResultObject = response;
+        });
 
         $scope.interviewSearch = function() {
             $scope.interviewSearchResultObject = interviewSearchFactory.interviewReport.get(

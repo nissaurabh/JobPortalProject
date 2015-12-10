@@ -31,6 +31,7 @@ jobMngmtServices.factory('JobSearchFactory', function ($resource) {
             serviceLine:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLine', {}),
             serviceLineCapability:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLineCapability', {}),
             jobRole:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/jobRole', {}),
+            jobReport: $resource('http://10.81.82.144:8080/job-management-service/jobSearch?:param', {}),
             jobSearch:  $resource('http://10.81.82.144:8080/job-management-service/jobSearch', {
                 req_start_from_date : '@srcReqDateFromId',
                 req_start_to_date : '@srcReqDateToId',
@@ -53,6 +54,7 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
         serviceLine:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLine', {}),
         serviceLineCapability:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLineCapability', {}),
         jobRole:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/jobRole', {}),
+        candidateDefaultReport:  $resource('http://10.81.82.144:8080/job-management-service/candidateSearch?:param', {}),
         candidateReport:  $resource('http://10.81.82.144:8080/job-management-service/candidateSearch?:param', {
             owner_rm : '@userId',
             service_ln: '@serviceLineId',
@@ -68,6 +70,7 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
 jobMngmtServices.factory('InterviewSearchFactory', function ($resource) {
 
     return {
+        interviewDefaultReport:  $resource('http://10.81.82.144:8080/job-management-service/interviewSearch?:param', {}),
         interviewReport:  $resource('http://10.81.82.144:8080/job-management-service/interviewSearch', {
             owner_rm : '@userId',
             start_date: '@interviewDateFrom',
