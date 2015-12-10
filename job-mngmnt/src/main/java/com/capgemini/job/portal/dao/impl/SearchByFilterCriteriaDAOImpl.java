@@ -149,7 +149,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		for (Object[] temp : list) {
 			CandidateDetail detail = new CandidateDetail();
 			detail.setCndtName((String)temp[0]);
-			detail.setCndtResume("/job-management-service/candidate/download/"+temp[1]);
+			detail.setCndtResume(candidateFilterMap.get("uri")+"candidate/download/"+temp[1]);
 			detail.setResourceType((String)temp[2]);
 			detail.setCntrctrRate((String)temp[3]);
 			detail.setCndtStatus((String)temp[4]);
