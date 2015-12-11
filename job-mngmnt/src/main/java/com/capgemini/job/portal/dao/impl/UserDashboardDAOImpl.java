@@ -57,19 +57,21 @@ public class UserDashboardDAOImpl implements UserDashboardDAO{
 	@Override
 	public String setUserDashboard(final String userId, final Map<String, String> dashboardMap) {
 		try{
-			PortalUser user = getPortalUserByUserId(userId);
-			if(null != user){
-				if(dashboardMap.containsKey("jobDashboard")){
-					user.setJobDashboard(dashboardMap.get("jobDashboard"));
+			if(!dashboardMap.isEmpty()){
+				PortalUser user = getPortalUserByUserId(userId);
+				if(null != user){
+					if(dashboardMap.containsKey("jobDashboard")){
+						user.setJobDashboard(dashboardMap.get("jobDashboard"));
+					}
+					if(dashboardMap.containsKey("cndtDashboard")){
+						user.setCandidateDashboard(dashboardMap.get("cndtDashboard"));
+					}
+					if(dashboardMap.containsKey("intrvwDashboard")){
+						user.setInterviewDashboard(dashboardMap.get("intrvwDashboard"));
+					}
+					entityManager.merge(user);
+					return JobMngMntConstants.CREATED;
 				}
-				if(dashboardMap.containsKey("cndtDashboard")){
-					user.setCandidateDashboard(dashboardMap.get("cndtDashboard"));
-				}
-				if(dashboardMap.containsKey("intrvwDashboard")){
-					user.setInterviewDashboard(dashboardMap.get("intrvwDashboard"));
-				}
-				entityManager.merge(user);
-				return JobMngMntConstants.CREATED;
 			}
 			return JobMngMntConstants.NOT_FOUND;
 		} catch(Exception e){

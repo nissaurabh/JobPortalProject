@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlType;
  */
 @SuppressWarnings("serial")
 @XmlRootElement(name = "interviewList")
-@XmlType(propOrder = {"conductedCount","successCount","interviewList"})
+@XmlType(propOrder = {"conductedCount","successCount","interviewList","intrvwAccount","intrvwBU"})
 public class InterviewDetails implements Serializable{
 	
 	private int conductedCount;
@@ -23,6 +23,10 @@ public class InterviewDetails implements Serializable{
 	private int successCount;
 	
 	private List<InterviewDetail> interviewList;
+	
+	private List<JobIntrvwStats> intrvwAccount;
+	
+	private List<JobIntrvwStats> intrvwBU;
 
 	public int getConductedCount() {
 		return conductedCount;
@@ -46,6 +50,22 @@ public class InterviewDetails implements Serializable{
 
 	public void setInterviewList(List<InterviewDetail> interviewList) {
 		this.interviewList = interviewList;
+	}
+
+	public List<JobIntrvwStats> getIntrvwAccount() {
+		return intrvwAccount;
+	}
+
+	public void setIntrvwAccount(List<JobIntrvwStats> intrvwAccount) {
+		this.intrvwAccount = intrvwAccount;
+	}
+
+	public List<JobIntrvwStats> getIntrvwBU() {
+		return intrvwBU;
+	}
+
+	public void setIntrvwBU(List<JobIntrvwStats> intrvwBU) {
+		this.intrvwBU = intrvwBU;
 	}
 	
 }

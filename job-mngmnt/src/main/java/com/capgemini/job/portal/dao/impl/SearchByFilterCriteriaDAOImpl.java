@@ -111,11 +111,11 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			Map<String, String> candidateFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<CandidateDetail> cndtDetList = new ArrayList<CandidateDetail>();
-		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_id, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm "  
-				+" from job_cndt a, resource_typ b, cndt_sts c , ctznshp_sts d, job e, job_role f, service_ln g, service_ln_cap h "
+		StringBuffer sql = new StringBuffer ("select distinct a.cndt_nm,a.cndt_id, b.res_typ_nm, a.cntrctr_rt,c.cndt_sts_nm, d.ctzn_shp_nm, f.job_rl_nm,i.clnt_nm, g.srvc_ln_nm "  
+				+" from job_cndt a, resource_typ b, cndt_sts c , ctznshp_sts d, job e, job_role f, service_ln g, service_ln_cap h, account i "
 				+ " where a.res_typ_id=b.res_typ_id and a.cndt_sts_id=c.cndt_sts_id and d.ctzn_shp_id = a.ctzn_shp_id "
 				+ " and e.job_id=a.job_id and e.job_rl_id = f.job_rl_id and h.srvc_ln_cap_id = f.srvc_ln_cap_id "
-				+ " and h.srvc_ln_id = g.srvc_ln_id ");
+				+ " and h.srvc_ln_id = g.srvc_ln_id and e.clnt_id = i.clnt_id ");
 		Query q = null;
 		if(candidateFilterMap.containsKey("owner_rm")){
 			sql.append(" and e.own_rm = :owner_rm");
@@ -157,6 +157,8 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			detail.setCndtStatus((String)temp[4]);
 			detail.setCtznStatus((String)temp[5]);
 			detail.setRoleName((String)temp[6]);
+			detail.setClientName((String)temp[7]);
+			detail.setBuName((String)temp[8]);
 			cndtDetList.add(detail);
 		}
 		return cndtDetList;
@@ -170,8 +172,11 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			Map<String, String> interviewFilterMap) {
 		List<String> paramList = new ArrayList<String>();
 		List<InterviewDetail> intrvwDetList = new ArrayList<InterviewDetail>();
-		StringBuffer sql = new StringBuffer ("select distinct a.intrvr_nm, a.intrvr_pos,b.intrvw_sts_nm, a.intrvr_cmnts, a.intrvw_tm from job_intrvw a, intrvw_sts b, job c  "  
-				+"  where a.intrvw_sts_id = b.intrvw_sts_id and a.job_id=c.job_id ");
+		StringBuffer sql = new StringBuffer ("select distinct a.intrvr_nm, a.intrvr_pos,b.intrvw_sts_nm, a.intrvr_cmnts, a.intrvw_tm,d.clnt_nm, e.srvc_ln_nm ,a.job_intrvw_id "
+				+ " from job_intrvw a, intrvw_sts b, job c, account d, service_ln e, service_ln_cap f, job_role g "  
+				+"  where a.intrvw_sts_id = b.intrvw_sts_id and a.job_id=c.job_id "
+				+ " and d.clnt_id = c.clnt_id and f.srvc_ln_cap_id = g.srvc_ln_cap_id "
+				+ " and e.srvc_ln_id = f.srvc_ln_id and c.job_rl_id = g.job_rl_id");
 		Query q = null;
 		if(interviewFilterMap.containsKey("owner_rm")){
 			sql.append(" and c.own_rm = :owner_rm");
@@ -203,6 +208,9 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			detail.setStatus((String)temp[2]);
 			detail.setIntrvwComments((String)temp[3]);
 			detail.setIntrvwDateTime(DateUtil.convertTimestamptoDate((Timestamp) temp[4]));
+			detail.setClientName((String)temp[5]);
+			detail.setBuName((String)temp[6]);
+			detail.setJobIntrvwId((int)temp[7]);
 			intrvwDetList.add(detail);
 		}
 		return intrvwDetList;
