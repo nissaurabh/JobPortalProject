@@ -70,6 +70,10 @@ angular
             templateUrl: 'views/login-form.html',
             controller: 'LogoutCtrl'
         })
+        .when('/jobDetailsView', {
+            templateUrl: 'views/jobDetails.html',
+            controller: 'JobSearchCtrl'
+        })
       .otherwise({
         redirectTo: '/login',
           templateUrl: 'views/login-form.html',

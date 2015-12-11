@@ -62,19 +62,65 @@
                     </tbody>
                 </table>
             </form>
+            <form class="col-sm-3 col-sm-offset-9">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                        <input type="text" class="form-control" placeholder="Search text" ng-model="searchCandidateFilter">
+
+                    </div>
+                </div>
+            </form>
 <div style="padding-bottom:30px;"><span></span></div>
             <table class="table">
                 <thead class="search search-heading">
                 <tr>
-                    <th><label>Candidate Name</label></th>
-                    <th><label>Resume</label></th>
-                    <th><label>Resource Type</label></th>
-                    <th><label>Contractor Rate</label></th>
-                    <th><label>Candidate Status</label></th>
-                    <th><label>Citizenship Status</label></th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'cndtName'; sortReverse = !sortReverse" class="white-link">
+                        <label>Candidate Name</label>
+                            <span ng-show="sortType == 'cndtName' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'cndtName' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'cndtResume'; sortReverse = !sortReverse" class="white-link">
+                        <label>Resume</label>
+                            <span ng-show="sortType == 'cndtResume' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'cndtResume' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'resourceType'; sortReverse = !sortReverse" class="white-link">
+                        <label>Resource Type</label>
+                            <span ng-show="sortType == 'resourceType' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'resourceType' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'cntrctrRate'; sortReverse = !sortReverse" class="white-link">
+                        <label>Contractor Rate</label>
+                            <span ng-show="sortType == 'cntrctrRate' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'cntrctrRate' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'cndtStatus'; sortReverse = !sortReverse" class="white-link">
+                        <label>Candidate Status</label>
+                            <span ng-show="sortType == 'cndtStatus' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'cndtStatus' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'ctznStatus'; sortReverse = !sortReverse" class="white-link">
+                        <label>Citizenship Status</label>
+                            <span ng-show="sortType == 'ctznStatus' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'ctznStatus' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
                 </tr>
                 </thead>
-                <tbody ng-repeat="searchResultObj in candidateResultObject.candidateList">
+                <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter"">
                 <tr>
                     <td>{{searchResultObj.cndtName}}</td>
                     <td><a ng-href="{{searchResultObj.cndtResume}}">download</a></td>
