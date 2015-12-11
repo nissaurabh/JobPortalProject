@@ -32,5 +32,11 @@ public interface UserDashboardDAO {
 	 * @return
 	 */
 	public String setUserDashboard(final String userId, final Map<String, String> dashboardMap);
-
+	
+	/**
+	 * @param userId
+	 * @return
+	 */
+	public PortalUser getPortalUserByUserId(String userId);
+	
 }

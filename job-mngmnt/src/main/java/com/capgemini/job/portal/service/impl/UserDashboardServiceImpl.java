@@ -82,5 +82,20 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 		}
 	}
 
+	@Override
+	public UserDashboard getPortalUserByUserId(String userId) {
+		PortalUser portalUser = userDashboardDAO.getPortalUserByUserId(userId);
+		UserDashboard userDashboard = new UserDashboard();
+		if(portalUser!=null){
+			userDashboard.setCandidateDashboard(portalUser.getCandidateDashboard());
+			userDashboard.setInterviewDashboard(portalUser.getInterviewDashboard());
+			userDashboard.setJobDashboard(portalUser.getJobDashboard());
+			userDashboard.setUserId(portalUser.getUserId());
+			userDashboard.setUserName(portalUser.getUserName());
+			userDashboard.setUserRole(portalUser.getPortalUserRole().getRoleName());
+		}
+		return userDashboard;
+	}
+
 
 }

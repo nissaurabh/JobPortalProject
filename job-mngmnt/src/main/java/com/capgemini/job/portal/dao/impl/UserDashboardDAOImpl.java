@@ -81,7 +81,7 @@ public class UserDashboardDAOImpl implements UserDashboardDAO{
 	 * @param userId
 	 * @return
 	 */
-	private PortalUser getPortalUserByUserId(String userId) {
+	public PortalUser getPortalUserByUserId(String userId) {
 		PortalUser portalUser = null;
 		final Query query = entityManager
 				.createQuery("SELECT portalUser FROM PortalUser portalUser where userId=:userId");

@@ -128,6 +128,7 @@ jobMngmtServices.factory('JobDashboardFactory', function ($resource) {
 
     return data;*/
    return {
+       getUserDashboard: $resource('http://10.81.82.144:8080/job-management-service/userDashboard?:param', {}),
        jobReport: $resource('http://10.81.82.144:8080/job-management-service/jobSearch?:param', {}),
        candidateReport:  $resource('http://10.81.82.144:8080/job-management-service/candidateSearch?:param', {}),
        interviewReport:  $resource('http://10.81.82.144:8080/job-management-service/interviewSearch?:param', {})

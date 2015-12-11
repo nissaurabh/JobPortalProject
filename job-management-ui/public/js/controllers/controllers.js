@@ -21,9 +21,10 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
     function($scope,$cookies,$rootScope,jobDashboardFactory) {
 
-
+        //alert("Hello");
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
+        $rootScope.userName= $cookies.get('userName');
 
     //job dashboard
         $scope.jobAccountLabels = [];
@@ -33,6 +34,14 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         $scope.jobBUData = [[],[]];
         $scope.jobBULabels = [];
         $scope.jobReportObj = [];
+
+        var userDashboardRes = jobDashboardFactory.getUserDashboard.get({param:$rootScope.userId});
+        userDashboardRes.$promise.then(function (response) {
+            $rootScope.jobDashboard=  response.userDashboard.jobDashboard;
+            $rootScope.candidateDashboard=  response.userDashboard.candidateDashboard;
+            $rootScope.interviewDashboard=  response.userDashboard.interviewDashboard;
+        });
+
         var jobReport = jobDashboardFactory.jobReport.get({param:$rootScope.jobDashboard});
         jobReport.$promise.then(function (response) {
            $scope.jobReportObj = response;
@@ -175,6 +184,7 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
     function($scope,$rootScope,$cookies,jobSearchFactory,$filter,$location) {
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
+        $rootScope.userName= $cookies.get('userName');
         $scope.serviceLineCapabilityList =[];
         $scope.serviceLineCapabilities = [];
         $scope.jobRolesList =[];
@@ -229,6 +239,7 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
     function($scope,$rootScope,$cookies,candidateSearchFactory,$filter,$location) {
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
+        $rootScope.userName= $cookies.get('userName');
         $scope.serviceLineCapabilityList =[];
         $scope.serviceLineCapabilities = [];
         $scope.jobRolesList =[];
@@ -285,6 +296,7 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
 
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
+        $rootScope.userName= $cookies.get('userName');
 
         $scope.interviewSearchResultObject = [];
 
@@ -334,6 +346,8 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
             //$sessionStorage.userId = $scope.userDashboard.userId;
             $cookies.put("loggedIn",'TRUE');
             $cookies.put("userId",$rootScope.userId);
+            $cookies.put("userName",response.userName);
+            $rootScope.userName=response.userName;
             //$window.sessionStorage.loggedIn = true;
             //$window.sessionStorage.userId = $scope.userDashboard.userId;
            // $window.sessionStorage.setItem('loggedIn', true);
@@ -341,6 +355,7 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
             //$cookieStore.put("loggedin", "true");
             //alert($scope.userDashboard.userRole);
             //console.log("data.name"+$rootScope.userDashboard);
+              //  alert("Hello");
             $location.path("/dashboard");
 
         });

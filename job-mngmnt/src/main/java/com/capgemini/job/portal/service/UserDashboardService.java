@@ -5,6 +5,7 @@
  */
 package com.capgemini.job.portal.service;
 
+import com.capgemini.job.portal.entities.PortalUser;
 import com.capgemini.job.portal.jaxb.User;
 import com.capgemini.job.portal.jaxb.UserDashboard;
 
@@ -32,5 +33,12 @@ public interface UserDashboardService {
 	 * @return
 	 */
 	public String setUserDashboard(String userId, String dashboardInput);
+	
+
+	/**
+	 * @param userId
+	 * @return
+	 */
+	public UserDashboard getPortalUserByUserId(String userId);
 
 }

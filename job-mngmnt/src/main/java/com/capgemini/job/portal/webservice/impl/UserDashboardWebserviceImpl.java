@@ -8,7 +8,10 @@ package com.capgemini.job.portal.webservice.impl;
 import java.net.URISyntaxException;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -55,6 +58,25 @@ public class UserDashboardWebserviceImpl implements UserDashboardWebservice{
 			throws URISyntaxException {
 		String response = userDashboardService.setUserDashboard(userId, dashboardInput);
 		return buildResponse(response);
+	}
+	
+	/**
+	 * get user dashboard urls.
+	 * 
+	 * @param userId
+	 *            the userId
+	 * @return the response
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
+	 */
+	@GET
+	@Produces("application/json")
+	@Path("/{userId}")
+	public Response getPortalUserByUserId(@PathParam("userId") final String userId)
+			throws URISyntaxException{
+		
+		UserDashboard userDashboard = userDashboardService.getPortalUserByUserId(userId);
+		return Response.ok(userDashboard).build();
 	}
 
 	/**
