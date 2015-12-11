@@ -13,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dao.JobCandidateDAO;
 import com.capgemini.job.portal.dao.JobDetailsDAO;
+import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.entities.CndtCtg;
 import com.capgemini.job.portal.entities.CndtSt;
 import com.capgemini.job.portal.entities.CtznshpSt;
@@ -167,6 +168,29 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	public JobCndt getJobCndtByJobIdAndJobCndtId(final int jobId, final int jobCndtId) {
 		
 		return jobCandidateDAO.getJobCndtByJobIdAndJobCndtId(jobId,jobCndtId);
+	}
+
+	/* (non-Javadoc)
+	 * @see com.capgemini.job.portal.service.JobCandidateService#getCandidateDetailsById(int)
+	 */
+	@Override
+	public CandidateDetail getCandidateDetailsById(int candidateId) {
+		JobCndt candidate = jobCandidateDAO.getJobCndtByJobCndtId(candidateId);
+		return formatCndtDetailResponse(candidate);
+	}
+	
+	/**
+	 * @param candidate
+	 * @return
+	 */
+	private CandidateDetail formatCndtDetailResponse(JobCndt candidate) {
+		CandidateDetail detail = null;
+		if(null != candidate){
+			detail = new CandidateDetail();
+			detail.setCndtId(candidate.getCndtId());
+			detail.setCndtName(candidate.getCndtNm());
+		}
+		return detail;
 	}
 
 }

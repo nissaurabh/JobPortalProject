@@ -20,11 +20,12 @@ import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
-
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
+
+
 
 
 import org.apache.commons.io.IOUtils;
@@ -34,6 +35,8 @@ import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.capgemini.job.portal.constants.JobMngMntConstants;
+import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.jaxb.JobCandidate;
 import com.capgemini.job.portal.service.JobCandidateService;
@@ -132,5 +135,27 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 		fos.close();
 		return file;
 	}
+
+	@Override
+	public Response getCandidateDetails(int candidateId) {
+		CandidateDetail detail = jobCandidateService.getCandidateDetailsById(candidateId);
+		return buildResponse(detail);
+	}
+
+	
+	/**
+	 * @param detail
+	 * @return
+	 */
+	private Response buildResponse(final CandidateDetail detail) {
+		Response responseObj = null;
+		if (null == detail) {
+			responseObj = Response.status(Status.NOT_FOUND).build();
+		} else {
+			responseObj = Response.ok(detail).build();
+		}
+		return responseObj;
+	}
+
 
 }

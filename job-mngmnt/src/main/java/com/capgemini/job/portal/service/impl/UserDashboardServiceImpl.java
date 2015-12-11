@@ -13,6 +13,7 @@ import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.util.JSONUtils;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -55,29 +56,20 @@ public class UserDashboardServiceImpl implements UserDashboardService {
 	/* (non-Javadoc)
 	 * @see com.capgemini.job.portal.service.UserDashboardService#setUserDashboard(java.lang.String, java.lang.String)
 	 */
-	@SuppressWarnings("unchecked")
 	@Override
 	public String setUserDashboard(final String userId, final String dashboardInput) {
-		JSONObject dashboardObj = JSONObject.fromObject(dashboardInput);
-		if(dashboardObj.containsKey("dashboard")){
-			JSONArray inputArray = dashboardObj.getJSONArray("dashboard");
-			Map<String, String> dashbrdMap = new HashMap<String, String>();
-			if(!JSONUtils.isNull(inputArray) && inputArray.size() > 0){
-				for (Iterator<JSONObject> iterator = inputArray.iterator(); iterator
-						.hasNext();) {
-					JSONObject object = (JSONObject) iterator.next();
-					if(object.containsKey("type") && "jobDashboard".equalsIgnoreCase(object.getString("type"))){
-						dashbrdMap.put("jobDashboard", dashboardObj.getString("value"));
-					} else if(object.containsKey("type") && "cndtDashboard".equalsIgnoreCase(object.getString("type"))){
-						dashbrdMap.put("cndtDashboard", dashboardObj.getString("value"));
-					} else if(object.containsKey("type") && "intrvwDashboard".equalsIgnoreCase(object.getString("type"))){
-						dashbrdMap.put("intrvwDashboard", dashboardObj.getString("value"));
-					}
-					
-				}
+		Map<String, String> dashbrdMap = new HashMap<String, String>();
+		if(StringUtils.isNotEmpty(dashboardInput)){
+			JSONObject dashboardObj = JSONObject.fromObject(dashboardInput);
+			if(dashboardObj.containsKey("type") && "jobDashboard".equalsIgnoreCase(dashboardObj.getString("type"))){
+				dashbrdMap.put("jobDashboard", dashboardObj.getString("value"));
+			} else if(dashboardObj.containsKey("type") && "cndtDashboard".equalsIgnoreCase(dashboardObj.getString("type"))){
+				dashbrdMap.put("cndtDashboard", dashboardObj.getString("value"));
+			} else if(dashboardObj.containsKey("type") && "intrvwDashboard".equalsIgnoreCase(dashboardObj.getString("type"))){
+				dashbrdMap.put("intrvwDashboard", dashboardObj.getString("value"));
 			}
 			return userDashboardDAO.setUserDashboard(userId, dashbrdMap);
-		} else {
+		}else {
 			return JobMngMntConstants.BAD_REQUEST;
 		}
 	}
