@@ -100,5 +100,15 @@ public interface JobCandidateWebservice {
     @Path("/download/{candidate_id}")
     @Produces("application/msword")
     public Response downloadCandidateResume(@PathParam("candidate_id")final int candidateId);
+	
+	
+	/**
+	 * @param candidateId
+	 * @return
+	 */
+	@GET
+    @Path("/retrieveDetails/{candidate_id}")
+    @Produces("application/json")
+    public Response getCandidateDetails(@PathParam("candidate_id")final int candidateId);
 
 }
