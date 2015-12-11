@@ -171,8 +171,8 @@ jobMngmtControllers.controller('AccountReportCtrl', ['$scope',
     }]);
 
 
-jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies','JobSearchFactory','$filter',
-    function($scope,$rootScope,$cookies,jobSearchFactory,$filter) {
+jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies','JobSearchFactory','$filter','$location',
+    function($scope,$rootScope,$cookies,jobSearchFactory,$filter,$location) {
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $scope.serviceLineCapabilityList =[];
@@ -214,10 +214,19 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
             });
         };
 
+        $scope.setDefaultJobDashboard = function() {
+           var dashboardURL = getDefaultJobDashboardURL($rootScope.userId,$scope.srcReqDateFromId, $scope.srcReqDateToId,
+                $scope.roleStartDateFromId, $scope.roleStartDateTo, $scope.serviceLineId,
+                $scope.statusId, $scope.jobRoleId, $scope.serviceLineCapabilityId);
+            jobSearchFactory.setJobDashboard.update({param:$rootScope.userId},
+                {"type": "jobDashboard","value": dashboardURL});
+            $location.path("/dashboard");
+        };
+
     }]);
 
-jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$cookies','CandidateSearchFactory','$filter',
-    function($scope,$rootScope,$cookies,candidateSearchFactory,$filter) {
+jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$cookies','CandidateSearchFactory','$filter','$location',
+    function($scope,$rootScope,$cookies,candidateSearchFactory,$filter,$location) {
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $scope.serviceLineCapabilityList =[];
@@ -261,10 +270,18 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
             );
         };
 
+        $scope.setDefaultCandidateDashboard = function() {
+            var cndtDashboardURL = getDefaultCndtDashboardURL($rootScope.userId,$scope.serviceLineId,$scope.serviceLineCapabilityId,
+                $scope.jobRoleId, $scope.candidateStatusId, $scope.citizenshipStatusId);
+            candidateSearchFactory.setCandidateDashboard.update({param:$rootScope.userId},
+                {"type": "cndtDashboard","value": cndtDashboardURL});
+            $location.path("/dashboard");
+        };
+
     }]);
 
-jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$cookies','InterviewSearchFactory','$filter',
-    function($scope,$rootScope,$cookies,interviewSearchFactory,$filter) {
+jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$cookies','InterviewSearchFactory','$filter','$location',
+    function($scope,$rootScope,$cookies,interviewSearchFactory,$filter,$location) {
 
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
@@ -288,6 +305,14 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
                 }
             );
         };
+
+        $scope.setDefaultInterviewDashboard = function() {
+            var dashboardURL = getDefaultIntrvwDashboardURL($rootScope.userId,$scope.interviewDateFrom,$scope.interviewDateTo,$scope.result,$scope.interviewer);
+            interviewSearchFactory.setInterviewDashboard.update({param:$rootScope.userId},
+                {"type": "intrvwDashboard","value": dashboardURL});
+            $location.path("/dashboard");
+        };
+
 
     }]);
 
@@ -328,3 +353,84 @@ jobMngmtControllers.controller('LogoutCtrl', ['$scope','$rootScope',
                 $rootScope.loggedIn = false;
 
     }]);
+
+
+function getDefaultJobDashboardURL(userId,srcReqDateFromId, srcReqDateToId,
+                                   roleStartDateFromId, roleStartDateTo, serviceLineId,statusId, jobRoleId,
+                                   serviceLineCapabilityId) {
+    var url = 'owner_rm=' + userId;
+    if (!isEmpty(srcReqDateFromId)) {
+        url = url + '&req_start_from_date=' + srcReqDateFromId;
+    }
+    if (!isEmpty(srcReqDateToId)) {
+        url = url + '&req_start_to_date=' + srcReqDateToId;
+    }
+
+    if (!isEmpty(roleStartDateFromId)) {
+        url = url + '&role_start_from_date=' + roleStartDateFromId;
+    }
+    if (!isEmpty(roleStartDateTo)) {
+        url = url + '&role_start_to_date=' + roleStartDateTo;
+    }
+    if (!isEmpty(serviceLineId)) {
+        url = url + '&service_ln=' + serviceLineId;
+    }
+    if (!isEmpty(statusId)) {
+        url = url + '&status=' + statusId;
+    }
+    if (!isEmpty(jobRoleId)) {
+        url = url + '&role_nm=' + jobRoleId;
+    }
+    if (!isEmpty(serviceLineCapabilityId)) {
+        url = url + '&service_ln_cap=' + serviceLineCapabilityId;
+    }
+    return url;
+};
+
+
+function getDefaultCndtDashboardURL(userId,serviceLineId,serviceLineCapabilityId,jobRoleId,candidateStatusId,citizenshipStatusId) {
+    var cndtURL = 'owner_rm=' + userId;
+
+    if (!isEmpty(serviceLineId)) {
+        cndtURL = cndtURL + '&service_ln=' + serviceLineId;
+    }
+    if (!isEmpty(serviceLineCapabilityId)) {
+        cndtURL = cndtURL + '&service_ln_cap=' + serviceLineCapabilityId;
+    }
+    if (!isEmpty(jobRoleId)) {
+        cndtURL = cndtURL + '&role_nm=' + jobRoleId;
+    }
+    if (!isEmpty(candidateStatusId)) {
+        cndtURL = cndtURL + '&cndt_sts=' + candidateStatusId;
+    }
+    if (!isEmpty(citizenshipStatusId)) {
+        cndtURL = cndtURL + '&ctznshp_sts=' + citizenshipStatusId;
+    }
+
+    return cndtURL;
+};
+
+
+function getDefaultIntrvwDashboardURL(userId,interviewDateFrom,interviewDateTo,result,interviewer) {
+    var url = 'owner_rm=' + userId;
+
+    if (!isEmpty(interviewDateFrom)) {
+        url = url + '&start_date=' + interviewDateFrom;
+    }
+    if (!isEmpty(interviewDateTo)) {
+        url = url + '&end_date=' + interviewDateTo;
+    }
+    if (!isEmpty(result)) {
+        url = url + '&result=' + result;
+    }
+    if (!isEmpty(interviewer)) {
+        url = url + '&intrvwr_nm=' + interviewer;
+    }
+
+    return url;
+};
+
+
+function isEmpty(value){
+    return (value == null || value.length === 0);
+}

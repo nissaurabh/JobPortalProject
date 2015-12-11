@@ -25,7 +25,7 @@
                                     class="btn btn-color" ng-click="interviewSearch()">
                             <span class="glyphicon glyphicon-search"></span> Search</button></td>
                         <td style="vertical-align: bottom;"><button type="button" id="customizeId"
-                                    class="btn btn-color">Set As Dashboard Default</button></td>
+                                    class="btn btn-color" ng-click="setDefaultInterviewDashboard()">Set As Dashboard Default</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -82,7 +82,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="bg-success" ng-repeat="searchResultObj in interviewSearchResultObject.interviewList | orderBy:sortType:sortReverse | filter:searchInterviewFilter"">
+                <tbody class="bg-success" ng-repeat="searchResultObj in interviewSearchResultObject.interviewList | orderBy:sortType:sortReverse | filter:searchInterviewFilter">
                 <tr>
                     <td>{{searchResultObj.interviewerName}}</td>
                     <td>{{searchResultObj.interviewerPos}}</td>

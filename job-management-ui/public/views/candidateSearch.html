@@ -15,7 +15,7 @@
                 <table class="table">
                     <tbody class="bg-success">
                     <tr>
-                        <td><label for="cmdtSrcSerLine">Service Line:</label>
+                        <td><label>Service Line:</label>
                             <select
                                     class="form-control serLine" id="serviceLineId" ng-model="serviceLineId" ng-change="serviceLineChanged(serviceLineId)"
                                     ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
@@ -23,7 +23,7 @@
                             </select>
                         </td>
 
-                        <td><label for="cndtSrcSerLnCap">Service Line
+                        <td><label>Service Line
                             Capability:</label>
                             <select class="form-control serLnCap" id="serviceLineCapabilityId" ng-model="serviceLineCapabilityId"
                                     ng-change="serviceLineCapChanged(serviceLineCapabilityId)"
@@ -32,13 +32,13 @@
                             </select>
                         </td>
 
-                        <td><label for="cndtSrcRlNm">Role Name:</label>
+                        <td><label>Role Name:</label>
                             <select class="form-control rlNm" id="jobRoleId"  ng-model="jobRoleId"
                                     ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRolesList">
                                 <option value="" selected="selected">Select</option>
                             </select>
                         </td>
-                        <td><label for="cndtSrcSts">Candidate Status:</label>
+                        <td><label>Candidate Status:</label>
                             <select class="form-control" id="candidateStatusId" ng-model="candidateStatusId"
                                     ng-options="opt.candidateStatusId as opt.candidateStatusName for opt in candidateStatuses.candidateStatus">
                                 <option value="" selected="selected">Select</option>
@@ -46,7 +46,7 @@
                         </tr><tr>
 
 
-                        <td><label for="ctzSrcSts">Citizenship Status:</label>
+                        <td><label>Citizenship Status:</label>
                             <select class="form-control" id="citizenshipStatusId" ng-model="citizenshipStatusId"
                                     ng-options="opt.citizenshipStatusId as opt.citizenshipStatusName for opt in citizenshipStatuses.citizenshipStatus">
                             <option value="" selected="selected">Select</option>
@@ -57,7 +57,7 @@
                             <span class="glyphicon glyphicon-search"></span>
                             Search</button>
                         <button type="button" id="customizeId"
-                                    class="btn btn-color">Set As Dashboard Default</button></td>
+                                    class="btn btn-color" ng-click="setDefaultCandidateDashboard()">Set As Dashboard Default</button></td>
                     </tr>
                     </tbody>
                 </table>
@@ -120,7 +120,7 @@
                     </th>
                 </tr>
                 </thead>
-                <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter"">
+                <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter">
                 <tr>
                     <td>{{searchResultObj.cndtName}}</td>
                     <td><a ng-href="{{searchResultObj.cndtResume}}">download</a></td>
