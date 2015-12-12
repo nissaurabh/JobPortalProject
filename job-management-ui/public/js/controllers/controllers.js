@@ -35,14 +35,18 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         $scope.jobBULabels = [];
         $scope.jobReportObj = [];
 
+        var jobDashboard='';
+        var candidateDashboard = '';
+        var interviewDashboard='';
         var userDashboardRes = jobDashboardFactory.getUserDashboard.get({param:$rootScope.userId});
         userDashboardRes.$promise.then(function (response) {
-            $rootScope.jobDashboard=  response.userDashboard.jobDashboard;
-            $rootScope.candidateDashboard=  response.userDashboard.candidateDashboard;
-            $rootScope.interviewDashboard=  response.userDashboard.interviewDashboard;
+           // alert(response.jobDashboard);
+            jobDashboard=  response.jobDashboard;
+            candidateDashboard=  response.candidateDashboard;
+            interviewDashboard=  response.interviewDashboard;
         });
 
-        var jobReport = jobDashboardFactory.jobReport.get({param:$rootScope.jobDashboard});
+        var jobReport = jobDashboardFactory.jobReport.get({param:jobDashboard});
         jobReport.$promise.then(function (response) {
            $scope.jobReportObj = response;
             angular.forEach(response.jobAccount, function(item){
@@ -72,7 +76,7 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         $scope.candidateBULabels = [];
         $scope.candidateReport = [];
 
-        var candidateReport = jobDashboardFactory.candidateReport.get({param:$rootScope.candidateDashboard});
+        var candidateReport = jobDashboardFactory.candidateReport.get({param:candidateDashboard});
         candidateReport.$promise.then(function (response) {
             $scope.candidateReport = response;
             angular.forEach(response.candidateAccount, function (item) {
@@ -100,7 +104,7 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         $scope.interviewBULabels = [];
         $scope.interviewReport = [];
 
-        var interviewReport = jobDashboardFactory.interviewReport.get({param:$rootScope.interviewDashboard});
+        var interviewReport = jobDashboardFactory.interviewReport.get({param:interviewDashboard});
         interviewReport.$promise.then(function (response) {
             $scope.interviewReport = response;
             angular.forEach(response.interviewAccount, function (item) {
