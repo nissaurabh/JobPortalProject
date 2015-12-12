@@ -63,7 +63,7 @@ public final class QueryParamUtil {
 				
 			}
 			if(StringUtils.isNotEmpty(value)){
-				if(key.contains("date") || key.contains("dt")){
+				if(key.contains("date")){
 					queryParams.put(multivalue.getKey(),DateUtil.convertUTCToString(value));
 				} else {
 					queryParams.put(multivalue.getKey(),value);
