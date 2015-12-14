@@ -188,7 +188,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("end_date");
 		}
 		if(interviewFilterMap.containsKey("result")){
-			sql.append(" and b.intrvw_sts_id = :result");
+			sql.append(" and b.intrvw_sts_nm = :result");
 			paramList.add("result");
 		}
 		if(interviewFilterMap.containsKey("intrvwr_nm")){
