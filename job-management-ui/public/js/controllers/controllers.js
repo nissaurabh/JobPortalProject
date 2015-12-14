@@ -405,17 +405,17 @@ function getDefaultJobDashboardURL(userId,srcReqDateFromId, srcReqDateToId,
                                    serviceLineCapabilityId,accountId) {
     var url = 'owner_rm=' + userId;
     if (!isEmpty(srcReqDateFromId)) {
-        url = url + '&req_start_from_date=' + srcReqDateFromId;
+        url = url + '&req_start_from_date=' + formatDate(srcReqDateFromId);
     }
     if (!isEmpty(srcReqDateToId)) {
-        url = url + '&req_start_to_date=' + srcReqDateToId;
+        url = url + '&req_start_to_date=' + formatDate(srcReqDateToId);
     }
 
     if (!isEmpty(roleStartDateFromId)) {
-        url = url + '&role_start_from_date=' + roleStartDateFromId;
+        url = url + '&role_start_from_date=' + formatDate(roleStartDateFromId);
     }
     if (!isEmpty(roleStartDateTo)) {
-        url = url + '&role_start_to_date=' + roleStartDateTo;
+        url = url + '&role_start_to_date=' + formatDate(roleStartDateTo);
     }
     if (!isEmpty(serviceLineId)) {
         url = url + '&service_ln=' + serviceLineId;
@@ -463,10 +463,10 @@ function getDefaultIntrvwDashboardURL(userId,interviewDateFrom,interviewDateTo,r
     var url = 'owner_rm=' + userId;
 
     if (!isEmpty(interviewDateFrom)) {
-        url = url + '&start_date=' + interviewDateFrom;
+        url = url + '&start_date=' + formatDate(interviewDateFrom);
     }
     if (!isEmpty(interviewDateTo)) {
-        url = url + '&end_date=' + interviewDateTo;
+        url = url + '&end_date=' + formatDate(interviewDateTo);
     }
     if (!isEmpty(result)) {
         url = url + '&result=' + result;
@@ -489,13 +489,13 @@ function setJobDefaultValues($scope,url) {
     for (var i = 0; i < queryString.length; i++) {
         var parameter = queryString[i].split('=');
         if ('req_start_from_date' == parameter[0]) {
-            $scope.srcReqDateFromId = parameter[1];
+            $scope.srcReqDateFromId = new Date(parameter[1]);
         } else if ('req_start_to_date' == parameter[0]) {
-            $scope.srcReqDateToId = parameter[1];
+            $scope.srcReqDateToId = new Date(parameter[1]);
         } else if ('role_start_from_date' == parameter[0]) {
-            $scope.roleStartDateFromId = parameter[1];
+            $scope.roleStartDateFromId = new Date(parameter[1]);
         } else if ('role_start_to_date' == parameter[0]) {
-            $scope.roleStartDateTo = parameter[1];
+            $scope.roleStartDateTo = new Date(parameter[1]);
         } else if ('service_ln' == parameter[0]) {
             $scope.serviceLineId = parameter[1];
         } else if ('status' == parameter[0]) {
@@ -534,9 +534,9 @@ function setInterviewDefaultValues($scope,url){
     for(var i = 0; i < queryString.length; i++){
         var parameter = queryString[i].split('=');
         if('start_date'==parameter[0]){
-            $scope.interviewDateFrom=parameter[1];
+            $scope.interviewDateFrom=new Date(parameter[1]);
         }else if('end_date'==parameter[0]){
-            $scope.interviewDateTo=parameter[1];
+            $scope.interviewDateTo=new Date(parameter[1]);
         }else if('result'==parameter[0]){
             $scope.result=parameter[1];
         }else if('intrvwr_nm'==parameter[0]){
@@ -544,4 +544,9 @@ function setInterviewDefaultValues($scope,url){
         }
     }
 
+}
+
+function formatDate(value)
+{
+    return value.getMonth()+1 + "/" + value.getDate() + "/" + value.getFullYear();
 }
