@@ -259,6 +259,10 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
 
             $scope.serviceLineCapabilityList = ($filter('filter')($scope.serviceLineCapabilities.serviceLineCapability, {serviceLineId: serviceLineId}));
         };
+		
+		$scope.exportData = function () {
+			alasql('SELECT [cndtName] as CandidateName, [resourceType] as ResourceType,[cntrctrRate] as ContractorRate, [cndtStatus] as CandidateStatus,[ctznStatus] as CitizenshipStatus, [roleName] as RoleName, [clientName] as Account, [buName] as ServiceLine INTO XLS("candidates.xls",{headers:true}) FROM ?',[$scope.candidateResultObject.candidateList]);
+		};
 
         $scope.serviceLineCapChanged = function(serviceLineCapabilityId) {
 
