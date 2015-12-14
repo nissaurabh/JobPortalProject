@@ -32,8 +32,7 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetai
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
     function($scope,$cookies,$rootScope,jobDashboardFactory) {
 
-        //alert("Hello");
-        $rootScope.loggedIn= $cookies.get('loggedIn');
+         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $rootScope.userName= $cookies.get('userName');
 
@@ -51,7 +50,7 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         var interviewDashboard='';
         var userDashboardRes = jobDashboardFactory.getUserDashboard.get({param:$rootScope.userId});
         userDashboardRes.$promise.then(function (response) {
-           // alert(response.jobDashboard);
+
             jobDashboard=  response.jobDashboard;
             candidateDashboard=  response.candidateDashboard;
             interviewDashboard=  response.interviewDashboard;
@@ -73,7 +72,7 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
             });
 
             angular.forEach(response.jobBU, function(item){
-                //alert(item.clientName);
+
                 $scope.jobBULabels.push(item.buName);
                 $scope.jobBUData[0].push(item.open);
                 $scope.jobBUData[1].push(item.aging);
@@ -129,7 +128,7 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
             });
 
             angular.forEach(response.intrvwBU, function (item) {
-                //alert(item.clientName);
+
                 $scope.interviewBULabels.push(item.buName);
                 $scope.interviewBUData[0].push(item.conducted);
                 $scope.interviewBUData[1].push(item.success);
@@ -227,8 +226,6 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         var jobReport = jobSearchFactory.jobReport.get({param:$rootScope.jobDashboard});
         jobReport.$promise.then(function (response) {
             $scope.jobSearchResult = response;
-            //$scope.accountId="1";
-            //$scope.statusId="1";
             setJobDefaultValues($scope,$rootScope.jobDashboard);
         });
 
@@ -273,7 +270,6 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
         $scope.serviceLines = candidateSearchFactory.serviceLine.get();
         $scope.serviceLineCapabilities = candidateSearchFactory.serviceLineCapability.get();
         $scope.jobRoles = candidateSearchFactory.jobRole.get();
-        //$scope.recipe = Api.Recipe.get({id: 1});
 
         $scope.serviceLineChanged = function(serviceLineId) {
 
@@ -371,21 +367,12 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
             $rootScope.jobDashboard=  $scope.userDashboard.jobDashboard;
             $rootScope.candidateDashboard=  $scope.userDashboard.candidateDashboard;
             $rootScope.interviewDashboard=  $scope.userDashboard.interviewDashboard;
-            //$rootScope.$apply();
-           // $sessionStorage.loggedIn= true;
-            //$sessionStorage.userId = $scope.userDashboard.userId;
+
             $cookies.put("loggedIn",'TRUE');
             $cookies.put("userId",$rootScope.userId);
             $cookies.put("userName",response.userName);
             $rootScope.userName=response.userName;
-            //$window.sessionStorage.loggedIn = true;
-            //$window.sessionStorage.userId = $scope.userDashboard.userId;
-           // $window.sessionStorage.setItem('loggedIn', true);
-           // $window.sessionStorage.setItem('userId', $scope.userDashboard.userId);
-            //$cookieStore.put("loggedin", "true");
-            //alert($scope.userDashboard.userRole);
-            //console.log("data.name"+$rootScope.userDashboard);
-              //  alert("Hello");
+
             $location.path("/dashboard");
 
         });

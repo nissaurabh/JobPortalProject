@@ -122,49 +122,13 @@ jobMngmtServices.factory('LoginFactory',function ($resource,config) {
 
 jobMngmtServices.factory('JobDashboardFactory',function ($resource,config) {
 
-  /* var data = $resource('http://10.81.82.144:8080/job-management-service/', {}, {
-        jobReport: {
-            url:'jobSearch?:param',
-            params:{param:'@param'},
-            method: 'GET',
-            isArray: false
-        },
-       candidateReport: {
-           url:'candidateSearch?:param',
-           method: 'GET',
-           params:{param:'@param'},
-           isArray: false
-       }
 
-    });
-
-    return data;*/
    return {
        getUserDashboard: $resource(config.apiUrl+'userDashboard/:param', {}),
        jobReport: $resource(config.apiUrl+'/jobSearch?:param', {}),
        candidateReport:  $resource(config.apiUrl+'candidateSearch?:param', {}),
        interviewReport:  $resource(config.apiUrl+'interviewSearch?:param', {})
     };
-   /*return {
 
-        //jobDashboard:  $resource('http://10.81.82.144:8080/job-management-service/:jobDashboardURL', {jobDashboardURL:'@jobDashboardURL'})
-       jobDashboard: function(param) {
-           alert(param);
-           return $resource('http://10.81.82.144:8080/job-management-service/'+param);
-       }
-        //candidateDashboard:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLine', {}),
-        //interviewDashboard:  $resource('http://10.81.82.144:8080/job-management-service/jobUtility/serviceLineCapability', {})
-    };*/
 });
-
-/*jobMngmtServices.factory('JobDashboardFactory',['$resource',function($resource){
-    return $resource(":param",{},
-        {
-            get:{
-
-                method: 'GET',
-                isArray:true}}
-    );
-}]);*/
-
 
