@@ -44,7 +44,7 @@ angular
             templateUrl: 'views/bu_report.html'
         })
       .when('/createJob', {
-        templateUrl: 'views/createJobMngmnt.html'
+        templateUrl: 'views/CreateProfile.html'
       })
         .when('/search', {
             templateUrl: 'views/menu.html'
