@@ -4,9 +4,9 @@
 
 var jobMngmtServices = angular.module('jobMngmtServices', ['ngResource']);
 
-jobMngmtServices.factory('JobDetailsFactory', function ($resource) {
+jobMngmtServices.factory('JobDetailsFactory', function ($resource,config) {
 
-  var data = $resource('http://192.168.2.6:8080/job-management-service/jobDetail', {}, {
+  var data = $resource(config.apiUrl+'jobDetail', {}, {
     create: { method: 'POST',
               isArray: false
             }
@@ -16,24 +16,24 @@ jobMngmtServices.factory('JobDetailsFactory', function ($resource) {
 
   });
 
-jobMngmtServices.factory('JobAdminFactory', function ($resource) {
+jobMngmtServices.factory('JobAdminFactory', function ($resource,config) {
 
-    return $resource('http://192.168.2.6:8080/job-management-service/jobUtility/account', {}, {
+    return $resource(config.apiUrl+'jobUtility/account', {}, {
 
     });
 
 });
 
-jobMngmtServices.factory('JobSearchFactory', function ($resource) {
+jobMngmtServices.factory('JobSearchFactory', function ($resource,config) {
 
         return {
-            status: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/jobStatus', {}),
-            account: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/account', {}),
-            serviceLine: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/serviceLine', {}),
-            serviceLineCapability: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/serviceLineCapability', {}),
-            jobRole: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/jobRole', {}),
-            jobReport: $resource('http://192.168.2.6:8080/job-management-service/jobSearch?:param', {}),
-            jobSearch: $resource('http://192.168.2.6:8080/job-management-service/jobSearch', {
+            status: $resource(config.apiUrl+'jobUtility/jobStatus', {}),
+            account: $resource(config.apiUrl+'jobUtility/account', {}),
+            serviceLine: $resource(config.apiUrl+'jobUtility/serviceLine', {}),
+            serviceLineCapability: $resource(config.apiUrl+'jobUtility/serviceLineCapability', {}),
+            jobRole: $resource(config.apiUrl+'jobUtility/jobRole', {}),
+            jobReport: $resource(config.apiUrl+'jobSearch?:param', {}),
+            jobSearch: $resource(config.apiUrl+'jobSearch', {
                 req_start_from_date: '@srcReqDateFromId',
                 req_start_to_date: '@srcReqDateToId',
                 role_start_from_date: '@roleStartDateFromId',
@@ -44,7 +44,7 @@ jobMngmtServices.factory('JobSearchFactory', function ($resource) {
                 role_nm: '@jobRoleId',
                 service_ln_cap: '@serviceLineCapabilityId'
             }),
-            setJobDashboard: $resource('http://192.168.2.6:8080/job-management-service/userDashboard/setDashboard/:param', {param:'@userId'},
+            setJobDashboard: $resource(config.apiUrl+'userDashboard/setDashboard/:param', {param:'@userId'},
                 {
                     update: {method: 'PUT',isArray: false,}
                 })
@@ -52,15 +52,15 @@ jobMngmtServices.factory('JobSearchFactory', function ($resource) {
 
 });
 
-jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
+jobMngmtServices.factory('CandidateSearchFactory', function ($resource,config) {
 
-    return {candidateStatus: $resource('http://192.168.2.6:8080/job-management-service/jobUtility/candidateStatus', {}),
-        citizenshipStatus:  $resource('http://192.168.2.6:8080/job-management-service/jobUtility/citizenshipStatus', {}),
-        serviceLine:  $resource('http://192.168.2.6:8080/job-management-service/jobUtility/serviceLine', {}),
-        serviceLineCapability:  $resource('http://192.168.2.6:8080/job-management-service/jobUtility/serviceLineCapability', {}),
-        jobRole:  $resource('http://192.168.2.6:8080/job-management-service/jobUtility/jobRole', {}),
-        candidateDefaultReport:  $resource('http://192.168.2.6:8080/job-management-service/candidateSearch?:param', {}),
-        candidateReport:  $resource('http://192.168.2.6:8080/job-management-service/candidateSearch?:param', {
+    return {candidateStatus: $resource(config.apiUrl+'jobUtility/candidateStatus', {}),
+        citizenshipStatus:  $resource(config.apiUrl+'jobUtility/citizenshipStatus', {}),
+        serviceLine:  $resource(config.apiUrl+'jobUtility/serviceLine', {}),
+        serviceLineCapability:  $resource(config.apiUrl+'jobUtility/serviceLineCapability', {}),
+        jobRole:  $resource(config.apiUrl+'jobUtility/jobRole', {}),
+        candidateDefaultReport:  $resource(config.apiUrl+'candidateSearch?:param', {}),
+        candidateReport:  $resource(config.apiUrl+'candidateSearch?:param', {
             owner_rm : '@userId',
             service_ln: '@serviceLineId',
             service_cap_ln:'@serviceLineCapabilityId',
@@ -68,7 +68,7 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
             cndt_sts: '@candidateStatusId',
             ctznshp_sts: '@citizenshipStatusId'
         }),
-        setCandidateDashboard: $resource('http://192.168.2.6:8080/job-management-service/userDashboard/setDashboard/:param', {param:'@userId'},
+        setCandidateDashboard: $resource(config.apiUrl+'userDashboard/setDashboard/:param', {param:'@userId'},
             {
                 update: {method: 'PUT',isArray: false,}
             })
@@ -79,15 +79,15 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource) {
 jobMngmtServices.factory('InterviewSearchFactory', function ($resource) {
 
     return {
-        interviewDefaultReport:  $resource('http://192.168.2.6:8080/job-management-service/interviewSearch?:param', {}),
-        interviewReport:  $resource('http://192.168.2.6:8080/job-management-service/interviewSearch', {
+        interviewDefaultReport:  $resource(config.apiUrl+'interviewSearch?:param', {}),
+        interviewReport:  $resource(config.apiUrl+'interviewSearch', {
             owner_rm : '@userId',
             start_date: '@interviewDateFrom',
             end_date:'@interviewDateTo',
             result: '@result',
             intrvwr_nm: '@interviewer'
         }),
-        setInterviewDashboard: $resource('http://192.168.2.6:8080/job-management-service/userDashboard/setDashboard/:param', {param:'@userId'},
+        setInterviewDashboard: $resource(config.apiUrl+'userDashboard/setDashboard/:param', {param:'@userId'},
             {
                 update: {method: 'PUT',isArray: false,}
             })
@@ -95,9 +95,9 @@ jobMngmtServices.factory('InterviewSearchFactory', function ($resource) {
 
 });
 
-jobMngmtServices.factory('LoginFactory', function ($resource) {
+jobMngmtServices.factory('LoginFactory',function ($resource,config) {
 
-    var data = $resource('http://192.168.2.6:8080/job-management-service/userDashboard', {}, {
+    var data = $resource(config.apiUrl+'userDashboard', {}, {
         userDashboard: { method: 'POST',
             isArray: false,
 
@@ -108,7 +108,7 @@ jobMngmtServices.factory('LoginFactory', function ($resource) {
 
 });
 
-jobMngmtServices.factory('JobDashboardFactory', function ($resource) {
+jobMngmtServices.factory('JobDashboardFactory',function ($resource,config) {
 
   /* var data = $resource('http://10.81.82.144:8080/job-management-service/', {}, {
         jobReport: {
@@ -128,10 +128,10 @@ jobMngmtServices.factory('JobDashboardFactory', function ($resource) {
 
     return data;*/
    return {
-       getUserDashboard: $resource('http://192.168.2.6:8080/job-management-service/userDashboard/:param', {}),
-       jobReport: $resource('http://192.168.2.6:8080/job-management-service/jobSearch?:param', {}),
-       candidateReport:  $resource('http://192.168.2.6:8080/job-management-service/candidateSearch?:param', {}),
-       interviewReport:  $resource('http://192.168.2.6:8080/job-management-service/interviewSearch?:param', {})
+       getUserDashboard: $resource(config.apiUrl+'userDashboard/:param', {}),
+       jobReport: $resource(config.apiUrl+'/jobSearch?:param', {}),
+       candidateReport:  $resource(config.apiUrl+'candidateSearch?:param', {}),
+       interviewReport:  $resource(config.apiUrl+'interviewSearch?:param', {})
     };
    /*return {
 

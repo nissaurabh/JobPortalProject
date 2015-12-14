@@ -16,7 +16,9 @@ angular
         delete $httpProvider.defaults.headers.common["X-Requested-With"];
         $httpProvider.defaults.headers.common["Accept"] = "application/json";
         $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
-    }])
+    }]).constant('config', {
+        apiUrl: 'http://10.81.82.85:8080/job-management-service/'
+        })
     /*.config(['ChartJsProvider', function(ChartJsProvider) {
         ChartJsProvider.setOptions({
             colours: ['#FF5252', '#FF8A80'],
