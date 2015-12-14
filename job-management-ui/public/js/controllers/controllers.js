@@ -215,6 +215,7 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         $scope.serviceLineCapabilities = jobSearchFactory.serviceLineCapability.get();
         $scope.jobRoles = jobSearchFactory.jobRole.get();
 
+
         $scope.serviceLineChanged = function(serviceLineId) {
             $scope.serviceLineCapabilityList = ($filter('filter')($scope.serviceLineCapabilities.serviceLineCapability, {serviceLineId: serviceLineId}));
         };
@@ -226,6 +227,9 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
         var jobReport = jobSearchFactory.jobReport.get({param:$rootScope.jobDashboard});
         jobReport.$promise.then(function (response) {
             $scope.jobSearchResult = response;
+            //$scope.accountId="1";
+            //$scope.statusId="1";
+            setJobDefaultValues($scope,$rootScope.jobDashboard);
         });
 
         $scope.jobSearch = function(jobSearch) {
@@ -289,6 +293,7 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
         var candidateReport = candidateSearchFactory.candidateDefaultReport.get({param:$rootScope.candidateDashboard});
         candidateReport.$promise.then(function (response) {
             $scope.candidateResultObject = response;
+            setCandidateDefaultValues($scope,$rootScope.candidateDashboard);
 
         });
 
@@ -328,6 +333,7 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
         var interviewReport = interviewSearchFactory.interviewDefaultReport.get({param:$rootScope.interviewDashboard});
         interviewReport.$promise.then(function (response) {
             $scope.interviewSearchResultObject = response;
+            setInterviewDefaultValues($scope,$rootScope.interviewDashboard);
         });
 
         $scope.interviewSearch = function() {
@@ -475,4 +481,67 @@ function getDefaultIntrvwDashboardURL(userId,interviewDateFrom,interviewDateTo,r
 
 function isEmpty(value){
     return (value == null || value.length === 0);
+}
+
+function setJobDefaultValues($scope,url) {
+
+    var queryString = url.split('&');
+    for (var i = 0; i < queryString.length; i++) {
+        var parameter = queryString[i].split('=');
+        if ('req_start_from_date' == parameter[0]) {
+            $scope.srcReqDateFromId = parameter[1];
+        } else if ('req_start_to_date' == parameter[0]) {
+            $scope.srcReqDateToId = parameter[1];
+        } else if ('role_start_from_date' == parameter[0]) {
+            $scope.roleStartDateFromId = parameter[1];
+        } else if ('role_start_to_date' == parameter[0]) {
+            $scope.roleStartDateTo = parameter[1];
+        } else if ('service_ln' == parameter[0]) {
+            $scope.serviceLineId = parameter[1];
+        } else if ('status' == parameter[0]) {
+            $scope.statusId = parameter[1];
+        } else if ('role_nm' == parameter[0]) {
+            $scope.jobRoleId = parameter[1];
+        } else if ('service_ln_cap' == parameter[0]) {
+            $scope.serviceLineCapabilityId = parameter[1];
+        } else if ('clnt_nm' == parameter[0]) {
+            $scope.accountId = parameter[1];
+        }
+    }
+}
+    function setCandidateDefaultValues($scope,url){
+
+        var queryString = url.split('&');
+        for(var i = 0; i < queryString.length; i++){
+            var parameter = queryString[i].split('=');
+            if('service_ln'==parameter[0]){
+                $scope.serviceLineId=parameter[1];
+            }else if('service_ln_cap'==parameter[0]){
+                $scope.serviceLineCapabilityId=parameter[1];
+            }else if('role_nm'==parameter[0]){
+                $scope.jobRoleId=parameter[1];
+            }else if('cndt_sts'==parameter[0]){
+                $scope.candidateStatusId=parameter[1];
+            }else if('ctznshp_sts'==parameter[0]){
+                $scope.citizenshipStatusId=parameter[1];
+            }
+        }
+}
+
+function setInterviewDefaultValues($scope,url){
+
+    var queryString = url.split('&');
+    for(var i = 0; i < queryString.length; i++){
+        var parameter = queryString[i].split('=');
+        if('start_date'==parameter[0]){
+            $scope.interviewDateFrom=parameter[1];
+        }else if('end_date'==parameter[0]){
+            $scope.interviewDateTo=parameter[1];
+        }else if('result'==parameter[0]){
+            $scope.result=parameter[1];
+        }else if('intrvwr_nm'==parameter[0]){
+            $scope.interviewer=parameter[1];
+        }
+    }
+
 }

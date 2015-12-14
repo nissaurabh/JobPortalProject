@@ -1,8 +1,8 @@
 'use strict';
 
-/* Services */
 
-var jobMngmtServices = angular.module('jobMngmtServices', ['ngResource']);
+
+var jobMngmtServices = angular.module('jobMngmtServices', ['ngResource']);/* Services */
 
 jobMngmtServices.factory('JobDetailsFactory', function ($resource,config) {
 
@@ -88,7 +88,7 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource,config) {
 
 });
 
-jobMngmtServices.factory('InterviewSearchFactory', function ($resource) {
+jobMngmtServices.factory('InterviewSearchFactory', function ($resource,config) {
 
     return {
         interviewDefaultReport:  $resource(config.apiUrl+'interviewSearch?:param', {}),
