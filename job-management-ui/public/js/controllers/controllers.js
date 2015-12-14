@@ -52,16 +52,16 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
             angular.forEach(response.jobAccount, function(item){
 
                 $scope.jobAccountLabels.push(item.clientName);
-                $scope.jobAccountData[0].push(item.Open);
-                $scope.jobAccountData[1].push(item.Aging);
+                $scope.jobAccountData[0].push(item.open);
+                $scope.jobAccountData[1].push(item.aging);
 
             });
 
             angular.forEach(response.jobBU, function(item){
                 //alert(item.clientName);
                 $scope.jobBULabels.push(item.buName);
-                $scope.jobBUData[0].push(item.Open);
-                $scope.jobBUData[1].push(item.Aging);
+                $scope.jobBUData[0].push(item.open);
+                $scope.jobBUData[1].push(item.aging);
 
             });
 
@@ -79,14 +79,14 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         var candidateReport = jobDashboardFactory.candidateReport.get({param:candidateDashboard});
         candidateReport.$promise.then(function (response) {
             $scope.candidateReport = response;
-            angular.forEach(response.candidateAccount, function (item) {
+            angular.forEach(response.cndtAccount, function (item) {
                 $scope.candidateAccountLabels.push(item.clientName);
                 $scope.candidateAccountData[0].push(item.active);
                 $scope.candidateAccountData[1].push(item.hired);
                 $scope.candidateAccountData[2].push(item.rejected);
             });
 
-            angular.forEach(response.candidateBU, function (item) {
+            angular.forEach(response.cndtBU, function (item) {
                 $scope.candidateBULabels.push(item.buName);
                 $scope.candidateBUData[0].push(item.active);
                 $scope.candidateBUData[1].push(item.hired);
@@ -107,13 +107,13 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
         var interviewReport = jobDashboardFactory.interviewReport.get({param:interviewDashboard});
         interviewReport.$promise.then(function (response) {
             $scope.interviewReport = response;
-            angular.forEach(response.interviewAccount, function (item) {
+            angular.forEach(response.intrvwAccount, function (item) {
                 $scope.interviewAccountLabels.push(item.clientName);
                 $scope.interviewAccountData[0].push(item.conducted);
                 $scope.interviewAccountData[1].push(item.success);
             });
 
-            angular.forEach(response.interviewBU, function (item) {
+            angular.forEach(response.intrvwBU, function (item) {
                 //alert(item.clientName);
                 $scope.interviewBULabels.push(item.buName);
                 $scope.interviewBUData[0].push(item.conducted);
