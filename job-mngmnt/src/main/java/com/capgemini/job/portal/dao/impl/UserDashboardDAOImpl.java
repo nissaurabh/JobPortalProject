@@ -5,6 +5,7 @@
  */
 package com.capgemini.job.portal.dao.impl;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Map;
 
@@ -69,6 +70,7 @@ public class UserDashboardDAOImpl implements UserDashboardDAO{
 					if(dashboardMap.containsKey("intrvwDashboard")){
 						user.setInterviewDashboard(dashboardMap.get("intrvwDashboard"));
 					}
+					user.setUpdtDts(new Timestamp(System.currentTimeMillis()));
 					entityManager.merge(user);
 					return JobMngMntConstants.CREATED;
 				}
