@@ -58,7 +58,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("role_start_to_date");
 		}
 		if(jobFilterMap.containsKey("service_cap_ln")){
-			sql.append(" and d.srvc_ln_cap_nm = :service_cap_ln");
+			sql.append(" and d.srvc_ln_cap_id = :service_cap_ln");
 			paramList.add("service_cap_ln");
 		}
 		if(jobFilterMap.containsKey("owner_rm")){
@@ -66,19 +66,19 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("owner_rm");
 		}
 		if(jobFilterMap.containsKey("service_ln")){
-			sql.append(" and c.srvc_ln_nm = :service_ln");
+			sql.append(" and c.srvc_ln_id = :service_ln");
 			paramList.add("service_ln");
 		}
 		if(jobFilterMap.containsKey("status")){
-			sql.append(" and e.job_sts_nm = :status");
+			sql.append(" and e.job_sts_id = :status");
 			paramList.add("status");
 		}
 		if(jobFilterMap.containsKey("role_nm")){
-			sql.append(" and b.job_rl_nm = :role_nm");
+			sql.append(" and b.job_rl_id = :role_nm");
 			paramList.add("role_nm");
 		}
 		if(jobFilterMap.containsKey("clnt_nm")){
-			sql.append(" and f.clnt_nm = :clnt_nm");
+			sql.append(" and f.clnt_id = :clnt_nm");
 			paramList.add("clnt_nm");
 		}
 		q = (Query) entityManager.createNativeQuery(sql.toString());
@@ -122,23 +122,23 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("owner_rm");	
 		}
 		if(candidateFilterMap.containsKey("service_cap_ln")){
-			sql.append(" and h.srvc_ln_cap_nm = :service_cap_ln");
+			sql.append(" and h.srvc_ln_cap_id = :service_cap_ln");
 			paramList.add("service_cap_ln");
 		}
 		if(candidateFilterMap.containsKey("service_ln")){
-			sql.append(" and g.srvc_ln_nm = :service_ln");
+			sql.append(" and g.srvc_ln_id = :service_ln");
 			paramList.add("service_ln");
 		}
 		if(candidateFilterMap.containsKey("ctznshp_sts")){
-			sql.append(" and d.ctzn_shp_nm = :ctznshp_sts");
+			sql.append(" and d.ctzn_shp_id = :ctznshp_sts");
 			paramList.add("ctznshp_sts");
 		}
 		if(candidateFilterMap.containsKey("role_nm")){
-			sql.append(" and f.job_rl_nm = :role_nm");
+			sql.append(" and f.job_rl_id = :role_nm");
 			paramList.add("role_nm");
 		}
 		if(candidateFilterMap.containsKey("cndt_sts")){
-			sql.append(" and c.cndt_sts_nm = :cndt_sts");
+			sql.append(" and c.cndt_sts_id = :cndt_sts");
 			paramList.add("cndt_sts");
 		}
 		q = (Query) entityManager.createNativeQuery(sql.toString());
@@ -188,7 +188,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("end_date");
 		}
 		if(interviewFilterMap.containsKey("result")){
-			sql.append(" and b.intrvw_sts_nm = :result");
+			sql.append(" and b.intrvw_sts_id = :result");
 			paramList.add("result");
 		}
 		if(interviewFilterMap.containsKey("intrvwr_nm")){
