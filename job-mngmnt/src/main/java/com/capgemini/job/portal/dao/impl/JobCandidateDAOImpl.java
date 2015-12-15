@@ -44,7 +44,7 @@ public class JobCandidateDAOImpl implements JobCandidateDAO{
 	}
 
 	@Override
-	public void deleteJob(final JobCndt jobCndt) {
+	public void deleteJobCandidate(final JobCndt jobCndt) {
 		entityManager.remove(jobCndt);
 	}
 	

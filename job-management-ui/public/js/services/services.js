@@ -24,6 +24,18 @@ jobMngmtServices.factory('JobAdminFactory', function ($resource,config) {
 
 });
 
+jobMngmtServices.factory('CandidateDetailsFactory', function ($resource,config) {
+
+  var data = $resource(config.apiUrl+'candidate', {}, {
+    create: { method: 'POST',
+              isArray: false
+            }
+
+    });
+  return data;
+
+  });
+
 jobMngmtServices.factory('JobSearchFactory', function ($resource,config) {
 
         return {

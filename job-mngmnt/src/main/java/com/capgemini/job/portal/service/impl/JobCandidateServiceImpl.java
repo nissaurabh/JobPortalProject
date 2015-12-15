@@ -6,6 +6,7 @@ package com.capgemini.job.portal.service.impl;
  */
 import java.sql.Timestamp;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
@@ -78,47 +79,77 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		JobCndt jobCndt = jobCandidateDAO.getJobCndtByJobIdAndJobCndtId(jobIdValue, jobCandidateIdValue);
 
 		if (jobCndt != null) {
-			jobCandidateDAO.deleteJob(jobCndt);
+			jobCandidateDAO.deleteJobCandidate(jobCndt);
 		}else{
 			response = JobMngMntConstants.NOT_FOUND;
 		}
 		return response;
 	}
 	
+	/**
+	 * @param jobId
+	 * @param jobCandidate
+	 * @param bytes
+	 * @param jobCndt
+	 * @return
+	 */
 	private JobCndt populateJobCondidateDetails(String jobId, JobCandidate jobCandidate, byte bytes[], final JobCndt jobCndt){
 		
-		jobCndt.setActJoinDt(DateUtil.convertStringToTimestamp(jobCandidate.getActualJoiningDate()));
-		jobCndt.setBuLdAppr(Boolean.valueOf(jobCandidate.getBuLeadApproval()));
-		jobCndt.setCapLdAppr(Boolean.valueOf(jobCandidate.getCapabilityLeadApproval()));
-		
-		CndtCtg cndtCtg = getCndtCtg(Integer.parseInt(jobCandidate.getCandidateCategoryId()));
+		if(StringUtils.isNotEmpty(jobCandidate.getActualJoiningDate())){
+			jobCndt.setActJoinDt(DateUtil.convertStringToTimestamp(jobCandidate.getActualJoiningDate()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getBuLeadApproval())){
+			jobCndt.setBuLdAppr(Boolean.valueOf(jobCandidate.getBuLeadApproval()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getCapabilityLeadApproval())){
+			jobCndt.setCapLdAppr(Boolean.valueOf(jobCandidate.getCapabilityLeadApproval()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getCandidateCategoryId())){
+			CndtCtg cndtCtg = getCndtCtg(Integer.parseInt(jobCandidate.getCandidateCategoryId()));
 	
-		jobCndt.setCndtCtg(cndtCtg);
+			jobCndt.setCndtCtg(cndtCtg);
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getCandidateStatusId())){
+			CndtSt cndtSt = getCndtSt(Integer.parseInt(jobCandidate.getCandidateStatusId()));
 		
-		CndtSt cndtSt = getCndtSt(Integer.parseInt(jobCandidate.getCandidateStatusId()));
+			jobCndt.setCndtSt(cndtSt);
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getCitizenshipStatusId())){
+			CtznshpSt ctznshpSt = getCtznshpSt(Integer.parseInt(jobCandidate.getCitizenshipStatusId()));
 		
-		jobCndt.setCndtSt(cndtSt);
-		
-		CtznshpSt ctznshpSt = getCtznshpSt(Integer.parseInt(jobCandidate.getCitizenshipStatusId()));
-		
-		jobCndt.setCtznshpSt(ctznshpSt);
-		
+			jobCndt.setCtznshpSt(ctznshpSt);
+		}
 		
 		final Job job = jobDetailsDAO.getJob(jobId);
 		jobCndt.setJob(job);
 		
-		ResourceTyp resourceTyp = getResourceTyp(Integer.parseInt(jobCandidate.getResourceTypeId()));
+		if(StringUtils.isNotEmpty(jobCandidate.getResourceTypeId())){
+			ResourceTyp resourceTyp = getResourceTyp(Integer.parseInt(jobCandidate.getResourceTypeId()));
 		
-		jobCndt.setResourceTyp(resourceTyp);
-		
-		jobCndt.setCndtNm(jobCandidate.getName());
-		jobCndt.setCndtRsm(bytes);
-		jobCndt.setCntrctrRt(jobCandidate.getContractorRate());
-		jobCndt.setJoinDt(DateUtil.convertStringToTimestamp(jobCandidate.getJoiningDate()));
-		jobCndt.setOffrAcptDt(DateUtil.convertStringToTimestamp(jobCandidate.getOfferAcceptDate()));
-		jobCndt.setOffrDt(DateUtil.convertStringToTimestamp(jobCandidate.getOfferDate()));
-		jobCndt.setPrmySk(jobCandidate.getPrimarySkills());
-		jobCndt.setCreateDts(new Timestamp(System.currentTimeMillis()));
+			jobCndt.setResourceTyp(resourceTyp);
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getName())){
+			jobCndt.setCndtNm(jobCandidate.getName());
+		}
+		if(null != bytes){
+			jobCndt.setCndtRsm(bytes);
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getContractorRate())){
+			jobCndt.setCntrctrRt(jobCandidate.getContractorRate());
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getJoiningDate())){
+			jobCndt.setJoinDt(DateUtil.convertStringToTimestamp(jobCandidate.getJoiningDate()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getOfferAcceptDate())){
+			jobCndt.setOffrAcptDt(DateUtil.convertStringToTimestamp(jobCandidate.getOfferAcceptDate()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getOfferDate())){
+			jobCndt.setOffrDt(DateUtil.convertStringToTimestamp(jobCandidate.getOfferDate()));
+		}
+		if(StringUtils.isNotEmpty(jobCandidate.getPrimarySkills())){
+			jobCndt.setPrmySk(jobCandidate.getPrimarySkills());
+		}
+		//jobCndt.setCreateDts(new Timestamp(System.currentTimeMillis()));
 		jobCndt.setCreateUsrId("jobmngmnt");
 		jobCndt.setUpdtDts(new Timestamp(System.currentTimeMillis()));
 		jobCndt.setUpdtUsrId("jobmngmnt");

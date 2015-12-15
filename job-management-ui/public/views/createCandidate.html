@@ -1,0 +1,89 @@
+<div class="container" ng-controller="CreateCandidateCtrl">
+
+				<!-- Modal content create candidate-->
+				<div style="width:750px">
+					<div class="modal-header" style="background-color: #dff0d8">
+						<h4 class="modal-title">Create Candidate</h4>
+					</div>
+					<div>
+						<div class="well" style="width:750px">
+							<form role="form" action="#dashboard">
+								<table class="table-condensed">
+									<tr>
+										<td><label for="candtName" style="width:120px;">Candidate Name:</label></td>
+										<td><input type="text" class="form-control"
+											id="candtName"></td>
+										<td><label for="rsrType1">Category :</label></td>
+										<td><select class="form-control" id="rsrType1">
+												<option>Internal</option>
+												<option>For Hire</option>
+												<option>Contractor</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label for="cndtSrcSts1">Candidate Status:</label></td>
+										<td><select class="form-control" id="cndtSrcSts1">
+												<option>Active</option>
+												<option>Hired</option>
+												<option>Rejected</option>
+												<option>Did Not Join</option>
+										</select></td>
+										<td><label for="cntrRate1">Contractor Rate:</label></td>
+										<td><input type="text" class="form-control"
+											id="cntrRate1"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="prmSkills">Primary Skills:</label></td>
+										<td><input type="text" class="form-control"
+											id="prmSkills"></td>
+										<td><label for="buLeadAppr">BU Lead Approval:</label></td>
+										<td><input type="text" class="form-control"
+											id="buLeadAppr"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="ctzSrcSts1">Citizenship Status:</label></td>
+										<td><select class="form-control" id="ctzSrcSts1">
+												<option>Green Card</option>
+												<option>H1B</option>
+												<option>OPT</option>
+												<option>US Citizen</option>
+										</select></td>
+										<td><label for="capLeadAppr">Capablity Lead Approver:</label></td>
+										<td><input type="text" class="form-control"
+											id="capLeadAppr"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="offerDate">Offer Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offerDate"></td>
+										<td><label for="offrAcptDate">Offer Accept Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offrAcptDate"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="joinDate">Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="joinDate"></td>
+										<td><label for="actjoinDate">Actual Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="actjoinDate"></td>
+									</tr>
+									<tr class="form-group form-inline" >
+										<td colspan="4"><span><label for="upldResume">Upload Resume:</label></span>
+											<span><input type="file" class="form-control"
+												id="upldResume"></span>
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+						
+					</div>
+					<div class="modal-footer" style="background-color: #dff0d8">
+							<button type="button" class="btn btn-default" data-dismiss="modal">Send</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+
+</div>
+
+</div>

@@ -18,6 +18,17 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','
 
   }]);
 
+
+jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetailsFactory',
+  function($scope, candidateDetailsFactory) {
+
+    $scope.saveJob = function() {
+       $scope.jsonObj = angular.toJson($scope.vm, false);
+      console.log("data: " + $scope.jsonObj);
+      candidateDetailsFactory.create($scope.vm);
+    }
+  }]);
+
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
     function($scope,$cookies,$rootScope,jobDashboardFactory) {
 

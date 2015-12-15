@@ -76,6 +76,9 @@ angular
             templateUrl: 'views/jobDetails.html',
             controller: 'JobSearchCtrl'
         })
+		.when('/createCandidate', {
+            templateUrl: 'views/createCandidate.html'
+        })
       .otherwise({
         redirectTo: '/login',
           templateUrl: 'views/login-form.html',

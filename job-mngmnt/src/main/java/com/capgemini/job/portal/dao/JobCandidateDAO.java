@@ -43,7 +43,7 @@ public interface JobCandidateDAO {
 	 *            the jobCndt
 	 * @return the response
 	 */
-	public void deleteJob(final JobCndt jobCndt);
+	public void deleteJobCandidate(final JobCndt jobCndt);
 	
 	/**
 	 * get the candidate category.

@@ -25,17 +25,13 @@ import javax.ws.rs.core.Response.Status;
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
-
-
-
 import org.apache.commons.io.IOUtils;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
-import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
+import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dto.CandidateDetail;
 import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.jaxb.JobCandidate;
@@ -48,6 +44,7 @@ import com.capgemini.job.portal.webservice.JobCandidateWebservice;
  * 
  * @author sbasired
  */
+@CrossOriginResourceSharing(allowAllOrigins = true)
 @Component("jobCandidateWebservice")
 public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 
@@ -62,7 +59,7 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response addJobCandidate(@PathParam("job-id") final String jobId,
 			@Multipart("jobCandidate") JobCandidate jobCandidate,
-			@Multipart("file") Attachment attachment) throws Exception{
+			@Multipart(value="file", required = false) Attachment attachment) throws Exception{
 	
 		DataHandler dataHandler1 =attachment.getDataHandler();
 		InputStream fileStream = dataHandler1.getInputStream();
@@ -78,9 +75,22 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	@Path("/{job-id}/{candidate-id}")
 	public Response updateJobCandidate(@PathParam("job-id") final String jobId,
 			@PathParam("candidate-id") final String candidateId,
-			final MultipartBody multipartBody) throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return Response.ok().build();
+			@Multipart("jobCandidate") JobCandidate jobCandidate,
+			@Multipart(value="file", required = false) Attachment attachment){
+		String response = "400";
+		try{
+			if(attachment != null){
+				DataHandler dataHandler1 =attachment.getDataHandler();
+				InputStream fileStream = dataHandler1.getInputStream();
+			    byte[] contents = IOUtils.toByteArray(fileStream);
+			    response = jobCandidateService.updateJobCandidate(jobId,candidateId, jobCandidate, contents);
+			} else {
+				response = jobCandidateService.updateJobCandidate(jobId, candidateId, jobCandidate, null);
+			}
+			return Response.status(Integer.valueOf(response)).header("Access-Control-Allow-Origin", "/job-management-service/").build();
+		} catch(Exception e){
+			return Response.status(Status.INTERNAL_SERVER_ERROR).header("Access-Control-Allow-Origin", "/job-management-service/").build();
+		}
 	}
 
 	@Override
@@ -90,8 +100,8 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	public Response deleteJobCandidate(@PathParam("job-id") String jobId,
 			@PathParam("candidate-id") String candidateId)
 			throws URISyntaxException {
-		// TODO Auto-generated method stub
-		return Response.ok().build();
+		String response = jobCandidateService.deleteJob(jobId,candidateId);
+		return Response.status(Integer.valueOf(response)).header("Access-Control-Allow-Origin", "/job-management-service/").build();
 	}
 
 	

@@ -20,7 +20,6 @@ import javax.ws.rs.core.Response;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
-import org.apache.cxf.jaxrs.ext.multipart.MultipartBody;
 
 import com.capgemini.job.portal.jaxb.JobCandidate;
 
@@ -55,24 +54,20 @@ public interface JobCandidateWebservice {
 	
 	
 	/**
-	 * update candidate to the job .
-	 * 
 	 * @param jobId
-	 *            the jobId
 	 * @param candidateId
-	 *            the candidateId
-	 * @param multipartBody
-	 *            the multipartBody
-	 * @return the response
-	 * @throws URISyntaxException
-	 *             the URI syntax exception
+	 * @param jobCandidate
+	 * @param attachment
+	 * @return
+	 * @throws Exception
 	 */
 	@PUT
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	@Path("/{job-id}/{candidate-id}")
 	public Response updateJobCandidate(@PathParam("job-id") final String jobId,
 			@PathParam("candidate-id") final String candidateId,
-			final MultipartBody multipartBody) throws URISyntaxException;
+			@Multipart("jobCandidate") JobCandidate jobCandidate,
+			@Multipart("file") Attachment attachment) throws Exception;
 
 	/**
 	 * remove candidate from the job .
