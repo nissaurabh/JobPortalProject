@@ -55,6 +55,10 @@ jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope
             jobDashboard=  response.jobDashboard;
             candidateDashboard=  response.candidateDashboard;
             interviewDashboard=  response.interviewDashboard;
+
+            $rootScope.jobDashboard=  response.jobDashboard;
+            $rootScope.candidateDashboard=  response.candidateDashboard;
+            $rootScope.interviewDashboard=  response.interviewDashboard;
         });
 
         var jobReport = jobDashboardFactory.jobReport.get({param:jobDashboard});
@@ -235,14 +239,15 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
                     service_ln:$scope.serviceLineId,
                     status: $scope.statusId,
                     role_nm:$scope.jobRoleId,
-                    service_ln_cap :$scope.serviceLineCapabilityId
+                    service_ln_cap :$scope.serviceLineCapabilityId,
+                    clnt_nm : $scope.accountId
             });
         };
 
         $scope.setDefaultJobDashboard = function() {
            var dashboardURL = getDefaultJobDashboardURL($rootScope.userId,$scope.srcReqDateFromId, $scope.srcReqDateToId,
                 $scope.roleStartDateFromId, $scope.roleStartDateTo, $scope.serviceLineId,
-                $scope.statusId, $scope.jobRoleId, $scope.serviceLineCapabilityId);
+                $scope.statusId, $scope.jobRoleId, $scope.serviceLineCapabilityId,$scope.accountId);
             jobSearchFactory.setJobDashboard.update({param:$rootScope.userId},
                 {"type": "jobDashboard","value": dashboardURL});
             $location.path("/dashboard");
@@ -391,7 +396,7 @@ jobMngmtControllers.controller('LogoutCtrl', ['$scope','$rootScope',
 
 function getDefaultJobDashboardURL(userId,srcReqDateFromId, srcReqDateToId,
                                    roleStartDateFromId, roleStartDateTo, serviceLineId,statusId, jobRoleId,
-                                   serviceLineCapabilityId) {
+                                   serviceLineCapabilityId,accountId) {
     var url = 'owner_rm=' + userId;
     if (!isEmpty(srcReqDateFromId)) {
         url = url + '&req_start_from_date=' + srcReqDateFromId;
@@ -417,6 +422,9 @@ function getDefaultJobDashboardURL(userId,srcReqDateFromId, srcReqDateToId,
     }
     if (!isEmpty(serviceLineCapabilityId)) {
         url = url + '&service_ln_cap=' + serviceLineCapabilityId;
+    }
+    if (!isEmpty(serviceLineCapabilityId)) {
+        url = url + '&clnt_nm=' + accountId;
     }
     return url;
 };
