@@ -10,7 +10,7 @@ $(function() {
 
     $(".next").click(
         function() {
-alert("hello");
+
             if (animating)
                 return false;
             animating = true;
