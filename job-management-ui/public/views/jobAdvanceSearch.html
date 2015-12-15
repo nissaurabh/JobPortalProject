@@ -150,7 +150,7 @@
                 </thead>
                 <tbody class="bg-success" ng-repeat="jobSearchObj in jobSearchResult.jobList | orderBy:sortType:sortReverse | filter:searchJobFilter">
                 <tr>
-                    <td><a href="/jobDetailsView">{{jobSearchObj.wwsid}}</a></td>
+                    <td><a href="/jobDetailsView/{{jobSearchObj.jobId}}">{{jobSearchObj.wwsid}}</a></td>
                     <td>{{jobSearchObj.serviceLine}}</td>
                     <td>{{jobSearchObj.serviceLineCap}}</td>
                     <td>{{jobSearchObj.roleName}}</td>

@@ -6,13 +6,28 @@ var jobMngmtServices = angular.module('jobMngmtServices', ['ngResource']);/* Ser
 
 jobMngmtServices.factory('JobDetailsFactory', function ($resource,config) {
 
-  var data = $resource(config.apiUrl+'jobDetail', {}, {
+  /*var data = $resource(config.apiUrl+'jobDetail', {}, {
     create: { method: 'POST',
               isArray: false
-            }
+            },
+
+      get: { method: 'GET',
+          isArray: false,
+          param:{param:'@param'}
+      }
 
     });
-  return data;
+  return data;*/
+   return {
+       createJob: $resource(config.apiUrl + 'jobDetail', {},
+           {
+               create: {method: 'POST', isArray: false,}
+           }),
+       getJob: $resource(config.apiUrl + 'jobDetail/:jobId', {jobId:'@jobId'},
+           {
+               get: {method: 'GET', isArray: false,}
+           })
+   }
 
   });
 

@@ -72,9 +72,9 @@ angular
             templateUrl: 'views/login-form.html',
             controller: 'LogoutCtrl'
         })
-        .when('/jobDetailsView', {
+        .when('/jobDetailsView/:jobId', {
             templateUrl: 'views/jobDetails.html',
-            controller: 'JobSearchCtrl'
+            controller: 'CreateJobCtrl'
         })
 		.when('/createCandidate', {
             templateUrl: 'views/createCandidate.html'

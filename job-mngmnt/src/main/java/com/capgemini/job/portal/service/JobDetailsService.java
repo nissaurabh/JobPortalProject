@@ -45,6 +45,14 @@ public interface JobDetailsService {
 	 * @return the response
 	 */
 	public String deleteJob(final String jobId);
+	
+	/**
+	 * get the job service.
+	 * @param jobId
+	 *            the jobId
+	 * @return the response
+	 */
+	public JobDetails getJob(final String jobId);
 
 	/**
 	 * get the account service.
