@@ -21,12 +21,20 @@ jobMngmtServices.factory('JobDetailsFactory', function ($resource,config) {
    return {
        createJob: $resource(config.apiUrl + 'jobDetail', {},
            {
-               create: {method: 'POST', isArray: false,}
+               create: {method: 'POST', isArray: false,interceptor: {
+                   response: function(response) {
+                       var result = response.resource;
+                       result.$status = response.status;
+                       return result;
+                   }
+               }
+               }
            }),
        getJob: $resource(config.apiUrl + 'jobDetail/:jobId', {jobId:'@jobId'},
            {
                get: {method: 'GET', isArray: false,}
            })
+
    }
 
   });

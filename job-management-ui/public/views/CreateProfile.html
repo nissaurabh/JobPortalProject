@@ -1,36 +1,37 @@
 <div ng-controller="CreateJobCtrl">
 	<form id="msform">
 
-		<ul id="progressbar">
-			<li class="active">Account Setup</li>
-			<li>Social Profiles</li>
-			<li>Personal Details</li>
-		</ul>
+		<!--ul id="progressbar">
+			<li class="active">Requestor Details</li>
+			<li>Account details</li>
+			<li>Employee Details</li>
+		</ul-->
 		<fieldset id="fieldSet-1">
 			<h2 class="fs-title">Requestor Details</h2>
+            <hr>
 			<table>
 				<tr>
-					<td style="width: 110px;"><label>WWSID:</label></td>
+					<td style="width: 110px;"><label>WWSID</label></td>
 					<td><input type="text" placeholder="WWSID" ng-model="vm.wwsid"></td>
-					<td rowspan="2" valign="middle" style="width: 112px;"><label>Requested
-							Date :</label></td>
+					<td rowspan="2" valign="middle" style="width: 130px;"><label>Requested
+							Date</label></td>
 					<td rowspan="2" valign="middle"><input type="date"
 						class="date" placeholder="Requested Date" ng-model="vm.requestedDate"></td>
 				</tr>
 				<tr>
-					<td><label>Creator RM:</label></td>
+					<td><label>Creator RM</label></td>
 					<td><input type="text" placeholder="Creator Resource Manager" ng-model="vm.creatorRM"></td>
 				</tr>
 				<tr>
-					<td><label>Requestor RM:</label></td>
+					<td><label>Requestor RM</label></td>
 					<td><input type="text"
 						placeholder="Requestor Resource Manager" ng-model="vm.requestorRM"></td>
-					<td rowspan="2" valign="middle"><label>Closure Date :</label></td>
+					<td rowspan="2" valign="middle"><label>Closure Date</label></td>
 					<td rowspan="2" valign="middle"><input type="date"
 						class="date" placeholder="Closure Date" ng-model="vm.closureDate"></td>
 				</tr>
 				<tr>
-					<td><label>Owning RM:</label></td>
+					<td><label>Owning RM</label></td>
 					<td><input type="text" placeholder="Owning Resource Manager" ng-model="vm.owningRM"></td>
 				</tr>
 
@@ -40,36 +41,36 @@
 		</fieldset>
 		<fieldset id="fieldSet-2" hidden="true">
 			<h2 class="fs-title">Account details</h2>
-
+            <hr>
 			<table>
 				<tr>
-					<td style="width: 110px;"><label>Service Line:</label></td>
+					<td style="width: 110px;"><label>Service Line</label></td>
 					<td><select name="serviceLineId" id="serviceLineId" ng-model="vm.serviceLineId"
 								ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
 					</select></td>
 					
 					<td style="width: 110px;"><label>Role Name</label></td>
-					<td><select name="roleName" id="rolenameid" ng-model="vm.rlNm"
+					<td><select name="roleName" id="rolenameid" ng-model="vm.roleId"
 								ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole">
 
 					</select></td>
 					
-					<td><label>Open Date :</label></td>
+					<td><label>Open Date</label></td>
 					<td><input type="date"
 						class="date" placeholder="Open Date" ng-model="vm.openDate"></td>
 				</tr>
 				<tr>
-					<td style="width: 110px;"><label>Service Line Capability:</label></td>
+					<td style="width: 110px;"><label>Service Line Capability</label></td>
 					<td><select name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId"
 								ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability">
 
 					</select></td>
-					<td style="width: 110px;"><label>Role Requestor:</label></td>
-					<td><select name="roleRequestor" id="roleRequestorId" ng-model="vm.roleId">
+					<td style="width: 110px;"><label>Role Requestor</label></td>
+					<td><select name="roleRequestor" id="roleRequestorId" >
 					<option value="1">Java Developer</option>
 					<option value="2">Oracle DBA</option>
 					</select></td>
-					<td><label>Presenter Date :</label></td>
+					<td><label>Presenter Date</label></td>
 					<td><input type="date"
 						class="date" placeholder="Presenter Date" ng-model="vm.presentedDate"></td>
 				</tr>
@@ -78,9 +79,9 @@
 					<td><select name="account" id="accountId" ng-model="vm.accountId"
 								ng-options="opt.accountId as opt.accountName for opt in accounts.account">
 					</select></td>
-					<td><label>Resource Requirment : </label></td>
+					<td><label>Resource Requirement</label></td>
 					<td><input type="text" placeholder="Number of Resources" ng-model="vm.resourceCount"></td>
-					<td><label>Role Start Date :</label></td>
+					<td><label>Role Start Date</label></td>
 					<td><input type="date"
 						class="date" placeholder="Role Start Date" ng-model="vm.roleStartDate"></td>
 				</tr>
@@ -89,12 +90,12 @@
 					<td><select name="status" id="statusId" ng-model="vm.jobStatusId"
                                 ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus">
 					</select></td>
-					<td style="width: 110px;"><label>Job Stage:</label></td>
+					<td style="width: 110px;"><label>Job Stage</label></td>
 					<td><select name="jobStage" id="jobStageId" ng-model="vm.jobStageId"
                                 ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage">
 
                     </select></td>
-					<td><label>Role End Date :</label></td>
+					<td><label>Role End Date</label></td>
 					<td><input type="date"
 						class="date" placeholder="Role End Date" ng-model="vm.roleEndDate"></td>
 				</tr>
@@ -107,17 +108,18 @@
 		</fieldset>
 		<fieldset id="fieldSet-3" hidden="true">
 			<h2 class="fs-title">Employee Details</h2>
+            <hr>
 			<table>
 				<tr>
-					<td style="width: 110px;"><label>Employee Type:</label></td>
+					<td style="width: 110px;"><label>Employee Type</label></td>
 					<td><select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId"
                                 ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType">
 					</select></td>
-					<td><label>Contractor Rate:</label></td>
+					<td><label>Contractor Rate</label></td>
 					<td><input type="text" placeholder="Contractor Rate" ng-model="vm.contractorRate"></td>
 				</tr>
 				<tr>
-					<td><label>Charge out Rate:</label></td>
+					<td><label>Charge Out Rate</label></td>
 					<td><input type="text"
 						placeholder="Charge Out Rate" ng-model="vm.chargeOutRate"></td>
 					<td><label>Travel:</label></td>
@@ -125,7 +127,7 @@
 						placeholder="Travel" ng-model="vm.travel"></td>
 				</tr>
 				<tr>
-					<td colspan="1"><label>Requirement Specifics:</label></td>
+					<td colspan="1"><label>Requirement Specifics</label></td>
 					<td colspan="2"><textarea rows="4" cols="20" placeholder="Requirement Specifics" ng-model="vm.requirementSpecifics"></textarea>
 				</tr>
 

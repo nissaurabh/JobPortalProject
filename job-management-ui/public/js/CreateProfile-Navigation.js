@@ -27,6 +27,7 @@ $(function() {
             //hide the current fieldset with style
             current_fs.animate({
                 opacity : 0
+                // 'animation': 'rotateRoomTopOut 2s'
             }, {
                 step : function(now, mx) {
                     //as the opacity of current_fs reduces to 0 - stored in "now"
@@ -37,17 +38,28 @@ $(function() {
                     //3. increase opacity of next_fs to 1 as it moves in
                     opacity = 1 - now;
                     current_fs.css({
-                        'transform' : 'scale(' + scale + ')'
+                        // 'transform' : 'scale(' + scale + ')',
+                        'transform-origin': '50% 100%',
+                        'animation': 'rotateRoomTopOut 2s both ease'
+                        // 'transform' : 'perspective(500px) translateX(1px) translateZ(0px) rotateY(0deg)',
+                        //'animation': 'rotateRoomRightIn 2s',
+                        //'transform-origin': '100% 50%'
+                       // '-webkit-animation': 'rotateRoomRightIn .8s both ease',
+                       // 'animation': 'rotateRoomRightIn .8s both ease'
                     });
                     next_fs.css({
+
                         'left' : left,
-                        'opacity' : opacity
+                        'opacity' : opacity,
+                        'transform-origin': '50% 0%',
+                        'animation': 'rotateRoomTopIn 2s both ease'
                     });
                 },
                 duration : 800,
                 complete : function() {
                     current_fs.hide();
                     animating = false;
+
                 },
                 //this comes from the custom easing plugin
                 // easing : 'easeOutBounce'
@@ -71,7 +83,9 @@ $(function() {
             previous_fs.show();
             //hide the current fieldset with style
             current_fs.animate({
+
                 opacity : 0
+                // 'animation': 'rotateRoomTopOut 2s'
             }, {
                 step : function(now, mx) {
                     //as the opacity of current_fs reduces to 0 - stored in "now"
@@ -82,10 +96,14 @@ $(function() {
                     //3. increase opacity of previous_fs to 1 as it moves in
                     opacity = 1 - now;
                     current_fs.css({
-                        'left' : left
+                        'transform-origin': '50% 0%',
+                        'animation': 'rotateRoomBottomOut 2s both ease'
+                       // 'left' : left
                     });
                     previous_fs.css({
-                        'transform' : 'scale(' + scale + ')',
+                       // 'transform' : 'scale(' + scale + ')',
+                        'transform-origin': '50% 100%',
+                        'animation': 'rotateRoomBottomIn 2s both ease',
                         'opacity' : opacity
                     });
                 },

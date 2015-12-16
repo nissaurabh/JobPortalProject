@@ -153,6 +153,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		job.setCreateUsrId("jobmngmnt");
 		job.setUpdtDts(new Timestamp(System.currentTimeMillis()));
 		job.setUpdtUsrId("jobmngmnt");
+		job.setWwsid(jobDetails.getWwsid());
 
 		return job;
 	}

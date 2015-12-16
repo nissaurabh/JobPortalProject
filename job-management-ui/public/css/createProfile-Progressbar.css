@@ -7,13 +7,61 @@
 }*/
 
 #msform fieldset {
-	background: linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	/*background: linear-gradient(to bottom, rgba(238,238,238,1) 0%,rgba(204,204,204,1) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	/* background: linear-gradient(to bottom, rgba(252,255,244,1) 0%,rgba(223,229,215,1) 40%,rgba(179,190,173,1) 100%); */
-	border: 1 none;
-	border-radius: 3px;
-	box-shadow: 0 0 15px 1px rgba(0, 0, 0, 0.4);
-	padding: 20px 10px;
 
+	border: 1px solid rgba(0,0,0,0.5);
+	border-bottom: 3px solid rgba(0,0,0,0.2);
+	border-left: 3px solid rgba(0,0,0,0.5);
+	border-radius: 10px;
+	padding: 20px 10px;
+	background: rgba(0,0,0,-0.25);
+	z-index: -100;
+
+
+	box-shadow:
+			0 2px 8px rgba(0,0,0,0.9), /* Exterior Shadow */
+			inset 0 1px rgba(255,255,255,0.3), /* Top light Line */
+			inset 0 100px rgba(255,255,255,0.2), /* Top Light Shadow */
+			inset 0 100px 100px rgba(255,255,255,0.2), /* Sides Light Shadow */
+			inset 0 -15px 30px rgba(0,0,0,0.3); /* Dark Background */
+
+
+
+	-webkit-box-reflect: below 0px -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(70%, transparent), to(rgba(255,255,255,0.4)));
+
+}
+
+@keyframes rotateRoomTopIn {
+	from { opacity: .3; -webkit-transform: translateY(100%) rotateX(90deg); transform: translateY(100%) rotateX(90deg); }
+}
+
+@keyframes rotateRoomTopOut {
+	from { }
+	to { opacity: .3; -webkit-transform: translateY(-100%) rotateX(-90deg); transform: translateY(-100%) rotateX(-90deg); }
+}
+
+@keyframes rotateRoomBottomOut {
+	from { }
+	to { opacity: .3; -webkit-transform: translateY(100%) rotateX(90deg); transform: translateY(100%) rotateX(90deg); }
+}
+
+@keyframes rotateRoomBottomIn {
+	from { opacity: .3; -webkit-transform: translateY(-100%) rotateX(-90deg); transform: translateY(-100%) rotateX(-90deg); }
+}
+
+@keyframes rotateRoomRightIn {
+	from { opacity: .3; -webkit-transform: translateX(-100%) rotateY(90deg); transform: translateX(-100%) rotateY(90deg); }
+}
+
+@keyframes fadein {
+	from { opacity: 0; }
+	to   { opacity: 1; }
+}
+
+#msform fieldset.thumb {
+	-webkit-transform: perspective(500px) translateX(1px) translateZ(-30px) rotateY(30deg);
+	transform: perspective(500px) translateX(1px) translateZ(-30px) rotateY(30deg);
 }
 /*Hide all except first fieldset*/
 #msform fieldset:not (:first-of-type ) {
@@ -54,10 +102,17 @@
 }
 
 #msform label {
+	 color : #626262;
+	 font-weight: lighter;
+	 text-shadow: 1px 1px 2px #3c3c3c;
+	 text-align: right;
+ }
+
+#msform h2 {
 	color : #626262;
 	font-weight: lighter;
 	text-shadow: 1px 1px 2px #3c3c3c;
-	text-align: right;
+	text-align: center;
 }
 
 #msform td {
