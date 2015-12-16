@@ -4,15 +4,21 @@
 
 var jobMngmtControllers = angular.module('jobMngmtControllers', []);
 
-jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','JobAdminFactory',
-  function($scope, jobDetailsFactory, jobAdminFactory) {
+jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cookies','$rootScope','JobDetailsFactory','JobAdminFactory',
+  function($scope, $routeParams,$cookies,$rootScope, jobDetailsFactory, jobAdminFactory) {
+
+      $rootScope.loggedIn= $cookies.get('loggedIn');
+      $rootScope.userId= $cookies.get('userId');
+      $rootScope.userName= $cookies.get('userName');
 
     $scope.saveJob = function() {
        $scope.jsonObj = angular.toJson($scope.vm, false);
       console.log("data: " + $scope.jsonObj);
-      jobDetailsFactory.create($scope.vm);
+      //jobDetailsFactory.create($scope.vm);
+      jobDetailsFactory.createJob.create($scope.vm);
     }
 
+<<<<<<< HEAD
       $scope.jobStatuses = jobAdminFactory.status.get();
       $scope.accounts = jobAdminFactory.account.get();
       $scope.serviceLines = jobAdminFactory.serviceLine.get();
@@ -20,6 +26,11 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','
       $scope.jobRoles = jobAdminFactory.jobRole.get();
       $scope.jobStages = jobAdminFactory.jobStage.get();
       $scope.employeeTypes = jobAdminFactory.employeeType.get();
+=======
+   $scope.accounts = jobAdminFactory.get();
+
+   $scope.jobDetails = jobDetailsFactory.getJob.get({jobId:$routeParams.jobId});
+>>>>>>> 26b9a69eb1b7fb9dfa8443e7b796cc377adf4c2f
 
   }]);
 
@@ -32,6 +43,7 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetai
       console.log("data: " + $scope.jsonObj);
       candidateDetailsFactory.create($scope.vm);
     }
+
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',

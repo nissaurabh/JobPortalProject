@@ -76,6 +76,15 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		return response;
 
 	}
+	
+	@Override
+	public JobDetails getJob(String jobId) {
+		
+		final Job job = jobDetailsDAO.getJob(jobId);
+		
+		return getJobDetails(job);
+	}
+
 
 	/**
 	 * populate the job details.
@@ -147,6 +156,44 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 
 		return job;
 	}
+	
+	
+	/**
+	 * populate the job details.
+	 * @param jobDetails
+	 *            the jobDetails
+	 * @param job
+	 *            the job
+	 * @return the job
+	 */
+	private JobDetails getJobDetails(final Job job) {
+		
+		JobDetails jobDetails = new JobDetails();
+		
+		jobDetails.setAccountId(job.getAccount().getClntNm());
+		jobDetails.setChargeOutRate(String.valueOf(job.getChrgOutRt()));
+		jobDetails.setClosureDate(DateUtil.convertTimestamptoDate(job.getClsrDt()));
+		jobDetails.setContractorRate(String.valueOf(job.getCntrtRt()));
+		jobDetails.setEmployementTypeId(job.getEmplTyp().getEmptTypNm());
+		jobDetails.setJobStageId(job.getJobStg().getJobStgNm());
+		jobDetails.setJobStatusId(job.getJobSt().getJobStsNm());
+		jobDetails.setOpenDate(DateUtil.convertTimestamptoDate(job.getOpnDt()));
+		jobDetails.setOwningRM(job.getOwnRm());
+		jobDetails.setPresentedDate(DateUtil.convertTimestamptoDate(job.getPrsntDt()));
+		jobDetails.setRequestedDate(DateUtil.convertTimestamptoDate(job.getReqDt()));
+		jobDetails.setRequestorRM(job.getReqstrRm());
+		jobDetails.setRequirementSpecifics(job.getReqmntSpc());
+		jobDetails.setResourceCount(String.valueOf(job.getResrCnt()));
+		jobDetails.setRoleEndDate(DateUtil.convertTimestamptoDate(job.getRlEndDt()));
+		jobDetails.setRoleId(job.getJobRole().getJobRlNm());
+		jobDetails.setRoleStartDate(job.getRlStrDt().toString());
+		jobDetails.setServiceLineCapabilityId(job.getJobRole().getServiceLnCap().getSrvcLnCapNm());
+		jobDetails.setServiceLineId(job.getJobRole().getServiceLnCap().getServiceLn().getSrvcLnNm());
+		jobDetails.setTravel(String.valueOf(job.getTrvl()));
+		jobDetails.setWwsid(job.getWwsid());
+		
+		return jobDetails;
+	}
 
 	@Transactional
 	@Override
@@ -182,5 +229,6 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 
 		return jobDetailsDAO.getJobStage(jobStgId);
 	}
+
 
 }

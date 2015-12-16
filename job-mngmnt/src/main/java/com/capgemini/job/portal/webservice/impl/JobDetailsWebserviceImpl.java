@@ -10,10 +10,13 @@ import java.net.URISyntaxException;
 
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
@@ -101,6 +104,24 @@ public class JobDetailsWebserviceImpl implements
 		response = jobDetailsService.deleteJob(jobId);
 
 		return buildResponse(response);
+	}
+	
+	/**
+	 * get the job.
+	 * 
+	 * @param jobId
+	 *            the jobId
+	 * @return the response
+	 * @throws URISyntaxException
+	 *             the URI syntax exception
+	 */
+	@GET
+	@Produces(MediaType.APPLICATION_JSON)
+	@Path("/{job-id}")
+	public Response getJob(@PathParam("job-id") final String jobId)
+			throws URISyntaxException{
+		JobDetails jobDetails = jobDetailsService.getJob(jobId);
+		return Response.ok(jobDetails).build();
 	}
 
 	/**
