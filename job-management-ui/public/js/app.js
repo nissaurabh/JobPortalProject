@@ -17,7 +17,7 @@ angular
         $httpProvider.defaults.headers.common["Accept"] = "application/json";
         $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     }]).constant('config', {
-        apiUrl: 'http://10.81.82.85:8080/job-management-service/'
+        apiUrl: 'http://ec2-52-90-75-254.compute-1.amazonaws.com:8080/job-management-service/'
         })
     /*.config(['ChartJsProvider', function(ChartJsProvider) {
         ChartJsProvider.setOptions({

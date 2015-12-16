@@ -44,15 +44,14 @@
 			<table>
 				<tr>
 					<td style="width: 110px;"><label>Service Line:</label></td>
-					<td><select name="serviceLineId" id="serviceLineId" ng-model="vm.serviceLineId">
-					<option value="CSD">CSD</option>
-					<option value="SAP">SAP</option>
+					<td><select name="serviceLineId" id="serviceLineId" ng-model="vm.serviceLineId"
+								ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
 					</select></td>
 					
 					<td style="width: 110px;"><label>Role Name</label></td>
-					<td><select name="roleName" id="rolenameid" ng-model="vm.rlNm">
-					<option value="Developer">Developer</option>
-					<option value="Tester">Tester</option>
+					<td><select name="roleName" id="rolenameid" ng-model="vm.rlNm"
+								ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole">
+
 					</select></td>
 					
 					<td><label>Open Date :</label></td>
@@ -61,14 +60,14 @@
 				</tr>
 				<tr>
 					<td style="width: 110px;"><label>Service Line Capability:</label></td>
-					<td><select name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId">
-					<option value="Core">Core</option>
-					<option value="Functionality">Functionality</option>
+					<td><select name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId"
+								ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability">
+
 					</select></td>
 					<td style="width: 110px;"><label>Role Requestor:</label></td>
 					<td><select name="roleRequestor" id="roleRequestorId" ng-model="vm.roleId">
-					<option value="JavaDeveloper">Java Developer</option>
-					<option value="OracleAdmin">Oracle DBA</option>
+					<option value="1">Java Developer</option>
+					<option value="2">Oracle DBA</option>
 					</select></td>
 					<td><label>Presenter Date :</label></td>
 					<td><input type="date"
@@ -78,8 +77,6 @@
 					<td style="width: 110px;"><label>Account</label></td>
 					<td><select name="account" id="accountId" ng-model="vm.accountId"
 								ng-options="opt.accountId as opt.accountName for opt in accounts.account">
-					<option value="Core">Core</option>
-					<option value="Functionality">Functionality</option>
 					</select></td>
 					<td><label>Resource Requirment : </label></td>
 					<td><input type="text" placeholder="Number of Resources" ng-model="vm.resourceCount"></td>
@@ -89,15 +86,14 @@
 				</tr>
 				<tr>
 					<td style="width: 110px;"><label>Status</label></td>
-					<td><select name="status" id="statusId" ng-model="vm.jobStatusId">
-					<option value="open">open</option>
-					<option value="closed">closed</option>
+					<td><select name="status" id="statusId" ng-model="vm.jobStatusId"
+                                ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus">
 					</select></td>
 					<td style="width: 110px;"><label>Job Stage:</label></td>
-					<td><select name="jobStage" id="jobStageId" ng-model="vm.jobStageId">
-					<option value="open">open</option>
-					<option value="finalized">Finalized</option>
-					</select></td>
+					<td><select name="jobStage" id="jobStageId" ng-model="vm.jobStageId"
+                                ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage">
+
+                    </select></td>
 					<td><label>Role End Date :</label></td>
 					<td><input type="date"
 						class="date" placeholder="Role End Date" ng-model="vm.roleEndDate"></td>
@@ -114,9 +110,8 @@
 			<table>
 				<tr>
 					<td style="width: 110px;"><label>Employee Type:</label></td>
-					<td><select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId">
-					<option value="fullTime">Full Time</option>
-					<option value="contractor">Contractor</option>
+					<td><select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId"
+                                ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType">
 					</select></td>
 					<td><label>Contractor Rate:</label></td>
 					<td><input type="text" placeholder="Contractor Rate" ng-model="vm.contractorRate"></td>

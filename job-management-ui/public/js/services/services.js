@@ -18,9 +18,15 @@ jobMngmtServices.factory('JobDetailsFactory', function ($resource,config) {
 
 jobMngmtServices.factory('JobAdminFactory', function ($resource,config) {
 
-    return $resource(config.apiUrl+'jobUtility/account', {}, {
-
-    });
+    return {
+        status: $resource(config.apiUrl+'jobUtility/jobStatus', {}),
+        account: $resource(config.apiUrl+'jobUtility/account', {}),
+        serviceLine: $resource(config.apiUrl+'jobUtility/serviceLine', {}),
+        serviceLineCapability: $resource(config.apiUrl+'jobUtility/serviceLineCapability', {}),
+        jobRole: $resource(config.apiUrl+'jobUtility/jobRole', {}),
+        jobStage : $resource(config.apiUrl+'jobUtility/jobStage', {}),
+        employeeType : $resource(config.apiUrl+'jobUtility/resourceType', {})
+    }
 
 });
 

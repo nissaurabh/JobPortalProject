@@ -13,8 +13,13 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope', 'JobDetailsFactory','
       jobDetailsFactory.create($scope.vm);
     }
 
-   $scope.accounts = jobAdminFactory.get();
-      console.log($scope.accounts);
+      $scope.jobStatuses = jobAdminFactory.status.get();
+      $scope.accounts = jobAdminFactory.account.get();
+      $scope.serviceLines = jobAdminFactory.serviceLine.get();
+      $scope.serviceLineCapabilities = jobAdminFactory.serviceLineCapability.get();
+      $scope.jobRoles = jobAdminFactory.jobRole.get();
+      $scope.jobStages = jobAdminFactory.jobStage.get();
+      $scope.employeeTypes = jobAdminFactory.employeeType.get();
 
   }]);
 
