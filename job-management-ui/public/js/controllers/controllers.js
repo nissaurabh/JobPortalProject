@@ -25,14 +25,16 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
   }]);
 
 
-jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetailsFactory',
-  function($scope, candidateDetailsFactory) {
+jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$routeParams', 'CandidateDetailsFactory',
+  function($scope, $routeParams , candidateDetailsFactory) {
 
     $scope.saveJob = function() {
        $scope.jsonObj = angular.toJson($scope.vm, false);
       console.log("data: " + $scope.jsonObj);
       candidateDetailsFactory.create($scope.vm);
     }
+	
+	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
 
   }]);
 

@@ -87,13 +87,6 @@
                         </a>
                     </th>
                     <th>
-                        <a href="#" ng-click="sortType = 'cndtResume'; sortReverse = !sortReverse" class="white-link">
-                        <label>Resume</label>
-                            <span ng-show="sortType == 'cndtResume' && !sortReverse" class="fa fa-caret-down"></span>
-                            <span ng-show="sortType == 'cndtResume' && sortReverse" class="fa fa-caret-up"></span>
-                        </a>
-                    </th>
-                    <th>
                         <a href="#" ng-click="sortType = 'resourceType'; sortReverse = !sortReverse" class="white-link">
                         <label>Resource Type</label>
                             <span ng-show="sortType == 'resourceType' && !sortReverse" class="fa fa-caret-down"></span>
@@ -121,16 +114,23 @@
                             <span ng-show="sortType == 'ctznStatus' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
+					<th>
+                        <a href="#" ng-click="sortType = 'cndtResume'; sortReverse = !sortReverse" class="white-link">
+                        <label>Resume</label>
+                            <span ng-show="sortType == 'cndtResume' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'cndtResume' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
                 </tr>
                 </thead>
                 <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter">
                 <tr>
-                    <td>{{searchResultObj.cndtName}}</td>
-                    <td><a ng-href="{{searchResultObj.cndtResume}}">download</a></td>
+                    <td><a ng-href="/candidateDetailsView/{{searchResultObj.cndtId}}">{{searchResultObj.cndtName}}</td>
                     <td>{{searchResultObj.resourceType}}</td>
                     <td>{{searchResultObj.cntrctrRate}}</td>
                     <td>{{searchResultObj.cndtStatus}}</td>
                     <td>{{searchResultObj.ctznStatus}}</td>
+					<td><a ng-href="{{searchResultObj.cndtResume}}">download</a></td>
                 </tr>
                 </tbody>
             </table>

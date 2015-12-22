@@ -76,6 +76,10 @@ angular
             templateUrl: 'views/jobDetails.html',
             controller: 'CreateJobCtrl'
         })
+		.when('/candidateDetailsView/:candidateId', {
+            templateUrl: 'views/candidateDetails.html',
+            controller: 'CreateCandidateCtrl'
+        })
 		.when('/createCandidate', {
             templateUrl: 'views/createCandidate.html'
         })
