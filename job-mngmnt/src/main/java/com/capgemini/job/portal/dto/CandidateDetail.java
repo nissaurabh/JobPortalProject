@@ -23,7 +23,9 @@ import javax.xml.bind.annotation.XmlType;
     "roleName",
     "cndtId",
     "clientName",
-    "buName"
+    "buName",
+    "primarySkills",
+    "jobId"
 })
 @XmlRootElement(name = "candidateDtl")
 public class CandidateDetail implements Serializable{
@@ -47,6 +49,10 @@ public class CandidateDetail implements Serializable{
 	private String clientName;
 	
 	private String buName;
+	
+	private String primarySkills;
+	
+	private int jobId;
 
 	public String getCndtName() {
 		return cndtName;
@@ -126,5 +132,21 @@ public class CandidateDetail implements Serializable{
 
 	public void setBuName(String buName) {
 		this.buName = buName;
+	}
+
+	public String getPrimarySkills() {
+		return primarySkills;
+	}
+
+	public void setPrimarySkills(String primarySkills) {
+		this.primarySkills = primarySkills;
+	}
+
+	public int getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 }

@@ -210,6 +210,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		return formatCndtDetailResponse(candidate);
 	}
 	
+	
 	/**
 	 * @param candidate
 	 * @return
@@ -220,6 +221,11 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 			detail = new CandidateDetail();
 			detail.setCndtId(candidate.getCndtId());
 			detail.setCndtName(candidate.getCndtNm());
+			detail.setResourceType(candidate.getCndtCtg().getCndtCtgNm());
+			detail.setPrimarySkills(candidate.getPrmySk());
+			detail.setCndtStatus(candidate.getCndtSt().getCndtStsNm());
+			detail.setCtznStatus(candidate.getCtznshpSt().getCtznShpNm());
+			detail.setJobId(candidate.getJob().getJobId());
 		}
 		return detail;
 	}
