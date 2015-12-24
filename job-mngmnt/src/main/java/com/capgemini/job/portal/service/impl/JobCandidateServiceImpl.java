@@ -43,12 +43,19 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	@Transactional
 	@Override
 	public String addJobCandidate(String jobId, JobCandidate jobCandidate, byte bytes[]) {
-		final String response = JobMngMntConstants.CREATED;
-		final JobCndt jobCndt = new JobCndt();
-		populateJobCondidateDetails(jobId, jobCandidate, bytes, jobCndt);
-		jobCandidateDAO.addJobCandidate(jobCndt);
-
-		return response;
+		try{
+			String response = JobMngMntConstants.CREATED;
+			final JobCndt jobCndt = new JobCndt();
+			if(null != jobCandidate){
+				populateJobCondidateDetails(jobId, jobCandidate, bytes, jobCndt,"CREATE");
+				jobCandidateDAO.addJobCandidate(jobCndt);
+			} else {
+				response = JobMngMntConstants.BAD_REQUEST;
+			}
+			return response;
+		} catch (Exception e){
+			return JobMngMntConstants.ERROR;
+		}
 	}
 
 	@Transactional
@@ -61,7 +68,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		JobCndt jobCndt = jobCandidateDAO.getJobCndtByJobIdAndJobCndtId(jobIdValue, jobCandidateIdValue);
 
 		if (jobCndt != null) {
-			jobCndt = populateJobCondidateDetails(jobId, jobCandidate, bytes, jobCndt);
+			jobCndt = populateJobCondidateDetails(jobId, jobCandidate, bytes, jobCndt,"UPDATE");
 			jobCandidateDAO.updateJobCandidate(jobCndt);
 		}else{
 			response = JobMngMntConstants.NOT_FOUND;
@@ -93,7 +100,7 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	 * @param jobCndt
 	 * @return
 	 */
-	private JobCndt populateJobCondidateDetails(String jobId, JobCandidate jobCandidate, byte bytes[], final JobCndt jobCndt){
+	private JobCndt populateJobCondidateDetails(String jobId, JobCandidate jobCandidate, byte bytes[], final JobCndt jobCndt, final String flow){
 		
 		if(StringUtils.isNotEmpty(jobCandidate.getActualJoiningDate())){
 			jobCndt.setActJoinDt(DateUtil.convertStringToTimestamp(jobCandidate.getActualJoiningDate()));
@@ -149,7 +156,9 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 		if(StringUtils.isNotEmpty(jobCandidate.getPrimarySkills())){
 			jobCndt.setPrmySk(jobCandidate.getPrimarySkills());
 		}
-		//jobCndt.setCreateDts(new Timestamp(System.currentTimeMillis()));
+		if("CREATE".equalsIgnoreCase(flow)){
+			jobCndt.setCreateDts(new Timestamp(System.currentTimeMillis()));
+		}
 		jobCndt.setCreateUsrId("jobmngmnt");
 		jobCndt.setUpdtDts(new Timestamp(System.currentTimeMillis()));
 		jobCndt.setUpdtUsrId("jobmngmnt");

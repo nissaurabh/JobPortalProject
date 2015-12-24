@@ -49,7 +49,7 @@ public interface JobCandidateWebservice {
 	@Produces(MediaType.APPLICATION_JSON)
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response addJobCandidate(@PathParam("job-id") final String jobId,
-			@Multipart("jobCandidate") JobCandidate jobCandidate,
+			@Multipart("jobCandidate") String jobCandidate,
 			@Multipart("file") Attachment attachment) throws Exception;
 	
 	

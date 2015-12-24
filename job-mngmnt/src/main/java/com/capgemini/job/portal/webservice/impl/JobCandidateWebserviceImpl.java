@@ -26,9 +26,11 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.apache.cxf.rs.security.cors.CrossOriginResourceSharing;
+import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -58,9 +60,9 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	@Path("/{job-id}")
 	@Consumes(MediaType.MULTIPART_FORM_DATA)
 	public Response addJobCandidate(@PathParam("job-id") final String jobId,
-			@Multipart("jobCandidate") JobCandidate jobCandidate,
+			@Multipart("jobCandidate") String jobCndt,
 			@Multipart(value="file", required = false) Attachment attachment) throws Exception{
-	
+		JobCandidate jobCandidate = convertJsontoPojo(jobCndt);
 		DataHandler dataHandler1 =attachment.getDataHandler();
 		InputStream fileStream = dataHandler1.getInputStream();
 	    byte[] contents = IOUtils.toByteArray(fileStream);
@@ -68,6 +70,28 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 		return Response.ok().build();
 		
 	}
+
+	private JobCandidate convertJsontoPojo(String jobCndt) {
+		if(StringUtils.isEmpty(jobCndt)){
+			return null;
+		} else {
+			return (JobCandidate) fromJsonToObject(jobCndt);
+		}
+	}
+	
+	/**
+	 * @param json
+	 * @return
+	 */
+	private Object fromJsonToObject(final String json) {
+		try{
+			JobCandidate candidate = new ObjectMapper().readValue(json, JobCandidate.class);
+			return candidate;
+		} catch(Exception e){
+			return null;
+		}
+	}
+
 
 	@Override
 	@PUT
