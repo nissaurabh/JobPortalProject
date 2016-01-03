@@ -5,6 +5,8 @@
  */
 package com.capgemini.job.portal.dao;
 
+import java.util.List;
+
 import com.capgemini.job.portal.entities.IntrvwSt;
 import com.capgemini.job.portal.entities.JobIntrvw;
 
@@ -46,5 +48,18 @@ public interface JobInterviewDetailsDAO {
 	 * @return 
 	 */
 	public JobIntrvw updateJobInterview(JobIntrvw jobIntrvw);
+	
+	/**
+	 * @param cndtId
+	 * @return
+	 */
+	public List<JobIntrvw> retrieveInterviewDetailsByCandId(final int cndtId);
+
+	/**
+	 * @param jobId
+	 * @param cndtId
+	 * @return
+	 */
+	public List<JobIntrvw> retrieveInterviewDetailsByJobIdandCandId(final int jobId, final int cndtId);
 
 }

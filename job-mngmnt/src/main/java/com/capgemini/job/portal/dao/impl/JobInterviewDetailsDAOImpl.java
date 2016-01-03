@@ -96,6 +96,37 @@ public class JobInterviewDetailsDAOImpl implements JobInterviewDetailsDAO {
 		return jobIntrvw;
 	}
 	
+	/**
+	 * @param cndtId
+	 * @return
+	 */
+	@Override
+	public List<JobIntrvw> retrieveInterviewDetailsByCandId(int cndtId) {
+		final Query query = entityManager.createNamedQuery("jobIntrvw.getJobIntrvwByCndtId");
+		query.setParameter("cndtId", cndtId);
+		final List<JobIntrvw> jobIntrvws = query.getResultList();
+		if(!CollectionUtils.isEmpty(jobIntrvws)){
+			return jobIntrvws;
+		}
+		return null;
+	}
+	
+	/**
+	 * @param cndtId
+	 * @return
+	 */
+	@Override
+	public List<JobIntrvw> retrieveInterviewDetailsByJobIdandCandId(int jobId, int cndtId) {
+		final Query query = entityManager.createNamedQuery("jobIntrvw.getJobIntrvwByCndtIdAndJobId");
+		query.setParameter("jobId", jobId);
+		query.setParameter("cndtId", cndtId);
+		final List<JobIntrvw> jobIntrvws = query.getResultList();
+		if(!CollectionUtils.isEmpty(jobIntrvws)){
+			return jobIntrvws;
+		}
+		return null;
+	}
+	
 	/* (non-Javadoc)
 	 * @see com.capgemini.job.portal.dao.JobInterviewDetailsDAO#updateJobInterview(com.capgemini.job.portal.entities.JobIntrvw)
 	 */

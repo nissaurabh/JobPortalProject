@@ -18,7 +18,12 @@ import java.sql.Timestamp;
                 query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobIntrvwId=:jobIntrvwId"),
     @NamedQuery(name="jobIntrvw.getJobIntrvwByJobIdCndtIdAndIntvrNm",
                 query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobCndt.cndtId=:cndtId"
-                + " and jobIntrvw.job.jobId=:jobId and jobIntrvw.intrvrNm=:intrvwrName")  
+                + " and jobIntrvw.job.jobId=:jobId and jobIntrvw.intrvrNm=:intrvwrName"),
+    @NamedQuery(name="jobIntrvw.getJobIntrvwByCndtId",
+                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobCndt.cndtId=:cndtId"),
+    @NamedQuery(name="jobIntrvw.getJobIntrvwByCndtIdAndJobId",
+                query="SELECT jobIntrvw FROM JobIntrvw jobIntrvw where jobIntrvw.jobCndt.cndtId=:cndtId "
+                + " and jobIntrvw.job.jobId=:jobId")
 })
 public class JobIntrvw implements Serializable {
 	private static final long serialVersionUID = 1L;

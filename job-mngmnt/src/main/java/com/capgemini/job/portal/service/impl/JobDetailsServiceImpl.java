@@ -191,6 +191,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		jobDetails.setServiceLineId(job.getJobRole().getServiceLnCap().getServiceLn().getSrvcLnNm());
 		jobDetails.setTravel(String.valueOf(job.getTrvl()));
 		jobDetails.setWwsid(job.getWwsid());
+		jobDetails.setJobId(String.valueOf(job.getJobId()));
 		
 		return jobDetails;
 	}

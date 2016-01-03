@@ -5,6 +5,9 @@
  */
 package com.capgemini.job.portal.service;
 
+import java.util.List;
+
+import com.capgemini.job.portal.dto.InterviewDetail;
 import com.capgemini.job.portal.jaxb.InterviewDetails;
 
 /**
@@ -39,5 +42,25 @@ public interface JobInterviewService {
 	 * @return the response
 	 */
 	public String deleteScheduleInterview(final String interviewId);
+	
+	/**
+	 * @param interviewId
+	 * @return
+	 */
+	public InterviewDetail getInterviewDetailsById(final String interviewId);
+	
+	/**
+	 * @param candidateId
+	 * @return
+	 */
+	public List<InterviewDetail> getInterviewDetailsByCandidateId(final String candidateId);
+
+
+	/**
+	 * @param jobId
+	 * @param candidateId
+	 * @return
+	 */
+	public List<InterviewDetail> getInterviewDetailsByJobIdAndCndtId(final String jobId, final String candidateId);
 
 }
