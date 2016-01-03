@@ -31,7 +31,6 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
 		$location.path( path );
 	};
     $scope.saveCandidate = function() {
-	alert($scope.jobDetails.jobId);
 	  var file = $scope.vm.resume;
 	  var fd = new FormData();
 	  if(isEmpty(file)){
