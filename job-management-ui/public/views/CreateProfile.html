@@ -1,141 +1,343 @@
 <div ng-controller="CreateJobCtrl">
 	<form id="msform">
-
-		<!--ul id="progressbar">
-			<li class="active">Requestor Details</li>
-			<li>Account details</li>
-			<li>Employee Details</li>
-		</ul-->
 		<fieldset id="fieldSet-1">
-			<h2 class="fs-title">Requestor Details</h2>
-            <hr>
-			<table>
-				<tr>
-					<td style="width: 110px;"><label>WWSID</label></td>
-					<td><input type="text" placeholder="WWSID" ng-model="vm.wwsid"></td>
-					<td rowspan="2" valign="middle" style="width: 130px;"><label>Requested
-							Date</label></td>
-					<td rowspan="2" valign="middle"><input type="date"
-						class="date" placeholder="Requested Date" ng-model="vm.requestedDate"></td>
-				</tr>
-				<tr>
-					<td><label>Creator RM</label></td>
-					<td><input type="text" placeholder="Creator Resource Manager" ng-model="vm.creatorRM"></td>
-				</tr>
-				<tr>
-					<td><label>Requestor RM</label></td>
-					<td><input type="text"
-						placeholder="Requestor Resource Manager" ng-model="vm.requestorRM"></td>
-					<td rowspan="2" valign="middle"><label>Closure Date</label></td>
-					<td rowspan="2" valign="middle"><input type="date"
-						class="date" placeholder="Closure Date" ng-model="vm.closureDate"></td>
-				</tr>
-				<tr>
-					<td><label>Owning RM</label></td>
-					<td><input type="text" placeholder="Owning Resource Manager" ng-model="vm.owningRM"></td>
-				</tr>
-
-			</table>
-			<input type="button" name="Next" value="Next"
-				class="next action-button">
+				<h2 class="fs-title">Requestor Details</h2>
+				<hr>
+				<div class="form-group row">
+					<label for="wwsidinput" class="col-sm-2 control-label">WWSID</label>
+					<div class="col-sm-4">
+						<input type="text" placeholder="WWSID" ng-model="vm.wwsid" class="form-control" id="wwsidinput" >
+						<span id="validatewwsidinput"></span>
+						<div id="wwsidinputalerts"></div>
+					</div>
+					<label for="requestedDateInput" class="col-sm-2 form-control-label">Requested Date</label>
+					<div class="col-sm-4">
+						<input type="date" class="form-control" ng-model="vm.requestedDate" id="requestedDateInput">
+						<span id="validaterequestedDateInput"></span>
+						<div id="requestedDateInputalerts"></div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="creatorRMInput" class="col-sm-2 form-control-label">Creator RM</label>
+					<div class="col-sm-4">
+						<input id="creatorRMInput" type="text" placeholder="Creator Resource Manager" ng-model="vm.creatorRM" class="form-control">
+						<span id="validatecreatorRMInput"></span>
+						<div id="creatorRMInputalerts"></div>
+					</div>
+				</div>
+				<div class="form-group row">
+					<label for="requestorrminput" class="col-sm-2 form-control-label">Requestor RM</label>
+					<div class="col-sm-4">
+						<input id="requestorrminput" type="text" placeholder="Requestor Resource Manager" ng-model="vm.requestorRM" class="form-control">
+						<span id="validaterequestorrminput"></span>
+						<div id="requestorrminputalerts"></div>
+					</div>
+					<label for="closuredateinput" class="col-sm-2 form-control-label">Closure Date</label>
+					<div class="col-sm-4">
+						<input id="closuredateinput" type="date"
+							   class="form-control" placeholder="Closure Date" ng-model="vm.closureDate">
+						<span id="validateclosuredateinput"></span>
+						<div id="closuredateinputalerts"></div>
+						</div>
+				</div>
+				<div class="form-group row">
+					<label for="owningrminput" class="col-sm-2 form-control-label">Owning RM</label>
+					<div class="col-sm-4">
+						<input id="owningrminput" type="text" placeholder="Owning Resource Manager" ng-model="vm.owningRM" class="form-control">
+						<span id="validateowningrminput"></span>
+						<div id="owningrminputalerts"></div>
+					</div>
+				</div>
+				<ul id="bbc" class="pager">
+					<li id="lic" class="next"><a href="#" id="nextfieldset2" class="nextbutton hvr-icon-wobble-horizontal">Next</a></li>
+				</ul>
+			<!--<input type="button" name="Next" value="Next"-->
+				<!--class="next action-button">-->
 		</fieldset>
 		<fieldset id="fieldSet-2" hidden="true">
 			<h2 class="fs-title">Account details</h2>
             <hr>
-			<table>
-				<tr>
-					<td style="width: 110px;"><label>Service Line</label></td>
-					<td><select name="serviceLineId" id="serviceLineId" ng-model="vm.serviceLineId"
-								ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
-					</select></td>
-					
-					<td style="width: 110px;"><label>Role Name</label></td>
-					<td><select name="roleName" id="rolenameid" ng-model="vm.roleId"
-								ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole">
+			<div class="form-group row">
+				<label for="serviceLineId" class="col-sm-2 control-label">Service Line</label>
+				<div class="col-sm-4">
+					<select name="serviceLineId" id="serviceLineId" ng-model="vm.serviceLineId" class="form-control"
+							ng-options="opt.serviceLineId as opt.serviceLineName for opt in serviceLines.serviceLine">
+						<option value="" selected="selected">Select</option>
+					</select>
+					<span id="validateserviceLineId"></span>
+					<div id="serviceLineIdalerts"></div>
+				</div>
+				<label for="rolenameid" class="col-sm-2 form-control-label">Role Name</label>
+				<div class="col-sm-4">
+					<select name="roleName" id="rolenameid" ng-model="vm.roleId" class="form-control"
+							ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole"></select>
+					<span id="validaterolenameid"></span>
+					<div id="rolenameidalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="serviceLineCapabilityId" class="col-sm-2 control-label">Service Line Capability</label>
+				<div class="col-sm-4">
+					<select class="form-control" name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId" class="form-control"
+							ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability"></select>
+					<span id="validateserviceLineCapabilityId"></span>
+					<div id="serviceLineCapabilityIdalerts"></div>
+				</div>
+				<label for="roleRequestorId" class="col-sm-2 form-control-label">Role Requestor</label>
+				<div class="col-sm-4">
+					<select name="roleRequestor" id="roleRequestorId" class="form-control">
+						<option value="1">Java Developer</option>
+						<option value="2">Oracle DBA</option>
+					</select>
+					<span id="validateroleRequestorId"></span>
+					<div id="roleRequestorIdalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="accountId" class="col-sm-2 control-label">Account</label>
+				<div class="col-sm-4">
+					<select name="account" id="accountId" ng-model="vm.accountId"
+							ng-options="opt.accountId as opt.accountName for opt in accounts.account" class="form-control"></select>
+					<span id="validateaccountId"></span>
+					<div id="accountIdalerts"></div>
+				</div>
+				<label for="resourceRequirementInput" class="col-sm-2 form-control-label">Resource Requirement</label>
+				<div class="col-sm-4">
+					<input type="text" placeholder="Number of Resources" ng-model="vm.resourceCount" class="form-control" id="resourceRequirementInput">
+					<span id="validateresourceRequirementInput"></span>
+					<div id="resourceRequirementInputalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="statusId" class="col-sm-2 control-label">Status</label>
+				<div class="col-sm-4">
+					<select name="status" id="statusId" ng-model="vm.jobStatusId"
+							ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus" class="form-control"></select>
+					<span id="validatestatusId"></span>
+					<div id="statusIdalerts"></div>
+				</div>
+				<label for="jobStageId" class="col-sm-2 form-control-label">Job Stage</label>
+				<div class="col-sm-4">
+					<select name="jobStage" id="jobStageId" ng-model="vm.jobStageId"
+							ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage" class="form-control"></select>
+					<span id="validatejobStageId"></span>
+					<div id="jobStageIdalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="openDateInput" class="col-sm-2 control-label">Open Date</label>
+				<div class="col-sm-4">
+					<input type="date"
+						   placeholder="Open Date" ng-model="vm.openDate" class="form-control" id="openDateInput">
+					<span id="validateopenDateInput"></span>
+					<div id="openDateInputalerts"></div>
+				</div>
+				<label for="roleStartDateInput" class="col-sm-2 form-control-label">Role Start Date</label>
+				<div class="col-sm-4">
+					<input type="date"
+						   class="date" placeholder="Role Start Date" ng-model="vm.roleStartDate" class="form-control" id="roleStartDateInput">
 
-					</select></td>
-					
-					<td><label>Open Date</label></td>
-					<td><input type="date"
-						class="date" placeholder="Open Date" ng-model="vm.openDate"></td>
-				</tr>
-				<tr>
-					<td style="width: 110px;"><label>Service Line Capability</label></td>
-					<td><select name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId"
-								ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability">
+					<span id="validateroleStartDateInput"></span>
+					<div id="roleStartDateInputalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="presenterDateInput" class="col-sm-2 control-label">Presenter Date</label>
+				<div class="col-sm-4">
+					<input type="date"
+						   class="date" placeholder="Presenter Date" ng-model="vm.presentedDate" class="form-control" id="presenterDateInput">
 
-					</select></td>
-					<td style="width: 110px;"><label>Role Requestor</label></td>
-					<td><select name="roleRequestor" id="roleRequestorId" >
-					<option value="1">Java Developer</option>
-					<option value="2">Oracle DBA</option>
-					</select></td>
-					<td><label>Presenter Date</label></td>
-					<td><input type="date"
-						class="date" placeholder="Presenter Date" ng-model="vm.presentedDate"></td>
-				</tr>
-				<tr>
-					<td style="width: 110px;"><label>Account</label></td>
-					<td><select name="account" id="accountId" ng-model="vm.accountId"
-								ng-options="opt.accountId as opt.accountName for opt in accounts.account">
-					</select></td>
-					<td><label>Resource Requirement</label></td>
-					<td><input type="text" placeholder="Number of Resources" ng-model="vm.resourceCount"></td>
-					<td><label>Role Start Date</label></td>
-					<td><input type="date"
-						class="date" placeholder="Role Start Date" ng-model="vm.roleStartDate"></td>
-				</tr>
-				<tr>
-					<td style="width: 110px;"><label>Status</label></td>
-					<td><select name="status" id="statusId" ng-model="vm.jobStatusId"
-                                ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus">
-					</select></td>
-					<td style="width: 110px;"><label>Job Stage</label></td>
-					<td><select name="jobStage" id="jobStageId" ng-model="vm.jobStageId"
-                                ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage">
-
-                    </select></td>
-					<td><label>Role End Date</label></td>
-					<td><input type="date"
-						class="date" placeholder="Role End Date" ng-model="vm.roleEndDate"></td>
-				</tr>
-
-			</table>
-
-			<input type="button" name="previous" class="previous action-button"
-				value="Previous" /> <input type="button" name="next"
-				class="next action-button" value="Next" />
+					<span id="validatepresenterDateInput"></span>
+					<div id="presenterDateInputalerts"></div>
+				</div>
+				<label for="roleEndDateInput" class="col-sm-2 form-control-label">Role End Date</label>
+				<div class="col-sm-4">
+					<input type="date"
+						   class="date" placeholder="Role End Date" ng-model="vm.roleEndDate" class="form-control" id="roleEndDateInput">
+					<span id="validateroleEndDateInput"></span>
+					<div id="roleEndDateInputalerts"></div>
+				</div>
+			</div>
+			<ul id="fieldSet2Pager" class="pager">
+				<li class="previous"><a href="#" id="previousfieldset1" class="nextbutton hvr-icon-wobble-horizontal-left">Previous</a></li>
+				<li class="next"><a href="#" id="nextfieldset3" class="nextbutton hvr-icon-wobble-horizontal">Next</a></li>
+			</ul>
 		</fieldset>
 		<fieldset id="fieldSet-3" hidden="true">
 			<h2 class="fs-title">Employee Details</h2>
             <hr>
-			<table>
-				<tr>
-					<td style="width: 110px;"><label>Employee Type</label></td>
-					<td><select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId"
-                                ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType">
-					</select></td>
-					<td><label>Contractor Rate</label></td>
-					<td><input type="text" placeholder="Contractor Rate" ng-model="vm.contractorRate"></td>
-				</tr>
-				<tr>
-					<td><label>Charge Out Rate</label></td>
-					<td><input type="text"
-						placeholder="Charge Out Rate" ng-model="vm.chargeOutRate"></td>
-					<td><label>Travel:</label></td>
-					<td><input type="text"
-						placeholder="Travel" ng-model="vm.travel"></td>
-				</tr>
-				<tr>
-					<td colspan="1"><label>Requirement Specifics</label></td>
-					<td colspan="2"><textarea rows="4" cols="20" placeholder="Requirement Specifics" ng-model="vm.requirementSpecifics"></textarea>
-				</tr>
-
-			</table>
-			<input type="button" name="previous" class="previous action-button"
-				value="Previous" /> <input type="submit" name="submit"
-				class="submit action-button" value="Submit" ng-click="saveJob()"/>
+			<div class="form-group row">
+			<label for="employeeTypeId" class="col-sm-2 control-label">Employee Type</label>
+			<div class="col-sm-4">
+				<select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId"
+						ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType" class="form-control"></select>
+				<span id="validateemployeeTypeId"></span>
+				<div id="employeeTypeIdalerts"></div>
+			</div>
+			<label for="contractorRateInput" class="col-sm-2 form-control-label">Contractor Rate</label>
+			<div class="col-sm-4">
+				<input type="text" placeholder="Contractor Rate" ng-model="vm.contractorRate" class="form-control" id="contractorRateInput">
+				<span id="validatecontractorRateInput"></span>
+				<div id="contractorRateInputalerts"></div>
+			</div>
+			</div>
+			<div class="form-group row">
+				<label for="chargeOutRateInput" class="col-sm-2 control-label">Charge Out Rate</label>
+				<div class="col-sm-4">
+					<input type="text"
+						   placeholder="Charge Out Rate" ng-model="vm.chargeOutRate" class="form-control" id="chargeOutRateInput">
+					<span id="validatechargeOutRateInput"></span>
+					<div id="chargeOutRateInputalerts"></div>
+				</div>
+				<label for="travelInput" class="col-sm-2 form-control-label">Travel</label>
+				<div class="col-sm-4">
+					<input type="text"
+						   placeholder="Travel" ng-model="vm.travel" class="form-control" id="travelInput">
+					<span id="validatetravelInput"></span>
+					<div id="travelInputalerts"></div>
+				</div>
+			</div>
+			<div class="form-group row">
+				<label for="reqSpecificsInput" class="col-sm-2 control-label">Requirement Specifics</label>
+				<div class="col-sm-8">
+					<textarea rows="4" cols="20" placeholder="Requirement Specifics" ng-model="vm.requirementSpecifics" class="form-control" id="reqSpecificsInput"></textarea>
+					<span id="validatereqSpecificsInput"></span>
+					<div id="reqSpecificsInputalerts"></div>
+				</div>
+			</div>
+			<ul id="fieldSet3Pager" class="pager">
+				<li class="previous"><a href="#" id="previousfieldset2" class="nextbutton hvr-icon-wobble-horizontal-left">Previous</a></li>
+				<li id="reviewDetails" class="next"><a href="#" id="review" data-toggle="modal" data-target="#confirm-submit" class="nextbutton hvr-icon-wobble-horizontal">Review Details</a></li>
+			</ul>
+			<!--<input type="button" name="previous" class="previous action-button"-->
+				<!--value="Previous" /> <input type="submit" name="submit"-->
+				<!--class="submit action-button" value="Submit" ng-click="saveJob()"/>-->
 		</fieldset>
+
+		<div class="modal fade" id="confirm-submit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="panel-heading search-heading">
+					<div class="row">
+					<div class="col-xs-10" >
+						<h3 class="panel-title">Review Details</h3>
+					</div>
+						</div>
+						</div>
+					<div class="panel-body">
+						<!-- We display the details entered by the user here -->
+						<table class="table table-hover">
+							<tbody class="bg-success">
+							<tr>
+								<th>WWSID</th>
+								<td id="wwsidinputmodal"></td>
+								<th>Requestor Date</th>
+								<td id="requestedDateInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Creator RM</th>
+								<td id="creatorRMInputmodal"></td>
+								<th>Requestor RM</th>
+								<td id="requestorrminputmodal"></td>
+							</tr>
+							<tr>
+								<th>Closure Date</th>
+								<td id="closuredateinputmodal"></td>
+								<th>Owning RM</th>
+								<td id="owningrminputmodal"></td>
+							</tr>
+							<tr>
+								<th>Service Line</th>
+								<td id="serviceLineIdmodal"></td>
+								<th>Role Name</th>
+								<td id="rolenameidmodal"></td>
+							</tr>
+							<tr>
+								<th>Service Line Capability</th>
+								<td id="serviceLineCapabilityIdmodal"></td>
+								<th>Role Requestor</th>
+								<td id="roleRequestorIdmodal"></td>
+							</tr>
+							<tr>
+								<th>Account</th>
+								<td id="accountIdmodal"></td>
+								<th>Resource Requirement</th>
+								<td id="resourceRequirementInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Status</th>
+								<td id="statusIdmodal"></td>
+								<th>Job Stage</th>
+								<td id="jobStageIdmodal"></td>
+							</tr>
+							<tr>
+								<th>Open Date</th>
+								<td id="openDateInputmodal"></td>
+								<th>Role Start Date</th>
+								<td id="roleStartDateInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Presenter Date</th>
+								<td id="presenterDateInputmodal"></td>
+								<th>Role End Date</th>
+								<td id="roleEndDateInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Employee Type</th>
+								<td id="employeeTypeIdmodal"></td>
+								<th>Contractor Rate</th>
+								<td id="contractorRateInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Charge Out Rate</th>
+								<td id="chargeOutRateInputmodal"></td>
+								<th>Travel</th>
+								<td id="travelInputmodal"></td>
+							</tr>
+							<tr>
+								<th>Requirement Specifics</th>
+								<td colspan="3" id="reqSpecificsInputmodal"></td>
+							</tr>
+						</tbody>
+						</table>
+
+					</div>
+
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+						<a href="#" id="submit" class="btn btn-success success" data-dismiss="modal" ng-click="saveJob()">Submit</a>
+					</div>
+				</div>
+			</div>
+			</div>
+
+		<div ng-show="submissionSuccess" class="confirmationmodal" id="jobStatusDiv">
+			<div class="panel-heading search-heading">
+				<div class="row">
+					<div class="col-xs-10" >
+						<h3 class="panel-title">Job Creation Status</h3>
+					</div>
+				</div>
+			</div>
+			<div class="panel-body">
+				<table class="table">
+					<tbody class="bg-success">
+					<tr>
+						<th colspan="2">Job Created Successfully !!!!</th>
+					</tr>
+					<tr>
+						<td colspan="2"/>
+					</tr>
+					<tr>
+						<td><button class="btn btn-success success" id="addMore">Add</button></td>
+						<td><a href="/dashboard" class="btn btn-success success" >Home</a></td>
+					</tr>
+					</tbody>
+				</table>
+				</div>
+
+		</div>
+
         <script
                 src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script src="../js/jquery.easing-1.3.min.js" type="text/javascript"></script>

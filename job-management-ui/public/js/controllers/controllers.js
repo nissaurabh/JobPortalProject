@@ -20,12 +20,15 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
         createJobResp.$promise.then(function(response) {
            if(response.$status == 200) {
                alert("Job Created successfully !!!");
-               $location.path("/dashboard");
+               $scope.submissionSuccess=true;
+               // $location.path("/dashboard");
            } else {
                alert("Exception from origin server .." + response.$status);
+               $scope.submissionSuccess=true;
            }
         }).catch(function(error) {
-            alert("Exception from origin server .." + error.$status);
+            alert("Exception from origin server exception.." + error.$status);
+            $scope.submissionSuccess=true;
         });
         // console.log($scope.createjob.create.result.$status);
     }
@@ -45,8 +48,8 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
   }]);
 
 
-jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetailsFactory',
-  function($scope, candidateDetailsFactory) {
+jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$routeParams', 'CandidateDetailsFactory',
+  function($scope, $routeParams , candidateDetailsFactory) {
 
     $scope.saveJob = function() {
        $scope.jsonObj = angular.toJson($scope.vm, false);
@@ -54,6 +57,8 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope', 'CandidateDetai
       $scope.storedData = candidateDetailsFactory.create($scope.vm);
         console.log("Response : " + $scope.storedData);
     }
+	
+	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
 
   }]);
 

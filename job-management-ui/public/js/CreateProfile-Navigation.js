@@ -3,20 +3,181 @@
  */
 $(function() {
 
+
+
     //jQuery time
     var current_fs, next_fs, previous_fs; //fieldsets
     var left, opacity, scale; //fieldset properties which we will animate
     var animating; //flag to prevent quick multi-click glitches
 
+
+    var mandatoryFields = {
+        fieldset1 : ["wwsidinput","requestedDateInput","creatorRMInput","requestorrminput","closuredateinput","owningrminput"],
+        fieldset2 : [],
+        fieldset3 : []
+    };
+
+    // $('.wwsidtooltip').tooltip();
+
+    function addAlert(resource,message) {
+        $(resource).append(
+            '<div class="alert alert-danger fade in">' +
+            '<button type="button" class="close" data-dismiss="alert">' +
+            '&times;</button>' + message + '</div>');
+    }
+
+    function emptyFieldCheck(resource,spanresource,alertresource,alertmessage) {
+        $(alertresource).empty();
+        var inp = $(resource).val();
+        if(jQuery.trim(inp).length > 0) {
+            $(resource).parent().removeClass("has-error has-feedback");
+            $(spanresource).removeClass("glyphicon glyphicon-remove-circle form-control-feedback");
+            $(resource).parent().addClass("has-success has-feedback");
+            $(spanresource).addClass("glyphicon glyphicon-ok-circle form-control-feedback");
+            return false;
+        } else {
+            $(resource).parent().removeClass("has-success has-feedback");
+            $(spanresource).removeClass("glyphicon glyphicon-ok-circle form-control-feedback");
+            $(resource).parent().addClass("has-error has-feedback");
+            $(spanresource).addClass("glyphicon glyphicon-remove-circle form-control-feedback");
+            addAlert(alertresource,alertmessage);
+            return true;
+        }
+    }
+
+    $("#wwsidinput").blur(function() {
+        emptyFieldCheck(this,'#validatewwsidinput','#wwsidinputalerts','WWSID field cannot be empty!!!');
+    });
+
+    $("#requestedDateInput").blur(function() {
+        emptyFieldCheck(this,'#validaterequestedDateInput','#requestedDateInputalerts','RequestedDate field cannot be empty!!!');
+    });
+
+    $("#creatorRMInput").blur(function() {
+        emptyFieldCheck(this,'#validatecreatorRMInput','#creatorRMInputalerts','Creator RM field cannot be empty!!!');
+    });
+
+
+    $("#requestorrminput").blur(function() {
+        emptyFieldCheck(this,'#validaterequestorrminput','#requestorrminputalerts','Requestor RM cannot be empty!!!');
+    });
+
+    $("#closuredateinput").blur(function() {
+        emptyFieldCheck(this,'#validateclosuredateinput','#closuredateinputalerts','Closure Date Field cannot be empty!!!');
+    });
+
+    $("#owningrminput").blur(function() {
+        emptyFieldCheck(this,'#validateowningrminput','#owningrminputalerts','Owning RM cannot be empty!!!');
+    });
+
+    function validateFieldSet1Mandatory() {
+        var wwsidEmpty = emptyFieldCheck('#wwsidinput','#validatewwsidinput','#wwsidinputalerts','WWSID field cannot be empty!!!');
+        var requestDateEmpty = emptyFieldCheck('#requestedDateInput','#validaterequestedDateInput','#requestedDateInputalerts','RequestedDate field cannot be empty!!!');
+        var creatorRMEmpty = emptyFieldCheck('#creatorRMInput','#validatecreatorRMInput','#creatorRMInputalerts','Creator RM field cannot be empty!!!');
+        var requestorrmEmpty = emptyFieldCheck('#requestorrminput','#validaterequestorrminput','#requestorrminputalerts','Requestor RM cannot be empty!!!');
+        var closuredateEmpty = emptyFieldCheck('#closuredateinput','#validateclosuredateinput','#closuredateinputalerts','Closure Date Field cannot be empty!!!');
+        var owningrmEmpty = emptyFieldCheck('#owningrminput','#validateowningrminput','#owningrminputalerts','Owning RM cannot be empty!!!');
+
+        return (wwsidEmpty || requestDateEmpty || creatorRMEmpty || requestorrmEmpty || closuredateEmpty || owningrmEmpty);
+
+    }
+
+
+    //jQuery(function() {
+    //    function validateOnBlur() {
+    //        alert("inside validateBlur");
+    //        $('#requestedDateInput').trigger('blur');
+    //    }
+    //});(jQuery);
+
+    function validateFieldsNextClick(fieldsetIndex) {
+
+        if(fieldsetIndex==1) {
+            return validateFieldSet1Mandatory();
+        }
+        //var continueNextPage = true;
+        //alert(mandatoryFields['fieldset'+fieldsetIndex][0]);
+        //var fieldSetMandatoryFields = mandatoryFields['fieldset'+fieldsetIndex];
+        //$.each(fieldSetMandatoryFields,function(index,value) {
+        //
+        //    var fieldName = '#'+value;
+        //    alert(fieldName);
+        //    jQuery(function() {
+        //        //$("#requestedDateInput").trigger("blur");
+        //        validateOnBlur();
+        //    });(jQuery);
+        //    if($(fieldName).hasClass('has-error')) {
+        //        continueNextPage = false;
+        //    }
+        //});
+        //
+        //return continueNextPage;
+    }
+
+
+    //(function($) {
+    //    $.fn.validateNext = function() {
+    //        alert('inside');
+    //        this.trigger('blur');
+    //    };
+    //}(jQuery));
+
+    $('#addMore').click(function() {
+      $('#jobStatusDiv').removeClass('confirmationmodal');
+        $('#jobStatusDiv').empty();
+        location.reload();
+    });
+
+
+
+
     $(".next").click(
         function() {
+            if($(this).attr('id')=='reviewDetails') {
+                $('#wwsidinputmodal').html($('#wwsidinput').val());
+                $('#requestedDateInputmodal').html($('#requestedDateInput').val());
+                $('#creatorRMInputmodal').html($('#creatorRMInput').val());
+                $('#requestorrminputmodal').html($('#requestorrminput').val());
+                $('#closuredateinputmodal').html($('#closuredateinput').val());
+                $('#owningrminputmodal').html($('#owningrminput').val());
+                $('#serviceLineIdmodal').html($('#serviceLineId option:selected').text());
+                $('#rolenameidmodal').html($('#rolenameid option:selected').text());
+                $('#serviceLineCapabilityIdmodal').html($('#serviceLineCapabilityId option:selected').text());
+                $('#roleRequestorIdmodal').html($('#roleRequestorId option:selected').text());
+                $('#accountIdmodal').html($('#accountId option:selected').text());
+                $('#resourceRequirementInputmodal').html($('#resourceRequirementInput').val());
+                $('#statusIdmodal').html($('#statusId option:selected').text());
+                $('#jobStageIdmodal').html($('#jobStageId option:selected').text());
+                $('#openDateInputmodal').html($('#openDateInput').val());
+                $('#roleStartDateInputmodal').html($('#roleStartDateInput').val());
+                $('#presenterDateInputmodal').html($('#presenterDateInput').val());
+                $('#roleEndDateInputmodal').html($('#roleEndDateInput').val());
+                $('#jobStageIdmodal').html($('#jobStageId option:selected').text());
+                $('#employeeTypeIdmodal').html($('#employeeTypeId option:selected').text());
+                $('#contractorRateInputmodal').html($('#contractorRateInput').val());
+                $('#chargeOutRateInputmodal').html($('#chargeOutRateInput').val());
+                $('#travelInputmodal').html($('#travelInput').val());
+                $('#reqSpecificsInputmodal').html($('#reqSpecificsInput').val());
+                return;
+            }
 
             if (animating)
                 return false;
             animating = true;
+            current_fs = $(this).parent().parent();
+            next_fs = $(this).parent().parent().next();
 
-            current_fs = $(this).parent();
-            next_fs = $(this).parent().next();
+
+            var fieldsetIndex = ($("fieldset").index(current_fs) + 1);
+            //$('#requestedDateInput').validateNext();
+            // validatedata
+            // var hasFailures = validateFieldsNextClick(fieldsetIndex);
+            //
+            //if(hasFailures) {
+            //    return;
+            //}
+
+           //  alert($("fieldset").index(next_fs));
 
             //activate next step on progressbar using the index of next_fs
             $("#progressbar li").eq($("fieldset").index(next_fs))
@@ -72,8 +233,11 @@ $(function() {
                 return false;
             animating = true;
 
-            current_fs = $(this).parent();
-            previous_fs = $(this).parent().prev();
+            current_fs = $(this).parent().parent();
+            previous_fs = $(this).parent().parent().prev();
+
+            //current_fs = $(this).parent();
+            //previous_fs = $(this).parent().prev();
 
             //de-activate current step on progressbar
             $("#progressbar li").eq($("fieldset").index(current_fs))

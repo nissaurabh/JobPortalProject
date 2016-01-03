@@ -55,14 +55,12 @@ jobMngmtServices.factory('JobAdminFactory', function ($resource,config) {
 
 jobMngmtServices.factory('CandidateDetailsFactory', function ($resource,config) {
 
-  var data = $resource(config.apiUrl+'candidate', {}, {
-    create: { method: 'POST',
-              isArray: false
-            }
-
-    });
-  return data;
-
+  return {
+       getCandidate: $resource(config.apiUrl + 'candidate/retrieveDetails/:candidateId', {candidateId:'@candidateId'},
+           {
+               get: {method: 'GET', isArray: false,}
+           })
+   }
   });
 
 jobMngmtServices.factory('JobSearchFactory', function ($resource,config) {
