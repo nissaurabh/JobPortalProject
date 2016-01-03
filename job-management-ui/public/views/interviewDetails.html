@@ -1,0 +1,72 @@
+<div class="row" ng-controller="CreateCandidateCtrl">
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">Candidate Interview Details</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/candidateSearchView" class="white-link">Back</a>
+                </div>
+            </div>
+            </div>
+        <!-- <a href="/jobSearchView" class="white-link">Search</a> <span>/</span>-->
+        <div class="panel-body">
+			<table class="table table-hover">
+                <thead class="search search-heading">
+                <tr>
+                    <th>
+                        <a href="#" ng-click="sortType = 'interviewerName'; sortReverse = !sortReverse" class="white-link">
+                        <label>Interviewer Name</label>
+                            <span ng-show="sortType == 'interviewerName' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'interviewerName' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'status'; sortReverse = !sortReverse" class="white-link">
+                        <label>Status</label>
+                            <span ng-show="sortType == 'status' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'status' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'intrvwDateTime'; sortReverse = !sortReverse" class="white-link">
+                        <label>Interview Date</label>
+                            <span ng-show="sortType == 'intrvwDateTime' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'intrvwDateTime' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                    <th>
+                        <a href="#" ng-click="sortType = 'intrvwComments'; sortReverse = !sortReverse" class="white-link">
+                        <label>Comments</label>
+                            <span ng-show="sortType == 'intrvwComments' && !sortReverse" class="fa fa-caret-down"></span>
+                            <span ng-show="sortType == 'intrvwComments' && sortReverse" class="fa fa-caret-up"></span>
+                        </a>
+                    </th>
+                </tr>
+                </thead>
+                <tbody class="bg-success" ng-repeat="detail in interviewDetails.interviewList | orderBy:sortType:sortReverse">
+                <tr>
+                    <td>{{detail.interviewerName}}</td>
+                    <td>{{detail.status}}</td>
+                    <td>{{detail.intrvwDateTime}}</td>
+                    <td>{{detail.intrvwComments}}</td>
+                </tr>
+                </tbody>
+				<!--tbody class="bg-success" ng-if="!(interviewDetails.interviewList && interviewDetails.interviewList.length>0)">
+                <tr>
+                    <td colspan='4'>No interviews schedule for the candidate</td>
+                </tr>
+                </tbody-->
+            </table>
+			<div class="input-group">
+                       <button type="button" id="schInt" class="btn btn-color" ng-click="modifyInterview()">
+                                Modify Interview
+						</button>
+						<button type="button" id="intDet" class="btn btn-color" ng-click="cancelIntervuew()">
+                                Delete Interview
+						</button>
+            </div>
+        </div>
+    </div>
+</div>

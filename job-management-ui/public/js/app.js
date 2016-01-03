@@ -80,8 +80,9 @@ angular
             templateUrl: 'views/candidateDetails.html',
             controller: 'CreateCandidateCtrl'
         })
-		.when('/createCandidate', {
-            templateUrl: 'views/createCandidate.html'
+		.when('/candidateIntrvwDetailsView/:candidateId', {
+            templateUrl: 'views/interviewDetails.html',
+            controller: 'CreateCandidateCtrl'
         })
       .otherwise({
         redirectTo: '/login',

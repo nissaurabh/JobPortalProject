@@ -25,17 +25,30 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
   }]);
 
 
-jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$routeParams', 'CandidateDetailsFactory',
-  function($scope, $routeParams , candidateDetailsFactory) {
-
-    $scope.saveJob = function() {
-       $scope.jsonObj = angular.toJson($scope.vm, false);
-      console.log("data: " + $scope.jsonObj);
-      candidateDetailsFactory.create($scope.vm);
+jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$location','$routeParams', 'CandidateDetailsFactory','InterviewSearchFactory',
+  function($scope,$rootScope,$location, $routeParams , candidateDetailsFactory,interviewSearchFactory) {
+	$scope.close = function ( path ) {
+		$location.path( path );
+	};
+    $scope.saveCandidate = function() {
+	alert($scope.jobDetails.jobId);
+	  var file = $scope.vm.resume;
+	  var fd = new FormData();
+	  if(isEmpty(file)){
+			fd.append('file', file);
+	  }
+	  fd.append('jobCandidate', angular.toJson($scope.vm, false));
+      var candidate = candidateDetailsFactory.createCandidate.create({param:$scope.jobDetails.jobId},fd);
+	  candidate.$promise.then(function (response) {
+		$location.path("/dashboard");
+	   });
     }
-	
 	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
-
+	$scope.interviewDetails = interviewSearchFactory.getInterviewDetByCandidate.get(
+                {
+                    cndt_id : $routeParams.candidateId
+                }
+        );
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
@@ -327,7 +340,7 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
 
 jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$cookies','InterviewSearchFactory','$filter','$location',
     function($scope,$rootScope,$cookies,interviewSearchFactory,$filter,$location) {
-
+		
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $rootScope.userName= $cookies.get('userName');
@@ -352,7 +365,6 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
                 }
             );
         };
-
         $scope.setDefaultInterviewDashboard = function() {
             var dashboardURL = getDefaultIntrvwDashboardURL($rootScope.userId,$scope.interviewDateFrom,$scope.interviewDateTo,$scope.result,$scope.interviewer);
             interviewSearchFactory.setInterviewDashboard.update({param:$rootScope.userId},

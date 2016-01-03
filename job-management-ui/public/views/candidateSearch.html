@@ -121,6 +121,7 @@
                             <span ng-show="sortType == 'cndtResume' && sortReverse" class="fa fa-caret-up"></span>
                         </a>
                     </th>
+					<th></th>
                 </tr>
                 </thead>
                 <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter">
@@ -131,6 +132,7 @@
                     <td>{{searchResultObj.cndtStatus}}</td>
                     <td>{{searchResultObj.ctznStatus}}</td>
 					<td><a ng-href="{{searchResultObj.cndtResume}}">download</a></td>
+					<td><a ng-href="/candidateIntrvwDetailsView/{{searchResultObj.cndtId}}">Interview Details</a></td>
                 </tr>
                 </tbody>
             </table>
