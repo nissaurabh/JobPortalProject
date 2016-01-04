@@ -41,6 +41,21 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
 	  candidate.$promise.then(function (response) {
 		$location.path("/dashboard");
 	   });
+	   /*alert("here");
+		var uploadUrl = 'http://192.168.1.36:8080/job-management-service/candidate/' + $scope.jobDetails.jobId;
+		alert(uploadUrl);
+		var file = $scope.vm.resume;
+	    var fd = new FormData();
+		fd.append('jobCandidate', angular.toJson($scope.vm, false));
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });*/
     }
 	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
 	$scope.interviewDetails = interviewSearchFactory.getInterviewDetByCandidate.get(
@@ -48,6 +63,13 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
                     cndt_id : $routeParams.candidateId
                 }
         );
+	$scope.saveInterview = function() {
+       $scope.jsonObj = angular.toJson($scope.vm, false);
+       interviewSearchFactory.createInterview.create({job_id:$scope.candidateDetails.jobId,cndt_id:$scope.candidateDetails.cndtId},$scope.vm);
+    }
+	$scope.cancelInterview = function() {
+       interviewSearchFactory.createInterview.create({jobIntrvwId:$scope.detail.jobIntrvwId});
+    }
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',

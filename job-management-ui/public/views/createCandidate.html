@@ -7,71 +7,78 @@
 					</div>
 					<div>
 						<div class="well" style="width:750px">
-							<form role="form" action="#dashboard">
+							<form role="form" action="#dashboard" name="createCandidate">
 								<table class="table-condensed">
 									<tr>
-										<td><label for="candtName" style="width:120px;">Candidate Name:</label></td>
+										<td><label for="candidateName" style="width:120px;">Candidate Name:</label></td>
 										<td><input type="text" class="form-control"
-											id="candtName"></td>
-										<td><label for="rsrType1">Category :</label></td>
-										<td><select class="form-control" id="rsrType1">
-												<option>Internal</option>
-												<option>For Hire</option>
-												<option>Contractor</option>
+											id="name" ng-model="vm.name"></td>
+										<td><label for="resourceType">Category :</label></td>
+										<td><select class="form-control" id="candidateCategoryId" ng-model="vm.candidateCategoryId">>
+												<option value="1">Internal</option>
+												<option value="2">For Hire</option>
+												<option value="3">Contractor</option>
 										</select></td>
 									</tr>
 									<tr>
-										<td><label for="cndtSrcSts1">Candidate Status:</label></td>
-										<td><select class="form-control" id="cndtSrcSts1">
-												<option>Active</option>
-												<option>Hired</option>
-												<option>Rejected</option>
-												<option>Did Not Join</option>
+										<td><label for="candidateStatus">Candidate Status:</label></td>
+										<td><select class="form-control" id="candidateStatusId" ng-model="vm.candidateStatusId">
+												<option value="1">Active</option>
+												<option value="2">Hired</option>
+												<option value="3">Rejected</option>
+												<option value="4">Did Not Join</option>
 										</select></td>
 										<td><label for="cntrRate1">Contractor Rate:</label></td>
 										<td><input type="text" class="form-control"
-											id="cntrRate1"></td>
+											id="contractorRate" ng-model="vm.contractorRate"></td>
 									</tr>
 									<tr class="form-group form-inline">
 										<td><label for="prmSkills">Primary Skills:</label></td>
 										<td><input type="text" class="form-control"
-											id="prmSkills"></td>
+											id="primarySkills" ng-model="vm.primarySkills"></td>
 										<td><label for="buLeadAppr">BU Lead Approval:</label></td>
 										<td><input type="text" class="form-control"
-											id="buLeadAppr"></td>
+											id="buLeadApproval" ng-model="vm.buLeadApproval"></td>
 									</tr>
 									<tr class="form-group form-inline">
 										<td><label for="ctzSrcSts1">Citizenship Status:</label></td>
-										<td><select class="form-control" id="ctzSrcSts1">
-												<option>Green Card</option>
-												<option>H1B</option>
-												<option>OPT</option>
-												<option>US Citizen</option>
+										<td><select class="form-control" id="citizenStatusId" ng-model="vm.citizenshipStatusId">
+												<option value="3">Green Card</option>
+												<option value="1">H1B</option>
+												<option value="2">OPT</option>
+												<option value="4">L1</option>
 										</select></td>
 										<td><label for="capLeadAppr">Capablity Lead Approver:</label></td>
 										<td><input type="text" class="form-control"
-											id="capLeadAppr"></td>
+											id="capabilityLeadApproval" ng-model="vm.capabilityLeadApproval"></td>
 									</tr>
 									<tr class="form-group form-inline">
 										<td><label for="offerDate">Offer Date:</label> </td>
 										<td><input type="date"
-									class="form-control" id="offerDate"></td>
+									class="form-control" id="offerDate" ng-model="vm.offerDate"></td>
 										<td><label for="offrAcptDate">Offer Accept Date:</label> </td>
 										<td><input type="date"
-									class="form-control" id="offrAcptDate"></td>
+									class="form-control" id="offerAcceptDate" ng-model="vm.offerAcceptDate"></td>
 									</tr>
 									<tr class="form-group form-inline">
 										<td><label for="joinDate">Join Date:</label> </td>
 										<td><input type="date"
-									class="form-control" id="joinDate"></td>
+									class="form-control" id="joiningDate" ng-model="vm.joiningDate"></td>
 										<td><label for="actjoinDate">Actual Join Date:</label> </td>
 										<td><input type="date"
-									class="form-control" id="actjoinDate"></td>
+									class="form-control" id="actualJoiningDate" ng-model="vm.actualJoiningDate"></td>
 									</tr>
 									<tr class="form-group form-inline" >
-										<td colspan="4"><span><label for="upldResume">Upload Resume:</label></span>
-											<span><input type="file" class="form-control"
-												id="upldResume"></span>
+									<td><label for="resourceType">Resource Type :</label></td>
+									<td><select class="form-control" id="resourceTypeId" name="resourceTypeId" ng-model="vm.resourceTypeId">
+												<option value="1">GX Employee</option>
+												<option value="2">US Employee</option>
+												<option value="3">Contractor</option>
+										</select>
+									</td>
+										<td><label for="upldResume">Upload Resume:</label></td>
+											<td><input type="file" class="form-control" style="width:100%"
+												id="resume" ng-model="vm.resume">
 										</td>
 									</tr>
 								</table>
@@ -80,8 +87,8 @@
 						
 					</div>
 					<div class="modal-footer" style="background-color: #dff0d8">
-							<button type="button" class="btn btn-default" data-dismiss="modal">Send</button>
-							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveCandidate()">Send</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close('/dashboard')">Close</button>
 						</div>
 
 </div>
