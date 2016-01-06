@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers'])
+  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers','jobMngmtDirectives'])
     .config(['$httpProvider',function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         //$httpProvider.defaults.withCredentials = true;
@@ -17,7 +17,7 @@ angular
         $httpProvider.defaults.headers.common["Accept"] = "application/json";
         $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     }]).constant('config', {
-        apiUrl: 'http://10.81.82.85:8080/job-management-service/'
+        apiUrl: 'http://192.168.2.6:8080/job-management-service/'
         })
     /*.config(['ChartJsProvider', function(ChartJsProvider) {
         ChartJsProvider.setOptions({

@@ -31,9 +31,9 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
 		$location.path( path );
 	};
     $scope.saveCandidate = function() {
-	  var file = $scope.vm.resume;
+	  var file = $scope.resume;
 	  var fd = new FormData();
-	  if(isEmpty(file)){
+	  if(file!=undefined){
 			fd.append('file', file);
 	  }
 	  fd.append('jobCandidate', angular.toJson($scope.vm, false));
