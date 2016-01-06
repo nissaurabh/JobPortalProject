@@ -44,6 +44,26 @@ public final class  DateUtil {
 	    }
 	  }
 	
+	/**
+	 * create the job.
+	 * 
+	 * @param strDate
+	 *            the strDate
+	 * @return the timeStampDate
+	 */
+	public static Timestamp convertStringToDateTimeStamp(String strDate) {
+	    try {
+	      DateFormat formatter;
+	      formatter = new SimpleDateFormat("yyyy-MM-ddTHH:MM:SS.sss");
+	      Date date = (Date) formatter.parse(strDate);
+	      java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
+
+	      return timeStampDate;
+	    } catch (ParseException e) {
+	      return null;
+	    }
+	  }
+	
 	
 	/**
 	 * @param strDate
