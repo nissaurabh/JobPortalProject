@@ -1,5 +1,9 @@
 package com.capgemini.job.portal.service.impl;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -9,6 +13,7 @@ import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dao.JobCandidateDAO;
 import com.capgemini.job.portal.dao.JobDetailsDAO;
 import com.capgemini.job.portal.dao.JobInterviewDetailsDAO;
+import com.capgemini.job.portal.dto.InterviewDetail;
 import com.capgemini.job.portal.entities.IntrvwSt;
 import com.capgemini.job.portal.entities.Job;
 import com.capgemini.job.portal.entities.JobCndt;
@@ -142,6 +147,73 @@ public class JobInterviewServiceImpl implements JobInterviewService {
 	@Transactional
 	public IntrvwSt getInterviewStatus(final int interviewStsId) {
 		return jobInterviewDetailsDAO.getInterviewStatus(interviewStsId);
+	}
+
+
+	@Override
+	public InterviewDetail getInterviewDetailsById(String interviewId) {
+		JobIntrvw interview = jobInterviewDetailsDAO.retrieveInterviewDetails(Integer.valueOf(interviewId));
+		return formatIntrvwDetailResponse(interview);
+	}
+	
+	@Override
+	public List<InterviewDetail> getInterviewDetailsByCandidateId(String candidateId) {
+		List<JobIntrvw> interviewList = jobInterviewDetailsDAO.retrieveInterviewDetailsByCandId(Integer.valueOf(candidateId));
+		return formatResponse(interviewList);
+	}
+	
+	@Override
+	public List<InterviewDetail> getInterviewDetailsByJobIdAndCndtId(String jobId, String candidateId) {
+		List<JobIntrvw> interviewList = jobInterviewDetailsDAO.
+				retrieveInterviewDetailsByJobIdandCandId(Integer.valueOf(jobId),Integer.valueOf(candidateId));
+		return formatResponse(interviewList);
+	}
+	
+	/**
+	 * @param interview
+	 * @return
+	 */
+	private InterviewDetail formatIntrvwDetailResponse(JobIntrvw interview) {
+		InterviewDetail detail = null;
+		if(null != interview){
+			detail = new InterviewDetail();
+			detail.setCandidateId(interview.getJobCndt().getCndtId());
+			detail.setCandidateName(interview.getJobCndt().getCndtNm());
+			detail.setInterviewerName(interview.getIntrvrNm());
+			detail.setIntrvwDateTime(DateUtil.convertTimestamptoDate(interview.getIntrvwTm()));
+			detail.setIntrvwComments(interview.getIntrvrCmnts());
+			detail.setStatus(interview.getIntrvwSt().getIntrvwStsNm());
+			detail.setJobId(interview.getJob().getJobId());
+			detail.setJobIntrvwId(interview.getJobIntrvwId());
+		}
+		return detail;
+	}
+	
+	
+	/**
+	 * @param interviewList
+	 * @return
+	 */
+	private List<InterviewDetail> formatResponse(List<JobIntrvw> interviewList) {
+		List<InterviewDetail> detailsList = new ArrayList<InterviewDetail>();
+		if(null!=interviewList && !interviewList.isEmpty()){
+			for (Iterator<JobIntrvw> iterator = interviewList.iterator(); iterator.hasNext();) {
+				JobIntrvw interview = (JobIntrvw) iterator.next();
+				if(null != interview){
+					InterviewDetail detail = new InterviewDetail();
+					detail.setCandidateId(interview.getJobCndt().getCndtId());
+					detail.setCandidateName(interview.getJobCndt().getCndtNm());
+					detail.setInterviewerName(interview.getIntrvrNm());
+					detail.setIntrvwDateTime(DateUtil.convertTimestamptoDate(interview.getIntrvwTm()));
+					detail.setIntrvwComments(interview.getIntrvrCmnts());
+					detail.setStatus(interview.getIntrvwSt().getIntrvwStsNm());
+					detail.setJobId(interview.getJob().getJobId());
+					detail.setJobIntrvwId(interview.getJobIntrvwId());
+					detailsList.add(detail);
+				}
+			}
+		}
+		return detailsList;
 	}
 
 

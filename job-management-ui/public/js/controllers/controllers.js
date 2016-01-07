@@ -4,8 +4,8 @@
 
 var jobMngmtControllers = angular.module('jobMngmtControllers', []);
 
-jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cookies','$rootScope','JobDetailsFactory','JobAdminFactory','$location',
-  function($scope, $routeParams,$cookies,$rootScope, jobDetailsFactory, jobAdminFactory,$location) {
+jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cookies','$rootScope','JobDetailsFactory','JobAdminFactory',
+  function($scope, $routeParams,$cookies,$rootScope, jobDetailsFactory, jobAdminFactory) {
 
       $rootScope.loggedIn= $cookies.get('loggedIn');
       $rootScope.userId= $cookies.get('userId');
@@ -15,51 +15,61 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
        $scope.jsonObj = angular.toJson($scope.vm, false);
       console.log("data: " + $scope.jsonObj);
       //jobDetailsFactory.create($scope.vm);
-     // $scope.createjob = jobDetailsFactory.createJob.create($scope.vm);
-        var createJobResp = jobDetailsFactory.createJob.create($scope.vm);
-        createJobResp.$promise.then(function(response) {
-           if(response.$status == 200) {
-               alert("Job Created successfully !!!");
-               $scope.submissionSuccess=true;
-               // $location.path("/dashboard");
-           } else {
-               alert("Exception from origin server .." + response.$status);
-               $scope.submissionSuccess=true;
-           }
-        }).catch(function(error) {
-            alert("Exception from origin server exception.." + error.$status);
-            $scope.submissionSuccess=true;
-        });
-        // console.log($scope.createjob.create.result.$status);
+      jobDetailsFactory.createJob.create($scope.vm);
     }
 
-      $scope.jobStatuses = jobAdminFactory.status.get();
-      $scope.accounts = jobAdminFactory.account.get();
-      $scope.serviceLines = jobAdminFactory.serviceLine.get();
-      $scope.serviceLineCapabilities = jobAdminFactory.serviceLineCapability.get();
-      $scope.jobRoles = jobAdminFactory.jobRole.get();
-      $scope.jobStages = jobAdminFactory.jobStage.get();
-      $scope.employeeTypes = jobAdminFactory.employeeType.get();
+   $scope.accounts = jobAdminFactory.get();
 
-
-   // $scope.jobDetails = jobDetailsFactory.getJob.get({jobId:$routeParams.jobId});
-
+   $scope.jobDetails = jobDetailsFactory.getJob.get({jobId:$routeParams.jobId});
 
   }]);
 
 
-jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$routeParams', 'CandidateDetailsFactory',
-  function($scope, $routeParams , candidateDetailsFactory) {
-
-    $scope.saveJob = function() {
-       $scope.jsonObj = angular.toJson($scope.vm, false);
-      console.log("data: " + $scope.jsonObj);
-      $scope.storedData = candidateDetailsFactory.create($scope.vm);
-        console.log("Response : " + $scope.storedData);
+jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$location','$routeParams', 'CandidateDetailsFactory','InterviewSearchFactory',
+  function($scope,$rootScope,$location, $routeParams , candidateDetailsFactory,interviewSearchFactory) {
+	$scope.close = function ( path ) {
+		$location.path( path );
+	};
+    $scope.saveCandidate = function() {
+	  var file = $scope.resume;
+	  var fd = new FormData();
+	  if(file!=undefined){
+			fd.append('file', file);
+	  }
+	  fd.append('jobCandidate', angular.toJson($scope.vm, false));
+      var candidate = candidateDetailsFactory.createCandidate.create({param:$scope.jobDetails.jobId},fd);
+	  candidate.$promise.then(function (response) {
+		$location.path("/dashboard");
+	   });
+	   /*alert("here");
+		var uploadUrl = 'http://192.168.1.36:8080/job-management-service/candidate/' + $scope.jobDetails.jobId;
+		alert(uploadUrl);
+		var file = $scope.vm.resume;
+	    var fd = new FormData();
+		fd.append('jobCandidate', angular.toJson($scope.vm, false));
+        fd.append('file', file);
+        $http.post(uploadUrl, fd, {
+            transformRequest: angular.identity,
+            headers: {'Content-Type': undefined}
+        })
+        .success(function(){
+        })
+        .error(function(){
+        });*/
     }
-	
 	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
-
+	$scope.interviewDetails = interviewSearchFactory.getInterviewDetByCandidate.get(
+                {
+                    cndt_id : $routeParams.candidateId
+                }
+        );
+	$scope.saveInterview = function() {
+       $scope.jsonObj = angular.toJson($scope.vm, false);
+       interviewSearchFactory.createInterview.create({job_id:$scope.candidateDetails.jobId,cndt_id:$scope.candidateDetails.cndtId},$scope.vm);
+    }
+	$scope.cancelInterview = function() {
+       interviewSearchFactory.createInterview.create({jobIntrvwId:$scope.detail.jobIntrvwId});
+    }
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
@@ -351,7 +361,7 @@ jobMngmtControllers.controller('CandidateSearchCtrl', ['$scope','$rootScope','$c
 
 jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$cookies','InterviewSearchFactory','$filter','$location',
     function($scope,$rootScope,$cookies,interviewSearchFactory,$filter,$location) {
-
+		
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $rootScope.userName= $cookies.get('userName');
@@ -376,7 +386,6 @@ jobMngmtControllers.controller('InterviewSearchCtrl', ['$scope','$rootScope','$c
                 }
             );
         };
-
         $scope.setDefaultInterviewDashboard = function() {
             var dashboardURL = getDefaultIntrvwDashboardURL($rootScope.userId,$scope.interviewDateFrom,$scope.interviewDateTo,$scope.result,$scope.interviewer);
             interviewSearchFactory.setInterviewDashboard.update({param:$rootScope.userId},

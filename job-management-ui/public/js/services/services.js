@@ -54,8 +54,11 @@ jobMngmtServices.factory('JobAdminFactory', function ($resource,config) {
 });
 
 jobMngmtServices.factory('CandidateDetailsFactory', function ($resource,config) {
-
   return {
+		createCandidate: $resource(config.apiUrl + 'candidate/:param', {param:'@jobId'},
+			{
+			   create: { method: 'POST', headers: {'Content-Type':undefined, enctype:'multipart/form-data'}, isArray: false}
+			}),
        getCandidate: $resource(config.apiUrl + 'candidate/retrieveDetails/:candidateId', {candidateId:'@candidateId'},
            {
                get: {method: 'GET', isArray: false,}
@@ -116,7 +119,6 @@ jobMngmtServices.factory('CandidateSearchFactory', function ($resource,config) {
 });
 
 jobMngmtServices.factory('InterviewSearchFactory', function ($resource,config) {
-
     return {
         interviewDefaultReport:  $resource(config.apiUrl+'interviewSearch?:param', {}),
         interviewReport:  $resource(config.apiUrl+'interviewSearch', {
@@ -126,10 +128,19 @@ jobMngmtServices.factory('InterviewSearchFactory', function ($resource,config) {
             result: '@result',
             intrvwr_nm: '@interviewer'
         }),
+		createInterview: $resource(config.apiUrl + 'interview/:job_id/:cndt_id', {job_id:'@job_id',cndt_id:'@cndt_id'},
+           {
+               create: {method: 'POST', isArray: false,}
+           }),
+		cancelInterview: $resource(config.apiUrl + 'interview/:jobIntrvwId', {jobIntrvwId:'@jobIntrvwId'},
+           {
+               delete: {method: 'DELETE', isArray: false,}
+           }),
         setInterviewDashboard: $resource(config.apiUrl+'userDashboard/setDashboard/:param', {param:'@userId'},
             {
                 update: {method: 'PUT',isArray: false,}
-            })
+            }),
+	    getInterviewDetByCandidate: $resource(config.apiUrl + 'interview/retrieveDetails', {cndt_id:'@cndt_id'})
     };
 
 });

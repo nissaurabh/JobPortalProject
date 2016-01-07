@@ -153,7 +153,6 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		job.setCreateUsrId("jobmngmnt");
 		job.setUpdtDts(new Timestamp(System.currentTimeMillis()));
 		job.setUpdtUsrId("jobmngmnt");
-		job.setWwsid(jobDetails.getWwsid());
 
 		return job;
 	}
@@ -192,6 +191,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 		jobDetails.setServiceLineId(job.getJobRole().getServiceLnCap().getServiceLn().getSrvcLnNm());
 		jobDetails.setTravel(String.valueOf(job.getTrvl()));
 		jobDetails.setWwsid(job.getWwsid());
+		jobDetails.setJobId(String.valueOf(job.getJobId()));
 		
 		return jobDetails;
 	}

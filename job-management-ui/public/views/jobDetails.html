@@ -91,6 +91,106 @@
                     </tr>-->
                 </tbody>
             </table>
+			<div class="input-group">
+				<button type="button" class="btn btn-color"	data-toggle="modal" data-target="#addCndtModal">Add	Candidate</button>
+            </div>
         </div>
     </div>
 </div>
+<div class="modal fade" id="addCndtModal" role="dialog" ng-controller="CreateCandidateCtrl">
+			<div class="modal-dialog">
+
+				<!-- Modal content create candidate-->
+				<div class="modal-content" style="width:780px;">
+					<div class="modal-header" style="background-color: #dff0d8">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h4 class="modal-title">Create Candidate</h4>
+					</div>
+					<div class="modal-body">
+						<div class="well" style="width:750px">
+							<form role="form" action="#dashboard">
+								<table class="table-condensed">
+									<tr>
+										<td><label for="candidateName" style="width:120px;">Candidate Name:</label></td>
+										<td><input type="text" class="form-control"
+											id="name" ng-model="vm.name"></td>
+										<td><label for="resourceType">Category :</label></td>
+										<td><select class="form-control" id="candidateCategoryId" ng-model="vm.candidateCategoryId">>
+												<option value="1">Internal</option>
+												<option value="2">For Hire</option>
+												<option value="3">Contractor</option>
+										</select></td>
+									</tr>
+									<tr>
+										<td><label for="candidateStatus">Candidate Status:</label></td>
+										<td><select class="form-control" id="candidateStatusId" ng-model="vm.candidateStatusId">
+												<option value="1">Active</option>
+												<option value="2">Hired</option>
+												<option value="3">Rejected</option>
+												<option value="4">Did Not Join</option>
+										</select></td>
+										<td><label for="cntrRate1">Contractor Rate:</label></td>
+										<td><input type="text" class="form-control"
+											id="contractorRate" ng-model="vm.contractorRate"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="prmSkills">Primary Skills:</label></td>
+										<td><input type="text" class="form-control"
+											id="primarySkills" ng-model="vm.primarySkills"></td>
+										<td><label for="buLeadAppr">BU Lead Approval:</label></td>
+										<td><input type="text" class="form-control"
+											id="buLeadApproval" ng-model="vm.buLeadApproval"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="ctzSrcSts1">Citizenship Status:</label></td>
+										<td><select class="form-control" id="citizenStatusId" ng-model="vm.citizenshipStatusId">
+												<option value="3">Green Card</option>
+												<option value="1">H1B</option>
+												<option value="2">OPT</option>
+												<option value="4">L1</option>
+										</select></td>
+										<td><label for="capLeadAppr">Capablity Lead Approver:</label></td>
+										<td><input type="text" class="form-control"
+											id="capabilityLeadApproval" ng-model="vm.capabilityLeadApproval"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="offerDate">Offer Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offerDate" ng-model="vm.offerDate"></td>
+										<td><label for="offrAcptDate">Offer Accept Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="offerAcceptDate" ng-model="vm.offerAcceptDate"></td>
+									</tr>
+									<tr class="form-group form-inline">
+										<td><label for="joinDate">Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="joiningDate" ng-model="vm.joiningDate"></td>
+										<td><label for="actjoinDate">Actual Join Date:</label> </td>
+										<td><input type="date"
+									class="form-control" id="actualJoiningDate" ng-model="vm.actualJoiningDate"></td>
+									</tr>
+									<tr class="form-group form-inline" >
+									<td><label for="resourceType">Resource Type :</label></td>
+									<td><select class="form-control" id="resourceTypeId" name="resourceTypeId" ng-model="vm.resourceTypeId">
+												<option value="1">GX Employee</option>
+												<option value="2">US Employee</option>
+												<option value="3">Contractor</option>
+										</select>
+									</td>
+										<td><label for="upldResume">Upload Resume:</label></td>
+											<td><input type="file" class="form-control" style="width:100%"
+												id="resume" file-model="resume">
+										</td>
+									</tr>
+								</table>
+							</form>
+						</div>
+					</div>
+					<div class="modal-footer" style="background-color: #dff0d8">
+							<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="saveCandidate()">Save</button>
+							<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+						</div>
+				</div>
+
+			</div>
+		</div>

@@ -22,8 +22,6 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Unmarshaller;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -128,17 +126,6 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 		return Response.status(Integer.valueOf(response)).header("Access-Control-Allow-Origin", "/job-management-service/").build();
 	}
 
-	
-	public static JobCandidate getProjectFromInputStream(InputStream is) throws Exception {
-        JAXBContext c = JAXBContext.newInstance(new Class[]{JobCandidate.class});
-        Unmarshaller u = c.createUnmarshaller();
-        JobCandidate jobCandidate = (JobCandidate) u.unmarshal(is);
-
-        return jobCandidate;
-    }
-	
-	
-	
 	@Override
 	public Response downloadCandidateResume(final int candidateId) {
 		ResponseBuilder responseBuilder =  null;

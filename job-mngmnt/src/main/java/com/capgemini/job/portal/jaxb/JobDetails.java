@@ -77,7 +77,8 @@ import javax.xml.bind.annotation.XmlType;
     "jobStageId",
     "accountId",
     "employementTypeId",
-    "jobStatusId"
+    "jobStatusId",
+    "jobId"
 })
 @XmlRootElement
 public class JobDetails {
@@ -110,6 +111,7 @@ public class JobDetails {
     protected String accountId;
     protected String employementTypeId;
     protected String jobStatusId;
+    protected String jobId;
 
     public String getWwsid() {
 		return wwsid;
@@ -622,4 +624,18 @@ public class JobDetails {
         this.jobStatusId = value;
     }
 
+	/**
+	 * @return
+	 */
+	public String getJobId() {
+		return jobId;
+	}
+
+	/**
+	 * @param jobId
+	 */
+	public void setJobId(String jobId) {
+		this.jobId = jobId;
+	}
+    
 }

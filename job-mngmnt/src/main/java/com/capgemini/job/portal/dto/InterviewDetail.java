@@ -21,7 +21,10 @@ import javax.xml.bind.annotation.XmlType;
     "intrvwDateTime",
     "clientName",
     "buName",
-    "jobIntrvwId"
+    "jobIntrvwId",
+    "candidateId",
+    "candidateName",
+    "jobId"
 })
 @XmlRootElement(name = "interview")
 public class InterviewDetail implements Serializable{
@@ -41,6 +44,12 @@ public class InterviewDetail implements Serializable{
 	private String buName;
 	
 	private int jobIntrvwId;
+	
+	private int candidateId;
+	
+	private String candidateName;
+	
+	private int jobId;
 
 	public String getInterviewerName() {
 		return interviewerName;
@@ -104,6 +113,30 @@ public class InterviewDetail implements Serializable{
 
 	public void setJobIntrvwId(int jobIntrvwId) {
 		this.jobIntrvwId = jobIntrvwId;
+	}
+
+	public int getCandidateId() {
+		return candidateId;
+	}
+
+	public void setCandidateId(int candidateId) {
+		this.candidateId = candidateId;
+	}
+
+	public String getCandidateName() {
+		return candidateName;
+	}
+
+	public void setCandidateName(String candidateName) {
+		this.candidateName = candidateName;
+	}
+
+	public int getJobId() {
+		return jobId;
+	}
+
+	public void setJobId(int jobId) {
+		this.jobId = jobId;
 	}
 	
 }
