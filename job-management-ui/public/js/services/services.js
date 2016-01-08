@@ -88,7 +88,10 @@ jobMngmtServices.factory('JobSearchFactory', function ($resource,config) {
                 service_ln: '@serviceLineId',
                 status: '@statusId',
                 role_nm: '@jobRoleId',
-                service_ln_cap: '@serviceLineCapabilityId'
+                service_ln_cap: '@serviceLineCapabilityId',
+				clnt_nm: '@accountId',
+				reqstr_rm: '@reqName',
+				search_owner_nm: '@reqOwnName'
             }),
             setJobDashboard: $resource(config.apiUrl+'userDashboard/setDashboard/:param', {param:'@userId'},
                 {

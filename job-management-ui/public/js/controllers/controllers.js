@@ -309,7 +309,9 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
                     status: $scope.statusId,
                     role_nm:$scope.jobRoleId,
                     service_ln_cap :$scope.serviceLineCapabilityId,
-                    clnt_nm : $scope.accountId
+                    clnt_nm : $scope.accountId,
+					reqstr_rm : $scope.reqName,
+					search_owner_nm : $scope.reqOwnName
             });
         };
 
