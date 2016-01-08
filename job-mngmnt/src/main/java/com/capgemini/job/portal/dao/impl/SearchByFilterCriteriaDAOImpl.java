@@ -81,10 +81,18 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			sql.append(" and f.clnt_id = :clnt_nm");
 			paramList.add("clnt_nm");
 		}
+		if(jobFilterMap.containsKey("reqstr_rm")){
+			sql.append(" and a.reqstr_rm like :reqstr_rm");
+			paramList.add("reqstr_rm");
+		}
 		q = (Query) entityManager.createNativeQuery(sql.toString());
 		for (Iterator<String> iterator = paramList.iterator(); iterator.hasNext();) {
 			String param = (String) iterator.next();
-			q.setParameter(param, jobFilterMap.get(param));
+			if(param.equalsIgnoreCase("reqstr_rm")){
+				q.setParameter(param, "%"+jobFilterMap.get(param)+"%");
+			} else {
+				q.setParameter(param, jobFilterMap.get(param));
+			}
 		}
 		List<Object[]> list = q.getResultList();
 		for (Object[] temp : list) {
@@ -121,6 +129,10 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			sql.append(" and e.own_rm = :owner_rm");
 			paramList.add("owner_rm");	
 		}
+		if(candidateFilterMap.containsKey("reqstr_rm")){
+			sql.append(" and e.reqstr_rm like :reqstr_rm");
+			paramList.add("reqstr_rm");
+		}
 		if(candidateFilterMap.containsKey("service_cap_ln")){
 			sql.append(" and h.srvc_ln_cap_id = :service_cap_ln");
 			paramList.add("service_cap_ln");
@@ -144,7 +156,11 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 		q = (Query) entityManager.createNativeQuery(sql.toString());
 		for (Iterator<String> iterator = paramList.iterator(); iterator.hasNext();) {
 			String param = (String) iterator.next();
-			q.setParameter(param, candidateFilterMap.get(param));
+			if(param.equalsIgnoreCase("reqstr_rm")){
+				q.setParameter(param, "%"+candidateFilterMap.get(param)+"%");
+			} else {
+				q.setParameter(param, candidateFilterMap.get(param));
+			}
 		}
 		List<Object[]> list = q.getResultList();
 		for (Object[] temp : list) {
