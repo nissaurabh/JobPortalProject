@@ -15,10 +15,30 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
        $scope.jsonObj = angular.toJson($scope.vm, false);
       console.log("data: " + $scope.jsonObj);
       //jobDetailsFactory.create($scope.vm);
-      jobDetailsFactory.createJob.create($scope.vm);
-    }
+      // $scope.createjob = jobDetailsFactory.createJob.create($scope.vm);
+        var createJobResp = jobDetailsFactory.createJob.create($scope.vm);
+        createJobResp.$promise.then(function(response) {
+           if(response.$status == 200) {
+               alert("Job Created successfully !!!");
+               $scope.submissionSuccess=true;
+               // $location.path("/dashboard");
+           } else {
+               alert("Exception from origin server .." + response.$status);
+               $scope.submissionSuccess=true;
+           }
+        }).catch(function(error) {
+            alert("Exception from origin server exception.." + error.$status);
+            $scope.submissionSuccess=true;
+        });
+        // console.log($scope.createjob.create.result.$status);    }
 
-   $scope.accounts = jobAdminFactory.get();
+   $scope.jobStatuses = jobAdminFactory.status.get();
+      $scope.accounts = jobAdminFactory.account.get();
+      $scope.serviceLines = jobAdminFactory.serviceLine.get();
+      $scope.serviceLineCapabilities = jobAdminFactory.serviceLineCapability.get();
+      $scope.jobRoles = jobAdminFactory.jobRole.get();
+      $scope.jobStages = jobAdminFactory.jobStage.get();
+      $scope.employeeTypes = jobAdminFactory.employeeType.get();
 
    $scope.jobDetails = jobDetailsFactory.getJob.get({jobId:$routeParams.jobId});
 
