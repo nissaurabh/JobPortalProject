@@ -13,6 +13,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Service;
 
 import com.capgemini.job.portal.dao.SearchByFilterCriteriaDAO;
@@ -62,7 +63,7 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			paramList.add("service_cap_ln");
 		}
 		if(jobFilterMap.containsKey("owner_rm")){
-			sql.append(" and a.own_rm = :owner_rm");
+			sql.append(" and a.own_rm like :owner_rm");
 			paramList.add("owner_rm");
 		}
 		if(jobFilterMap.containsKey("service_ln")){
@@ -90,6 +91,12 @@ public class SearchByFilterCriteriaDAOImpl implements SearchByFilterCriteriaDAO 
 			String param = (String) iterator.next();
 			if(param.equalsIgnoreCase("reqstr_rm")){
 				q.setParameter(param, "%"+jobFilterMap.get(param)+"%");
+			} else if(param.equalsIgnoreCase("owner_rm")) { 
+				if(StringUtils.isNotEmpty(jobFilterMap.get("search_owner_nm"))){
+					q.setParameter(param, "%"+jobFilterMap.get("search_owner_nm")+"%");
+				} else{
+					q.setParameter(param, "%"+jobFilterMap.get(param)+"%");
+				}
 			} else {
 				q.setParameter(param, jobFilterMap.get(param));
 			}
