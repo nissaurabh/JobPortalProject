@@ -14,10 +14,12 @@ import java.net.URISyntaxException;
 import javax.activation.DataHandler;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
@@ -33,6 +35,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.capgemini.job.portal.dto.CandidateDetail;
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.entities.JobCndt;
 import com.capgemini.job.portal.jaxb.JobCandidate;
 import com.capgemini.job.portal.service.JobCandidateService;
@@ -170,6 +173,22 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	 */
 	private Response buildResponse(final CandidateDetail detail) {
 		Response responseObj = null;
+		if (null == detail) {
+			responseObj = Response.status(Status.NOT_FOUND).build();
+		} else {
+			responseObj = Response.ok(detail).build();
+		}
+		return responseObj;
+	}
+
+	@Override
+	@GET
+	@Path("/retrieveCandidateDetails/{job_id}")
+	@Produces("application/json")
+	public Response getCandidateDetailsByJobId(
+			@PathParam("job_id") int jobId) {
+		Response responseObj = null;
+		CandidateDetails detail = jobCandidateService.getCandidateDetailsByJobId(jobId);
 		if (null == detail) {
 			responseObj = Response.status(Status.NOT_FOUND).build();
 		} else {

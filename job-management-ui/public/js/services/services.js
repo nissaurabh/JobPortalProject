@@ -58,11 +58,15 @@ jobMngmtServices.factory('CandidateDetailsFactory', function ($resource,config) 
 		createCandidate: $resource(config.apiUrl + 'candidate/:param', {param:'@jobId'},
 			{
 			   create: { method: 'POST', headers: {'Content-Type':undefined, enctype:'multipart/form-data'}, isArray: false}
-			}),
+}),
        getCandidate: $resource(config.apiUrl + 'candidate/retrieveDetails/:candidateId', {candidateId:'@candidateId'},
            {
                get: {method: 'GET', isArray: false,}
-           })
+           }),
+      getCandidatesByJobId: $resource(config.apiUrl + 'candidate/retrieveCandidateDetails/:jobId', {candidateId:'@jobId'},
+          {
+              get: {method: 'GET'}
+          })
    }
   });
 

@@ -49,17 +49,23 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
 	$scope.close = function ( path ) {
 		$location.path( path );
 	};
-    $scope.saveCandidate = function() {
+    /*$scope.saveCandidate = function() {
 	  var file = $scope.resume;
 	  var fd = new FormData();
 	  if(file!=undefined){
 			fd.append('file', file);
 	  }
-	  fd.append('jobCandidate', angular.toJson($scope.vm, false));
-      var candidate = candidateDetailsFactory.createCandidate.create({param:$scope.jobDetails.jobId},fd);
+	  fd.append('jobCandidate', angular.toJson($scope.vm, false));*/
+
+      /*var candidate = candidateDetailsFactory.createCandidate.create({param:$routeParams.jobId},fd);
 	  candidate.$promise.then(function (response) {
-		$location.path("/dashboard");
-	   });
+		//$location.path("/jobDetailsView/"+$routeParams.jobId);
+          $scope.$on("candidateResultObject",function(){
+              alert("great");
+              $scope.candidateResultObject = candidateDetailsFactory.getCandidatesByJobId.get({jobId: $routeParams.jobId});
+              alert("great1");
+          });
+	   });*/
 	   /*alert("here");
 		var uploadUrl = 'http://192.168.1.36:8080/job-management-service/candidate/' + $scope.jobDetails.jobId;
 		alert(uploadUrl);
@@ -75,8 +81,8 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
         })
         .error(function(){
         });*/
-    }
-	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
+    //}
+	/*$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
 	$scope.interviewDetails = interviewSearchFactory.getInterviewDetByCandidate.get(
                 {
                     cndt_id : $routeParams.candidateId
@@ -88,7 +94,7 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
     }
 	$scope.cancelInterview = function() {
        interviewSearchFactory.createInterview.create({jobIntrvwId:$scope.detail.jobIntrvwId});
-    }
+    }*/
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
@@ -444,6 +450,45 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
 jobMngmtControllers.controller('LogoutCtrl', ['$scope','$rootScope',
     function($scope,$rootScope) {
                 $rootScope.loggedIn = false;
+
+    }]);
+
+jobMngmtControllers.controller('JobDetailsCtrl', ['$scope','$rootScope','$cookies','$routeParams','JobDetailsFactory','CandidateDetailsFactory',
+    function($scope,$rootScope,$cookies,$routeParams,jobDetailsFactory, candidateDetailsFactory) {
+        $rootScope.loggedIn= $cookies.get('loggedIn');
+        $rootScope.userId= $cookies.get('userId');
+        $rootScope.userName= $cookies.get('userName');
+        $scope.candidateResultObject = [];
+        $scope.jobDetails = jobDetailsFactory.getJob.get({jobId: $routeParams.jobId});
+
+       // $scope.candidateResultObject = candidateDetailsFactory.getCandidatesByJobId.get({jobId: $routeParams.jobId});
+
+       /* $scope.$on("candidateResultObject", function () {
+            alert("great34");
+            $scope.candidateResultObject = candidateDetailsFactory.getCandidatesByJobId.get({jobId: $routeParams.jobId});
+            alert("great15456");
+        });*/
+
+
+        $scope.readCandidateList = function(){
+            $scope.candidateResultObject = candidateDetailsFactory.getCandidatesByJobId.get({jobId: $routeParams.jobId});
+        }
+
+        $scope.readCandidateList();
+
+        $scope.saveCandidate = function() {
+
+            var file = $scope.resume;
+            var fd = new FormData();
+            if (file != undefined) {
+                fd.append('file', file);
+            }
+            fd.append('jobCandidate', angular.toJson($scope.vm, false));
+            var candidate = candidateDetailsFactory.createCandidate.create({param: $routeParams.jobId}, fd);
+            candidate.$promise.then(function (response) {
+                $scope.readCandidateList();
+            });
+        }
 
     }]);
 

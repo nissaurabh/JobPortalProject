@@ -126,7 +126,7 @@
                 </thead>
                 <tbody class="bg-success" ng-repeat="searchResultObj in candidateResultObject.candidateList | orderBy:sortType:sortReverse | filter:searchCandidateFilter">
                 <tr>
-                    <td><a ng-href="/candidateDetailsView/{{searchResultObj.cndtId}}">{{searchResultObj.cndtName}}</td>
+                    <td><a ng-href="/candidateDetailsView/{{searchResultObj.cndtId}}">{{searchResultObj.cndtName}}</a></td>
                     <td>{{searchResultObj.resourceType}}</td>
                     <td>{{searchResultObj.cntrctrRate}}</td>
                     <td>{{searchResultObj.cndtStatus}}</td>
