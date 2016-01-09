@@ -5,7 +5,10 @@ package com.capgemini.job.portal.service.impl;
  * Copyright (c) 2015, Inc.
  */
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -15,6 +18,7 @@ import com.capgemini.job.portal.constants.JobMngMntConstants;
 import com.capgemini.job.portal.dao.JobCandidateDAO;
 import com.capgemini.job.portal.dao.JobDetailsDAO;
 import com.capgemini.job.portal.dto.CandidateDetail;
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.entities.CndtCtg;
 import com.capgemini.job.portal.entities.CndtSt;
 import com.capgemini.job.portal.entities.CtznshpSt;
@@ -235,8 +239,23 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 			detail.setCndtStatus(candidate.getCndtSt().getCndtStsNm());
 			detail.setCtznStatus(candidate.getCtznshpSt().getCtznShpNm());
 			detail.setJobId(candidate.getJob().getJobId());
+			detail.setCntrctrRate(candidate.getCntrctrRt());
 		}
 		return detail;
+	}
+
+	@Override
+	public CandidateDetails getCandidateDetailsByJobId(int jobId) {
+		CandidateDetails candidateDetails = new CandidateDetails();
+		List<CandidateDetail> cndtDetailsList = new ArrayList<CandidateDetail>();
+		List<JobCndt> candidates = jobCandidateDAO.getJobCndtsByJobId(jobId);
+		if(!CollectionUtils.isEmpty(candidates)){
+			for(JobCndt jobCndt : candidates){
+				cndtDetailsList.add(formatCndtDetailResponse(jobCndt));
+			}
+		}
+		candidateDetails.setCandidateList(cndtDetailsList);
+		return candidateDetails;
 	}
 
 }

@@ -105,5 +105,14 @@ public interface JobCandidateWebservice {
     @Path("/retrieveDetails/{candidate_id}")
     @Produces("application/json")
     public Response getCandidateDetails(@PathParam("candidate_id")final int candidateId);
+	
+	/**
+	 * @param candidateId
+	 * @return
+	 */
+	@GET
+    @Path("/retrieveCandidateDetails/{job_id}")
+    @Produces("application/json")
+    public Response getCandidateDetailsByJobId(@PathParam("candidate_id")final int jobId);
 
 }

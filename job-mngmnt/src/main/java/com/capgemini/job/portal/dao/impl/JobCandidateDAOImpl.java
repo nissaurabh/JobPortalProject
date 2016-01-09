@@ -144,4 +144,15 @@ public class JobCandidateDAOImpl implements JobCandidateDAO{
 		return jobCndt;
 	}
 
+	@Override
+	public List<JobCndt> getJobCndtsByJobId(int jobId) {
+		
+		List<JobCndt> jobCndtList = null;
+		final Query query = entityManager.createNamedQuery("jobCndt.findByJobId");
+		query.setParameter("jobId", jobId);
+		jobCndtList = (List<JobCndt>) query.getResultList();
+		
+		return jobCndtList;
+	}
+
 }
