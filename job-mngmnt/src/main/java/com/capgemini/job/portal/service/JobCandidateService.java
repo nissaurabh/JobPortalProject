@@ -6,6 +6,7 @@
 package com.capgemini.job.portal.service;
 
 import com.capgemini.job.portal.dto.CandidateDetail;
+import com.capgemini.job.portal.dto.CandidateDetails;
 import com.capgemini.job.portal.entities.CndtCtg;
 import com.capgemini.job.portal.entities.CndtSt;
 import com.capgemini.job.portal.entities.CtznshpSt;
@@ -125,6 +126,12 @@ public interface JobCandidateService {
 	 * @return
 	 */
 	public CandidateDetail getCandidateDetailsById(final int candidateId);
+	
+	/**
+	 * @param jobId
+	 * @return
+	 */
+	public CandidateDetails getCandidateDetailsByJobId(final int jobId);
 
 
 }

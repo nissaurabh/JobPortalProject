@@ -5,6 +5,8 @@
  */
 package com.capgemini.job.portal.dao;
 
+import java.util.List;
+
 import com.capgemini.job.portal.entities.CndtCtg;
 import com.capgemini.job.portal.entities.CndtSt;
 import com.capgemini.job.portal.entities.CtznshpSt;
@@ -101,5 +103,15 @@ public interface JobCandidateDAO {
 	 * 			  the jobCndt
 	 */
 	public JobCndt getJobCndtByJobCndtId(final int jobCndtId);
+	
+	/**
+	 * get the Job Candidate by job id.
+	 * 
+	 * @param jobId
+	 *            the jobId
+	 * @return List<JobCndt>
+	 * 			  the List<JobCndt>
+	 */
+	public List<JobCndt> getJobCndtsByJobId(final int jobId);
 
 }

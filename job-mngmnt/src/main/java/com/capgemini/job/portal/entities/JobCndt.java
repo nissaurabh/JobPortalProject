@@ -17,7 +17,9 @@ import java.util.List;
                 query="SELECT jobCndt FROM JobCndt jobCndt where jobCndt.cndtId=:cndtId"),
     @NamedQuery(name="jobCndt.findByJobIdAndJobCndtId",
                 query="SELECT jobCndt FROM JobCndt jobCndt where jobCndt.cndtId=:cndtId"
-                + " and jobCndt.job.jobId=:jobId")            
+                + " and jobCndt.job.jobId=:jobId"),
+    @NamedQuery(name="jobCndt.findByJobId",
+    query="SELECT jobCndt FROM JobCndt jobCndt where jobCndt.job.jobId=:jobId") 
 }) 
 public class JobCndt implements Serializable {
 	private static final long serialVersionUID = 1L;
