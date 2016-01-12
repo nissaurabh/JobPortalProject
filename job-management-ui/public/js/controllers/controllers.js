@@ -4,8 +4,8 @@
 
 var jobMngmtControllers = angular.module('jobMngmtControllers', []);
 
-jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cookies','$rootScope','JobDetailsFactory','JobAdminFactory',
-  function($scope, $routeParams,$cookies,$rootScope, jobDetailsFactory, jobAdminFactory) {
+jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cookies','$rootScope','JobDetailsFactory','JobAdminFactory','$location',
+  function($scope, $routeParams,$cookies,$rootScope, jobDetailsFactory, jobAdminFactory,$location) {
 
       $rootScope.loggedIn= $cookies.get('loggedIn');
       $rootScope.userId= $cookies.get('userId');
@@ -19,17 +19,17 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
         var createJobResp = jobDetailsFactory.createJob.create($scope.vm);
         createJobResp.$promise.then(function (response) {
             if (response.$status == 200) {
-                alert("Job Created successfully !!!");
                 $scope.submissionSuccess = true;
                 // $location.path("/dashboard");
             } else {
                 alert("Exception from origin server .." + response.$status);
-                $scope.submissionSuccess = true;
+                $scope.submissionSuccess = false;
             }
         }).catch(function (error) {
             alert("Exception from origin server exception.." + error.$status);
-            $scope.submissionSuccess = true;
+            $scope.submissionSuccess = false;
         });
+    }
         // console.log($scope.createjob.create.result.$status);    }
 
         $scope.jobStatuses = jobAdminFactory.status.get();
@@ -42,7 +42,7 @@ jobMngmtControllers.controller('CreateJobCtrl', ['$scope','$routeParams','$cooki
 
         $scope.jobDetails = jobDetailsFactory.getJob.get({jobId: $routeParams.jobId});
 
-    }}]);
+    }]);
 
 jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$location','$routeParams', 'CandidateDetailsFactory','InterviewSearchFactory',
   function($scope,$rootScope,$location, $routeParams , candidateDetailsFactory,interviewSearchFactory) {
