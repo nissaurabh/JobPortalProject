@@ -100,6 +100,7 @@ public class JobDetailsServiceImpl implements JobDetailsService {
 				.parseInt(jobDetails.getAccountId()));
 
 		job.setAccount(account);
+		job.setWwsid(jobDetails.getWwsid());
 
 		final EmplTyp emplTyp = getEmplTyp(Integer.parseInt(jobDetails
 				.getEmployementTypeId()));

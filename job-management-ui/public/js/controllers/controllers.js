@@ -82,7 +82,7 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
         .error(function(){
         });*/
     //}
-	/*$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
+	$scope.candidateDetails = candidateDetailsFactory.getCandidate.get({candidateId:$routeParams.candidateId});
 	$scope.interviewDetails = interviewSearchFactory.getInterviewDetByCandidate.get(
                 {
                     cndt_id : $routeParams.candidateId
@@ -94,7 +94,7 @@ jobMngmtControllers.controller('CreateCandidateCtrl', ['$scope','$rootScope','$l
     }
 	$scope.cancelInterview = function() {
        interviewSearchFactory.createInterview.create({jobIntrvwId:$scope.detail.jobIntrvwId});
-    }*/
+    }
   }]);
 
 jobMngmtControllers.controller('DashboardCtrl', ['$scope','$cookies','$rootScope','JobDashboardFactory',
@@ -309,7 +309,9 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
                     status: $scope.statusId,
                     role_nm:$scope.jobRoleId,
                     service_ln_cap :$scope.serviceLineCapabilityId,
-                    clnt_nm : $scope.accountId
+                    clnt_nm : $scope.accountId,
+					reqstr_rm : $scope.reqName,
+					search_owner_nm : $scope.reqOwnName
             });
         };
 
