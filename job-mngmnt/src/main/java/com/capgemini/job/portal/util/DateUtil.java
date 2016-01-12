@@ -13,6 +13,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.TimeZone;
 
+import org.apache.commons.lang.StringUtils;
+
 /**
  * The Class DateUtil.
  * 
@@ -52,9 +54,12 @@ public final class  DateUtil {
 	 * @return the timeStampDate
 	 */
 	public static Timestamp convertStringToDateTimeStamp(String strDate) {
+		if(StringUtils.isEmpty(strDate)){
+			return null;
+		}
 	    try {
-	      DateFormat formatter;
-	      formatter = new SimpleDateFormat("yyyy-MM-ddTHH:MM:SS.sss");
+	      DateFormat formatter = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'");
+	      formatter.setTimeZone(TimeZone.getTimeZone("ESTEDT"));
 	      Date date = (Date) formatter.parse(strDate);
 	      java.sql.Timestamp timeStampDate = new Timestamp(date.getTime());
 

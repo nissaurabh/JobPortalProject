@@ -139,7 +139,7 @@ public class JobInterviewServiceImpl implements JobInterviewService {
 		jobIntrvw.setIntrvrNm(interviewDetails.getIntrvwrName());
 		jobIntrvw.setIntrvrPos(interviewDetails.getInterviewerPos());
 		jobIntrvw.setIntrvrCmnts(interviewDetails.getIntrvwrComments());
-		jobIntrvw.setIntrvwTm(DateUtil.convertStringToTimestamp(interviewDetails.getInterviewDateTime()));
+		jobIntrvw.setIntrvwTm(DateUtil.convertStringToDateTimeStamp(interviewDetails.getInterviewDateTime()));
 
 		return jobIntrvw;
 	}
