@@ -62,15 +62,23 @@
                         </tr>
                         <tr>
                         <td colspan="1">
-
-                            <label for="srcAccount">Account:</label>
+							 <label for="srcAccount">Account:</label>
                             <select class="form-control" id="srcAccount"  ng-model="accountId"
                                     ng-options="opt.accountId as opt.accountName for opt in accounts.account">
                                 <option value="" selected="selected">Select</option>
                             </select>
-
                         </td>
-                        <td colspan="3">
+						<td>
+                            <label for="srcReqRm">Requester RM:</label>
+                            <input style="width:80%"type="text" class="form-control" id="reqName" ng-model="reqName">
+						</td>
+						<td colspan="2">
+                            <label for="srcOwnRm">Owner RM:</label>
+                            <input style="width:60%"type="text" class="form-control" id="reqOwnName" ng-model="reqOwnName">
+						</td>
+						</tr>
+                        <tr>
+                        <td colspan="4">
                             <div style="padding-bottom:20px;"></div>
                             <button type="button" id="searchId" class="btn btn-color" ng-click="jobSearch()">
                                 <span class="glyphicon glyphicon-search"></span> Search

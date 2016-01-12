@@ -171,11 +171,11 @@ $(function() {
             var fieldsetIndex = ($("fieldset").index(current_fs) + 1);
             //$('#requestedDateInput').validateNext();
             // validatedata
-            // var hasFailures = validateFieldsNextClick(fieldsetIndex);
+             var hasFailures = validateFieldsNextClick(fieldsetIndex);
             //
-            //if(hasFailures) {
-            //    return;
-            //}
+            if(hasFailures) {
+                return;
+            }
 
            //  alert($("fieldset").index(next_fs));
 
@@ -201,7 +201,9 @@ $(function() {
                     current_fs.css({
                         // 'transform' : 'scale(' + scale + ')',
                         'transform-origin': '50% 100%',
-                        'animation': 'rotateRoomTopOut 2s both ease'
+                         'animation': 'rotateRoomTopOut 2s both ease'
+                        // 'animation': 'rotateCubeLeftOut 2s both ease'
+
                         // 'transform' : 'perspective(500px) translateX(1px) translateZ(0px) rotateY(0deg)',
                         //'animation': 'rotateRoomRightIn 2s',
                         //'transform-origin': '100% 50%'
@@ -214,6 +216,7 @@ $(function() {
                         'opacity' : opacity,
                         'transform-origin': '50% 0%',
                         'animation': 'rotateRoomTopIn 2s both ease'
+                        //'animation': 'rotateCubeLeftIn 2s both ease'
                     });
                 },
                 duration : 800,
