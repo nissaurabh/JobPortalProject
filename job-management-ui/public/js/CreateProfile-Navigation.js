@@ -174,6 +174,7 @@ $(function() {
              var hasFailures = validateFieldsNextClick(fieldsetIndex);
             //
             if(hasFailures) {
+                animating = false;
                 return;
             }
 
