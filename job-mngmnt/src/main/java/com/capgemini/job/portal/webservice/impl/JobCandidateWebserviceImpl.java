@@ -20,10 +20,12 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.ResponseBuilder;
 import javax.ws.rs.core.Response.Status;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.StringUtils;
@@ -161,8 +163,9 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	}
 
 	@Override
-	public Response getCandidateDetails(int candidateId) {
-		CandidateDetail detail = jobCandidateService.getCandidateDetailsById(candidateId);
+	public Response getCandidateDetails(final int candidateId, final UriInfo uriInfo) {
+		final String uri = uriInfo.getBaseUri().toString();
+		CandidateDetail detail = jobCandidateService.getCandidateDetailsById(candidateId, uri);
 		return buildResponse(detail);
 	}
 
@@ -186,9 +189,10 @@ public class JobCandidateWebserviceImpl implements JobCandidateWebservice {
 	@Path("/retrieveCandidateDetails/{job_id}")
 	@Produces("application/json")
 	public Response getCandidateDetailsByJobId(
-			@PathParam("job_id") int jobId) {
+			@PathParam("job_id") int jobId, @Context final UriInfo uriInfo) {
 		Response responseObj = null;
-		CandidateDetails detail = jobCandidateService.getCandidateDetailsByJobId(jobId);
+		final String uri = uriInfo.getBaseUri().toString();
+		CandidateDetails detail = jobCandidateService.getCandidateDetailsByJobId(jobId, uri);
 		if (null == detail) {
 			responseObj = Response.status(Status.NOT_FOUND).build();
 		} else {

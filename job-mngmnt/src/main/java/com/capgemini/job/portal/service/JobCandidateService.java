@@ -123,15 +123,17 @@ public interface JobCandidateService {
 
 	/**
 	 * @param candidateId
+	 * @param uri
 	 * @return
 	 */
-	public CandidateDetail getCandidateDetailsById(final int candidateId);
+	public CandidateDetail getCandidateDetailsById(final int candidateId, final String uri);
 	
 	/**
 	 * @param jobId
+	 * @param uri
 	 * @return
 	 */
-	public CandidateDetails getCandidateDetailsByJobId(final int jobId);
+	public CandidateDetails getCandidateDetailsByJobId(final int jobId, final String uri);
 
 
 }

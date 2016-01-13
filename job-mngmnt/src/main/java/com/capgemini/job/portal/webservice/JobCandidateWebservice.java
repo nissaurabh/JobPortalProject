@@ -15,8 +15,10 @@ import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriInfo;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
@@ -97,22 +99,26 @@ public interface JobCandidateWebservice {
     public Response downloadCandidateResume(@PathParam("candidate_id")final int candidateId);
 	
 	
+	
 	/**
 	 * @param candidateId
+	 * @param uriInfo
 	 * @return
 	 */
 	@GET
     @Path("/retrieveDetails/{candidate_id}")
     @Produces("application/json")
-    public Response getCandidateDetails(@PathParam("candidate_id")final int candidateId);
+    public Response getCandidateDetails(@PathParam("candidate_id")final int candidateId, @Context final UriInfo uriInfo);
+	
 	
 	/**
-	 * @param candidateId
+	 * @param jobId
+	 * @param uriInfo
 	 * @return
 	 */
 	@GET
     @Path("/retrieveCandidateDetails/{job_id}")
     @Produces("application/json")
-    public Response getCandidateDetailsByJobId(@PathParam("candidate_id")final int jobId);
+    public Response getCandidateDetailsByJobId(@PathParam("job_id")final int jobId, @Context final UriInfo uriInfo);
 
 }

@@ -218,9 +218,9 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	 * @see com.capgemini.job.portal.service.JobCandidateService#getCandidateDetailsById(int)
 	 */
 	@Override
-	public CandidateDetail getCandidateDetailsById(int candidateId) {
+	public CandidateDetail getCandidateDetailsById(final int candidateId, final String uri) {
 		JobCndt candidate = jobCandidateDAO.getJobCndtByJobCndtId(candidateId);
-		return formatCndtDetailResponse(candidate);
+		return formatCndtDetailResponse(candidate, uri);
 	}
 	
 	
@@ -228,11 +228,12 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 	 * @param candidate
 	 * @return
 	 */
-	private CandidateDetail formatCndtDetailResponse(JobCndt candidate) {
+	private CandidateDetail formatCndtDetailResponse(JobCndt candidate, String baseURI) {
 		CandidateDetail detail = null;
 		if(null != candidate){
 			detail = new CandidateDetail();
 			detail.setCndtId(candidate.getCndtId());
+			detail.setCndtResume(baseURI+"candidate/download/"+candidate.getCndtId());
 			detail.setCndtName(candidate.getCndtNm());
 			detail.setResourceType(candidate.getCndtCtg().getCndtCtgNm());
 			detail.setPrimarySkills(candidate.getPrmySk());
@@ -240,18 +241,20 @@ public class JobCandidateServiceImpl implements JobCandidateService {
 			detail.setCtznStatus(candidate.getCtznshpSt().getCtznShpNm());
 			detail.setJobId(candidate.getJob().getJobId());
 			detail.setCntrctrRate(candidate.getCntrctrRt());
+			detail.setBuLeadApproval(String.valueOf(candidate.getBuLdAppr()));
+			detail.setCapLeadApproval(String.valueOf(candidate.getCapLdAppr()));
 		}
 		return detail;
 	}
 
 	@Override
-	public CandidateDetails getCandidateDetailsByJobId(int jobId) {
+	public CandidateDetails getCandidateDetailsByJobId(final int jobId,final String uri) {
 		CandidateDetails candidateDetails = new CandidateDetails();
 		List<CandidateDetail> cndtDetailsList = new ArrayList<CandidateDetail>();
 		List<JobCndt> candidates = jobCandidateDAO.getJobCndtsByJobId(jobId);
 		if(!CollectionUtils.isEmpty(candidates)){
 			for(JobCndt jobCndt : candidates){
-				cndtDetailsList.add(formatCndtDetailResponse(jobCndt));
+				cndtDetailsList.add(formatCndtDetailResponse(jobCndt,uri));
 			}
 		}
 		candidateDetails.setCandidateList(cndtDetailsList);
