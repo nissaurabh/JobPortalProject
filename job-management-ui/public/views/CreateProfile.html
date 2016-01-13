@@ -70,7 +70,9 @@
 				<label for="rolenameid" class="col-sm-2 form-control-label">Role Name</label>
 				<div class="col-sm-4">
 					<select name="roleName" id="rolenameid" ng-model="vm.roleId" class="form-control"
-							ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole"></select>
+							ng-options="opt.jobRoleId as opt.jobRoleName for opt in jobRoles.jobRole">
+						<option value="" selected="selected">Select</option>
+					</select>
 					<span id="validaterolenameid"></span>
 					<div id="rolenameidalerts"></div>
 				</div>
@@ -79,7 +81,9 @@
 				<label for="serviceLineCapabilityId" class="col-sm-2 control-label">Service Line Capability</label>
 				<div class="col-sm-4">
 					<select class="form-control" name="serviceLineCapability" id="serviceLineCapabilityId" ng-model="vm.serviceLineCapabilityId" class="form-control"
-							ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability"></select>
+							ng-options="opt.serviceLineCapabilityId as opt.serviceLineCapabilityName for opt in serviceLineCapabilities.serviceLineCapability">
+						<option value="" selected="selected">Select</option>
+					</select>
 					<span id="validateserviceLineCapabilityId"></span>
 					<div id="serviceLineCapabilityIdalerts"></div>
 				</div>
@@ -97,7 +101,9 @@
 				<label for="accountId" class="col-sm-2 control-label">Account</label>
 				<div class="col-sm-4">
 					<select name="account" id="accountId" ng-model="vm.accountId"
-							ng-options="opt.accountId as opt.accountName for opt in accounts.account" class="form-control"></select>
+							ng-options="opt.accountId as opt.accountName for opt in accounts.account" class="form-control">
+						<option value="" selected="selected">Select</option>
+					</select>
 					<span id="validateaccountId"></span>
 					<div id="accountIdalerts"></div>
 				</div>
@@ -112,14 +118,18 @@
 				<label for="statusId" class="col-sm-2 control-label">Status</label>
 				<div class="col-sm-4">
 					<select name="status" id="statusId" ng-model="vm.jobStatusId"
-							ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus" class="form-control"></select>
+							ng-options="opt.jobStatusId as opt.jobStatusName for opt in jobStatuses.jobStatus" class="form-control">
+						<option value="" selected="selected">Select</option>
+					</select>
 					<span id="validatestatusId"></span>
 					<div id="statusIdalerts"></div>
 				</div>
 				<label for="jobStageId" class="col-sm-2 form-control-label">Job Stage</label>
 				<div class="col-sm-4">
 					<select name="jobStage" id="jobStageId" ng-model="vm.jobStageId"
-							ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage" class="form-control"></select>
+							ng-options="opt.jobStageId as opt.jobStageName for opt in jobStages.jobStage" class="form-control">
+						<option value="" selected="selected">Select</option>
+					</select>
 					<span id="validatejobStageId"></span>
 					<div id="jobStageIdalerts"></div>
 				</div>
@@ -170,7 +180,9 @@
 			<label for="employeeTypeId" class="col-sm-2 control-label">Employee Type</label>
 			<div class="col-sm-4">
 				<select name="employeeType" id="employeeTypeId" ng-model="vm.employementTypeId"
-						ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType" class="form-control"></select>
+						ng-options="opt.resourceTypeId as opt.resourceTypeName for opt in employeeTypes.resourceType" class="form-control">
+					<option value="" selected="selected">Select</option>
+				</select>
 				<span id="validateemployeeTypeId"></span>
 				<div id="employeeTypeIdalerts"></div>
 			</div>
@@ -207,7 +219,7 @@
 			</div>
 			<ul id="fieldSet3Pager" class="pager">
 				<li class="previous"><a href="#" id="previousfieldset2" class="nextbutton hvr-icon-wobble-horizontal-left">Previous</a></li>
-				<li id="reviewDetails" class="next"><a href="#" id="review" data-toggle="modal" data-target="#confirm-submit" class="nextbutton hvr-icon-wobble-horizontal">Review Details</a></li>
+				<li id="reviewDetails" class="next"><a href="#" id="review" data-toggle="modal" data-target="#confirm-submit" class="nextbutton hvr-icon-wobble-horizontal">Review</a></li>
 			</ul>
 			<!--<input type="button" name="previous" class="previous action-button"-->
 				<!--value="Previous" /> <input type="submit" name="submit"-->
