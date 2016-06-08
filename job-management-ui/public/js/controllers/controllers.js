@@ -313,8 +313,9 @@ jobMngmtControllers.controller('JobSearchCtrl', ['$scope','$rootScope','$cookies
 					reqstr_rm : $scope.reqName,
 					search_owner_nm : $scope.reqOwnName
             });
+			alert("JobSrch Result: "+$scope.jobSearchResult);
         };
-
+		
         $scope.setDefaultJobDashboard = function() {
            var dashboardURL = getDefaultJobDashboardURL($rootScope.userId,$scope.srcReqDateFromId, $scope.srcReqDateToId,
                 $scope.roleStartDateFromId, $scope.roleStartDateTo, $scope.serviceLineId,
@@ -428,6 +429,7 @@ jobMngmtControllers.controller('LoginCtrl', ['$scope','$rootScope','$cookies','$
 
         $scope.userDashboard = [];
         $scope.login = function() {
+			alert("Logging In As: "+$scope.user.userId);
             $scope.userDashboard = loginFactory.userDashboard($scope.user);
             return  $scope.userDashboard.$promise.then(function (response) {
             $scope.userDashboard = response;

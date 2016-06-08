@@ -69,6 +69,59 @@ jobMngmtServices.factory('CandidateDetailsFactory', function ($resource,config) 
           })
    }
   });
+  
+//Added for WWS Data Feed: Begin
+jobMngmtServices.factory('WWSFileUploadFactory', function ($resource,config) {
+  return {
+		uploadOpenNeeds: $resource(config.apiUrl + 'wwsData/open/:param', {param:'@wwsData.sheetName'}, 
+		{
+			   create: { method: 'POST', headers: {'Content-Type':undefined, enctype:'multipart/form-data'}, isArray: false
+		}
+		}),
+		uploadClosedNeeds: $resource(config.apiUrl + 'wwsData/closed/:param', {param:'@wwsData.sheetName'}, 
+		{
+			   create: { method: 'POST', headers: {'Content-Type':undefined, enctype:'multipart/form-data'}, isArray: false
+		}
+		})
+   }
+});
+
+jobMngmtServices.factory('WWSViewNeedsFactory', function ($resource,config) {
+  return {
+		getNeedsRequiringSPUpdate: $resource(config.apiUrl + 'wwsData/no-skill-profile-needs', {}), 
+		getNeedDetails: $resource(config.apiUrl + 'wwsData/need-details/:param', {param:'@wwsNeedId'}),
+		updateSkillProfileForNeed: $resource(config.apiUrl + 'wwsData/update-skill-profile/:param', {param:'@wwsNeedId'}, 
+			{
+				   create: { method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, isArray: false
+			}
+		}),
+		getSkillCategories: $resource(config.apiUrl + 'wwsData/skill-categories', {}),
+		getNeedRoles: $resource(config.apiUrl + 'wwsData/need-roles', {}),
+		getCoreSkillsOfSkillCat: $resource(config.apiUrl + 'wwsData/category-core-skills/:param', {param:'@skillprof.skillCat'}),
+		getRoleNamesOfRole: $resource(config.apiUrl + 'wwsData/role-names/:param', {param:'@skillprof.role'})
+   }
+});
+
+jobMngmtServices.factory('WWSSearchNeedsFactory', function ($resource,config) {
+  return {
+		getClients: $resource(config.apiUrl + 'wwsData/clients', {}),
+		getPractices: $resource(config.apiUrl + 'wwsData/practices', {}),
+		getLocations: $resource(config.apiUrl + 'wwsData/locations', {}),
+		getProjectTypes: $resource(config.apiUrl + 'wwsData/project-types', {}),
+		getCloseReasons: $resource(config.apiUrl + 'wwsData/close-reasons', {}),
+		getGrades: $resource(config.apiUrl + 'wwsData/grades', {}),
+		getSkills: $resource(config.apiUrl + 'wwsData/skills', {}),
+		getRoles: $resource(config.apiUrl + 'wwsData/roles', {}),
+		searchMatchingNeeds: $resource(config.apiUrl + 'wwsData/search-needs', {}, 
+			{
+				   create: { method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, isArray: true
+			}
+		}),
+		getNeedInformation: $resource(config.apiUrl + 'wwsData/need-information/:param', {param:'@selectedNeedId'})
+   }
+});
+//Added for WWS Data Feed: End
+
 
 jobMngmtServices.factory('JobSearchFactory', function ($resource,config) {
 

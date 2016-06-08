@@ -1,0 +1,56 @@
+<div class="row">
+	<div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">WWS Data Upload</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/dashboard" class="white-link">Dashboard</a>
+                </div>
+            </div>
+        </div>
+		<div class="panel-body" ng-controller="LoadClosedNeedsController">
+			<!-- Modal content Upload Open Needs-->
+			<div style="width:750px">
+				<div class="modal-header" style="background-color: #dff0d8">
+					<h4 class="modal-title">Load Closed Needs</h4>
+				</div>
+				<div>
+					<div class="well" style="width:750px">
+						<form role="form" action="#dashboard" name="loadOpenNeeds">
+							<table class="table-condensed">
+								<tr>
+									<td>
+										<label for="sheetName">Excel Data Sheet Name:</label>
+									</td>
+									<td>
+										<input type="text" class="form-control" id="sheetName" ng-model="wwsData.sheetName">
+									</td>
+								</tr>
+								<tr class="form-group form-inline" >
+									<td><label for="openNeedsFile">Closed Needs File:</label></td>
+									<td>
+										<input type="file" class="form-control-file" style="width:100%" id="closedNeedsFile" file-model="wwsData.closedNeedsFile">
+									</td>
+								</tr>
+							</table>
+						</form>
+						<!--div>
+							<span ng-bind="uploadServcResp.fileName"></span>
+							<span ng-bind="uploadServcResp.sheetName"></span>
+							<span ng-bind="uploadServcResp.noOfColumns"></span>
+							<span ng-bind="uploadServcResp.noOfRows"></span>
+							<span ng-bind="uploadServcResp.needFileType"></span>
+						</div-->
+					</div>
+					
+				</div>
+				<div class="modal-footer" style="background-color: #dff0d8">
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="uploadClosedNeedsFile()">Upload WWS Closed Needs</button>
+					<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="close('/dashboard')">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>		

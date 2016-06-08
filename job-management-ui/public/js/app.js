@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers','jobMngmtDirectives'])
+  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers','jobMngmtDirectives','wwsDataControllers'])
     .config(['$httpProvider',function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         //$httpProvider.defaults.withCredentials = true;
@@ -17,8 +17,8 @@ angular
         $httpProvider.defaults.headers.common["Accept"] = "application/json";
         $httpProvider.defaults.headers.common["Content-Type"] = "application/json";
     }]).constant('config', {
-        apiUrl: 'http://ec2-52-90-75-254.compute-1.amazonaws.com:8080/job-management-service/'
-        // apiUrl: 'http://192.168.2.6:8080/job-management-service/'
+        //apiUrl: 'http://ec2-52-90-75-254.compute-1.amazonaws.com:8080/job-management-service/'
+         apiUrl: 'http://localhost:8081/job-management-service/'
         })
     /*.config(['ChartJsProvider', function(ChartJsProvider) {
         ChartJsProvider.setOptions({
@@ -84,6 +84,20 @@ angular
 		.when('/candidateIntrvwDetailsView/:candidateId', {
             templateUrl: 'views/interviewDetails.html',
             controller: 'CreateCandidateCtrl'
+        })
+		.when('/loadOpenNeeds', {
+            templateUrl: 'views/wws/LoadOpenNeeds.html',
+			controller: 'LoadOpenNeedsController'
+        })
+		.when('/loadClosedNeeds', {
+            templateUrl: 'views/wws/LoadClosedNeeds.html',
+			controller: 'LoadClosedNeedsController'
+        })
+		.when('/viewNeeds', {
+            templateUrl: 'views/wws/ViewNeeds.html'
+        })
+		.when('/viewNeedsRequiringSkillProfile', {
+            templateUrl: 'views/wws/NeedsForSkillProfileUpdt.html'
         })
       .otherwise({
         redirectTo: '/login',

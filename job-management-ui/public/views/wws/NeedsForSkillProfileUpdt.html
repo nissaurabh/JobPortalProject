@@ -1,0 +1,281 @@
+<div class="row">
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">Needs Requiring Skill Profile Update</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/dashboard" class="white-link">Dashboard</a>
+                </div>
+            </div>
+        </div>
+		<div class="panel-body" ng-controller="NeedsRequiringSPController">
+			<form class="col-sm-3 col-sm-offset-9">
+                <div class="form-group">
+                    <div class="input-group">
+                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+
+                        <input type="text" class="form-control" placeholder="Search text" ng-model="searchJobFilter">
+
+                    </div>
+                </div>
+            </form>
+			<div style="padding-bottom: 30px;"></div>
+			<div>
+				<table class="table table-hover">
+					<thead class="search search-heading">
+					<tr>
+						<th>
+							Sl#
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'wwsId'; sortReverse = !sortReverse" class="white-link">
+							<label>WWS ID</label>
+								<span ng-show="sortType == 'wwsId' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'wwsId' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'clientName'; sortReverse = !sortReverse" class="white-link">
+							<label>Client</label>
+								<span ng-show="sortType == 'clientName' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'clientName' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'city'; sortReverse = !sortReverse" class="white-link">
+							<label>Location</label>
+								<span ng-show="sortType == 'city' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'city' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'grade'; sortReverse = !sortReverse" class="white-link">
+							<label>Grade</label>
+								<span ng-show="sortType == 'grade' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'grade' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'projectType'; sortReverse = !sortReverse" class="white-link">
+							<label>Project Type</label>
+								<span ng-show="sortType == 'projectType' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'projectType' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'projectStartDt'; sortReverse = !sortReverse" class="white-link">
+							<label>Project Start Date</label>
+								<span ng-show="sortType == 'projectStartDt' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'projectStartDt' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+						<th>
+							<a href="#" ng-click="sortType = 'projectEndDt'; sortReverse = !sortReverse" class="white-link">
+							<label>Project End Date</label>
+								<span ng-show="sortType == 'projectEndDt' && !sortReverse" class="fa fa-caret-down"></span>
+								<span ng-show="sortType == 'projectEndDt' && sortReverse" class="fa fa-caret-up"></span>
+							</a>
+						</th>
+					</tr>
+					</thead>
+					<tbody class="bg-success" ng-repeat="needObj in needsRequiringSP  | orderBy:sortType:sortReverse | filter:searchJobFilter">
+					<tr>
+						<td>{{$index + 1}}</td>
+						<td><a href="#" data-toggle="modal" data-target="#viewNeedDetails" ng-click="fetchNeedDetails(needObj.wwsId)">{{needObj.wwsId}}</a></td>
+						<td>{{needObj.clientName}}</td>
+						<td>{{needObj.city}}, {{needObj.state}}, {{needObj.country}}</td>
+						<td>{{needObj.grade}}</td>
+						<td>{{needObj.projectType}}</td>
+						<td>{{needObj.projectStartDt | date:'mediumDate'}}</td>
+						<td>{{needObj.projectEndDt | date:'mediumDate'}}</td>
+					</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="modal fade" id="viewNeedDetails" role="dialog">
+				<div class="modal-dialog">
+					<div class="modal-content" style="width:780px;">
+						<div class="modal-header" style="background-color: #dff0d8">
+							<button type="button" class="close" data-dismiss="modal">&times;</button>
+							<h4 class="modal-title">Associate Skill Profile</h4>
+						</div>
+						
+						<div class="modal-body">
+							<div class="well" style="width:750px">
+								<form role="form">
+									<table class="table-condensed">
+										<tr>
+											<td style="font-weight:bold;">WWS ID: </td>
+											<td align="left">{{needDetails.wwsId}}</td>
+											<td style="font-weight:bold;">Grade: </td>
+											<td align="left">{{needDetails.grade}}</td>
+											<td style="font-weight:bold;">Local Grades: </td>
+											<td align="left">{{needDetails.localGrades}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Client: </td>
+											<td align="left">{{needDetails.client}}</td>
+											<td style="font-weight:bold;">Location: </td>
+											<td align="left">{{needDetails.missionLocation}}, {{needDetails.missionCountry}}</td>
+											<td style="font-weight:bold;">Project Type: </td>
+											<td align="left">{{needDetails.projectType}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Project Name: </td>
+											<td align="left">{{needDetails.projectName}}</td>
+											<td style="font-weight:bold;">Status: </td>
+											<td align="left">{{needDetails.status}}</td>
+											<td style="font-weight:bold;">Tags Email Sent: </td>
+											<td align="left">{{needDetails.tagsEmailSent}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Created Date: </td>
+											<td align="left">{{needDetails.creatonDate | date:'mediumDate'}}</td>
+											<td style="font-weight:bold;">Project End Date: </td>
+											<td align="left">{{needDetails.projectEndDate | date:'mediumDate'}}</td>
+											<td style="font-weight:bold;">Project Start Date: </td>
+											<td align="left">{{needDetails.projectStartDate | date:'mediumDate'}}</td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Short Description: </td>
+											<td colspan="5"><pre style="width:600px;">{{needDetails.shortDescription}}</pre></td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Internal Description</td>
+											<td colspan="5"><pre style="width:600px;">{{needDetails.internalDescription}}</div></td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Skill Comment: </td>
+											<td colspan="5"><pre style="width:600px;">{{needDetails.skillComment}}</pre></td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">Private Comment</td>
+											<td colspan="5"><pre style="width:600px;">{{needDetails.privateComment}}</pre></td>
+										</tr>
+										<tr>
+											<td style="font-weight:bold;">RM Handler: </td>
+											<td align="left">{{needDetails.rmHandlerFullName}}</td>
+											<td style="font-weight:bold;">Creator: </td>
+											<td align="left">{{needDetails.creatorFullName}}</td>
+											<td style="font-weight:bold;">Requester: </td>
+											<td align="left">{{needDetails.requesterFullName}}</td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
+						<div class="modal-body">
+							<div class="well" style="width:750px">
+								<form role="form">
+									<table style="width:100%">
+										<tr>
+											<td>
+												<table class="table-condensed">
+													<tr>
+														<td>
+															<table style="width:100%">
+																<tr>
+																	<td>
+																		<fieldset>
+																			<legend>Skills </legend>
+																			<table style="width:100%">
+																				<tr>
+																					<td colspan="4" align="right">
+																						<label>Define New Skill: <input type="checkbox" ng-model="skillprof.defineNewSkill" selected></label>
+																					</td>
+																				</tr>
+																				<tr class="form-group form-inline">
+																					<td style="width:175px;"><label for="skillCat">Skill Category:</label> </td>
+																					<td>
+																						<select class="form-control" id="skillCat" ng-model="skillprof.skillCat"  style="width:200px;"
+																							ng-change="skillCategoryChanged()" ng-options="skillnm for skillnm in skillCategories"  ng-hide="skillprof.defineNewSkill">
+																							<option value="" selected="selected">- Select an Existing Category -</option>
+																						</select>
+																					</td>
+																					
+																					<td>
+																						<input type="text" class="form-control" id="newSkillCat" ng-model="skillprof.newSkillCat" ng-show="skillprof.defineNewSkill">
+																					</td>
+																				</tr>
+																				<tr class="form-group form-inline">
+																					<td><label for="existingSkillId">Core Skills:</label> </td>
+																					<td>
+																						<select class="form-control" id="existingSkillId" ng-model="skillprof.existingSkillId" style="width:200px;"
+																						 ng-options="cskill.skillId as cskill.skill for cskill in coreSkills"  ng-hide="skillprof.defineNewSkill">
+																							<option value="" selected>-- Select a Skill --</option>
+																						</select>
+																					</td>
+																					
+																					<td>
+																						<input type="text" class="form-control" id="newCoreSkill" ng-model="skillprof.newCoreSkill" ng-show="skillprof.defineNewSkill">
+																					</td>
+																				</tr>
+																			</table>
+																		</fieldset>
+																	</td>
+																</tr>
+																<tr>
+																	<td>
+																		<fieldset>
+																			<legend>Roles </legend>
+																			<table style="width:100%">
+																				<tr>
+																					<td colspan="4" align="right">
+																						<label>Define New Role: <input type="checkbox" ng-model="skillprof.defineNewRole" ng-change="toggleRolesControls()"></label>
+																					</td>
+																				</tr>
+																				<tr class="form-group form-inline">
+																					<td style="width:175px;"><label for="role">Role:</label> </td>
+																					<td>
+																						<select class="form-control" id="role" ng-model="skillprof.role"  style="width:200px;"
+																							ng-change="needRoleChanged()" ng-options="roleNm for roleNm in needRoles" ng-hide="skillprof.defineNewRole">
+																							<option value="">- Select an Existing Role -</option>
+																						</select>
+																					</td>
+																					
+																					<td>
+																						<input type="text" class="form-control" id="newRole" ng-model="skillprof.newRole"  ng-show="skillprof.defineNewRole">
+																					</td>
+																				</tr>
+																				
+																				<tr class="form-group form-inline">
+																					<td><label for="existingRoleId">Role Name:</label> </td>
+																					<td>
+																						<select class="form-control" id="existingRoleId" ng-model="skillprof.existingRoleId"  style="width:200px;" 
+																							ng-options="rlNm.roleId as rlNm.roleName for rlNm in roleNames" ng-hide="skillprof.defineNewRole">
+																							<option value="" selected>-- Select Role Name --</option>
+																						</select>
+																					</td>
+																					
+																					<td>
+																						<input type="text" class="form-control" id="newRoleNm" ng-model="skillprof.newRoleNm" ng-show="skillprof.defineNewRole">
+																					</td>
+																				</tr>
+																			</table>
+																		</fieldset>
+																	</td>
+																</tr>
+															</table>
+														</td>
+													</tr>
+												</table>
+											</td>
+											<td align="right" style="padding-left:20px;">
+												<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="attachSkillProfileToNeed()">Update Skill Profile</button>
+											</td>
+										</tr>
+									</table>
+								</form>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+			

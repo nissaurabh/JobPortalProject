@@ -1,0 +1,342 @@
+<div class="row">
+    <div class="panel search">
+        <div class="panel-heading search-heading">
+            <div class="row">
+                <div class="col-xs-10">
+                    <h3 class="panel-title">Filter Needs</h3>
+                </div>
+                <div class="col-xs-2 text-left">
+                    <a href="/dashboard" class="white-link">Dashboard</a>
+                </div>
+            </div>
+        </div>
+		<div class="panel-body" ng-controller="NeedsSearchController">
+            <form role="form" action="#dashboard">
+				<table>
+					<tr>
+						<td>
+						   <table class="table-condensed">
+								<tbody class="bg-success">
+								<tr>
+									<td>
+										<label for="wwsId">WWS ID:</label>
+									</td>
+									<td> 
+										<input type="text" class="form-control" id="wwsId" ng-model="needSearchObj.wwsId">
+									</td>
+									<td><label for="clientId">Client:</label></td>
+									<td>
+										<select class="form-control" id="clientId" ng-model="needSearchObj.clientId"  style="width:200px;"
+											ng-options="client.clientId as client.clientName for client in clients">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td><label for="practiceId">Practice:</label></td>
+									<td>
+										<select class="form-control" id="practiceId" ng-model="needSearchObj.practiceId"  style="width:200px;"
+											ng-options="practice.practiceId as practice.practiceName for practice in practices">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="locationId">Location:</label>
+									</td>
+									<td> 
+										<select class="form-control" id="locationId" ng-model="needSearchObj.locationId"  style="width:200px;"
+											ng-options="loc.locationId as loc.city+', '+loc.state+', '+loc.country for loc in locations">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td>
+										<label for="projectTypeId">Project Type:</label>
+									</td>
+									<td> 
+										<select class="form-control" id="projectTypeId" ng-model="needSearchObj.projectTypeId"  style="width:200px;"
+											ng-options="bill.billabilityId as bill.billabilityDesc for bill in projecTypes">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td>
+										<label for="closeReasonId">Close Reasons:</label>
+									</td>
+									<td> 
+										<select class="form-control" id="closeReasonId" ng-model="needSearchObj.closeReasonId"  style="width:200px;"
+											ng-options="cr.closeReasonId as cr.closeReason+': '+cr.closeReasonDetails for cr in closeReasons">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="gradeId">Grade:</label>
+									</td>
+									<td> 
+										<select class="form-control" id="gradeId" ng-model="needSearchObj.gradeId"  style="width:200px;"
+											ng-options="g.gradeId as g.gradeDescription for g in grades">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td>
+										<label for="skillId">Skill:</label>
+									</td>
+									<td>
+										<select class="form-control" id="skillId" ng-model="needSearchObj.skillId"  style="width:200px;"
+											ng-options="skill.skillId as skill.skillCategory+': '+skill.skill for skill in skills">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td>
+										<label for="roleId">Roles:</label>
+									</td>
+									<td>
+										<select class="form-control" id="roleId" ng-model="needSearchObj.roleId"  style="width:200px;"
+											ng-options="role.roleId as role.role+': '+role.roleName for role in roles">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+								</tr>
+								<tr>
+									<td>
+										<label for="needStatus">Need Status:</label>
+									</td>
+									<td> 
+										<select class="form-control" id="roleId" ng-model="needSearchObj.needStatus"  style="width:200px;"
+											ng-options="status for status in needStatuses">
+											<option value="">&nbsp;</option>
+										</select>
+									</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+									<td>&nbsp;</td>
+								</tr>
+								<tr>
+									<td colspan="6" align="center">
+										<button type="button" id="needSearchId" class="btn btn-color" ng-click="searchNeeds()">
+											<span class="glyphicon glyphicon-search"></span> Search
+										</button>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<table width="100%">
+								<td>
+									<div>
+									
+									<table class="table table-hover">
+										<thead class="search search-heading">
+										<tr>
+											<th>
+												Sl#
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'wwsId'; sortReverse = !sortReverse" class="white-link">
+												<label>WWS ID</label>
+													<span ng-show="sortType == 'wwsId' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'wwsId' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'clientName'; sortReverse = !sortReverse" class="white-link">
+												<label>Client</label>
+													<span ng-show="sortType == 'clientName' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'clientName' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'city'; sortReverse = !sortReverse" class="white-link">
+												<label>Location</label>
+													<span ng-show="sortType == 'city' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'city' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'grade'; sortReverse = !sortReverse" class="white-link">
+												<label>Grade</label>
+													<span ng-show="sortType == 'grade' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'grade' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<!--th>
+												<a href="#" ng-click="sortType = 'projectType'; sortReverse = !sortReverse" class="white-link">
+												<label>Project Type</label>
+													<span ng-show="sortType == 'projectType' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'projectType' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'projectStartDt'; sortReverse = !sortReverse" class="white-link">
+												<label>Project Start Date</label>
+													<span ng-show="sortType == 'projectStartDt' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'projectStartDt' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'projectEndDt'; sortReverse = !sortReverse" class="white-link">
+												<label>Project End Date</label>
+													<span ng-show="sortType == 'projectEndDt' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'projectEndDt' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th-->
+											<th>
+												<a href="#" ng-click="sortType = 'skillCategory'; sortReverse = !sortReverse" class="white-link">
+												<label>Skill Category</label>
+													<span ng-show="sortType == 'skillCategory' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'skillCategory' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'skills'; sortReverse = !sortReverse" class="white-link">
+												<label>Skill</label>
+													<span ng-show="sortType == 'skills' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'skills' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'role'; sortReverse = !sortReverse" class="white-link">
+												<label>Role</label>
+													<span ng-show="sortType == 'role' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'role' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+											<th>
+												<a href="#" ng-click="sortType = 'roleName'; sortReverse = !sortReverse" class="white-link">
+												<label>Role Name</label>
+													<span ng-show="sortType == 'roleName' && !sortReverse" class="fa fa-caret-down"></span>
+													<span ng-show="sortType == 'roleName' && sortReverse" class="fa fa-caret-up"></span>
+												</a>
+											</th>
+										</tr>
+										</thead>
+										<tbody class="bg-success" ng-repeat="needObj in searchedNeeds  | orderBy:sortType:sortReverse | filter:searchJobFilter">
+										<tr>
+											<td>{{$index + 1}}</td>
+											<td><a href="#" data-toggle="modal" data-target="#viewSearchedNeedDetails" ng-click="getSelectedNeedDetails(needObj.wwsId)">{{needObj.wwsId}}</a></td>
+											<td>{{needObj.clientName}}</td>
+											<td>{{needObj.city}}, {{needObj.state}}, {{needObj.country}}</td>
+											<td>{{needObj.grade}}</td>
+											<!--td>{{needObj.projectType}}</td>
+											<td>{{needObj.projectStartDt | date:'mediumDate'}}</td>
+											<td>{{needObj.projectEndDt | date:'mediumDate'}}</td-->
+											<td>{{needObj.skillCategory}}</td>
+											<td>{{needObj.skill}}</td>
+											<td>{{needObj.role}}</td>
+											<td>{{needObj.roleName}}</td>
+										</tr>
+										</tbody>
+									</table>
+									
+									</div>
+								</td>
+							</table>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							<div class="modal fade" id="viewSearchedNeedDetails" role="dialog">
+								<div class="modal-dialog">
+									<div class="modal-content" style="width:780px;">
+										<div class="modal-header" style="background-color: #dff0d8">
+											<button type="button" class="close" data-dismiss="modal">&times;</button>
+											<h4 class="modal-title">Need Details For [WWS ID: {{selectedNeedDetails.wwsId}}]</h4>
+										</div>
+										
+										<div class="modal-body">
+											<div class="well" style="width:750px">
+												<form role="form">
+													<table class="table-condensed">
+														<tr>
+															<td style="font-weight:bold;">WWS ID: </td>
+															<td align="left">{{selectedNeedDetails.wwsId}}</td>
+															<td style="font-weight:bold;">Grade: </td>
+															<td align="left">{{selectedNeedDetails.grade}}</td>
+															<td style="font-weight:bold;">Local Grades: </td>
+															<td align="left">{{selectedNeedDetails.localGrade}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Skill Category: </td>
+															<td>{{selectedNeedDetails.skillCategory}}</td>
+															<td style="font-weight:bold;">Skill: </td>
+															<td colspan="3">{{selectedNeedDetails.skill}}</td>															
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Role: </td>
+															<td>{{selectedNeedDetails.role}}</td>
+															<td style="font-weight:bold;">Role Name: </td>
+															<td colspan="3">{{selectedNeedDetails.roleName}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Client: </td>
+															<td align="left">{{selectedNeedDetails.clientName}}</td>
+															<td style="font-weight:bold;">Location: </td>
+															<td align="left">{{selectedNeedDetails.city}}, {{selectedNeedDetails.state}}, {{selectedNeedDetails.country}}</td>
+															<td style="font-weight:bold;">Project Type: </td>
+															<td align="left">{{selectedNeedDetails.projectType}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Project Name: </td>
+															<td align="left">{{selectedNeedDetails.projectName}}</td>
+															<td style="font-weight:bold;">Status: </td>
+															<td align="left">{{selectedNeedDetails.status}}</td>
+															<td style="font-weight:bold;">Tags Email Sent: </td>
+															<td align="left">{{selectedNeedDetails.tagsEmailSent}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Created Date: </td>
+															<td align="left">{{selectedNeedDetails.created | date:'mediumDate'}}</td>
+															<td style="font-weight:bold;">Project End Date: </td>
+															<td align="left">{{selectedNeedDetails.projectEndDt | date:'mediumDate'}}</td>
+															<td style="font-weight:bold;">Project Start Date: </td>
+															<td align="left">{{selectedNeedDetails.projectStartDt | date:'mediumDate'}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Short Description: </td>
+															<td colspan="5"><pre style="width:600px;">{{selectedNeedDetails.shortDesc}}</pre></td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Internal Description</td>
+															<td colspan="5"><pre style="width:600px;">{{selectedNeedDetails.internalDesc}}</div></td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Skill Comment: </td>
+															<td colspan="5"><pre style="width:600px;">{{selectedNeedDetails.skillComment}}</pre></td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Private Comment</td>
+															<td colspan="5"><pre style="width:600px;">{{selectedNeedDetails.privateComment}}</pre></td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">RM Handler: </td>
+															<td align="left">{{selectedNeedDetails.rmHandlerFullName}}</td>
+															<td style="font-weight:bold;">Creator: </td>
+															<td align="left">{{selectedNeedDetails.creatorFullName}}</td>
+															<td style="font-weight:bold;">Requester: </td>
+															<td align="left">{{selectedNeedDetails.requestorFullName}}</td>
+														</tr>
+														<tr>
+															<td style="font-weight:bold;">Practice: </td>
+															<td>{{selectedNeedDetails.practiceNm}}</td>
+															<td style="font-weight:bold;">Work Anywhere: </td>
+															<td>{{selectedNeedDetails.workAnywhere}}</td>
+															<td style="font-weight:bold;">Need Reason: </td>
+															<td>{{selectedNeedDetails.needReason}}</td>
+														</tr>
+													</table>
+												</form>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>	
+						</td>
+					</tr>
+				</table>
+			</form>
+		</div>
+	</div>
+</div>
