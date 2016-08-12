@@ -9,6 +9,7 @@ import java.util.Date;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +28,7 @@ public class OpenNeed implements Serializable {
 	private Integer wwsId; //Id
 	
 	@Column(name="short_desc")
+	@Lob 
 	private String shortDescription;//Short Description
 	
 	@Column(name="project_name")
@@ -57,12 +59,15 @@ public class OpenNeed implements Serializable {
 	private String workAnywhere;//Work Anywhere
 
 	@Column(name="internal_desc")
+	@Lob 
 	private String internalDescription;//Internal Description
 
 	@Column(name="confidential_desc")
+	@Lob 
 	private String confidentialDescription;//Confidential Description
 	
 	@Column(name="private_comment")
+	@Lob 
 	private String privateComment;//Private Comment
 
 	@Column(name="rm_handler_full_name")
@@ -87,6 +92,7 @@ public class OpenNeed implements Serializable {
 	private String tagsEmailSent;//Tags Email Sent
 
 	@Column(name="skill_comment")
+	@Lob
 	private String skillComment;//Skill Comment
 
 	@Column(name="need_reason")

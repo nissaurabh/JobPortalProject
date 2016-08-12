@@ -19,6 +19,7 @@ import com.capgemini.job.portal.entities.NeedCloseReason;
 import com.capgemini.job.portal.entities.OpenNeed;
 import com.capgemini.job.portal.entities.Practice;
 import com.capgemini.job.portal.service.WWSDataService;
+import com.capgemini.wws.util.WWSUtil;
 
 /**
  * This class operates on the data read from excel sheet and populates processed data to master tables.
@@ -62,14 +63,14 @@ public class WWSMasterDataProcessor implements Runnable {
 		Map<String, Grade> grades = wwsDataService.getGrades();
 		Map<String, NeedCloseReason> closeReasons = wwsDataService.getNeedCloseReasons();
 		
-		if ("Open".equalsIgnoreCase(needsFileType)) {
+		if (WWSUtil.NEED_STATUS_OPEN.equalsIgnoreCase(needsFileType)) {
 			for (OpenNeed on: fileRecords) {
 				//Check if need already exists in database.
 				Need need = wwsDataService.getNeedByWWSId(on.getWwsId());
 				if (null == need) {
 					need = new Need();
 					need.setWwsId(on.getWwsId());
-					need.setNeedStatus("Open");
+					need.setNeedStatus(WWSUtil.NEED_STATUS_OPEN);
 					need.setCreatedDate(new Date());
 				}
 				
@@ -134,7 +135,7 @@ public class WWSMasterDataProcessor implements Runnable {
 				log.info("Persisted OpenNeed to Need: "+need.getWwsId());
 			}
 			
-		} else if ("Closed".equalsIgnoreCase(needsFileType)) {
+		} else if (WWSUtil.NEED_STATUS_CLOSED.equalsIgnoreCase(needsFileType)) {
 			log.info("Sync of WWS File Data to Need master (ClosedNeeds) is now started..");
 			for (ClosedNeed cn: closedNeeds) {
 				//Check if need already exists in database.
@@ -142,7 +143,7 @@ public class WWSMasterDataProcessor implements Runnable {
 				if (null == need) {
 					need = new Need();
 					need.setWwsId(cn.getWwsId());
-					need.setNeedStatus("Closed");
+					need.setNeedStatus(WWSUtil.NEED_STATUS_CLOSED);
 					need.setCreatedDate(new Date());
 				}
 				//Set updated Date

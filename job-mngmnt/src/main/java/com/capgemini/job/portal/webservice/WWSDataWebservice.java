@@ -5,6 +5,7 @@
 package com.capgemini.job.portal.webservice;
 
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -17,6 +18,7 @@ import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import com.capgemini.job.portal.jaxb.NeedCommentJAXB;
 import com.capgemini.job.portal.jaxb.NeedSearchJAXB;
 import com.capgemini.job.portal.jaxb.SkillProfileJAXB;
 
@@ -130,4 +132,19 @@ public interface WWSDataWebservice {
 	@Consumes("application/json")
 	@Path("/search-needs")
 	public Response searchNeeds(@RequestBody final NeedSearchJAXB searchObj);
+	
+	@POST
+	@Consumes("application/json")
+	@Path("/add-need-comment")
+	public Response addNeedComments(@RequestBody final NeedCommentJAXB needCommentJaxb);
+	
+	@GET
+	@Path("/need-comments/{wwsId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getNeedComments(@PathParam("wwsId") final String wwsId);
+	
+	@DELETE
+	@Path("/delete-need-comment/{needCmntId}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response deleteComment(@PathParam("wwneedCmntIdsId") final String needCmntId);
 }

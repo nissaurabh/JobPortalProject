@@ -13,6 +13,7 @@ import com.capgemini.job.portal.entities.Grade;
 import com.capgemini.job.portal.entities.Location;
 import com.capgemini.job.portal.entities.Need;
 import com.capgemini.job.portal.entities.NeedCloseReason;
+import com.capgemini.job.portal.entities.NeedComment;
 import com.capgemini.job.portal.entities.OpenNeed;
 import com.capgemini.job.portal.entities.Practice;
 import com.capgemini.job.portal.entities.Role;
@@ -213,6 +214,26 @@ public interface WWSDataService {
 	 * @return
 	 */
 	public NeedVO getNeedInformation(Integer integer);
+
+	/**
+	 * Returns the comments for the need
+	 * @param integer
+	 * @return
+	 */
+	public List<NeedComment> getNeedComments(Integer wwsId);
+
+	/**
+	 * Updates/Persists the need comment
+	 * @param needComment
+	 * @return
+	 */
+	public NeedComment addNeedComment(NeedComment needComment);
+
+	/**
+	 * Deletes the given need comment
+	 * @param needCmntId
+	 */
+	public void deleteNeedComment(String needCmntId);
 
 	
 }

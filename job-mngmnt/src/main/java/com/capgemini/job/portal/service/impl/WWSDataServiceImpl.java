@@ -19,6 +19,7 @@ import com.capgemini.job.portal.entities.Grade;
 import com.capgemini.job.portal.entities.Location;
 import com.capgemini.job.portal.entities.Need;
 import com.capgemini.job.portal.entities.NeedCloseReason;
+import com.capgemini.job.portal.entities.NeedComment;
 import com.capgemini.job.portal.entities.OpenNeed;
 import com.capgemini.job.portal.entities.Practice;
 import com.capgemini.job.portal.entities.Role;
@@ -245,6 +246,25 @@ public class WWSDataServiceImpl implements WWSDataService {
 	@Override
 	public NeedVO getNeedInformation(Integer wwsId) {
 		return wWSDataDao.getNeedInformation(wwsId);
+	}
+
+	@Override
+	public List<NeedComment> getNeedComments(Integer wwsId) {
+		return wWSDataDao.getNeedComments(wwsId);
+	}
+
+	@Transactional
+	@Override
+	public NeedComment addNeedComment(NeedComment needComment) {
+		return wWSDataDao.persistNeedComment(needComment);
+	}
+
+	@Transactional
+	@Override
+	public void deleteNeedComment(String needCmntId) {
+		NeedComment nc = new NeedComment();
+		nc.setNeedCommentId(new Integer(needCmntId));
+		wWSDataDao.deleteNeedComment(nc);
 	}
 
 }

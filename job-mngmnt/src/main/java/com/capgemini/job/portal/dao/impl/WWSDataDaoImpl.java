@@ -23,13 +23,14 @@ import com.capgemini.job.portal.entities.Grade;
 import com.capgemini.job.portal.entities.Location;
 import com.capgemini.job.portal.entities.Need;
 import com.capgemini.job.portal.entities.NeedCloseReason;
+import com.capgemini.job.portal.entities.NeedComment;
 import com.capgemini.job.portal.entities.OpenNeed;
 import com.capgemini.job.portal.entities.Practice;
 import com.capgemini.job.portal.entities.Role;
 import com.capgemini.job.portal.entities.Skill;
 import com.capgemini.job.portal.entities.SkillProfile;
 import com.capgemini.job.portal.jaxb.NeedSearchJAXB;
-import com.capgemini.wws.filefeed.WWSUtil;
+import com.capgemini.wws.util.WWSUtil;
 import com.capgemini.wws.vo.NeedVO;
 
 /**
@@ -177,7 +178,7 @@ public class WWSDataDaoImpl implements WWSDataDao {
 
 	@Override
 	public Grade persistGrade(Grade grade) {
-		entityManager.merge(grade);
+		entityManager.persist(grade);
 		entityManager.flush();
 		return grade;
 	}
@@ -195,10 +196,11 @@ public class WWSDataDaoImpl implements WWSDataDao {
 		sql.append("Select new com.capgemini.wws.vo.NeedVO (n.wwsId, n.client.clientName, n.practice.practiceName, n.location.city ")
 		.append(" , n.location.state, n.location.country, n.grade.gradeDescription, n.billability.billabilityDesc ")
 		.append(" , n.projectStartDate, n.projectEndDate, n.createdDate, n.updatedDate, n.shortDescription )")
-		.append(" From Need n where n.skillProfile is NULL")
+		.append(" From Need n where n.skillProfile is NULL ")
+		.append(" and n.needStatus =:needSts ")
 		//.append(" From Need n")
 		;
-		final Query query = entityManager.createQuery(sql.toString());
+		final Query query = entityManager.createQuery(sql.toString()).setParameter("needSts", WWSUtil.NEED_STATUS_OPEN);
 		final List<NeedVO> needList = (List<NeedVO>) query.getResultList();
 		
 		return needList;
@@ -593,5 +595,27 @@ public class WWSDataDaoImpl implements WWSDataDao {
 		}
 		return needVo;
 	}
+
+	@Override
+	public List<NeedComment> getNeedComments(Integer wwsId) {
+		final Query query = entityManager.createQuery(" select nc from NeedComment nc where nc.wwsId =:wwsId").setParameter("wwsId", wwsId);
+		final List<NeedComment> needComments = (List<NeedComment>) query.getResultList();
+		return needComments;
+	}
+
+	@Override
+	public NeedComment persistNeedComment(NeedComment needComment) {
+		entityManager.persist(needComment);
+		entityManager.flush();
+		return needComment;
+	}
+
+	@Override
+	public void deleteNeedComment(NeedComment nc) {
+		nc = entityManager.find(NeedComment.class, nc.getNeedCommentId());
+		entityManager.remove(nc);
+		entityManager.flush();
+	}
+
 
 }

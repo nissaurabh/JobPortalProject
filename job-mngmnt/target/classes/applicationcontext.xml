@@ -40,6 +40,7 @@
 			<ref bean="jobInterviewDetWebservice"/>
 			<ref bean="searchByFilterCriteriaWebservice"/>
 			<ref bean="userDashboardWebservice"/>
+			<ref bean="wwsDataWebservice"/>
 		</jaxrs:serviceBeans>
 		<jaxrs:providers>
 		 	 <ref bean="cors-filter" /> 

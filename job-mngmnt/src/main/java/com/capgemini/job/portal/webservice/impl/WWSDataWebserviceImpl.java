@@ -5,18 +5,21 @@ package com.capgemini.job.portal.webservice.impl;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeSet;
 
 import javax.activation.DataHandler;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.Response.Status;
 
 import org.apache.cxf.jaxrs.ext.multipart.Attachment;
 import org.apache.cxf.jaxrs.ext.multipart.Multipart;
@@ -31,11 +34,13 @@ import com.capgemini.job.portal.entities.ClosedNeed;
 import com.capgemini.job.portal.entities.Grade;
 import com.capgemini.job.portal.entities.Location;
 import com.capgemini.job.portal.entities.NeedCloseReason;
+import com.capgemini.job.portal.entities.NeedComment;
 import com.capgemini.job.portal.entities.OpenNeed;
 import com.capgemini.job.portal.entities.Practice;
 import com.capgemini.job.portal.entities.Role;
 import com.capgemini.job.portal.entities.Skill;
 import com.capgemini.job.portal.entities.SkillProfile;
+import com.capgemini.job.portal.jaxb.NeedCommentJAXB;
 import com.capgemini.job.portal.jaxb.NeedSearchJAXB;
 import com.capgemini.job.portal.jaxb.SkillProfileJAXB;
 import com.capgemini.job.portal.service.WWSDataService;
@@ -43,7 +48,7 @@ import com.capgemini.job.portal.webservice.WWSDataWebservice;
 import com.capgemini.wws.filefeed.ExcelReader;
 import com.capgemini.wws.filefeed.WWSFileDataHelper;
 import com.capgemini.wws.filefeed.WWSMasterDataProcessor;
-import com.capgemini.wws.filefeed.WWSUtil;
+import com.capgemini.wws.util.WWSUtil;
 import com.capgemini.wws.vo.NeedVO;
 import com.capgemini.wws.vo.WWSFileVO;
 
@@ -111,6 +116,15 @@ public class WWSDataWebserviceImpl implements WWSDataWebservice {
 		    thread.start();
 		    
 	    } else if ("Closed".equalsIgnoreCase(needsFileType)) {
+	    	//Persisting closed need info and open need info. Closed need file also contains the open need information. Closed need info is extra in this file.
+	    	List<OpenNeed> openNeedDataToPersist = helper.getOpenNeedRecords(sheetData);
+	    	wwsDataService.persistOpenNeeds(openNeedDataToPersist);
+	    	
+	    	WWSMasterDataProcessor openNeedDataProcessor = new WWSMasterDataProcessor(openNeedDataToPersist, "Open", wwsDataService);
+		    Thread openNeedProcessorThread = new Thread(openNeedDataProcessor);
+		    openNeedProcessorThread.start();
+	    	
+	    	
 	    	List<ClosedNeed> recordsToPersist = helper.getClosedNeedRecords(sheetData);
 	    	wwsDataService.persistClosedNeeds(recordsToPersist);
 	    	vo.setConsideredRecords(recordsToPersist.size());
@@ -355,6 +369,42 @@ public class WWSDataWebserviceImpl implements WWSDataWebservice {
 	public Response getNeedInformation(@PathParam("wwsId") String wwsId) {
 		NeedVO needVo = wwsDataService.getNeedInformation(new Integer(wwsId));
 		return Response.ok(needVo).build();
+	}
+
+	@Override
+	@POST
+	@Consumes("application/json")
+	@Path("/add-need-comment")
+	public Response addNeedComments(@RequestBody NeedCommentJAXB needCommentJaxb) {
+		NeedComment needComment = new NeedComment();
+		needComment.setComment(needCommentJaxb.getComment());
+		needComment.setCommentDate(WWSUtil.getDate(needCommentJaxb.getCommentDate()));
+		if (!WWSUtil.nullOrEmpty(needCommentJaxb.getCommentId())) {
+			needComment.setNeedCommentId(new Integer(needCommentJaxb.getCommentId()));
+		} else {
+			needComment.setCreated(new Date());
+		}
+		needComment.setWwsId(new Integer(needCommentJaxb.getWwsId()));
+		needComment = wwsDataService.addNeedComment(needComment);
+		return Response.status(Status.CREATED).build();
+	}
+
+	@Override
+	@GET
+	@Path("/need-comments/{wwsId}")
+	@Produces("application/json")
+	public Response getNeedComments(@PathParam("wwsId") String wwsId) {
+		List<NeedComment> needComments = wwsDataService.getNeedComments(new Integer(wwsId));
+		return Response.ok(needComments).build();
+	}
+
+	@Override
+	@DELETE
+	@Path("/delete-need-comment/{needCmntId}")
+	@Produces("application/json")
+	public Response deleteComment(@PathParam("needCmntId") String needCmntId) {
+		wwsDataService.deleteNeedComment(needCmntId);
+		return Response.ok().build();
 	}
 	
 
