@@ -117,7 +117,17 @@ jobMngmtServices.factory('WWSSearchNeedsFactory', function ($resource,config) {
 				   create: { method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, isArray: true
 			}
 		}),
-		getNeedInformation: $resource(config.apiUrl + 'wwsData/need-information/:param', {param:'@selectedNeedId'})
+		getNeedInformation: $resource(config.apiUrl + 'wwsData/need-information/:param', {param:'@selectedNeedId'}),
+		getNeedComments: $resource(config.apiUrl + 'wwsData/need-comments/:param', {param:'@selNeedId'}),
+		addNeedComments: $resource(config.apiUrl + 'wwsData/add-need-comment', {}, 
+			{
+				   create: { method: 'POST', headers: {'Content-Type':'application/json','Accept':'application/json'}, isArray: true
+			}
+		}),
+		deleteNeedComment: $resource(config.apiUrl + 'wwsData/delete-need-comment/:param', {param:'@commentId'},
+			{
+               delete: {method: 'DELETE', isArray: false}
+           })
    }
 });
 //Added for WWS Data Feed: End

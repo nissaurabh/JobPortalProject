@@ -2,6 +2,8 @@
   "name": "job-management-ui",
   "main": "server.js",
   "dependencies": {
+    "angular": "^1.5.6",
+    "angularjs-datepicker": "^2.1.4",
     "body-parser": "~1.4.2",
     "express": "~4.5.1",
     "http-proxy": "^1.12.0",

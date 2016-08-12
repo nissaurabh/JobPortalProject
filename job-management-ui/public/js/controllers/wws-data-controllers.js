@@ -71,6 +71,7 @@ wwsDataControllers.controller('LoadClosedNeedsController', ['$scope','$rootScope
 wwsDataControllers.controller('NeedsRequiringSPController', ['$scope','$rootScope','$cookies','$window','$location','WWSViewNeedsFactory',
     function($scope,$rootScope,$cookies, $window,$location, wwsViewNeedsFactory) {
 		//alert("in NeedsRequiringSPController of wws-data-controllers.js");
+		//$scope.sortType='projectType';
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $rootScope.userName= $cookies.get('userName');
@@ -191,13 +192,15 @@ wwsDataControllers.controller('NeedsRequiringSPController', ['$scope','$rootScop
 wwsDataControllers.controller('NeedsSearchController', ['$scope','$rootScope','$cookies','$window','$location','WWSSearchNeedsFactory',
     function($scope,$rootScope,$cookies, $window,$location, wwsSearchNeedsFactory) {
 		//alert("in LoadOpenNeedsController of wws-data-controllers.js");
+		$scope.sortType = 'projectType';
         $rootScope.loggedIn= $cookies.get('loggedIn');
         $rootScope.userId= $cookies.get('userId');
         $rootScope.userName= $cookies.get('userName');
 		
 		$scope.needSearchObj = [];
 		
-		$scope.needStatuses = ['Open','Closed'];
+		$scope.OpenNeedStatuses = ['Open'];
+		$scope.ClosedNeedStatuses = ['Closed'];
 				
 		$scope.clients = [];
 		var getClientsCall = wwsSearchNeedsFactory.getClients.query();
@@ -277,6 +280,8 @@ wwsDataControllers.controller('NeedsSearchController', ['$scope','$rootScope','$
 				alert("Error receiving Skills: \n"+JSOn.stringify(reason));
 		});
 		
+		
+		
 		$scope.searchedNeeds = [];
 		$scope.searchNeeds = function() {
 			//alert('Search Needs - Under Construction...');
@@ -318,5 +323,53 @@ wwsDataControllers.controller('NeedsSearchController', ['$scope','$rootScope','$
 				alert("Error receiving Need Information: \n"+reason);
 			});
 		}
+		$scope.selectedNeedComments = [];
+		$scope.selectedNeedForComments = 'Yet to Assign';
+		$scope.viewNeedComments = function (selNeedId) {
+			//alert('View Add Comments  - Under Construction: '+selNeedId);
+			$scope.selectedNeedForComments = selNeedId;
+			
+			var selectedNeedCommentsCall = wwsSearchNeedsFactory.getNeedComments.query({param:selNeedId});
+			selectedNeedCommentsCall.$promise.then(function (response) {
+				$scope.selectedNeedComments = response;
+				//alert("Need Details: "+JSON.stringify($scope.selectedNeedComments));
+			},
+			function (reason) {
+				alert("Error receiving Need Comments: \n"+JSON.stringify(reason));
+			});
+		}
+		$scope.addComment = function(selectNeedId) {
+			//alert("Add Comments - Selected NeedId: "+selectNeedId);
+			var needCommentBody = {
+				wwsId: selectNeedId,
+				commentDate: $scope.needComment.commentDate,
+				comment: $scope.needComment.comment
+			};
+			
+			var addCommentToNeedsCall = wwsSearchNeedsFactory.addNeedComments.create({}, needCommentBody);
+				addCommentToNeedsCall.$promise.then(function (response) {
+					//alert("Matching Needs: "+JSON.stringify(response));
+					//alert("Comment Added Successfully ");
+					$scope.selectedNeedComments = wwsSearchNeedsFactory.getNeedComments.query({param:selectNeedId});
+				},
+				function (reason) {
+					alert("Error in Add Need Comment: \n"+JSON.stringify(reason));
+				});
+			//alert("Comment Date: "+$scope.needComment.commentDate);
+		}
 		
+		$scope.deleteNeedComment = function(commentId, selectNeedId) {
+			//alert("Delete Comment - Under Construction: "+commentId+"\n For WWSID: "+selectNeedId);
+			var delNeedCmntCall = wwsSearchNeedsFactory.deleteNeedComment.delete({param:commentId});
+			delNeedCmntCall.$promise.then(function (response) {
+				alert("Comment Deleted Successfully: "+JSON.stringify(response));
+				$scope.selectedNeedComments = wwsSearchNeedsFactory.getNeedComments.query({param:selectNeedId});
+			},
+			function (reason) {
+				alert("Error Deleting the Need Comment: \n"+JSON.stringify(reason));
+				
+			});
+		}
+		//Adding below line to load the results based on open/closed need search pages.
+		$scope.searchNeeds();
 }]);

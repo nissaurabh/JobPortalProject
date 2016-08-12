@@ -9,7 +9,7 @@
  * Main module of the application.
  */
 angular
-  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers','jobMngmtDirectives','wwsDataControllers'])
+  .module('jobMngmtApp', ['chart.js','ngRoute','ngCookies','jobMngmtServices', 'jobMngmtControllers','jobMngmtDirectives','wwsDataControllers','moment-picker'])
     .config(['$httpProvider',function ($httpProvider) {
         $httpProvider.defaults.useXDomain = true;
         //$httpProvider.defaults.withCredentials = true;
@@ -93,8 +93,11 @@ angular
             templateUrl: 'views/wws/LoadClosedNeeds.html',
 			controller: 'LoadClosedNeedsController'
         })
-		.when('/viewNeeds', {
-            templateUrl: 'views/wws/ViewNeeds.html'
+		.when('/viewOpenNeeds', {
+            templateUrl: 'views/wws/ViewOpenNeeds.html'
+        })
+		.when('/viewClosedNeeds', {
+            templateUrl: 'views/wws/ViewClosedNeeds.html'
         })
 		.when('/viewNeedsRequiringSkillProfile', {
             templateUrl: 'views/wws/NeedsForSkillProfileUpdt.html'
